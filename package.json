@@ -1,0 +1,29 @@
+{
+	"name": "@x3p0-dev/x3p0-a-boy-in-the-wild",
+	"version": "1.0.0",
+	"author": "Justin Tadlock <justintadlock@gmail.com>",
+	"homepage": "https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild",
+	"scripts": {
+		"start": "wp-scripts start --webpack-src-dir=resources --output-path=public --experimental-modules",
+		"build": "wp-scripts build --webpack-src-dir=resources --output-path=public --experimental-modules"
+	},
+	"devDependencies": {
+		"@wordpress/block-editor": "^15.19.0",
+		"@wordpress/blocks": "^15.19.0",
+		"@wordpress/components": "^33.1.0",
+		"@wordpress/data": "^10.46.0",
+		"@wordpress/editor": "^14.46.0",
+		"@wordpress/element": "^6.46.0",
+		"@wordpress/i18n": "^6.19.0",
+		"@wordpress/plugins": "^7.46.0",
+		"@wordpress/primitives": "^4.46.0",
+		"@wordpress/scripts": "^32.2.0",
+		"copy-webpack-plugin": "^14.0.0",
+		"glob": "^13.0.6",
+		"path": "^0.12.7",
+		"webpack-remove-empty-scripts": "^1.1.1"
+	},
+	"dependencies": {
+		"@wordpress/interactivity": "^6.46.0"
+	}
+}

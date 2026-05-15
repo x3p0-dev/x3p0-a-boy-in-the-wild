@@ -16,3 +16,5 @@
 *.map
 *.zip
 .DS_Store
+
+/notes
