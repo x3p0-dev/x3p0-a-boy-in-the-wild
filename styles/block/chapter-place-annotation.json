@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter Place Annotation",
+	"slug": "chapter-place-annotation",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"spacing": {
+			"padding": {
+				"top": "0.9rem",
+				"bottom": "0.9rem",
+				"left": "0.9rem",
+				"right": "0.9rem"
+			}
+		},
+		"elements": {
+			"heading": {
+				"color": {
+					"text": "var(--wp--preset--color--muted)"
+				},
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--tertiary)",
+					"fontSize": "var(--wp--preset--font-size--md)"
+				}
+			}
+		}
+	}
+}

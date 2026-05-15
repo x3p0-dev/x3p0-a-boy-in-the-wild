@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter Rule",
+	"slug": "chapter-rule",
+	"blockTypes": ["core/separator"],
+	"styles": {
+		"color": {
+			"background": "transparent"
+		},
+		"border": {
+			"top": { "width": "0" },
+			"left": { "width": "0" },
+			"right": { "width": "0" },
+			"bottom": { "width": "0" }
+		},
+		"css": "&::before { content: ''; display: block; width: 64%; border-top: 1px solid var(--wp--preset--color--rule); }"
+	}
+}

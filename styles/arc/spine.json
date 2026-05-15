@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Spine",
+	"slug": "arc-spine",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"css": "--wp--preset--color--parchment: #e8dfc0;\n--wp--preset--color--parchment-raised: #f0e8cc;\n--wp--preset--color--parchment-surface: #f5f0e0;\n--wp--preset--color--parchment-accent: rgba(90,55,12,0.45);\n--wp--preset--color--ink: #160c02;\n--wp--preset--color--ink-subtle: #5c2c08;\n--wp--preset--color--ink-muted: rgba(90,55,12,0.50);\n--wp--preset--color--ink-accent: rgba(90,55,12,0.45);\n--wp--preset--color--ink-on-accent: #f5f0e0;\n--wp--preset--color--rule: rgba(90,55,12,0.18);\n--wp--preset--color--sketch-parchment: #e8dfc0;\n--wp--preset--color--sketch-ink: rgba(90,55,12,0.42); animation: spine-pulse 6s ease-in-out infinite",
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		}
+	}
+}

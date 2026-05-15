@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Early Autumn",
+	"slug": "season-early-autumn",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"css": "--wp--preset--color--parchment: #c8b88a;\n--wp--preset--color--parchment-raised: #d8cca0;\n--wp--preset--color--parchment-surface: #e8deb8;\n--wp--preset--color--parchment-accent: #4a2808;\n--wp--preset--color--ink: #1a0800;\n--wp--preset--color--ink-subtle: #4a2808;\n--wp--preset--color--ink-muted: #8a5820;\n--wp--preset--color--ink-accent: #4a2808;\n--wp--preset--color--ink-on-accent: #e8deb8;\n--wp--preset--color--rule: rgba(90,50,8,0.20);\n--wp--preset--color--sketch-parchment: #d8cca0;\n--wp--preset--color--sketch-ink: rgba(90,50,8,0.50);",
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		}
+	}
+}

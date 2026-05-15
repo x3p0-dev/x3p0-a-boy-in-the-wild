@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Spine Marker",
+	"slug": "separator-spine-marker",
+	"blockTypes": ["core/separator"],
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--rule)"
+		},
+		"css": "& { width: 1px; height: var(--wp--preset--spacing--80); margin-left: auto; margin-right: auto; border: none; }"
+	}
+}

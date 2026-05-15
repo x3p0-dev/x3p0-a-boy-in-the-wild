@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Buried",
+	"slug": "state-buried",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"css": "min-height: calc(100vh - var(--wp-admin--admin-bar--height, 0px)); --wp--preset--color--parchment: #ede8d5;\n--wp--preset--color--parchment-raised: #e8e2cc;\n--wp--preset--color--parchment-surface: #f5f0e4;\n--wp--preset--color--parchment-accent: rgba(100,62,12,0.45);\n--wp--preset--color--ink: rgba(30,16,2,0.86);\n--wp--preset--color--ink-subtle: rgba(30,16,2,0.68);\n--wp--preset--color--ink-muted: rgba(30,16,2,0.50);\n--wp--preset--color--ink-accent: rgba(100,62,12,0.45);\n--wp--preset--color--ink-on-accent: #f5f0e4;\n--wp--preset--color--rule: rgba(100,62,12,0.12);\n--wp--preset--color--sketch-parchment: #e8e2cc;\n--wp--preset--color--sketch-ink: rgba(100,62,12,0.42);\noverflow-x: hidden; & > .wp-block-group { transform: rotate(-2deg); }\n",
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--tertiary)"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--tertiary)"
+				}
+			}
+		}
+	}
+}

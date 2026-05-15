@@ -1,0 +1,10 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/wp/6.8/schemas/json/theme.json",
+	"version": 3,
+	"title": "Pulse-Fade",
+	"slug": "icon-pulse-fade",
+	"blockTypes": [ "core/icon" ],
+	"styles": {
+		"css": "animation: pulse-fade 3s ease-in-out infinite;"
+	}
+}

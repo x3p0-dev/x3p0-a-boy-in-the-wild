@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter List of Sounds",
+	"slug": "chapter-list-of-sounds",
+	"blockTypes": ["core/list"],
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--secondary)",
+			"fontSize": "var(--wp--preset--font-size--md)",
+			"lineHeight": "1"
+		},
+		"color": {
+			"text": "var(--wp--preset--color--ink-subtle)"
+		},
+		"spacing": {
+			"padding": {
+				"top": "0",
+				"bottom": "0",
+				"left": "0",
+				"right": "0"
+			},
+			"margin": {
+				"bottom": "var(--wp--preset--spacing--80)"
+			}
+		},
+		"css": "list-style: none; & li { padding: var(--wp--preset--spacing--20) 0; border-bottom: 1px solid var(--wp--preset--color--rule); line-height: 1; opacity: 1; transition: opacity 0.2s ease; } & li:last-child { border-bottom: none; } & li:nth-child(1) { opacity: 1; } & li:nth-child(2) { opacity: 0.85; } & li:nth-child(3) { opacity: 0.7; } & li:nth-child(4) { opacity: 0.55; } & li:nth-child(5) { opacity: 0.4; } & li:nth-child(n+6) { opacity: 0.25; }"
+	}
+}

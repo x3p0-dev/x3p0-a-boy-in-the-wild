@@ -1,0 +1,9 @@
+{
+	"version": 2,
+	"blockTypes": ["core/separator"],
+	"title": "Field Note Rule",
+	"name": "separator-field-note-rule",
+	"styles": {
+		"css": "border: none; background: none; height: 4px; margin-bottom: 2.5rem; background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 600 4' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,2 C8,1 16,3 24,2 C32,1 40,3 48,2 C56,0.5 64,3.5 72,2 C80,1 88,3 96,2 C104,0.5 112,3 120,2 C128,1.5 136,2.5 144,2 C152,1 160,3 168,2 C176,1.5 184,2.5 192,2 C200,0.5 208,3.5 216,2 C224,1 232,3 240,2 C248,1.5 256,2.5 264,2 C272,1 280,3 288,2 C296,0.5 304,3 312,2 C320,1.5 328,2.5 336,2 C344,1 352,3 360,2 C368,1.5 376,3.5 384,2 C392,0.5 400,3 408,2 C416,1 424,3 432,2 C440,1.5 448,2.5 456,2 C464,1 472,3 480,2 C488,0.5 496,3.5 504,2 C512,1 520,3 528,2 C536,1.5 544,2.5 552,2 C560,1 568,3 576,2 C584,1.5 592,2.5 600,2' fill='none' stroke='%238a4e12' stroke-width='1.2' stroke-opacity='0.4'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-size: 100% 100%; width: 100%; max-width: 100%;"
+	}
+}

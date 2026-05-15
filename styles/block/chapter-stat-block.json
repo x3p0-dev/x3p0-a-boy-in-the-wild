@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter Stat Block",
+	"slug": "chapter-stat-block",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"spacing": {
+			"padding": {
+				"top": "0",
+				"bottom": "0",
+				"left": "0",
+				"right": "0"
+			}
+		},
+		"border": {
+			"top": {
+				"color": "var(--wp--preset--color--rule)",
+				"style": "solid",
+				"width": "1px"
+			},
+			"bottom": {
+				"width": "0"
+			},
+			"left": {
+				"width": "0"
+			},
+			"right": {
+				"width": "0"
+			}
+		}
+	}
+}

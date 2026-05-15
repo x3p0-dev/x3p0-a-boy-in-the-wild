@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Storm",
+	"slug": "mood-storm",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"css": "& { --wp--preset--color--parchment: #070c12; --wp--preset--color--parchment-raised: #0e1620; --wp--preset--color--parchment-surface: #020508; --wp--preset--color--parchment-accent: rgba(77,120,100,0.55); --wp--preset--color--ink: rgba(200,215,210,0.85); --wp--preset--color--ink-subtle: rgba(160,180,175,0.60); --wp--preset--color--ink-muted: rgba(130,150,145,0.35); --wp--preset--color--ink-accent: rgba(160,200,160,0.70); --wp--preset--color--ink-on-accent: #070c12; --wp--preset--color--handwritten: rgba(150,170,160,0.45); --wp--preset--color--rule: rgba(130,160,150,0.15); --wp--preset--color--annotation: rgba(130,160,150,0.25); --wp--preset--color--sketch-parchment: #0e1620; --wp--preset--color--sketch-ink: rgba(130,160,150,0.50); }",
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		}
+	}
+}

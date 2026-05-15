@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Late Summer",
+	"slug": "season-late-summer",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"css": "--wp--preset--color--parchment: #f2e8cc;\n--wp--preset--color--parchment-raised: #f8eecc;\n--wp--preset--color--parchment-surface: #fdf8ed;\n--wp--preset--color--parchment-accent: #9a5818;\n--wp--preset--color--ink: #120802;\n--wp--preset--color--ink-subtle: #5c2c08;\n--wp--preset--color--ink-muted: #9a5818;\n--wp--preset--color--ink-accent: #7a4010;\n--wp--preset--color--ink-on-accent: #fdf8ed;\n--wp--preset--color--rule: rgba(130,72,14,0.22);\n--wp--preset--color--sketch-parchment: #f2e8cc;\n--wp--preset--color--sketch-ink: rgba(130,72,14,0.42);",
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		}
+	}
+}

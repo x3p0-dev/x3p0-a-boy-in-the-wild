@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter Attempt — Fail",
+	"slug": "chapter-attempt-fail",
+	"blockTypes": ["core/list-item"],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--ink-muted)"
+		},
+		"css": "& { text-decoration: line-through; text-decoration-color: var(--wp--preset--color--rule); }"
+	}
+}

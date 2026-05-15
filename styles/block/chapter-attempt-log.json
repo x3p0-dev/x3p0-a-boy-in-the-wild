@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter Attempt Log",
+	"slug": "chapter-attempt-log",
+	"blockTypes": ["core/list"],
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--secondary)",
+			"fontSize": "var(--wp--preset--font-size--sm)"
+		},
+		"color": {
+			"text": "var(--wp--preset--color--ink-subtle)"
+		},
+		"spacing": {
+			"margin": {
+				"top": "0",
+				"bottom": "var(--wp--preset--spacing--70)"
+			},
+			"padding": {
+				"top": "0",
+				"bottom": "0",
+				"left": "0",
+				"right": "0"
+			}
+		},
+		"css": "& { list-style: none; } & li { padding: var(--wp--preset--spacing--20) 0; border-bottom: 0.5px solid var(--wp--preset--color--rule); line-height: 1.6; } & li:last-child { border-bottom: none; }"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Survival",
+	"slug": "mood-survival",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"css": "--wp--preset--color--parchment: #161b18;\n--wp--preset--color--parchment-raised: #1e2420;\n--wp--preset--color--parchment-surface: #0e1210;\n--wp--preset--color--parchment-accent: rgba(200,196,176,0.22);\n--wp--preset--color--ink: rgba(200,196,176,0.80);\n--wp--preset--color--ink-subtle: rgba(200,196,176,0.52);\n--wp--preset--color--ink-muted: rgba(200,196,176,0.28);\n--wp--preset--color--ink-accent: rgba(200,196,176,0.52);\n--wp--preset--color--ink-on-accent: #161b18;\n--wp--preset--color--rule: rgba(200,196,176,0.10);\n--wp--preset--color--sketch-parchment: #1e2420;\n--wp--preset--color--sketch-ink: rgba(200,196,176,0.28);",
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		}
+	}
+}

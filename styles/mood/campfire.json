@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Campfire",
+	"slug": "mood-campfire",
+	"blockTypes": ["core/group"],
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--parchment)",
+			"text": "var(--wp--preset--color--ink)"
+		},
+		"css": "& { --wp--preset--color--parchment: #1a1f1c; --wp--preset--color--parchment-raised: #242820; --wp--preset--color--parchment-surface: #0e1210; --wp--preset--color--parchment-accent: rgba(180,175,155,0.55); --wp--preset--color--ink: rgba(200,196,176,0.82); --wp--preset--color--ink-subtle: rgba(180,175,155,0.55); --wp--preset--color--ink-muted: rgba(180,175,155,0.28); --wp--preset--color--ink-accent: rgba(200,140,60,0.80); --wp--preset--color--ink-on-accent: #1a1f1c; --wp--preset--color--handwritten: rgba(180,175,155,0.42); --wp--preset--color--rule: rgba(180,175,155,0.18); --wp--preset--color--annotation: rgba(180,175,155,0.32); --wp--preset--color--sketch-parchment: #242820; --wp--preset--color--sketch-ink: rgba(180,175,155,0.45); }"
+	}
+}

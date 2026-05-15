@@ -1,0 +1,21 @@
+{
+	"version": 2,
+	"blockTypes": ["core/paragraph"],
+	"title": "Field Note Dateline",
+	"name": "paragraph-field-note-dateline",
+	"styles": {
+		"color": {
+			"text": "rgba(138, 78, 18, 0.55)"
+		},
+		"spacing": {
+			"margin": {
+				"bottom": "0.75rem"
+			}
+		},
+		"typography": {
+			"fontFamily": "'Caveat', cursive",
+			"fontSize": "1rem",
+			"letterSpacing": "0.03em"
+		}
+	}
+}

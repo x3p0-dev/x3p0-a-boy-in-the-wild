@@ -1,0 +1,23 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/wp/6.8/schemas/json/theme.json",
+	"version": 3,
+	"title": "Kicker",
+	"description": "A short, one-line heading meant to be placed above a larger heading.",
+	"slug": "text-kicker",
+	"blockTypes": [
+		"core/heading",
+		"core/paragraph"
+	],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--ink-sepia)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--tertiary)",
+			"fontSize": "var(--wp--preset--font-size--sm)",
+			"fontWeight": "400",
+			"lineHeight": "var(--wp--custom--line-height--xs)",
+			"textTransform": "uppercase"
+		}
+	}
+}
