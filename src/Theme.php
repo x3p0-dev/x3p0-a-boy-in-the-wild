@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace X3P0\ABoyInTheWild;
+
+use X3P0\ABoyInTheWild\Framework\Core\Application;
+
+/**
+ * The Theme class is an implementation of the Application contract. It's used
+ * to register the default service providers, bootstrapping the theme.
+ */
+final class Theme extends Application
+{
+	/**
+	 * Defines the theme's namespace, which is used as a hook prefix.
+	 */
+	protected const NAMESPACE = 'x3p0/a-boy-in-the-wild';
+
+	/**
+	 * Defines the theme's default service providers.
+	 */
+	protected const PROVIDERS = [
+		Admin\AdminServiceProvider::class,
+		Audio\AudioServiceProvider::class,
+		Block\Binding\BindingServiceProvider::class,
+		Block\Canvas\CanvasServiceProvider::class,
+		Block\Category\BlockCategoryServiceProvider::class,
+		Block\Render\RenderServiceProvider::class,
+		Block\Settings\SettingsServiceProvider::class,
+		Block\Stylesheet\StylesheetServiceProvider::class,
+		Content\ContentServiceProvider::class,
+		Editor\EditorServiceProvider::class,
+		Frontend\FrontendServiceProvider::class,
+		Icon\IconServiceProvider::class,
+		Pattern\PatternServiceProvider::class,
+		Template\TemplateServiceProvider::class,
+		Typewriter\TypewriterServiceProvider::class
+	];
+}

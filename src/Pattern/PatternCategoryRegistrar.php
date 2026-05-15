@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Pattern category registrar.
+ *
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2023-2025, Justin Tadlock
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
+ * @link      https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+ */
+
+declare(strict_types=1);
+
+namespace X3P0\ABoyInTheWild\Pattern;
+
+use WP_Block_Pattern_Categories_Registry;
+use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
+
+/**
+ * Registers block pattern categories.
+ */
+final class PatternCategoryRegistrar implements Bootable
+{
+	/**
+	 * Sets up the object state.
+	 */
+	public function __construct()
+	{}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function boot(): void
+	{
+		add_action('init', $this->register(...), -999999);
+	}
+
+	/**
+	 * Register block pattern categories. Note that this theme registers
+	 * patterns by adding them as individual pattern files in the `/patterns`
+	 * folder.
+	 */
+	private function register(): void
+	{
+		register_block_pattern_category('x3p0-chapters', [
+			'label'       => __('Story Chapters', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Starter patterns that contain a new chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
+		]);
+	}
+}
