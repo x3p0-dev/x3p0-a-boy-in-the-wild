@@ -1,23 +1,28 @@
-<!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-chapter-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
-<main class="wp-block-group alignfull is-style-chapter-lost" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:group {"tagName":"header","metadata":{"name":"Waypoint"},"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
-	<header class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:group {"lock":{"move":false,"remove":false},"metadata":{"name":"Waypoint Content","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-header"},"className":"is-style-chapter-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","alignItems":"center"}} -->
+<!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-mood-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group alignfull is-style-season-mood-lost" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+
+	<!-- wp:group {"tagName":"header","metadata":{"name":"Waypoint"},"align":"full","className":"is-style-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
+	<header class="wp-block-group alignfull is-style-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:group {"lock":{"move":false,"remove":false},"metadata":{"name":"Waypoint Content","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-header"},"className":"is-style-chapter-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","alignItems":"center"}} -->
 		<div class="wp-block-group is-style-chapter-header"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
-			<div class="wp-block-group"><!-- wp:buttons -->
-				<div class="wp-block-buttons"><!-- wp:button {"metadata":{"bindings":{"url":{"source":"x3p0/site-data","args":{"field":"url"}}}},"className":"is-style-button-link"} -->
-					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/">← All Chapters</a></div>
-					<!-- /wp:button --></div>
-				<!-- /wp:buttons -->
+			<div class="wp-block-group"><!-- wp:site-title {"level":0} /-->
 
 				<!-- wp:paragraph {"metadata":{"name":"Separator"}} -->
 				<p>·</p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:site-title {"level":0} /--></div>
+				<!-- wp:paragraph {"metadata":{"name":"Unchartered"}} -->
+				<p>Unchartered</p>
+				<!-- /wp:paragraph -->
+			</div>
 			<!-- /wp:group -->
 
-			<!-- wp:buttons -->
+			<!-- wp:buttons {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
 			<div class="wp-block-buttons"><!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site-data","args":{"field":"url"}}}},"className":"toggle-chapter-audio"} -->
 				<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button">Sound</button></div>
+				<!-- /wp:button -->
+
+				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site-data","args":{"field":"url"}}}},"className":"toggle-color-scheme"} -->
+				<div class="wp-block-button toggle-color-scheme"><button type="button" class="wp-block-button__link wp-element-button">Day</button></div>
 				<!-- /wp:button --></div>
 			<!-- /wp:buttons --></div>
 		<!-- /wp:group --></header>
@@ -25,8 +30,8 @@
 
 	<!-- wp:group {"tagName":"article","metadata":{"name":"Chapter"},"align":"full","layout":{"type":"constrained"}} -->
 	<article class="wp-block-group alignfull"><!-- wp:group {"tagName":"header","metadata":{"name":"Chapter Header"},"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"default"}} -->
-		<header class="wp-block-group alignwide"><!-- wp:paragraph {"className":"is-style-chapter-dateline"} -->
-			<p class="is-style-chapter-dateline">Lost · Somewhere in the trees · No landmarks visible</p>
+		<header class="wp-block-group alignwide"><!-- wp:paragraph {"className":"is-style-chapter-meta"} -->
+			<p class="is-style-chapter-meta">Lost · Somewhere in the trees · No landmarks visible</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":1} -->
