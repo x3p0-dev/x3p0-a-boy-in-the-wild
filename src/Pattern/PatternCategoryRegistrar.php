@@ -46,5 +46,10 @@ final class PatternCategoryRegistrar implements Bootable
 			'label'       => __('Story Chapters', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Starter patterns that contain a new chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
 		]);
+
+		register_block_pattern_category('x3p0-chapter-elements', [
+			'label'       => __('Chapter Elements', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Patterns used for various chapter elements.' ,'x3p0-a-boy-in-the-wild')
+		]);
 	}
 }

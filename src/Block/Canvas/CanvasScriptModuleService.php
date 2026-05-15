@@ -40,6 +40,10 @@ final class CanvasScriptModuleService implements Bootable
 	 */
 	private function render(string $content, array $block, WP_Block $instance): string
 	{
+		if (is_admin()) {
+			return $content;
+		}
+
 		$processor = new WP_HTML_Tag_Processor($content);
 
 		while ($processor->next_tag('canvas')) {
