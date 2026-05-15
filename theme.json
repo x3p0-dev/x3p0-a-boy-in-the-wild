@@ -539,8 +539,9 @@
 				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--tertiary)",
-					"fontSize": "var(--wp--preset--font-size--sm)",
-					"letterSpacing": "0.05em"
+					"fontSize": "var(--wp--preset--font-size--lg)",
+					"letterSpacing": "0.05em",
+					"lineHeight": "var(--wp--custom--line-height--lg)"
 				},
 				"elements": {
 					"link": {
