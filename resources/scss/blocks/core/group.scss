@@ -1,0 +1,34 @@
+////
+/// Group block CSS.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+// -----------------------------------------------------------------------------
+// Block fixes.
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Block customizations.
+// -----------------------------------------------------------------------------
+
+///
+/// Ensures siblings for nested `<canvas>` elements are positioned over the
+/// background effect.
+///
+.wp-block-group:has(.x3p0-canvas-bg) > *:not(.x3p0-canvas-bg) {
+	position: relative;
+	z-index: 1;
+}
+
+
+.x3p0-typewriter p.is-typing::after {
+	content: '|';
+	animation: blink 0.7s step-end infinite;
+}
+
+
+// -----------------------------------------------------------------------------
+// Block style variations.
+// -----------------------------------------------------------------------------

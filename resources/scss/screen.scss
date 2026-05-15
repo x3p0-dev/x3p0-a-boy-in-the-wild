@@ -1,0 +1,34 @@
+////
+/// Primary theme stylesheet, which is used for both the front end and the
+/// editor. Note that it is named `screen` instead of `style` because
+/// `wp-scripts` renames that file to `style-index`. But, it's also an
+/// easy way to differentiate it from `print`, which I'll totally add one
+/// day. I promise.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-ideas
+////
+
+// Base/Defaults.
+//@use 'base/var';
+//@use 'base/root';
+//@use 'base/elements';
+//@use 'base/forms';
+
+// Utilities.
+@use 'utilities/helpers';
+@use 'utilities/keyframes';
+//@use 'utilities/lightbox';
+//@use 'utilities/rich-text';
+//@use 'utilities/typography';
+
+
+del,
+s {
+	color: var(--wp--preset--color--ink-subtle, inherit);
+	text-decoration:
+		var(--wp--preset--color--ink, currentColor)
+		line-through
+		solid
+		min(0.875em, 3px);
+}

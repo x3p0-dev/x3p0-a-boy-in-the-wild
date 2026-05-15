@@ -1,0 +1,32 @@
+////
+/// Post Title block CSS.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+// -----------------------------------------------------------------------------
+// Block fixes.
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Block customizations.
+// -----------------------------------------------------------------------------
+
+
+.wp-block-post-title a:has(.wp-block-post-title__status) {
+	display: flex;
+	gap: var(--wp--preset--spacing--20);
+	align-items: center;
+}
+
+.wp-block-post-title__status {
+	font-size: 1rem;
+	font-weight: 400;
+	font-family: var(--wp--preset--font-family--tertiary);
+	transform: rotate(-5deg);
+}
+
+// -----------------------------------------------------------------------------
+// Block style variations.
+// -----------------------------------------------------------------------------

@@ -1,0 +1,44 @@
+////
+/// Paragraph block CSS.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+// -----------------------------------------------------------------------------
+// Block fixes.
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Block customizations.
+// -----------------------------------------------------------------------------
+
+.has-drop-cap:not(:focus)::first-letter {
+	float: none;
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	text-transform: none;
+}
+
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+
+	.has-drop-cap:not(:focus)::first-letter {
+		-webkit-initial-letter: 3;
+		initial-letter: 3;
+		float: none;
+		margin: 0;
+		padding-right: var(--wp--preset--spacing--20);
+		font: inherit;
+		font-variant: normal;
+
+		font-family: var(--wp--preset--font-family--primary);
+		font-style:  normal;
+		font-weight: 900;
+	}
+}
+
+
+// -----------------------------------------------------------------------------
+// Block style variations.
+// -----------------------------------------------------------------------------

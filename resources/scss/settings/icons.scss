@@ -1,0 +1,13 @@
+////
+/// Icon library.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+$data-svg-prefix: 'data:image/svg+xml,';
+
+$icons: (
+	'sun': '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="3" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="1" x2="8" y2="2.8" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="13.2" x2="8" y2="15" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="8" x2="2.8" y2="8" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="13.2" y1="8" x2="15" y2="8" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="2.93" y1="2.93" x2="4.2" y2="4.2" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="11.8" y1="11.8" x2="13.07" y2="13.07" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="13.07" y1="2.93" x2="11.8" y2="4.2" stroke="black" stroke-width="1.5" stroke-linecap="round"/><line x1="4.2" y1="11.8" x2="2.93" y2="13.07" stroke="black" stroke-width="1.5" stroke-linecap="round"/></svg>',
+	'moon': '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 9.5C12.5 10.2 11.3 10.6 10 10.6C6.96 10.6 4.5 8.14 4.5 5.1C4.5 3.78 4.94 2.56 5.7 1.6C3.3 2.4 1.6 4.65 1.6 7.3C1.6 10.62 4.28 13.3 7.6 13.3C10.18 13.3 12.38 11.68 13.2 9.4L13.5 9.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+);

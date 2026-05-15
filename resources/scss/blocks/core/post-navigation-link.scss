@@ -1,0 +1,27 @@
+////
+/// Post Navigation Link block CSS.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+// -----------------------------------------------------------------------------
+// Block fixes.
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Block customizations.
+// -----------------------------------------------------------------------------
+
+.wp-block-post-navigation-link .wp-block-post-navigation-link__arrow-next {
+	display: inline-block;
+	transition: transform 0.2s ease;
+}
+
+.wp-block-post-navigation-link a:hover + .wp-block-post-navigation-link__arrow-next {
+	transform: translateX(4px);
+}
+
+// -----------------------------------------------------------------------------
+// Block style variations.
+// -----------------------------------------------------------------------------

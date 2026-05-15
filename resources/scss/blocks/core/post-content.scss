@@ -1,0 +1,102 @@
+////
+/// Post Content block CSS.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+// -----------------------------------------------------------------------------
+// Block fixes.
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Block customizations.
+// -----------------------------------------------------------------------------
+
+
+/* password form for posts */
+
+.chapter-protected {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	margin-inline: auto;
+}
+
+.chapter-protected form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.chapter-protected__label {
+	font-family: var(--wp--preset--font-family--tertiary);
+	font-size: var(--wp--preset--font-size--md);
+	color: var(--wp--preset--color--ink-muted);
+	display: block;
+	margin-block-end: 0.5rem;
+}
+
+.chapter-protected__row {
+	display: flex;
+	width: 100%;
+	border: 1px solid var(--wp--preset--color--rule);
+	color: var(--wp--preset--color--ink-muted);
+	border-radius: 255px 15px 225px 15px/15px 225px 15px 255px !important;
+}
+
+.chapter-protected__row input[type="password"],
+.chapter-protected__row input[type="submit"] {
+	appearance: none;
+	outline: none;
+	border-radius: 0;
+	border: none;
+	font-family: var(--wp--preset--font-family--tertiary);
+}
+
+.chapter-protected__row input[type="password"] {
+	flex: 1;
+	min-width: 0;
+	background: transparent;
+	border-inline-end: none;
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--md);
+	padding: 0.65rem 0.85rem;
+	letter-spacing: 0.04em;
+}
+
+.chapter-protected__row input[type="password"]::placeholder {
+	color: var(--wp--preset--color--ink-muted);
+	font-style: italic;
+}
+
+.chapter-protected__row input[type="password"]:focus {
+}
+
+.chapter-protected__row input[type="submit"] {
+	flex-shrink: 0;
+	background: transparent;
+	border-left: 1px solid var(--wp--preset--color--rule);
+	color: var(--wp--preset--color--ink-muted);
+	font-size: var(--wp--preset--font-size--md);
+	padding: 0.65rem 1.1rem;
+	cursor: pointer;
+	transition: background 0.15s, color 0.15s;
+	white-space: nowrap;
+	border-top-left-radius: 15px 255px !important;
+	border-bottom-left-radius: 15px 255px !important;
+}
+
+.chapter-protected__row input[type="submit"]:hover {
+	background: var(--wp--preset--color--parchment-accent);
+	color: var(--wp--preset--color--ink-on-accent);
+}
+
+.chapter-protected__row input[type="password"]:focus + input[type="submit"] {
+	border-inline-start-color: var(--wp--preset--color--ink-accent);
+}
+
+// -----------------------------------------------------------------------------
+// Block style variations.
+// -----------------------------------------------------------------------------

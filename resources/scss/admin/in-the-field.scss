@@ -1,0 +1,555 @@
+/*
+ * A Boy in the Wild — Admin Color Scheme: In the Field
+ *
+ * Compiled from the same selector structure used by WordPress core color
+ * schemes (midnight, blue, coffee, etc.). Matches wp-admin/css/colors/_admin.scss
+ * and the compiled output of each scheme's colors.css.
+ *
+ * Palette:
+ *   Menu bg:        #2c2418  (dark bark)
+ *   Menu bg alt:    #3d3020  (warm brown)
+ *   Highlight:      #9a6b2e  (amber)
+ *   Highlight dark: #7a5520  (dark amber)
+ *   Button:         #9a6b2e  (amber)
+ *   Notification:   #c8a85a  (gold)
+ *   Text on dark:   #d4b896  (parchment)
+ *   Text active:    #f5ead0  (light parchment)
+ */
+
+/* ==========================================================================
+   CSS Custom Properties — used by block editor and modern admin components
+   ========================================================================== */
+
+:root {
+	--wp-admin-theme-color:          #9a6b2e;
+	--wp-admin-theme-color--rgb:     154, 107, 46;
+	--wp-admin-theme-color-darker-10: #7a5520;
+	--wp-admin-theme-color-darker-20: #5c3d1e;
+}
+
+/* ==========================================================================
+   Admin Menu
+   ========================================================================== */
+
+#adminmenuback,
+#adminmenuwrap {
+	background: #2c2418;
+}
+
+#adminmenu {
+	background: #2c2418;
+}
+
+#adminmenu a {
+	color: #d4b896;
+}
+
+#adminmenu div.wp-menu-image::before {
+	color: #a08060;
+}
+
+#adminmenu a:hover,
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub > a.menu-top,
+#adminmenu li > a.menu-top:focus {
+	color: #f5ead0;
+	background-color: #3d3020;
+}
+
+#adminmenu li.menu-top:hover div.wp-menu-image::before,
+#adminmenu li.opensub > a.menu-top div.wp-menu-image::before {
+	color: #f5ead0;
+}
+
+/* Current/active menu item */
+#adminmenu .current a.menu-top,
+#adminmenu .wp-has-current-submenu .wp-submenu-head,
+#adminmenu .wp-has-current-submenu.opensub .wp-submenu-head,
+.folded #adminmenu .current.menu-top,
+#adminmenu .wp-has-current-submenu a.wp-has-current-submenu:focus,
+.folded #adminmenu a.current:focus {
+	color: #f5ead0;
+	background-color: #9a6b2e;
+}
+
+#adminmenu .wp-has-current-submenu div.wp-menu-image::before,
+#adminmenu a.current:hover div.wp-menu-image::before,
+#adminmenu .current div.wp-menu-image::before {
+	color: #f5ead0;
+}
+
+/* Submenu */
+#adminmenu .wp-submenu,
+#adminmenu .wp-has-current-submenu .wp-submenu,
+#adminmenu .wp-has-current-submenu.opensub .wp-submenu {
+	background: #1e1810;
+}
+
+#adminmenu .wp-submenu .wp-submenu-head {
+	color: #b89870;
+}
+
+#adminmenu .wp-submenu a,
+#adminmenu .wp-submenu li.current a,
+#adminmenu .wp-submenu li.current a:hover {
+	color: #b89870;
+}
+
+#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-submenu a:focus,
+#adminmenu .wp-submenu li.current a:focus {
+	color: #f5ead0;
+}
+
+/* Bubble/notification badge */
+#adminmenu li.wp-has-current-submenu .wp-submenu li.current a,
+#adminmenu li.current a {
+	color: #f5ead0;
+}
+
+.wp-submenu .wp-submenu-head {
+	color: #b89870;
+}
+
+#adminmenu .awaiting-mod,
+#adminmenu .update-plugins {
+	background-color: #c8a85a;
+	color: #2c2418;
+}
+
+#adminmenu li.current a .awaiting-mod,
+#adminmenu li a.wp-has-current-submenu .update-plugins,
+#adminmenu li:hover a .awaiting-mod,
+#adminmenu li.menu-top:hover > a .update-plugins {
+	background-color: #f5ead0;
+	color: #2c2418;
+}
+
+/* Menu separator */
+#adminmenu .wp-menu-separator {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+/* Collapse toggle */
+#collapse-button {
+	color: #a08060;
+}
+
+#collapse-button:hover,
+#collapse-button:focus {
+	color: #f5ead0;
+}
+
+/* ==========================================================================
+   Admin Bar
+   ========================================================================== */
+
+#wpadminbar {
+	background: #2c2418;
+}
+
+#wpadminbar .ab-item,
+#wpadminbar a.ab-item,
+#wpadminbar > #wp-toolbar span.ab-label,
+#wpadminbar > #wp-toolbar span.noticon {
+	color: #d4b896;
+}
+
+#wpadminbar .ab-icon,
+#wpadminbar .ab-icon::before,
+#wpadminbar .ab-item::before,
+#wpadminbar .ab-item::after {
+	color: #a08060;
+}
+
+#wpadminbar:not(.mobile) .ab-top-menu > li:hover > .ab-item,
+#wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item:focus,
+#wpadminbar.nojq .quicklinks .ab-top-menu > li > .ab-item:focus,
+#wpadminbar.nojs .ab-top-menu > li.menupop:hover > .ab-item {
+	color: #f5ead0;
+	background: #3d3020;
+}
+
+#wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item:focus:before,
+#wpadminbar:not(.mobile) .ab-top-menu > li.hover > .ab-item:before,
+#wpadminbar:not(.mobile) > #wp-toolbar > #wp-admin-bar-root-default li.hover > .ab-item:before,
+#wpadminbar:not(.mobile) > #wp-toolbar > #wp-admin-bar-top-secondary > #wp-admin-bar-search #adminbarsearch.adminbar-focused::before {
+	color: #f5ead0;
+}
+
+#wpadminbar .menupop .ab-sub-wrapper {
+	background: #1e1810;
+}
+
+#wpadminbar .quicklinks .menupop ul.ab-sub-secondary,
+#wpadminbar .quicklinks .menupop ul.ab-sub-secondary .ab-submenu {
+	background: #241e10;
+}
+
+#wpadminbar .ab-submenu .ab-item,
+#wpadminbar .quicklinks .menupop ul li a,
+#wpadminbar .quicklinks .menupop ul li a:focus,
+#wpadminbar .quicklinks .menupop ul li a:hover {
+	color: #b89870;
+}
+
+#wpadminbar .quicklinks li .blavatar,
+#wpadminbar .menupop .menupop > .ab-item::before {
+	color: #a08060;
+}
+
+#wpadminbar .quicklinks .ab-sub-wrapper .menupop > a:focus,
+#wpadminbar .quicklinks .menupop ul li a:focus,
+#wpadminbar .quicklinks .menupop ul li a:hover,
+#wpadminbar .quicklinks .ab-sub-wrapper .menupop.hover > a,
+#wpadminbar.nojs .quicklinks .menupop:hover > .ab-item,
+#wpadminbar .quicklinks .menupop.hover > a,
+#wpadminbar.nojs .quicklinks .ab-sub-wrapper .menupop:hover > .ab-item {
+	color: #f5ead0;
+	background: #3d3020;
+}
+
+#wpadminbar .quicklinks li a:hover .blavatar,
+#wpadminbar .quicklinks li a:focus .blavatar,
+#wpadminbar .menupop .menupop > a:hover::before,
+#wpadminbar .menupop .menupop > a:focus::before,
+#wpadminbar .menupop .menupop.hover > a::before {
+	color: #f5ead0;
+}
+
+#wpadminbar .quicklinks .menupop ul.ab-sub-secondary li a:hover,
+#wpadminbar .quicklinks .menupop ul.ab-sub-secondary li a:focus {
+	background: #241e10;
+}
+
+#wpadminbar > #wp-toolbar > #wp-admin-bar-root-default li.hover > .ab-item,
+#wpadminbar > #wp-toolbar > #wp-admin-bar-top-secondary > #wp-admin-bar-search #adminbarsearch.adminbar-focused {
+	color: #f5ead0;
+	background: #3d3020;
+}
+
+#wpadminbar .ab-top-secondary .ab-sub-wrapper {
+	background: #1e1810;
+}
+
+#wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+	// background-image: url("../images/wordpress-logo.svg");
+	background-position: 0 0;
+}
+
+#wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
+	background-position: 0 0;
+}
+
+/* Search field */
+#wpadminbar #adminbarsearch:before {
+	color: #a08060;
+}
+
+#wpadminbar > #wp-toolbar #wp-admin-bar-search #adminbarsearch .adminbar-input:focus {
+	color: #2c2418;
+	background: #d4b896;
+}
+
+/* Recovery mode */
+#wpadminbar .recovery-mode-menu {
+	background-color: #3d3020;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+/* Primary button */
+.wp-core-ui .button-primary {
+	background: #9a6b2e;
+	border-color: #7a5520;
+	color: #f5ead0;
+	text-decoration: none;
+}
+
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary:focus {
+	background: #7a5520;
+	border-color: #5c3d1e;
+	color: #f5ead0;
+}
+
+.wp-core-ui .button-primary:focus {
+	box-shadow: 0 0 0 1px #f5ead0, 0 0 0 3px #9a6b2e;
+}
+
+.wp-core-ui .button-primary:active {
+	background: #5c3d1e;
+	border-color: #3d2810;
+	color: #f5ead0;
+	box-shadow: inset 0 2px 5px -3px rgba(0, 0, 0, 0.5);
+}
+
+.wp-core-ui .button-primary.active,
+.wp-core-ui .button-primary.active:focus,
+.wp-core-ui .button-primary.active:hover {
+	background: #5c3d1e;
+	border-color: #3d2810;
+	color: #f5ead0;
+}
+
+.wp-core-ui .button-primary[disabled],
+.wp-core-ui .button-primary:disabled,
+.wp-core-ui .button-primary.disabled {
+	background: #c8a87a !important;
+	border-color: #b89060 !important;
+	color: rgba(245, 234, 208, 0.6) !important;
+	text-shadow: none !important;
+}
+
+/* Secondary / default button — these use the scheme highlight colour for hover/focus */
+.wp-core-ui .button-secondary:hover,
+.wp-core-ui .button-secondary:focus,
+.wp-core-ui .button:hover,
+.wp-core-ui .button:focus {
+	border-color: #7a5520;
+	color: #5c3d1e;
+	box-shadow: 0 0 0 1px #7a5520;
+}
+
+.wp-core-ui .button-secondary:focus,
+.wp-core-ui .button:focus {
+	box-shadow: 0 0 0 1px #f5ead0, 0 0 0 3px #9a6b2e;
+}
+
+/* Button group */
+.wp-core-ui .button-group > .button:focus,
+.wp-core-ui .button-group > .button:active,
+.wp-core-ui .button-group > .button.active {
+	border-color: #9a6b2e;
+	color: #9a6b2e;
+	box-shadow: inset 0 2px 5px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   Forms — checkboxes, radios, range
+   ========================================================================== */
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+	background-color: #9a6b2e;
+	border-color: #9a6b2e;
+}
+
+input[type="checkbox"]:checked::before {
+	content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%23f5ead0%27%2F%3E%3C%2Fsvg%3E");
+}
+
+input[type="radio"]:checked::before {
+	background-color: #f5ead0;
+}
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+input[type="color"]:focus,
+select:focus {
+	border-color: #9a6b2e;
+	box-shadow: 0 0 0 1px #9a6b2e;
+}
+
+input[type="range"]::-webkit-slider-thumb,
+input[type="range"]::-moz-range-thumb {
+	background-color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+a {
+	color: #7a5520;
+}
+
+a:hover,
+a:active {
+	color: #5c3d1e;
+}
+
+#media-upload a.del-link:hover,
+div.dashboard-widget-submit input:hover,
+.subsubsub a:hover,
+.subsubsub a.current:hover {
+	color: #5c3d1e;
+}
+
+/* ==========================================================================
+   List tables — row actions and status colours
+   ========================================================================== */
+
+.wrap .add-new-h2:hover,
+.wrap .page-title-action:hover {
+	background-color: #9a6b2e;
+	color: #f5ead0;
+}
+
+.view-switch a.current::before {
+	color: #9a6b2e;
+}
+
+.view-switch a:hover::before {
+	color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Post statuses / metaboxes
+   ========================================================================== */
+
+.post-com-count span,
+.post-state-format,
+.post-com-count-no-comments,
+.post-state {
+	color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Media upload / modal
+   ========================================================================== */
+
+#media-upload-header,
+#sidemenu a.current,
+#sidemenu a:hover {
+	background-color: #9a6b2e;
+	color: #f5ead0;
+}
+
+/* ==========================================================================
+   Nav tabs
+   ========================================================================== */
+
+.wp-tab-active,
+.wp-tab-active:hover {
+	background-color: #f5ead0;
+}
+
+.nav-tab-active,
+.nav-tab-active:focus,
+.nav-tab-active:focus:active,
+.nav-tab-active:hover {
+	border-top-color: #9a6b2e;
+	color: #9a6b2e;
+}
+
+/* ==========================================================================
+   UI highlights — used by plugins to pull the theme colour
+   ========================================================================== */
+
+.wp-ui-highlight {
+	background-color: #9a6b2e;
+	color: #f5ead0;
+}
+
+.wp-ui-highlight-text,
+.wp-ui-text-highlight {
+	color: #9a6b2e;
+}
+
+.wp-ui-primary {
+	background-color: #2c2418;
+	color: #f5ead0;
+}
+
+.wp-ui-text-primary {
+	color: #2c2418;
+}
+
+.wp-ui-notification {
+	background-color: #c8a85a;
+	color: #2c2418;
+}
+
+.wp-ui-text-notification {
+	color: #c8a85a;
+}
+
+/* ==========================================================================
+   Gutenberg / block editor
+   ========================================================================== */
+
+.components-button:focus {
+	box-shadow: 0 0 0 2px #9a6b2e;
+}
+
+.block-editor-block-toolbar .components-toolbar-group,
+.block-editor-block-toolbar .components-toolbar {
+	border-color: rgba(154, 107, 46, 0.2);
+}
+
+a {
+	color: #7a5520;
+}
+
+/* ==========================================================================
+   Screen options / help tab
+   ========================================================================== */
+
+.contextual-help-tabs .active a,
+.contextual-help-tabs .active a:hover,
+.contextual-help-tabs .active a:focus {
+	border-left-color: #9a6b2e;
+	color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Dashboard widgets
+   ========================================================================== */
+
+.postbox .hndle,
+.postbox .handlediv {
+	color: inherit;
+}
+
+.dashboard-widget-submit input {
+	background-color: #9a6b2e;
+	color: #f5ead0;
+	border-color: #7a5520;
+}
+
+/* ==========================================================================
+   Colour picker
+   ========================================================================== */
+
+.wp-picker-active .button:focus,
+.wp-picker-active .button:hover {
+	background: #7a5520;
+	border-color: #5c3d1e;
+	color: #f5ead0;
+}
+
+/* ==========================================================================
+   Focus styles
+   ========================================================================== */
+
+:focus-visible {
+	outline-color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Progress bar / upload bar
+   ========================================================================== */
+
+.media-progress-bar div {
+	background-color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Custom selects
+   ========================================================================== */
+
+select:focus {
+	outline-color: #9a6b2e;
+}
+
+/* ==========================================================================
+   Screen reader / skip link
+   ========================================================================== */
+
+.screen-reader-shortcut:focus,
+#wpwrap:focus {
+	outline-color: #9a6b2e;
+}

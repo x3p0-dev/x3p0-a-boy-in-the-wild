@@ -1,0 +1,44 @@
+////
+/// Helper classes and special handling.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+///
+/// Light and dark mode classes for individual sections.
+///
+.is-light-mode {
+	color-scheme: only light;
+}
+
+.is-dark-mode {
+	color-scheme: only dark;
+}
+
+///
+/// Hidden and visible text helpers.
+///
+.is-hidden {
+	visibility: hidden;
+}
+
+.is-visible {
+	visibility: visible;
+}
+
+
+///
+/// Cleans up smiley styling.
+///
+svg.wp-smiley {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}

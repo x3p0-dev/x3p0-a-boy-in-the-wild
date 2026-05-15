@@ -1,0 +1,66 @@
+////
+/// Button block CSS.
+///
+/// @author Justin Tadlock <justintadlock@gmail.com>
+/// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
+////
+
+@use '../../tools/icon';
+@use '../../tools/inline-icon';
+
+// -----------------------------------------------------------------------------
+// Block fixes.
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Block customizations.
+// -----------------------------------------------------------------------------
+
+.toggle-chapter-audio .wp-block-button__link {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var( --wp--preset--spacing--10 );
+	align-items: center;
+}
+
+.toggle-chapter-audio .wp-block-button__link::before {
+	content: '';
+	width: 0.4em;
+	height: 0.4em;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.toggle-chapter-audio .wp-block-button__link.is-playing::before {
+	animation: pulse-ring 1.2s ease-out infinite;
+}
+
+// -----------------------------------------------------------------------------
+// Block style variations.
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// Block variations.
+// -----------------------------------------------------------------------------
+
+///
+/// Color scheme block variation CSS.
+///
+/// Note that the editor renders a `<div>` element for the `<button>`.
+///
+.wp-block-button.toggle-color-scheme .wp-block-button__link {
+
+	// When used in a nav menu, decrease the default spacing.
+	.wp-block-navigation & {
+		padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--40);
+	}
+
+	// The default icon is for light mode, but we use the dark mode icon
+	// when the dark color scheme is in use.
+	@include inline-icon.prefix(icon.get-url('sun'));
+
+	&.is-dark-scheme::before {
+		@include inline-icon.modify(icon.get-url('moon'));
+	}
+}
