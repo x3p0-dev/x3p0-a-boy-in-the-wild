@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Title: Home Content
- * Slug: x3p0-a-boy-in-the-wild/content-home
+ * Title: Archive Content
+ * Slug: x3p0-a-boy-in-the-wild/content-archive
  * Inserter: no
  */
 
@@ -12,7 +12,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 $background = get_theme_file_uri('public/media/images/late-summer-background.webp');
-$sketch     = get_theme_file_uri('public/media/images/wilderness.webp');
+$sketch     = get_theme_file_uri('public/media/images/archive-sketch.webp');
 ?>
 
 <!-- wp:group {"className":"is-style-season-late-summer","metadata":{"name":"The Territory"},"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"},"margin":{"top":"0"}},"background":{"backgroundImage":{"url":"<?= esc_url($background) ?>","id":419,"source":"file","title":"late-summer-background"},"backgroundSize":"cover","backgroundPosition":"50% 0%","backgroundAttachment":"fixed"}},"layout":{"type":"default"}} -->
@@ -27,24 +27,30 @@ $sketch     = get_theme_file_uri('public/media/images/wilderness.webp');
 			<!-- wp:group {"tagName":"header","metadata":{"name":"The Anchor"},"style":{"position":{"type":"sticky","top":"0px"}},"layout":{"type":"default"}} -->
 			<header class="wp-block-group">
 
-				<!-- wp:site-title {"isLink":false,"metadata":{"name":"The Title"}} /-->
+				<!-- wp:site-title {"metadata":{"name":"The Title"}} /-->
 
 				<!-- wp:group {"metadata":{"name":"The Opening"},"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"default"}} -->
 				<div class="wp-block-group">
 
-					<!-- wp:heading {"level":1} -->
-					<h1 class="wp-block-heading"><strong>Mostly</strong> <em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-ink-accent-color">true</mark></em></h1>
-					<!-- /wp:heading -->
+					<!-- wp:paragraph {"className":"is-style-text-kicker"} -->
+					<p class="is-style-text-kicker">A Stretch of Time</p>
+					<!-- /wp:paragraph -->
+
+					<!-- wp:query-title {
+						"type":"archive",
+						"showPrefix":false,
+						"align":"wide"
+					} /-->
 
 					<!-- wp:paragraph {"className":"is-style-chapter-caption"} -->
-					<p class="is-style-chapter-caption">Notes on finding the way back, chronicled one marker at a time. The path shifts, but the direction holds.</p>
+					<p class="is-style-chapter-caption">I don't remember writing all of these. Some days I wrote more than others. The days I didn't write I was probably fine. Not every day made it into the notes.</p>
 					<!-- /wp:paragraph -->
 
 				</div>
 				<!-- /wp:group -->
 
 				<!-- wp:image {"metadata":{"name":"The Sketch"},"sizeSlug":"large","className":"is-style-chapter-field-sketch"} -->
-				<figure class="wp-block-image size-large is-style-chapter-field-sketch"><img src="<?= esc_url($sketch) ?>" alt="AI_IMAGE: A quick, expressive pencil and sepia wash sketch of a distant mountain ridge line with sparse pine trees, drawn loosely on a textured journal page | illustration | landscape"/><figcaption class="wp-element-caption">32 27'N 86 22'W · Somewhere north of the ridge</figcaption></figure>
+				<figure class="wp-block-image size-large is-style-chapter-field-sketch"><img src="<?= esc_url($sketch) ?>" alt="AI_IMAGE: A quick, expressive pencil and sepia wash sketch of a distant mountain ridge line with sparse pine trees, drawn loosely on a textured journal page | illustration | landscape"/><figcaption class="wp-element-caption">The sky tells you what's coming if you know how to read it.</figcaption></figure>
 				<!-- /wp:image -->
 
 			</header>
@@ -62,16 +68,14 @@ $sketch     = get_theme_file_uri('public/media/images/wilderness.webp');
 				<!-- wp:group {"metadata":{"name":"The Heading"},"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"default"}} -->
 				<div class="wp-block-group">
 
-					<!-- wp:group {"metadata":{"name":"The Kicker"},"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
-					<div class="wp-block-group">
+					<!-- wp:group {"className":"is-style-chapter-meta","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
+					<div class="wp-block-group is-style-chapter-meta">
 
-						<!-- wp:heading {"className":"is-style-text-kicker"} -->
-						<h2 class="wp-block-heading is-style-text-kicker">The Trail So Far</h2>
-						<!-- /wp:heading -->
+						<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"x3p0/query","args":{"field":"count"}}}},"className":"is-style-text-kicker"} -->
+						<p class="is-style-text-kicker">0 Chapters</p>
+						<!-- /wp:paragraph -->
 
-						<!-- wp:icon {"icon":"x3p0/compass","metadata":{"name":"Compass"},"style":{"dimensions":{"width":"40px"}}} /-->
-
-					</div>
+						<!-- wp:icon {"icon":"x3p0/sundial","style":{"dimensions":{"width":"40px"}}} /--></div>
 					<!-- /wp:group -->
 
 					<!-- wp:separator {"opacity":"css","className":"is-style-separator-hand-drawn"} -->

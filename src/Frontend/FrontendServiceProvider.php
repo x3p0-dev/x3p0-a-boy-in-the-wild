@@ -15,6 +15,7 @@ final class FrontendServiceProvider extends ServiceProvider implements Bootable
 	public function boot(): void
 	{
 		$this->container->get(FrontendAssets::class)->boot();
+		$this->container->get(FrontendQuery::class)->boot();
 		$this->container->get(FrontendTweaks::class)->boot();
 	}
 }

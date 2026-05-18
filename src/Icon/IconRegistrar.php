@@ -62,8 +62,14 @@ final class IconRegistrar implements Bootable
 	private function icons(): array
 	{
 		return [
-			'compass'    => __('Compass', 'x3p0-a-boy-in-the-wild'),
-			'sealed-key' => __('Sealed Key', 'x3p0-a-boy-in-the-wild')
+			'compass'      => __('Compass', 'x3p0-a-boy-in-the-wild'),
+			'history'      => __('History', 'x3p0-a-boy-in-the-wild'),
+			'landscape'    => __('Landscape', 'x3p0-a-boy-in-the-wild'),
+			'linear-scale' => __('Linear Scale', 'x3p0-a-boy-in-the-wild'),
+			'route'        => __('Route', 'x3p0-a-boy-in-the-wild'),
+			'sealed-key'   => __('Sealed Key', 'x3p0-a-boy-in-the-wild'),
+			'sundial'      => __('Sundial', 'x3p0-a-boy-in-the-wild'),
+			'sun-path'     => __('Sun Path', 'x3p0-a-boy-in-the-wild'),
 		];
 	}
 }

@@ -524,6 +524,11 @@
 					}
 				}
 			},
+			"core/query-title": {
+				"typography": {
+					"fontWeight": "700"
+				}
+			},
 			"core/separator": {
 				"border": {
 					"top": {

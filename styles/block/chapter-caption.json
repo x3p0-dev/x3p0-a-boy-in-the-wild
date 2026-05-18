@@ -3,7 +3,7 @@
 	"version": 3,
 	"title": "Chapter Caption",
 	"slug": "chapter-caption",
-	"blockTypes": ["core/heading","core/paragraph"],
+	"blockTypes": ["core/heading","core/paragraph", "core/term-description"],
 	"styles": {
 		"color": {
 			"text": "var(--wp--preset--color--ink-accent)"

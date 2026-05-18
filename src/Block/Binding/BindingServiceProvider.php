@@ -24,8 +24,10 @@ final class BindingServiceProvider extends ServiceProvider implements Bootable
 	 */
 	private const SOURCES = [
 		Sources\PostData::class,
+		Sources\Query::class,
 		Sources\SiteData::class,
-		Sources\Story::class
+		Sources\Story::class,
+		Sources\Term::class
 	];
 
 	/**

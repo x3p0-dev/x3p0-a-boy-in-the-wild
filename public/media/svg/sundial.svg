@@ -1,0 +1,17 @@
+<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+	<path fill-rule="evenodd" fill="currentColor" d="M 50,14 C 69.88,14 86,30.12 86,50 C 86,69.88 69.88,86 50,86 C 30.12,86 14,69.88 14,50 C 14,30.12 30.12,14 50,14 Z M 50,18 C 67.67,18 82,32.33 82,50 C 82,67.67 67.67,82 50,82 C 32.33,82 18,67.67 18,50 C 18,32.33 32.33,18 50,18 Z"/>
+	<path fill-rule="evenodd" fill="currentColor" opacity="0.3" d="M 50,18 C 67.67,18 82,32.33 82,50 C 82,67.67 67.67,82 50,82 C 32.33,82 18,67.67 18,50 C 18,32.33 32.33,18 50,18 Z M 50,21 C 65.98,21 79,34.02 79,50 C 79,65.98 65.98,79 50,79 C 34.02,79 21,65.98 21,50 C 21,34.02 34.02,21 50,21 Z"/>
+	<path fill="currentColor" d="M 49,4 L 51,4 L 51,13 L 49,13 Z"/>
+	<path fill="currentColor" d="M 49,87 L 51,87 L 51,96 L 49,96 Z"/>
+	<path fill="currentColor" d="M 4,49 L 4,51 L 13,51 L 13,49 Z"/>
+	<path fill="currentColor" d="M 87,49 L 87,51 L 96,51 L 96,49 Z"/>
+	<path fill="currentColor" d="M 72.5,22.1 L 74,23.6 L 68.5,29.1 L 67,27.6 Z"/>
+	<path fill="currentColor" d="M 27.5,22.1 L 33,27.6 L 31.5,29.1 L 26,23.6 Z"/>
+	<path fill="currentColor" d="M 72.5,77.9 L 74,76.4 L 68.5,70.9 L 67,72.4 Z"/>
+	<path fill="currentColor" d="M 27.5,77.9 L 26,76.4 L 31.5,70.9 L 33,72.4 Z"/>
+	<path fill="currentColor" d="M 47,48 L 55,10 L 53,48 Z"/>
+	<path fill="currentColor" d="M 51,52 L 74,40 L 52,50 Z" opacity="0.45"/>
+	<path fill-rule="evenodd" fill="currentColor" d="M 50,47 C 51.66,47 53,48.34 53,50 C 53,51.66 51.66,53 50,53 C 48.34,53 47,51.66 47,50 C 47,48.34 48.34,47 50,47 Z"/>
+	<path fill="currentColor" d="M 43,87 C 43,83 46,82 50,82 C 54,82 57,83 57,87 L 55,87 C 55,84.5 52.8,84 50,84 C 47.2,84 45,84.5 45,87 Z"/>
+	<path fill="currentColor" d="M 40,88 L 60,88 L 60,90 L 40,90 Z"/>
+</svg>

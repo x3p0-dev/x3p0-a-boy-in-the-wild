@@ -23,7 +23,7 @@
 	top: 30px;
 	left: 14px;
 	width: 2px;
-	height: calc(100% - 16px);
+	height: calc(100% - 30px);
 	background-color: var(--wp--preset--color--rule);
 	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='600' preserveAspectRatio='none'%3E%3Cline x1='1' y1='0' x2='1' y2='600' stroke='%23ffffff' stroke-width='1.5' stroke-dasharray='6 4 12 5 8 3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
 	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='600' preserveAspectRatio='none'%3E%3Cline x1='1' y1='0' x2='1' y2='600' stroke='%23ffffff' stroke-width='1.5' stroke-dasharray='6 4 12 5 8 3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
