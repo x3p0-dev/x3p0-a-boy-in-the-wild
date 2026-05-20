@@ -50,7 +50,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 
 		<!-- wp:group {
 			"tagName":"article",
-			"metadata":{"name":"<?= esc_attr__('Chapter Header', 'x3p0-a-boy-in-the-wild') ?>"},
+			"metadata":{"name":"<?= esc_attr__('Chapter', 'x3p0-a-boy-in-the-wild') ?>"},
 			"align":"full",
 			"layout":{"type":"constrained"}
 		} -->
