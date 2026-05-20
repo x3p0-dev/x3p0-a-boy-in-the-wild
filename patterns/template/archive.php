@@ -11,8 +11,8 @@ declare(strict_types=1);
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-$background = get_theme_file_uri('public/media/images/late-summer-background.webp');
-$sketch     = get_theme_file_uri('public/media/images/archive-sketch.webp');
+$background = get_theme_file_uri('public/media/images/system/season-late-summer.webp');
+$sketch     = get_theme_file_uri('public/media/images/template/archive-sketch.webp');
 ?>
 
 <!-- wp:group {"className":"is-style-section-season-late-summer","metadata":{"name":"The Territory"},"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"},"margin":{"top":"0"}},"background":{"backgroundImage":{"url":"<?= esc_url($background) ?>","id":419,"source":"file","title":"late-summer-background"},"backgroundSize":"cover","backgroundPosition":"50% 0%","backgroundAttachment":"fixed"}},"layout":{"type":"default"}} -->

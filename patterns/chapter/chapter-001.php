@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-$background = get_theme_file_uri('public/media/images/late-summer-background.webp');
+$background = get_theme_file_uri('public/media/images/system/season-late-summer.webp');
 $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp');
 ?>
 

@@ -1,6 +1,6 @@
 # A Boy in the Wild
 
-![](/resources/media/images/a-boy-in-the-wild.webp)
+![](/public/media/images/a-boy-in-the-wild.webp)
 
 A WordPress block theme unlike anything in the directory.
 

@@ -11,7 +11,7 @@ declare(strict_types=1);
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-$sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
+$sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
 ?>
 
 <!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-section-mood-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
