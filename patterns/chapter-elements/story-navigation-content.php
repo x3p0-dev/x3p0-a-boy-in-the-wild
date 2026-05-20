@@ -11,7 +11,7 @@
 <!-- wp:group {
 	"templateLock":"contentOnly",
 	"metadata":{"name":"<?= esc_attr__('Story Navigation Content', 'x3p0-a-boy-in-the-wild') ?>"},
-	"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}
+	"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center","verticalAlignment":"top"}
 } -->
 <div class="wp-block-group">
 

@@ -15,7 +15,7 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 
 <!-- wp:group {
 	"metadata":{"name":"<?= esc_attr__('Entry', 'x3p0-a-boy-in-the-wild') ?>"},
-	"align":"full","className":"is-style-mood-storm",
+	"align":"full","className":"is-style-section-mood-storm",
 	"style":{
 		"background":{
 			"backgroundImage":{
@@ -32,7 +32,7 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 	},
 	"layout":{"type":"constrained"}
 } -->
-<div class="wp-block-group alignfull is-style-mood-storm" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+<div class="wp-block-group alignfull is-style-section-mood-storm" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/waypoint-default-full"} /-->
 
@@ -157,8 +157,8 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 				</div>
 				<!-- /wp:columns -->
 
-				<!-- wp:paragraph -->
-				<p><em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-ink-subtle-color">I thought about the fire from the first night and whether it had been large enough and whether —</mark></em></p>
+				<!-- wp:paragraph {"className":"is-style-text-aside"} -->
+				<p class="is-style-text-aside">I thought about the fire from the first night and whether it had been large enough and whether —</p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:separator -->
@@ -201,8 +201,8 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 				"metadata":{"name":"<?= esc_attr__('Chapter Footer', 'x3p0-a-boy-in-the-wild') ?>"},
 				"align":"full",
 				"className":"is-style-container-meta",
-				"style":{"spacing":{"blockGap":"var:preset|spacing|0","padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},
-				"layout":{"type":"flex","orientation":"vertical","justifyContent":"right"}
+				"style":{"spacing":{"blockGap":"var:preset|spacing|20","padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},
+				"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}
 			} -->
 			<footer class="wp-block-group alignfull is-style-container-meta" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 

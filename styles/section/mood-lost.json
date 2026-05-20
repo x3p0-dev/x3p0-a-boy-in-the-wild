@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
 	"title": "Lost",
-	"slug": "mood-lost",
+	"slug": "section-mood-lost",
 	"blockTypes": ["core/group"],
 	"styles": {
 		"css": "--wp--preset--color--parchment: #020804;\n--wp--preset--color--parchment-raised: #060e06;\n--wp--preset--color--parchment-surface: #0a1509;\n--wp--preset--color--parchment-accent: rgba(195,175,90,0.22);\n--wp--preset--color--ink: rgba(215,205,158,0.90);\n--wp--preset--color--ink-subtle: rgba(195,182,128,0.65);\n--wp--preset--color--ink-muted: rgba(170,158,100,0.45);\n--wp--preset--color--ink-accent: rgba(200,178,85,0.72);\n--wp--preset--color--ink-on-accent: #020804;\n--wp--preset--color--handwritten: rgba(185,165,88,0.52);\n--wp--preset--color--rule: rgba(185,165,85,0.14);\n--wp--preset--color--sketch-parchment: #060e06;\n--wp--preset--color--sketch-ink: rgba(195,178,105,0.45);",

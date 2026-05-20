@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
 	"title": "Deep Winter",
-	"slug": "season-deep-winter",
+	"slug": "section-season-deep-winter",
 	"blockTypes": ["core/group"],
 	"styles": {
 		"css": "--wp--preset--color--parchment: #1a1f1c;\n--wp--preset--color--parchment-raised: #242820;\n--wp--preset--color--parchment-surface: #0e1210;\n--wp--preset--color--parchment-accent: rgba(180,175,155,0.55);\n--wp--preset--color--ink: rgba(200,196,176,0.82);\n--wp--preset--color--ink-subtle: rgba(180,175,155,0.55);\n--wp--preset--color--ink-muted: rgba(180,175,155,0.28);\n--wp--preset--color--ink-accent: rgba(180,175,155,0.55);\n--wp--preset--color--ink-on-accent: #1a1f1c;\n--wp--preset--color--rule: rgba(180,175,155,0.18);\n--wp--preset--color--sketch-parchment: #242820;\n--wp--preset--color--sketch-ink: rgba(180,175,155,0.45);",

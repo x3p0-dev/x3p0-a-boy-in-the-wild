@@ -16,11 +16,11 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 <!-- wp:group {
 	"metadata":{"name":"<?= esc_attr__('Entry', 'x3p0-a-boy-in-the-wild') ?>"},
 	"align":"full",
-	"className":"is-style-season-early-autumn",
+	"className":"is-style-section-season-early-autumn",
 	"style":{"spacing":{"padding":{"bottom":"var:preset|spacing|70","top":"var:preset|spacing|70"}}},
 	"layout":{"type":"constrained","contentSize":"64rem","wideSize":"80rem"}
 } -->
-<div class="wp-block-group alignfull is-style-season-early-autumn" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+<div class="wp-block-group alignfull is-style-section-season-early-autumn" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/waypoint-default-full"} /-->
 

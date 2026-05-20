@@ -14,11 +14,11 @@ defined('ABSPATH') || exit;
 $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 ?>
 
-<!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-mood-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
-<main class="wp-block-group alignfull is-style-mood-lost" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+<!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-section-mood-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group alignfull is-style-section-mood-lost" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 
-	<!-- wp:group {"tagName":"header","metadata":{"name":"Waypoint"},"align":"full","className":"is-style-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
-	<header class="wp-block-group alignfull is-style-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+	<!-- wp:group {"tagName":"header","metadata":{"name":"Waypoint"},"align":"full","className":"is-style-container-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
+	<header class="wp-block-group alignfull is-style-container-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 
 		<!-- wp:group {"lock":{"move":false,"remove":false},"metadata":{"name":"Waypoint Content","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-header"},"className":"is-style-chapter-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","alignItems":"center"}} -->
 		<div class="wp-block-group is-style-chapter-header">
@@ -65,9 +65,16 @@ $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 		<!-- wp:group {"tagName":"header","metadata":{"name":"Chapter Header"},"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"default"}} -->
 		<header class="wp-block-group alignwide">
 
-			<!-- wp:paragraph {"className":"is-style-container-meta"} -->
-			<p class="is-style-container-meta">Lost · Somewhere in the trees · No landmarks visible</p>
-			<!-- /wp:paragraph -->
+			<!-- wp:group {
+				"className":"is-style-container-meta",
+				"layout":{"type":"default"}
+			} -->
+			<div class="wp-block-group is-style-container-meta">
+				<!-- wp:paragraph -->
+				<p>Lost · Somewhere in the trees · No landmarks visible</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:group -->
 
 			<!-- wp:heading {"level":1} -->
 			<h1 class="wp-block-heading">You've gone somewhere<br>I&nbsp;<em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-ink-subtle-color">haven't charted.</mark></em></h1>

@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
 	"title": "Early Autumn",
-	"slug": "season-early-autumn",
+	"slug": "section-season-early-autumn",
 	"blockTypes": [
 		"core/group"
 	],

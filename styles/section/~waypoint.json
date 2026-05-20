@@ -3,7 +3,7 @@
 	"version": 3,
 	"blockTypes": ["core/group"],
 	"title": "Waypoint",
-	"slug": "waypoint",
+	"slug": "container-waypoint",
 	"styles": {
 		"color": {
 			"text": "var(--wp--preset--color--ink-accent)"

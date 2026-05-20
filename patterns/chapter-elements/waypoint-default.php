@@ -10,10 +10,10 @@
 
 <!-- wp:group {
 	"metadata":{"name":"<?= esc_attr__('Waypoint', 'x3p0-a-boy-in-the-wild') ?>"},
-	"className":"is-style-waypoint",
+	"className":"is-style-container-waypoint",
 	"layout":{"type":"default"}
 } -->
-<div class="wp-block-group is-style-waypoint">
+<div class="wp-block-group is-style-container-waypoint">
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/waypoint-content-chapter"} /-->
 

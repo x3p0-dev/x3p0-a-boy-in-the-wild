@@ -11,11 +11,11 @@
 <!-- wp:group {
 	"metadata":{"name":"<?= esc_attr__('Waypoint', 'x3p0-a-boy-in-the-wild') ?>"},
 	"align":"full",
-	"className":"is-style-waypoint",
+	"className":"is-style-container-waypoint",
 	"style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},
 	"layout":{"type":"default"}
 } -->
-<div class="wp-block-group alignfull is-style-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+<div class="wp-block-group alignfull is-style-container-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/waypoint-content-chapter"} /-->
 
