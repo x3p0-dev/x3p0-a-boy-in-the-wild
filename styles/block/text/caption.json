@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Caption",
+	"slug": "text-caption",
+	"blockTypes": [
+		"core/heading",
+		"core/paragraph",
+		"core/term-description"
+	],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--ink-accent)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--tertiary)",
+			"fontSize": "1.025em",
+			"lineHeight": "var(--wp--custom--line-height--lg)",
+			"fontStyle": "normal"
+		}
+	}
+}

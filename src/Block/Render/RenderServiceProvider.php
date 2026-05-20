@@ -23,8 +23,7 @@ final class RenderServiceProvider extends ServiceProvider implements Bootable
 	 */
 	private const RENDERERS = [
 		Filters\Button::class,
-		Filters\Group::class,
-		Filters\PostExcerpt::class,
+		Filters\PostExcerpt::class
 	];
 
 	/**

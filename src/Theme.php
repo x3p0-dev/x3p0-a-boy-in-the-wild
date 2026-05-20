@@ -34,7 +34,6 @@ final class Theme extends Application
 		Frontend\FrontendServiceProvider::class,
 		Icon\IconServiceProvider::class,
 		Pattern\PatternServiceProvider::class,
-		Template\TemplateServiceProvider::class,
-		Typewriter\TypewriterServiceProvider::class
+		Template\TemplateServiceProvider::class
 	];
 }

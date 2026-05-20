@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Fade Out",
+	"slug": "list-fade-out",
+	"blockTypes": ["core/list"],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--ink)"
+		},
+		"spacing": {
+			"padding": {
+				"top": "0",
+				"bottom": "0",
+				"left": "0",
+				"right": "0"
+			}
+		},
+		"css": "list-style: none; & li { padding: var(--wp--preset--spacing--30) 0; border-bottom: 1px solid var(--wp--preset--color--rule); line-height: 1; opacity: 1; transition: opacity 0.2s ease; } & li:last-child { border-bottom: none; } & li:nth-child(2) { opacity: 0.9; } & li:nth-child(3) { opacity: 0.8; } & li:nth-child(4) { opacity: 0.7; } & li:nth-child(5) { opacity: 0.6; } & li:nth-child(n+6) { opacity: 0.5; } & li:nth-child(n+7) { opacity: 0.4; } & li:nth-child(n+8) { opacity: 0.3; }"
+	}
+}

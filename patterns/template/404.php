@@ -1,0 +1,146 @@
+<?php
+
+/**
+ * Title: 404 Template
+ * Slug: x3p0-a-boy-in-the-wild/template-404
+ * Inserter: no
+ */
+
+declare(strict_types=1);
+
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
+$sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
+?>
+
+<!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-mood-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group alignfull is-style-mood-lost" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+
+	<!-- wp:group {"tagName":"header","metadata":{"name":"Waypoint"},"align":"full","className":"is-style-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
+	<header class="wp-block-group alignfull is-style-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+
+		<!-- wp:group {"lock":{"move":false,"remove":false},"metadata":{"name":"Waypoint Content","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-header"},"className":"is-style-chapter-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","alignItems":"center"}} -->
+		<div class="wp-block-group is-style-chapter-header">
+
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
+			<div class="wp-block-group">
+
+				<!-- wp:site-title {"level":0} /-->
+
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+				<!-- /wp:separator -->
+
+				<!-- wp:paragraph {"metadata":{"name":"<?= esc_attr__('Location', 'x3p0-a-boy-in-the-wild') ?>"}} -->
+				<p><?= esc_html__('Unchartered', 'x3p0-a-boy-in-the-wild') ?></p>
+				<!-- /wp:paragraph -->
+
+			</div>
+			<!-- /wp:group -->
+
+			<!-- wp:buttons {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
+			<div class="wp-block-buttons">
+
+				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"toggle-chapter-audio"} -->
+				<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button">Sound</button></div>
+				<!-- /wp:button -->
+
+				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"toggle-color-scheme"} -->
+				<div class="wp-block-button toggle-color-scheme"><button type="button" class="wp-block-button__link wp-element-button">Day</button></div>
+				<!-- /wp:button -->
+
+			</div>
+			<!-- /wp:buttons -->
+
+		</div>
+		<!-- /wp:group -->
+
+	</header>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"tagName":"article","metadata":{"name":"Chapter"},"align":"full","layout":{"type":"constrained"}} -->
+	<article class="wp-block-group alignfull">
+
+		<!-- wp:group {"tagName":"header","metadata":{"name":"Chapter Header"},"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"default"}} -->
+		<header class="wp-block-group alignwide">
+
+			<!-- wp:paragraph {"className":"is-style-container-meta"} -->
+			<p class="is-style-container-meta">Lost · Somewhere in the trees · No landmarks visible</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:heading {"level":1} -->
+			<h1 class="wp-block-heading">You've gone somewhere<br>I&nbsp;<em><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-ink-subtle-color">haven't charted.</mark></em></h1>
+			<!-- /wp:heading -->
+
+			<!-- wp:separator {"opacity":"css","className":"is-style-separator-chapter-rule"} -->
+			<hr class="wp-block-separator has-css-opacity is-style-separator-chapter-rule"/>
+			<!-- /wp:separator -->
+
+		</header>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"metadata":{"name":"Chapter Content"},"align":"wide","layout":{"type":"constrained","justifyContent":"left"}} -->
+		<div class="wp-block-group alignwide">
+
+			<!-- wp:paragraph -->
+			<p>This stretch isn't on anything I've drawn. I've walked into places like this — every direction looks like every other direction, the light the same everywhere. You stop. You listen. You work out which way the water runs.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:paragraph -->
+			<p>The page you were looking for isn't here. But&nbsp;<em>here</em>&nbsp;isn't nothing. It's just unmapped. That's different. Home is back the way you came — it hasn't moved.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:image {"id":484,"sizeSlug":"full","linkDestination":"none","align":"wide","className":"is-style-image-sketch"} -->
+			<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt="" class="wp-image-484"/><figcaption class="wp-element-caption">Not to scale · Not surveyed · Made in poor light</figcaption></figure>
+			<!-- /wp:image -->
+
+			<!-- wp:paragraph {"className":"is-style-text-caption"} -->
+			<p class="is-style-text-caption">If you don't know where you are, find water. It goes somewhere. Most things do.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
+			<div class="wp-block-group">
+
+				<!-- wp:buttons -->
+				<div class="wp-block-buttons">
+
+					<!-- wp:button {"metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"is-style-button-link"} -->
+					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/">← All Chapters</a></div>
+					<!-- /wp:button -->
+
+				</div>
+				<!-- /wp:buttons -->
+
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+				<!-- /wp:separator -->
+
+				<!-- wp:buttons {"metadata":{"name":"The Beginning"}} -->
+				<div class="wp-block-buttons">
+
+					<!-- wp:button {"metadata":{"bindings":{"url":{"source":"x3p0/story","args":{"field":"firstChapterUrl"}},"text":{"source":"x3p0/story","args":{"field":"firstChapterLabel"}}}},"className":"is-style-button-link"} -->
+					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/">Begin at the beginning →</a></div>
+					<!-- /wp:button -->
+
+				</div>
+				<!-- /wp:buttons -->
+
+			</div>
+			<!-- /wp:group -->
+
+		</div>
+		<!-- /wp:group -->
+
+	</article>
+	<!-- /wp:group -->
+
+	<!-- wp:html -->
+	<!-- Animation canvas. Do not alter unless you know what you're doing! -->
+	<canvas class="x3p0-canvas-bg x3p0-canvas-bg--lost-moon" data-moon-x="0.4"></canvas>
+	<canvas class="x3p0-canvas-bg x3p0-canvas-bg--lost-terrain"></canvas>
+	<canvas class="x3p0-canvas-bg x3p0-canvas-bg--lost-motes" data-origin-x-min="0.24" data-origin-x-max="0.56"></canvas>
+	<!-- /wp:html -->
+
+</main>
+<!-- /wp:group -->

@@ -17,7 +17,7 @@
 // Block style variations.
 // -----------------------------------------------------------------------------
 
-.is-style-chapter-rule::before {
+.is-style-separator-chapter-rule::before {
 	transform-origin: left center;
 	animation: rule-draw 0.6s ease-out both;
 	animation-delay: 0.3s;

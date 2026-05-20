@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Subhead",
+	"slug": "text-subhead",
+	"blockTypes": [
+		"core/heading",
+		"core/paragraph",
+		"core/post-title"
+	],
+	"styles": {
+		"typography": {
+			"fontSize": "var(--wp--preset--font-size--xl)",
+			"lineHeight": "var(--wp--custom--line-height--xl)"
+		}
+	}
+}

@@ -47,9 +47,29 @@ final class PatternCategoryRegistrar implements Bootable
 			'description' => __('Starter patterns that contain a new chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
 		]);
 
+		register_block_pattern_category('x3p0-chapters-buried', [
+			'label'       => __('Buried Chapters', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Starter patterns that contain a new buried chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
+		]);
+
 		register_block_pattern_category('x3p0-chapter-elements', [
 			'label'       => __('Chapter Elements', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Patterns used for various chapter elements.' ,'x3p0-a-boy-in-the-wild')
+		]);
+
+		register_block_pattern_category('x3p0-background-animations', [
+			'label'       => __('Background Animations', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Animated backgrounds meant for use for the page.' ,'x3p0-a-boy-in-the-wild')
+		]);
+
+		register_block_pattern_category('x3p0-template-elements', [
+			'label'       => __('Template Elements', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Patterns used for various elements in templates.' ,'x3p0-a-boy-in-the-wild')
+		]);
+
+		register_block_pattern_category('x3p0-fragments', [
+			'label'       => __('Fragments', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Small and reusable elements.' ,'x3p0-a-boy-in-the-wild')
 		]);
 	}
 }

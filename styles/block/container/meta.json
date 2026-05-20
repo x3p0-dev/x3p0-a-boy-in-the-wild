@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"blockTypes": ["core/group","core/paragraph", "core/post-excerpt"],
+	"title": "Meta",
+	"slug": "container-meta",
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--ink-subtle)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--tertiary)",
+			"fontSize": "var(--wp--preset--font-size--md)",
+			"lineHeight": "var(--wp--custom--line-heigh--md)"
+		},
+		"blocks": {
+			"core/post-excerpt": {
+				"css": "& .wp-block-post-excerpt__more-link {\n\tdisplay: none !important;\n}"
+			},
+			"core/post-title": {
+				"color": {
+					"text": "currentColor"
+				},
+				"typography": {
+					"fontFamily": "inherit",
+					"fontSize": "inherit",
+					"fontStyle": "inherit",
+					"fontWeight": "inherit",
+					"letterSpacing": "revert",
+					"lineHeight": "inherit",
+					"textTransform": "inherit"
+				}
+			}
+		}
+	}
+}

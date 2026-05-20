@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Aside",
+	"slug": "text-aside",
+	"blockTypes": ["core/paragraph"],
+	"styles": {
+		"typography": {
+			"fontSize": "var(--wp--preset--font-size--sm)",
+			"fontStyle": "italic",
+			"lineHeight": "var(--wp--custom--line-height--sm)"
+		},
+		"color": {
+			"text": "var(--wp--preset--color--ink-subtle)"
+		}
+	}
+}

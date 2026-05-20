@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Elevated",
+	"slug": "container-elevated",
+	"blockTypes": [
+		"core/column",
+		"core/columns",
+		"core/group"
+	],
+	"styles": {
+		"color": {
+			"background": "color-mix(in oklab, var(--wp--preset--color--parchment-accent) 38%, transparent)"
+		},
+		"border": {
+			"color": "var(--wp--preset--color--rule)",
+			"style": "solid",
+			"width": "1px"
+		}
+	}
+}

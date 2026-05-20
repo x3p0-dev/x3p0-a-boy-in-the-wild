@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Field Sketch",
+	"slug": "image-sketch",
+	"blockTypes": ["core/image"],
+	"styles": {
+		"border": {
+			"radius": "0"
+		},
+		"shadow": "0 0 0 1px var(--wp--preset--color--sketch-ink), 1.5px 1px 0 0.5px var(--wp--preset--color--sketch-ink), -1px 1.5px 0 0.5px var(--wp--preset--color--sketch-ink), 1px -1.5px 0 0.5px var(--wp--preset--color--sketch-ink), -1.5px -1px 0 0.5px var(--wp--preset--color--sketch-ink), 2px 0.5px 0 0 var(--wp--preset--color--sketch-ink), -0.5px 2px 0 0 var(--wp--preset--color--sketch-ink), 2.5px 1.5px 0 0 rgba(0,0,0,0.08), -1px -2px 0 0 rgba(0,0,0,0.06)",
+		"spacing": {
+			"margin": {
+				"top": "var(--wp--preset--spacing--70)",
+				"bottom": "var(--wp--preset--spacing--70)"
+			},
+			"padding": {
+				"left": "var(--wp--preset--spacing--40)",
+				"right": "var(--wp--preset--spacing--40)",
+				"top": "var(--wp--preset--spacing--40)",
+				"bottom": "var(--wp--preset--spacing--40)"
+			}
+		},
+		"elements": {
+			"caption": {
+				"color": {
+					"text": "var(--wp--preset--color--sketch-ink)"
+				},
+				"spacing": {
+					"margin": {
+						"top": "var(--wp--preset--spacing--40)",
+						"bottom": "0"
+					}
+				},
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--tertiary)",
+					"fontSize": "var(--wp--preset--font-size--sm)",
+					"lineHeight": "var(--wp--custom--line-height--sm)",
+					"textAlign": "center"
+				}
+			}
+		}
+	}
+}

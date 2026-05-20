@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Middle Dot",
+	"slug": "separator-middle-dot",
+	"blockTypes": ["core/separator"],
+	"styles": {
+		"color": {
+			"text": "inherit"
+		},
+		"typography": {
+			"fontFamily": "inherit",
+			"fontSize": "inherit",
+			"lineHeight": "inherit"
+		},
+		"border": {
+			"top": {
+				"width": "0px"
+			}
+		},
+		"spacing": {
+			"margin": {
+				"top": "0",
+				"bottom": "0"
+			}
+		},
+		"dimensions": {
+			"minHeight": "0"
+		},
+		"css": "&::before { font-size: inherit; content: '\\00B7'; display: block; }"
+	}
+}

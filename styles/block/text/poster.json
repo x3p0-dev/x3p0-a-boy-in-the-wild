@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Poster",
+	"slug": "text-poster",
+	"blockTypes": [
+		"core/heading",
+		"core/paragraph",
+		"core/post-title"
+	],
+	"styles": {
+		"typography": {
+			"fontSize": "var(--wp--preset--font-size--7-xl)",
+			"fontWeight": "900",
+			"lineHeight": "0.84",
+			"letterSpacing": "-0.03em"
+		},
+		"color": {
+			"text": "var(--wp--preset--color--ink)"
+		}
+	}
+}

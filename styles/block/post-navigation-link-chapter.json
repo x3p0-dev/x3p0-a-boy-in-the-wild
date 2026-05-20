@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Chapter Navigation Link",
+	"slug": "post-navigation-link-chapter",
+	"blockTypes": [ "core/post-navigation-link" ],
+	"styles": {
+		"css": "& { display: flex; flex-direction: column; }"
+	}
+}

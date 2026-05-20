@@ -1,7 +1,5 @@
 <!-- wp:group {"metadata":{"name":"Entry"},"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
-
-	<!-- wp:group {"metadata":{"name":"Waypoint"},"align":"full","className":"is-style-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:group {"metadata":{"name":"Waypoint"},"align":"full","className":"is-style-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group alignfull is-style-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:group {"lock":{"move":false,"remove":false},"metadata":{"name":"Waypoint Content","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-header"},"className":"is-style-chapter-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","alignItems":"center"}} -->
 		<div class="wp-block-group is-style-chapter-header"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
 			<div class="wp-block-group"><!-- wp:site-title {"level":0} /-->
@@ -14,11 +12,11 @@
 			<!-- /wp:group -->
 
 			<!-- wp:buttons {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
-			<div class="wp-block-buttons"><!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site-data","args":{"field":"url"}}}},"className":"toggle-chapter-audio"} -->
+			<div class="wp-block-buttons"><!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"toggle-chapter-audio"} -->
 				<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button">Sound</button></div>
 				<!-- /wp:button -->
 
-				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site-data","args":{"field":"url"}}}},"className":"toggle-color-scheme"} -->
+				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"toggle-color-scheme"} -->
 				<div class="wp-block-button toggle-color-scheme"><button type="button" class="wp-block-button__link wp-element-button">Day</button></div>
 				<!-- /wp:button --></div>
 			<!-- /wp:buttons --></div>
@@ -27,45 +25,49 @@
 
 	<!-- wp:group {"tagName":"main","metadata":{"name":"Chapter"},"align":"full","layout":{"type":"constrained"}} -->
 	<main class="wp-block-group alignfull"><!-- wp:group {"tagName":"article","metadata":{"name":"Chapter Content"},"align":"full","layout":{"type":"constrained"}} -->
-		<article class="wp-block-group alignfull">
+		<article class="wp-block-group alignfull"><!-- wp:icon {"icon":"x3p0/sealed-key","align":"center","className":"is-style-icon-pulse-fade","style":{"dimensions":{"width":"64px"},"elements":{"link":{"color":{"text":"var:preset|color|ink-muted"}}}},"textColor":"ink-muted"} /-->
 
-			<!-- wp:icon {"icon":"x3p0/sealed-key","align":"center","className":"is-style-icon-pulse-fade","style":{"dimensions":{"width":"64px"},"elements":{"link":{"color":{"text":"var:preset|color|ink-muted"}}}},"textColor":"ink-muted"} /-->
+			<!-- wp:group {"tagName":"header","metadata":{"name":"Chapter Header"},"style":{"spacing":{"blockGap":"var:preset|spacing|40"},"typography":{"textAlign":"center"}},"layout":{"type":"constrained"}} -->
+			<header class="wp-block-group has-text-align-center"><!-- wp:group {"className":"is-style-container-meta","layout":{"type":"constrained"}} -->
+				<div class="wp-block-group is-style-container-meta"><!-- wp:post-excerpt {"showMoreOnNewLine":false,"className":"is-style-chapter-meta"} /--></div>
+				<!-- /wp:group -->
 
-			<!-- wp:group {"tagName":"header","metadata":{"name":"Chapter Header"},"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-			<header class="wp-block-group"><!-- wp:post-excerpt {"showMoreOnNewLine":false,"className":"is-style-chapter-meta"} /-->
-
-				<!-- wp:post-title {"level":1,"className":"is-style-field-note-title","style":{"typography":{"fontWeight":"400","lineHeight":"0.93"},"spacing":{"margin":{"bottom":"0.7rem"}}}} /-->
-
-				<!-- wp:separator {"opacity":"css","className":"is-style-chapter-divider"} -->
-				<hr class="wp-block-separator has-css-opacity is-style-chapter-divider"/>
-				<!-- /wp:separator --></header>
+				<!-- wp:post-title {"level":1,"style":{"typography":{"fontWeight":"400","lineHeight":"0.93"},"spacing":{"margin":{"bottom":"0.7rem"}}}} /--></header>
 			<!-- /wp:group -->
 
-			<!-- wp:group {"metadata":{"name":"Chapter Body"},"align":"full","layout":{"type":"constrained","contentSize":"320px"}} -->
-			<div class="wp-block-group alignfull"><!-- wp:group {"className":"chapter-protected","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-				<div class="wp-block-group chapter-protected"><!-- wp:paragraph {"className":"chapter-protected__message is-style-chapter-aside","style":{"typography":{"textAlign":"center"}}} -->
-					<p class="has-text-align-center chapter-protected__message is-style-chapter-aside">This chapter is sealed. If you have the key, you know what to do with it.</p>
+			<!-- wp:group {"metadata":{"name":"Chapter Body"},"align":"full","layout":{"type":"constrained","contentSize":"20rem"}} -->
+			<div class="wp-block-group alignfull"><!-- wp:separator {"opacity":"css","className":"is-style-default"} -->
+				<hr class="wp-block-separator has-css-opacity is-style-default"/>
+				<!-- /wp:separator -->
+
+				<!-- wp:group {"className":"chapter-protected","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
+				<div class="wp-block-group chapter-protected"><!-- wp:paragraph {"className":"is-style-text-aside","style":{"typography":{"textAlign":"center"}}} -->
+					<p class="has-text-align-center is-style-text-aside">This chapter is sealed. If you have the key, you know what to do with it.</p>
 					<!-- /wp:paragraph -->
 
 					<!-- wp:post-content {"lock":{"move":false,"remove":true},"layout":{"type":"constrained"}} /-->
 
-					<!-- wp:paragraph {"className":"is-style-chapter-caption","style":{"typography":{"textAlign":"center"}}} -->
-					<p class="has-text-align-center is-style-chapter-caption">The key is somewhere in the chapters. If you don't have it yet, keep reading.</p>
+					<!-- wp:paragraph {"className":"is-style-text-caption","style":{"typography":{"textAlign":"center"}}} -->
+					<p class="has-text-align-center is-style-text-caption">The key is somewhere in the chapters. If you don't have it yet, keep reading.</p>
 					<!-- /wp:paragraph --></div>
 				<!-- /wp:group --></div>
 			<!-- /wp:group -->
 
-			<!-- wp:spacer {"height":"2rem"} -->
-			<div style="height:2rem" aria-hidden="true" class="wp-block-spacer"></div>
+			<!-- wp:spacer -->
+			<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
 			<!-- /wp:spacer --></article>
 		<!-- /wp:group --></main>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
-	<div class="wp-block-group"><!-- wp:group {"tagName":"footer","lock":{"move":false,"remove":false},"metadata":{"name":"Story Navigation","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-footer"},"className":"is-style-chapter-footer","layout":{"type":"constrained"}} -->
-		<footer class="wp-block-group is-style-chapter-footer"><!-- wp:post-navigation-link {"label":"Continue to  ","showTitle":true,"linkLabel":true,"arrow":"arrow","metadata":{"name":"Next Chapter"}} /--></footer>
-		<!-- /wp:group --></div>
-	<!-- /wp:group -->
+	<!-- wp:group {"tagName":"footer","metadata":{"name":"Story Navigation (Default)","patternName":"x3p0-a-boy-in-the-wild/story-navigation-default","description":"Wrapper for story navigation.","categories":["x3p0-chapter-elements"]},"align":"full","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
+	<footer class="wp-block-group alignfull" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)"><!-- wp:separator -->
+		<hr class="wp-block-separator has-alpha-channel-opacity"/>
+		<!-- /wp:separator -->
 
-</div>
+		<!-- wp:group {"templateLock":"contentOnly","metadata":{"name":"Story Navigation Content","patternName":"x3p0-a-boy-in-the-wild/story-navigation-content","description":"Stores the navigation links for moving between chapters.","categories":["x3p0-chapter-elements"]},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+		<div class="wp-block-group"><!-- wp:post-navigation-link {"type":"previous","label":"← Previous","showTitle":true,"metadata":{"name":"Previous Chapter"},"className":"is-style-post-navigation-link-chapter","style":{"layout":{"selfStretch":"fill","flexSize":null}}} /-->
+
+			<!-- wp:post-navigation-link {"label":"Next →","showTitle":true,"metadata":{"name":"Next Chapter"},"className":"is-style-post-navigation-link-chapter","style":{"typography":{"textAlign":"right"},"layout":{"selfStretch":"fill","flexSize":null}}} /--></div>
+		<!-- /wp:group --></footer>
+	<!-- /wp:group --></div>
 <!-- /wp:group -->

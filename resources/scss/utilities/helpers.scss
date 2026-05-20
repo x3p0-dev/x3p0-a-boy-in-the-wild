@@ -5,6 +5,19 @@
 /// @link   https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
 ////
 
+
+:is(
+	.wp-block-post-content,
+	.wp-site-blocks
+) > :where(
+	[class*=is-style-arc-],
+	[class*=is-style-mood-],
+	[class*=is-style-season-],
+	[class*=is-style-state-]
+) {
+	min-height: calc(100vh - var(--wp-admin--admin-bar--height, 0px));
+}
+
 ///
 /// Light and dark mode classes for individual sections.
 ///
@@ -14,17 +27,6 @@
 
 .is-dark-mode {
 	color-scheme: only dark;
-}
-
-///
-/// Hidden and visible text helpers.
-///
-.is-hidden {
-	visibility: hidden;
-}
-
-.is-visible {
-	visibility: visible;
 }
 
 

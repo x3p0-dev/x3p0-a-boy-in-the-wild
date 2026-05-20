@@ -5,7 +5,7 @@
 	"slug": "state-buried",
 	"blockTypes": ["core/group"],
 	"styles": {
-		"css": "min-height: calc(100vh - var(--wp-admin--admin-bar--height, 0px)); --wp--preset--color--parchment: #ede8d5;\n--wp--preset--color--parchment-raised: #e8e2cc;\n--wp--preset--color--parchment-surface: #f5f0e4;\n--wp--preset--color--parchment-accent: rgba(100,62,12,0.45);\n--wp--preset--color--ink: rgba(30,16,2,0.86);\n--wp--preset--color--ink-subtle: rgba(30,16,2,0.68);\n--wp--preset--color--ink-muted: rgba(30,16,2,0.50);\n--wp--preset--color--ink-accent: rgba(100,62,12,0.45);\n--wp--preset--color--ink-on-accent: #f5f0e4;\n--wp--preset--color--rule: rgba(100,62,12,0.12);\n--wp--preset--color--sketch-parchment: #e8e2cc;\n--wp--preset--color--sketch-ink: rgba(100,62,12,0.42);\noverflow-x: hidden; & > .wp-block-group { transform: rotate(-2deg); }\n",
+		"css": "--wp--preset--color--parchment: #ede8d5;\n--wp--preset--color--parchment-raised: #d4c9a8;\n--wp--preset--color--parchment-surface: #f5f0e4;\n--wp--preset--color--parchment-accent: rgba(100,62,12,0.45);\n--wp--preset--color--ink: rgba(30,16,2,0.86);\n--wp--preset--color--ink-subtle: rgba(30,16,2,0.68);\n--wp--preset--color--ink-muted: rgba(30,16,2,0.50);\n--wp--preset--color--ink-accent: rgba(100,62,12,0.45);\n--wp--preset--color--ink-on-accent: #f5f0e4;\n--wp--preset--color--rule: rgba(100,62,12,0.12);\n--wp--preset--color--sketch-parchment: #e8e2cc;\n--wp--preset--color--sketch-ink: rgba(100,62,12,0.42);\noverflow-x: hidden; & > .wp-block-group { transform: rotate(-2deg); }\n",
 		"color": {
 			"background": "var(--wp--preset--color--parchment)",
 			"text": "var(--wp--preset--color--ink)"
@@ -18,6 +18,28 @@
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--tertiary)"
 				}
+			}
+		},
+		"blocks": {
+			"core/quote": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--tertiary)",
+					"fontStyle": "normal",
+					"fontWeight": "700"
+				}
+			},
+			"core/separator": {
+				"border": {
+					"style": "none",
+					"width": "0px"
+				},
+				"color": {
+					"background": "var(--wp--preset--color--rule)"
+				},
+				"dimensions": {
+					"minHeight": "8px"
+				},
+				"css": "mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='8' viewBox='0 0 200 8'%3E%3Cpath d='M0 4 Q12 2 25 4 Q38 6 50 4 Q62 2 75 4 Q88 6 100 4 Q112 2 125 4 Q138 6 150 4 Q162 2 175 4 Q188 6 200 4' fill='none' stroke='white' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E\"); mask-repeat: repeat-x; mask-position: center;"
 			}
 		}
 	}

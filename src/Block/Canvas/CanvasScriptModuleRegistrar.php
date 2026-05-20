@@ -29,6 +29,7 @@ final class CanvasScriptModuleRegistrar
 	 */
 	private const MODULES = [
 		'bg' => [
+			'adrift',
 			'flow-field',
 			'lost-moon',
 			'lost-motes',

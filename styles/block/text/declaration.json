@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Declaration",
+	"slug": "text-declaration",
+	"blockTypes": [
+		"core/heading",
+		"core/paragraph",
+		"core/post-title"
+	],
+	"styles": {
+		"typography": {
+			"fontSize": "var(--wp--preset--font-size--5-xl)",
+			"fontWeight": "900",
+			"lineHeight": "1",
+			"letterSpacing": "-0.02em"
+		}
+	}
+}
