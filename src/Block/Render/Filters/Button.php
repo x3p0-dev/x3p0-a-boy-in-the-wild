@@ -54,7 +54,7 @@ final class Button extends RenderFilter
 			isset($block['attrs']['className'])
 			&& str_contains($block['attrs']['className'], self::COLOR_SCHEME_CLASS)
 		) {
-		//	return '';
+			return '';
 		}
 
 		return $content;
