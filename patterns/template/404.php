@@ -17,13 +17,27 @@ $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 <!-- wp:group {"tagName":"main","metadata":{"name":"Entry"},"align":"full","className":"is-style-section-mood-lost","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
 <main class="wp-block-group alignfull is-style-section-mood-lost" style="padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 
-	<!-- wp:group {"tagName":"header","metadata":{"name":"Waypoint"},"align":"full","className":"is-style-container-waypoint","style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},"layout":{"type":"default"}} -->
-	<header class="wp-block-group alignfull is-style-container-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
+	<!-- wp:group {
+		"metadata":{"name":"<?= esc_attr__('Waypoint', 'x3p0-a-boy-in-the-wild') ?>"},
+		"align":"full",
+		"className":"is-style-container-waypoint",
+		"style":{"spacing":{"padding":{"right":"var:preset|spacing|70","left":"var:preset|spacing|70"}}},
+		"layout":{"type":"default"}
+	} -->
+	<div class="wp-block-group alignfull is-style-container-waypoint" style="padding-right:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 
-		<!-- wp:group {"lock":{"move":false,"remove":false},"metadata":{"name":"Waypoint Content","categories":["featured"],"patternName":"x3p0-a-boy-in-the-wild/chapter-header"},"className":"is-style-chapter-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","alignItems":"center"}} -->
-		<div class="wp-block-group is-style-chapter-header">
+		<!-- wp:group {
+	"templateLock":"contentOnly",
+	"metadata":{"name":"<?= esc_attr__('Waypoint Content (Chapter)', 'x3p0-a-boy-in-the-wild') ?>"},
+	"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},
+	"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","alignItems":"center"}
+} -->
+		<div class="wp-block-group">
 
-			<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
+			<!-- wp:group {
+				"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},
+				"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}
+			} -->
 			<div class="wp-block-group">
 
 				<!-- wp:site-title {"level":0} /-->
@@ -39,15 +53,26 @@ $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 			</div>
 			<!-- /wp:group -->
 
-			<!-- wp:buttons {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
+			<!-- wp:buttons {
+				"metadata":{"name":"<?= esc_attr__('Toggle Buttons', 'x3p0-a-boy-in-the-wild') ?>"},
+				"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}
+			} -->
 			<div class="wp-block-buttons">
 
-				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"toggle-chapter-audio"} -->
-				<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button">Sound</button></div>
+				<!-- wp:button {
+					"tagName":"button",
+					"metadata":{"name":"<?= esc_attr__('Audio Toggle', 'x3p0-a-boy-in-the-wild') ?>"},
+					"className":"toggle-chapter-audio"
+				} -->
+				<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button"><?= esc_html__('Listen', 'x3p0-a-boy-in-the-wild') ?></button></div>
 				<!-- /wp:button -->
 
-				<!-- wp:button {"tagName":"button","metadata":{"bindings":{"url":{"source":"x3p0/site","args":{"field":"url"}}}},"className":"toggle-color-scheme"} -->
-				<div class="wp-block-button toggle-color-scheme"><button type="button" class="wp-block-button__link wp-element-button">Day</button></div>
+				<!-- wp:button {
+					"tagName":"button",
+					"metadata":{"name":"<?= esc_attr__('Day/Night Toggle', 'x3p0-a-boy-in-the-wild') ?>"},
+					"className":"toggle-color-scheme"
+				} -->
+				<div class="wp-block-button toggle-color-scheme"><button type="button" class="wp-block-button__link wp-element-button"><?= esc_html__('Day', 'x3p0-a-boy-in-the-wild') ?></button></div>
 				<!-- /wp:button -->
 
 			</div>
@@ -55,8 +80,7 @@ $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 
 		</div>
 		<!-- /wp:group -->
-
-	</header>
+	</div>
 	<!-- /wp:group -->
 
 	<!-- wp:group {"tagName":"article","metadata":{"name":"Chapter"},"align":"full","layout":{"type":"constrained"}} -->
