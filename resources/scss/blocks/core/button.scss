@@ -16,14 +16,14 @@
 // Block customizations.
 // -----------------------------------------------------------------------------
 
-.toggle-chapter-audio .wp-block-button__link {
+.toggle-audio .wp-block-button__link {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var( --wp--preset--spacing--10 );
 	align-items: center;
 }
 
-.toggle-chapter-audio .wp-block-button__link::before {
+.toggle-audio .wp-block-button__link::before {
 	content: '';
 	width: 0.4em;
 	height: 0.4em;
@@ -31,7 +31,7 @@
 	background: currentColor;
 }
 
-.toggle-chapter-audio .wp-block-button__link.is-playing::before {
+.toggle-audio .wp-block-button__link.is-playing::before {
 	animation: pulse-ring 1.2s ease-out infinite;
 }
 

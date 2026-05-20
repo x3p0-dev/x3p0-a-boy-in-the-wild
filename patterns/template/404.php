@@ -62,9 +62,9 @@ $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 				<!-- wp:button {
 					"tagName":"button",
 					"metadata":{"name":"<?= esc_attr__('Audio Toggle', 'x3p0-a-boy-in-the-wild') ?>"},
-					"className":"toggle-chapter-audio"
+					"className":"toggle-audio"
 				} -->
-				<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button"><?= esc_html__('Listen', 'x3p0-a-boy-in-the-wild') ?></button></div>
+				<div class="wp-block-button toggle-audio"><button type="button" class="wp-block-button__link wp-element-button"><?= esc_html__('Listen', 'x3p0-a-boy-in-the-wild') ?></button></div>
 				<!-- /wp:button -->
 
 				<!-- wp:button {
@@ -166,12 +166,7 @@ $sketch = get_theme_file_uri('public/media/images/lost-404-sketch.webp');
 	</article>
 	<!-- /wp:group -->
 
-	<!-- wp:html -->
-	<!-- Animation canvas. Do not alter unless you know what you're doing! -->
-	<canvas class="x3p0-canvas-bg x3p0-canvas-bg--lost-moon" data-moon-x="0.4"></canvas>
-	<canvas class="x3p0-canvas-bg x3p0-canvas-bg--lost-terrain"></canvas>
-	<canvas class="x3p0-canvas-bg x3p0-canvas-bg--lost-motes" data-origin-x-min="0.24" data-origin-x-max="0.56"></canvas>
-	<!-- /wp:html -->
+	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-bg-lost-moon-terrain-motes"} /-->
 
 </main>
 <!-- /wp:group -->

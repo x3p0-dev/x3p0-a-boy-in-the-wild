@@ -26,7 +26,7 @@ final class Button extends RenderFilter
 {
 	protected const BLOCK_TYPE = 'core/button';
 
-	private const CHAPTER_AUDIO_CLASS = 'toggle-chapter-audio';
+	private const AUDIO_CLASS = 'toggle-audio';
 
 	private const COLOR_SCHEME_CLASS = 'toggle-color-scheme';
 
@@ -44,7 +44,7 @@ final class Button extends RenderFilter
 	{
 		if (
 			isset($block['attrs']['className'])
-			&& str_contains($block['attrs']['className'], self::CHAPTER_AUDIO_CLASS)
+			&& str_contains($block['attrs']['className'], self::AUDIO_CLASS)
 		) {
 			return $this->renderAudioToggle($content);
 		}
@@ -65,7 +65,7 @@ final class Button extends RenderFilter
 		$processor = new WP_HTML_Tag_Processor($content);
 
 		if (
-			! $processor->next_tag(['class_name' => self::CHAPTER_AUDIO_CLASS])
+			! $processor->next_tag(['class_name' => self::AUDIO_CLASS])
 			|| ! $processor->next_tag('button')
 		) {
 			return $processor->get_updated_html();

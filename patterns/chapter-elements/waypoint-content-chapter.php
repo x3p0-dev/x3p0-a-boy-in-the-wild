@@ -42,9 +42,9 @@
 		<!-- wp:button {
 			"tagName":"button",
 			"metadata":{"name":"<?= esc_attr__('Audio Toggle', 'x3p0-a-boy-in-the-wild') ?>"},
-			"className":"toggle-chapter-audio"
+			"className":"toggle-audio"
 		} -->
-		<div class="wp-block-button toggle-chapter-audio"><button type="button" class="wp-block-button__link wp-element-button"><?= esc_html__('Listen', 'x3p0-a-boy-in-the-wild') ?></button></div>
+		<div class="wp-block-button toggle-audio"><button type="button" class="wp-block-button__link wp-element-button"><?= esc_html__('Listen', 'x3p0-a-boy-in-the-wild') ?></button></div>
 		<!-- /wp:button -->
 
 		<!-- wp:button {

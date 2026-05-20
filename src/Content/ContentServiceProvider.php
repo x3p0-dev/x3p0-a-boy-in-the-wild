@@ -24,7 +24,6 @@ final class ContentServiceProvider extends ServiceProvider implements Bootable
 	public function boot(): void
 	{
 		$this->container->get(Category::class)->boot();
-		$this->container->get(Page::class)->boot();
 		$this->container->get(Post::class)->boot();
 		$this->container->get(PostTag::class)->boot();
 		$this->container->get(PostStatusManager::class )->boot();

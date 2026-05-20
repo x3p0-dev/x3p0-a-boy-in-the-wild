@@ -27,7 +27,7 @@ final class AudioResolver
 		$audioUrl = '';
 
 		if (is_singular('post')) {
-			$audioId = get_post_meta(get_queried_object_id(), 'x3p0_chapter_audio', true);
+			$audioId = get_post_meta(get_queried_object_id(), AudioMeta::META_KEY, true);
 		} elseif (is_404()) {
 			$audioUrl = get_theme_file_uri('public/media/audio/lost.mp3');
 		}

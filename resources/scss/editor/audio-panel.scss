@@ -1,0 +1,90 @@
+@use "@wordpress/base-styles/colors";
+@use "@wordpress/base-styles/variables";
+
+/* Chapter Audio Panel
+ * Styles for the Chapter Sound panel in the post editor sidebar.
+ * Mirrors the visual design of the Background Image panel in Global Styles.
+ */
+
+.x3p0-audio-panel {
+
+	&__set {
+		width: 100%;
+		justify-content: center;
+	}
+
+	// Mirrors __image-tools-panel-item — owns the border.
+	&__preview {
+		position: relative;
+		border: variables.$border-width solid colors.$gray-300;
+		border-radius: variables.$radius-small;
+	}
+
+	// Mirrors __dropdown-toggle inside __image-tools-panel-item.
+	&__toggle {
+		cursor: pointer;
+		background: transparent;
+		border: none;
+		height: 40px;
+		width: 100%;
+		justify-content: flex-start;
+		padding-left: variables.$grid-unit-15;
+		padding-right: variables.$grid-unit-40;
+		color: colors.$gray-900;
+
+		&:hover {
+			color: var(--wp-admin-theme-color);
+		}
+
+		&:focus {
+			box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
+		}
+	}
+
+	&__toggle-inner {
+		display: flex;
+		align-items: center;
+		gap: variables.$grid-unit-10;
+		width: 100%;
+		min-width: 0; // allows Truncate to work correctly
+	}
+
+	// Mirrors __inspector-image-indicator — the left slot.
+	// Swapped background/box-shadow for a plain icon; keeps the same sizing.
+	&__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 20px;
+		height: 20px;
+		border-radius: variables.$radius-small;
+	}
+
+	// Mirrors __reset — hidden until hovered or focused.
+	&__reset {
+		position: absolute;
+		right: 0;
+		top: variables.$grid-unit;
+		margin: auto variables.$grid-unit auto;
+		opacity: 0;
+
+		@media not ( prefers-reduced-motion ) {
+			transition: opacity 0.1s ease-in-out;
+		}
+
+		.x3p0-audio-panel__toggle:hover + &,
+		&:focus,
+		&:hover {
+			opacity: 1;
+		}
+
+		@media ( hover: none ) {
+			opacity: 1;
+		}
+	}
+
+	&__error {
+		font-size: variables.$default-font-size;
+	}
+}

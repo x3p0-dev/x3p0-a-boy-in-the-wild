@@ -82,7 +82,7 @@ module.exports = (() => {
 					'js/editor':  path.resolve(process.cwd(), 'resources/js',   'editor/index.js'),
 					'css/screen': path.resolve(process.cwd(), 'resources/scss', 'screen.scss'),
 					'css/admin/in-the-field': path.resolve(process.cwd(), 'resources/scss/admin', 'in-the-field.scss'),
-				//	'css/editor': path.resolve(process.cwd(), 'resources/scss', 'editor.scss'),
+					'css/editor': path.resolve(process.cwd(), 'resources/scss', 'editor.scss'),
 				//	'css/embed':  path.resolve(process.cwd(), 'resources/scss', 'embed.scss')
 				},
 				plugins: [

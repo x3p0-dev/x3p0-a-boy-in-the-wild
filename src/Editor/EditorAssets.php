@@ -45,6 +45,7 @@ final class EditorAssets implements Bootable
 	private function enqueue(): void
 	{
 		$script_asset = include get_parent_theme_file_path('public/js/editor.asset.php');
+		$style_asset  = include get_parent_theme_file_path('public/css/editor.asset.php');
 
 		wp_enqueue_script(
 			'x3p0-a-boy-in-the-wild-editor',
@@ -57,5 +58,12 @@ final class EditorAssets implements Bootable
 		// Set translations for editor scripts.
 		// @link https://developer.wordpress.org/reference/functions/wp_set_script_translations/
 		wp_set_script_translations('x3p0-a-boy-in-the-wild-editor', 'x3p0-a-boy-in-the-wild');
+
+		wp_enqueue_style(
+			'x3p0-a-boy-in-the-wild-editor',
+			get_parent_theme_file_uri('public/css/editor.css'),
+			$style_asset['dependencies'],
+			$style_asset['version']
+		);
 	}
 }
