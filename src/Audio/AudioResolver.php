@@ -29,7 +29,7 @@ final class AudioResolver
 		if (is_singular('post')) {
 			$audioId = get_post_meta(get_queried_object_id(), AudioMeta::META_KEY, true);
 		} elseif (is_404()) {
-			$audioUrl = get_theme_file_uri('public/media/audio/lost.mp3');
+			$audioUrl = get_theme_file_uri('public/media/audio/music/moonless-pine-drift.mp3');
 		}
 
 		if ($audioId) {
