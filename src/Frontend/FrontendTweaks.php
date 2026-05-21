@@ -89,37 +89,21 @@ final class FrontendTweaks implements Bootable
 
 	private function thePasswordForm(string $form, WP_Post $post): string
 	{
-		return $this->renderPasswordFormTemplate($this->getPasswordFormTemplate(), $post);
-	}
-
-	private function getPasswordFormTemplate(): ?WP_Block_Template
-	{
-		// Looks for `parts/password-form.html` in the active theme.
-		$template = get_block_template(
-			get_stylesheet() . '//post-password-form',
-			'wp_template_part'
-		);
-
-		return ($template && !empty($template->content)) ? $template : null;
-	}
-
-	private function renderPasswordFormTemplate(WP_Block_Template $template, WP_Post $post): string
-	{
-		// Replace custom tokens in the template part with real dynamic values.
-		return str_replace(
-			[
-				'{{action_url}}',
-				'{{post_id}}',
-				'{{label_text}}',
-				'{{submit_text}}',
-			],
-			[
-				esc_url(site_url('wp-login.php?action=postpass', 'login_post')),
-				esc_attr($post->ID),
-				esc_html__('The key', 'x3p0-a-boy-in-the-wild'),
-				esc_attr__('Open', 'x3p0-a-boy-in-the-wild'),
-			],
-			$template->content
+		return sprintf(
+			'<!-- wp:html -->
+				<form action="%1$s" method="post">
+					<label class="chapter-protected__label" for="pwbox-%2$d">%3$s</label>
+					<div class="chapter-protected__row">
+						<input placeholder="%4$s" name="post_password" id="pwbox-%2$d" type="password" size="20" />
+						<input type="submit" name="Submit" value="%5$s" />
+					</div>
+				</form>
+			<!-- /wp:html -->',
+			esc_url(site_url('wp-login.php?action=postpass', 'login_post')),
+			absint($post->ID),
+			esc_html__('The key', 'x3p0-a-boy-in-the-wild'),
+			esc_attr__('Enter the key', 'x3p0-a-boy-in-the-wild'),
+			esc_attr__('Open', 'x3p0-a-boy-in-the-wild')
 		);
 	}
 
