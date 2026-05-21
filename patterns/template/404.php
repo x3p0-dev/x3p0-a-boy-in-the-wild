@@ -49,8 +49,8 @@ $sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
 
 				<!-- wp:site-title {"level":0} /-->
 
-				<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
-				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 				<!-- /wp:separator -->
 
 				<!-- wp:paragraph {"metadata":{"name":"<?= esc_attr__('Location', 'x3p0-a-boy-in-the-wild') ?>"}} -->
@@ -168,8 +168,8 @@ $sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
 				</div>
 				<!-- /wp:buttons -->
 
-				<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
-				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 				<!-- /wp:separator -->
 
 				<!-- wp:buttons {"metadata":{"name":"The Beginning"}} -->

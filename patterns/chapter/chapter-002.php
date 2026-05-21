@@ -17,10 +17,13 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 	"metadata":{"name":"<?= esc_attr__('Entry', 'x3p0-a-boy-in-the-wild') ?>"},
 	"align":"full",
 	"className":"is-style-section-season-early-autumn",
-	"style":{"spacing":{"padding":{"bottom":"var:preset|spacing|70","top":"var:preset|spacing|70"}}},
+	"style":{
+		"spacing":{"padding":{"bottom":"var:preset|spacing|70","top":"var:preset|spacing|70"}},
+		"css":"--wp--custom--mark--separator: '\\00d7';"
+	},
 	"layout":{"type":"constrained","contentSize":"64rem","wideSize":"80rem"}
 } -->
-<div class="wp-block-group alignfull is-style-section-season-early-autumn" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+<div class="wp-block-group alignfull is-style-section-season-early-autumn has-custom-css" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/waypoint-default-full"} /-->
 
@@ -32,7 +35,7 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 		"align":"full",
 		"className":"is-style-image-sketch"
 	} -->
-	<figure class="wp-block-image alignfull size-full is-style-image-sketch"><img src="<?= esc_url($map) ?>" alt="" class="wp-image-516"/><figcaption class="wp-element-caption">Scale: about a day's walk. Maybe two.</figcaption></figure>
+	<figure class="wp-block-image alignfull size-full is-style-image-sketch"><img src="<?= esc_url($map) ?>" alt="A hand-drawn territory map on parchment, showing contour lines, two ridges, and four named locations marked with pins. One location — The Place Where I Buried Something — is marked with an X in the far corner." class="wp-image-516"/><figcaption class="wp-element-caption">Scale: about a day's walk. Maybe two.</figcaption></figure>
 	<!-- /wp:image -->
 
 	<!-- wp:group {
@@ -300,28 +303,18 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 				"tagName":"footer",
 				"metadata":{"name":"<?= esc_attr__('Chapter Footer', 'x3p0-a-boy-in-the-wild') ?>"},
 				"className":"is-style-container-meta",
-				"style":{"spacing":{"blockGap":"var:preset|spacing|0"}},
-				"layout":{"type":"flex","orientation":"vertical","justifyContent":"right"}
+				"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},
+				"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}
 			} -->
 			<footer class="wp-block-group is-style-container-meta">
 
-				<!-- wp:group {
-					"metadata":{"name":"<?= esc_attr__('Chapter Stamp', 'x3p0-a-boy-in-the-wild') ?>"},
-					"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},
-					"layout":{"type":"flex","flexWrap":"nowrap"}
-				} -->
-				<div class="wp-block-group">
+				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-season"} /-->
 
-					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-season"} /-->
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
+				<!-- /wp:separator -->
 
-					<!-- wp:separator {"tagName":"div","className":"is-style-separator-slash"} -->
-					<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-slash"></div>
-					<!-- /wp:separator -->
-
-					<!-- wp:post-title {"level":6} /-->
-
-				</div>
-				<!-- /wp:group -->
+				<!-- wp:post-title {"level":6} /-->
 
 			</footer>
 			<!-- /wp:group -->

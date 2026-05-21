@@ -24,8 +24,8 @@
 
 		<!-- wp:site-title {"level":0} /-->
 
-		<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
-		<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+		<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+		<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 		<!-- /wp:separator -->
 
 		<!-- wp:post-terms {"term":"category","prefix":"Era — "} /-->

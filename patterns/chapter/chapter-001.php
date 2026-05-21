@@ -59,18 +59,21 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 			<!-- wp:group {
 				"tagName":"header",
 				"metadata":{"name":"<?= esc_attr__('Chapter Header', 'x3p0-a-boy-in-the-wild') ?>"},
+				"align":"full",
 				"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},
 				"layout":{"type":"constrained"}
 			} -->
-			<header class="wp-block-group">
+			<header class="wp-block-group alignfull">
 
 				<!-- wp:group {
+					"align":"full",
 					"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},
 					"layout":{"type":"constrained"}
 				} -->
-				<div class="wp-block-group">
+				<div class="wp-block-group alignfull">
 
-					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
+
+				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
 
 					<!-- wp:post-title {"level":1} /-->
 
@@ -101,7 +104,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 				<!-- /wp:paragraph -->
 
 				<!-- wp:image {"id":243,"sizeSlug":"full","linkDestination":"none","align":"wide","className":"is-style-image-sketch"} -->
-				<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt="" class="wp-image-243"/><figcaption class="wp-element-caption">The Clearing. First Night.</figcaption></figure>
+				<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt="A charcoal drawing of a small fire burning in a forest clearing at night. Tall pines press close on either side, their shadows stretching across the ground. The fire is the only light." class="wp-image-243"/><figcaption class="wp-element-caption">The Clearing. First Night.</figcaption></figure>
 				<!-- /wp:image -->
 
 				<!-- wp:paragraph -->
@@ -141,8 +144,8 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 
 					<!-- wp:post-title {"level":6} /-->
 
-					<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
-					<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+					<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+					<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 					<!-- /wp:separator -->
 
 					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-season"} /-->

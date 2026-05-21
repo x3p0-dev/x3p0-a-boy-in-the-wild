@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
-	"title": "Slash",
-	"slug": "separator-slash",
+	"title": "Inline",
+	"slug": "separator-inline",
 	"blockTypes": ["core/separator"],
 	"styles": {
 		"color": {
@@ -18,9 +18,15 @@
 				"width": "0px"
 			}
 		},
+		"spacing": {
+			"margin": {
+				"top": "0",
+				"bottom": "0"
+			}
+		},
 		"dimensions": {
 			"minHeight": "0"
 		},
-		"css": "&::before { font-size: inherit; content: '\\002F'; display: block; }"
+		"css": "&::before { font-size: inherit; content: var(--wp--custom--mark--separator); display: block; }"
 	}
 }

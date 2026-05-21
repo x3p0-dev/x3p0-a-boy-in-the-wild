@@ -48,7 +48,7 @@ final class PatternCategoryRegistrar implements Bootable
 		]);
 
 		register_block_pattern_category('x3p0-chapters-buried', [
-			'label'       => __('Buried Chapters', 'x3p0-a-boy-in-the-wild'),
+			'label'       => __('Story Chapters (Buried)', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Starter patterns that contain a new buried chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
 		]);
 

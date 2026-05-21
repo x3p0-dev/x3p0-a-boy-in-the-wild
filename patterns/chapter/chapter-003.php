@@ -28,11 +28,12 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 			"backgroundAttachment":"fixed",
 			"backgroundPosition":"0% 0%"
 		},
-		"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}
+		"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}},
+		"css":"--wp--custom--mark--separator: '\\2014';"
 	},
 	"layout":{"type":"constrained"}
 } -->
-<div class="wp-block-group alignfull is-style-section-mood-storm" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+<div class="wp-block-group alignfull is-style-section-mood-storm has-custom-css" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/waypoint-default-full"} /-->
 
@@ -208,14 +209,14 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 
 				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-season"} /-->
 
-				<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
-				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 				<!-- /wp:separator -->
 
 				<!-- wp:post-title {"level":6} /-->
 
-				<!-- wp:separator {"tagName":"div","className":"is-style-separator-middle-dot"} -->
-				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-middle-dot"></div>
+				<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 				<!-- /wp:separator -->
 
 				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-story-year"} /-->

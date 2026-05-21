@@ -16,10 +16,13 @@ declare(strict_types=1);
 	"metadata":{"name":"<?= esc_attr__('Entry', 'x3p0-a-boy-in-the-wild') ?>"},
 	"align":"full",
 	"className":"is-style-section-state-buried",
-	"style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},
+	"style":{
+		"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}},
+		"css":"--wp--custom--mark--separator: '\\2027';"
+	},
 	"layout":{"type":"default"}
 } -->
-<div class="wp-block-group alignfull is-style-section-state-buried" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+<div class="wp-block-group alignfull is-style-section-state-buried has-custom-css" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
 
 	<!-- wp:group {
 		"metadata":{"name":"<?= esc_attr__('Page', 'x3p0-a-boy-in-the-wild') ?>"},
