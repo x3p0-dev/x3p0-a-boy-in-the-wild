@@ -6,6 +6,7 @@
 	"blockTypes": [
 		"core/heading",
 		"core/paragraph",
+		"core/post-author-biography",
 		"core/term-description"
 	],
 	"styles": {

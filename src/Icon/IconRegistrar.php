@@ -63,6 +63,7 @@ final class IconRegistrar implements Bootable
 	{
 		return [
 			'compass'      => __('Compass', 'x3p0-a-boy-in-the-wild'),
+			'draw'         => __('Draw', 'x3p0-a-boy-in-the-wild'),
 			'history'      => __('History', 'x3p0-a-boy-in-the-wild'),
 			'landscape'    => __('Landscape', 'x3p0-a-boy-in-the-wild'),
 			'linear-scale' => __('Linear Scale', 'x3p0-a-boy-in-the-wild'),

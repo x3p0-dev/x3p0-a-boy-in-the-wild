@@ -6,7 +6,8 @@
 	"slug": "text-kicker",
 	"blockTypes": [
 		"core/heading",
-		"core/paragraph"
+		"core/paragraph",
+		"core/post-author-biography"
 	],
 	"styles": {
 		"color": {

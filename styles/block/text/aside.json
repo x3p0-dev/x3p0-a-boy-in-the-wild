@@ -3,7 +3,10 @@
 	"version": 3,
 	"title": "Aside",
 	"slug": "text-aside",
-	"blockTypes": ["core/paragraph"],
+	"blockTypes": [
+		"core/paragraph",
+		"core/post-author-biography"
+	],
 	"styles": {
 		"typography": {
 			"fontSize": "var(--wp--preset--font-size--sm)",
