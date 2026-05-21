@@ -15,25 +15,50 @@ $background = get_theme_file_uri('public/media/images/system/season-late-summer.
 $sketch     = get_theme_file_uri('public/media/images/template/archive-sketch.webp');
 ?>
 
-<!-- wp:group {"className":"is-style-section-season-late-summer","metadata":{"name":"The Territory"},"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"},"margin":{"top":"0"}},"background":{"backgroundImage":{"url":"<?= esc_url($background) ?>","id":419,"source":"file","title":"late-summer-background"},"backgroundSize":"cover","backgroundPosition":"50% 0%","backgroundAttachment":"fixed"}},"layout":{"type":"default"}} -->
+<!-- wp:group {
+	"className":"is-style-section-season-late-summer",
+	"metadata":{"name":"<?= esc_attr__('The Territory', 'x3p0-a-boy-in-the-wild') ?>"},
+	"align":"full",
+	"style":{
+		"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"},"margin":{"top":"0"}},
+		"background":{"backgroundImage":{"url":"<?= esc_url($background) ?>","id":419,"source":"file","title":"late-summer-background"},"backgroundSize":"cover","backgroundPosition":"50% 0%","backgroundAttachment":"fixed"}
+	},
+	"layout":{"type":"default"}
+} -->
 <div class="wp-block-group alignfull is-style-section-season-late-summer" style="margin-top:0;padding-top:var(--wp--preset--spacing--70);padding-right:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--70)">
 
-	<!-- wp:columns {"metadata":{"name":"The Layout"},"className":"home-grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|90"}}}} -->
+	<!-- wp:columns {
+		"metadata":{"name":"<?= esc_attr__('The Layout', 'x3p0-a-boy-in-the-wild') ?>"},
+		"className":"home-grid",
+		"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|90"}}}
+	} -->
 	<div class="wp-block-columns home-grid">
 
-		<!-- wp:column {"metadata":{"name":"The Marker"},"width":"38%"} -->
+		<!-- wp:column {
+			"metadata":{"name":"<?= esc_attr__('The Marker', 'x3p0-a-boy-in-the-wild') ?>"},
+			"width":"38%"
+		} -->
 		<div class="wp-block-column" style="flex-basis:38%">
 
-			<!-- wp:group {"tagName":"header","metadata":{"name":"The Anchor"},"style":{"position":{"type":"sticky","top":"0px"}},"layout":{"type":"default"}} -->
+			<!-- wp:group {
+				"tagName":"header",
+				"metadata":{"name":"<?= esc_attr__('The Anchor', 'x3p0-a-boy-in-the-wild') ?>"},
+				"style":{"position":{"type":"sticky","top":"0px"}},
+				"layout":{"type":"default"}
+			} -->
 			<header class="wp-block-group">
 
-				<!-- wp:site-title {"metadata":{"name":"The Title"}} /-->
+				<!-- wp:site-title /-->
 
-				<!-- wp:group {"metadata":{"name":"The Opening"},"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"default"}} -->
+				<!-- wp:group {
+					"metadata":{"name":"<?= esc_attr__('The Opening', 'x3p0-a-boy-in-the-wild') ?>"},
+					"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},
+					"layout":{"type":"default"}
+				} -->
 				<div class="wp-block-group">
 
 					<!-- wp:paragraph {"className":"is-style-text-kicker"} -->
-					<p class="is-style-text-kicker">A Stretch of Time</p>
+					<p class="is-style-text-kicker"><?= esc_html__('A Stretch of Time', 'x3p0-a-boy-in-the-wild') ?></p>
 					<!-- /wp:paragraph -->
 
 					<!-- wp:query-title {
@@ -43,14 +68,18 @@ $sketch     = get_theme_file_uri('public/media/images/template/archive-sketch.we
 					} /-->
 
 					<!-- wp:paragraph {"className":"is-style-text-caption"} -->
-					<p class="is-style-text-caption">I don't remember writing all of these. Some days I wrote more than others. The days I didn't write I was probably fine. Not every day made it into the notes.</p>
+					<p class="is-style-text-caption"><?= esc_html__("I don't remember writing all of these. Some days I wrote more than others. The days I didn't write I was probably fine. Not every day made it into the notes.", 'x3p0-a-boy-in-the-wild') ?></p>
 					<!-- /wp:paragraph -->
 
 				</div>
 				<!-- /wp:group -->
 
-				<!-- wp:image {"metadata":{"name":"The Sketch"},"sizeSlug":"large","className":"is-style-image-sketch"} -->
-				<figure class="wp-block-image size-large is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt="AI_IMAGE: A quick, expressive pencil and sepia wash sketch of a distant mountain ridge line with sparse pine trees, drawn loosely on a textured journal page | illustration | landscape"/><figcaption class="wp-element-caption">The sky tells you what's coming if you know how to read it.</figcaption></figure>
+				<!-- wp:image {
+					"metadata":{"name":"<?= esc_attr__('The Sketch', 'x3p0-a-boy-in-the-wild') ?>"},
+					"sizeSlug":"large",
+					"className":"is-style-image-sketch"
+				} -->
+				<figure class="wp-block-image size-large is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt=""/><figcaption class="wp-element-caption"><?= esc_html__("The sky tells you what's coming if you know how to read it.", 'x3p0-a-boy-in-the-wild') ?></figcaption></figure>
 				<!-- /wp:image -->
 
 			</header>
@@ -59,23 +88,40 @@ $sketch     = get_theme_file_uri('public/media/images/template/archive-sketch.we
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"metadata":{"name":"The Trail"},"width":"62%"} -->
+		<!-- wp:column {
+			"metadata":{"name":"<?= esc_attr__('The Trail', 'x3p0-a-boy-in-the-wild') ?>"},
+			"width":"62%"
+		} -->
 		<div class="wp-block-column" style="flex-basis:62%">
 
-			<!-- wp:group {"tagName":"main","metadata":{"name":"The Chronicle"},"layout":{"type":"default"}} -->
+			<!-- wp:group {
+				"tagName":"main",
+				"metadata":{"name":"<?= esc_attr__('The Chronicle', 'x3p0-a-boy-in-the-wild') ?>"},
+				"layout":{"type":"default"}
+			} -->
 			<main class="wp-block-group">
 
-				<!-- wp:group {"metadata":{"name":"The Heading"},"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"default"}} -->
+				<!-- wp:group {
+					"metadata":{"name":"<?= esc_attr__('The Heading', 'x3p0-a-boy-in-the-wild') ?>"},
+					"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},
+					"layout":{"type":"default"}
+				} -->
 				<div class="wp-block-group">
 
-					<!-- wp:group {"className":"is-style-container-meta","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
+					<!-- wp:group {
+						"className":"is-style-container-meta",
+						"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},
+						"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}
+					} -->
 					<div class="wp-block-group is-style-container-meta">
 
 						<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"x3p0/query","args":{"field":"count"}}}},"className":"is-style-text-kicker"} -->
-						<p class="is-style-text-kicker">0 Chapters</p>
+						<p class="is-style-text-kicker"><?= esc_html__('0 Chapters', 'x3p0-a-boy-in-the-wild') ?></p>
 						<!-- /wp:paragraph -->
 
-						<!-- wp:icon {"icon":"x3p0/sundial","style":{"dimensions":{"width":"40px"}}} /--></div>
+						<!-- wp:icon {"icon":"x3p0/sundial","style":{"dimensions":{"width":"40px"}}} /-->
+
+					</div>
 					<!-- /wp:group -->
 
 					<!-- wp:separator {"opacity":"css","className":"is-style-separator-hand-drawn"} -->
@@ -91,11 +137,11 @@ $sketch     = get_theme_file_uri('public/media/images/template/archive-sketch.we
 				<hr class="wp-block-separator has-css-opacity is-style-separator-hand-drawn"/>
 				<!-- /wp:separator -->
 
-				<!-- wp:buttons {"metadata":{"name":"The Beginning"}} -->
+				<!-- wp:buttons {"metadata":{"name":"<?= esc_attr__('The Beginning', 'x3p0-a-boy-in-the-wild') ?>"}} -->
 				<div class="wp-block-buttons">
 
 					<!-- wp:button {"metadata":{"bindings":{"url":{"source":"x3p0/story","args":{"field":"firstChapterUrl"}},"text":{"source":"x3p0/story","args":{"field":"firstChapterLabel"}}}},"className":"is-style-button-link"} -->
-					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/">Begin at the beginning →</a></div>
+					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/"><?= esc_html__('Begin at the beginning →', 'x3p0-a-boy-in-the-wild') ?></a></div>
 					<!-- /wp:button -->
 
 				</div>
