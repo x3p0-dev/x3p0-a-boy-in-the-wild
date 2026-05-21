@@ -6,6 +6,7 @@
 	"blockTypes": ["core/separator"],
 	"styles": {
 		"color": {
+			"background": "transparent",
 			"text": "inherit"
 		},
 		"typography": {
@@ -14,9 +15,7 @@
 			"lineHeight": "inherit"
 		},
 		"border": {
-			"top": {
-				"width": "0px"
-			}
+			"width": "0"
 		},
 		"spacing": {
 			"margin": {
@@ -27,6 +26,6 @@
 		"dimensions": {
 			"minHeight": "0"
 		},
-		"css": "&::before { font-size: inherit; content: var(--wp--custom--mark--separator); display: block; }"
+		"css": "mask: none; &::before { font-size: inherit; content: var(--wp--custom--mark--separator); display: block; background: none; mask: none; }"
 	}
 }

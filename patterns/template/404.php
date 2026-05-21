@@ -122,8 +122,8 @@ $sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
 			<h1 class="wp-block-heading"><?php echo wp_kses_post(__("You've gone somewhere<br>I&nbsp;<em><span class=\"has-ink-subtle-color\">haven't charted.</span></em>", 'x3p0-a-boy-in-the-wild')); ?></h1>
 			<!-- /wp:heading -->
 
-			<!-- wp:separator {"opacity":"css","className":"is-style-separator-chapter-rule"} -->
-			<hr class="wp-block-separator has-css-opacity is-style-separator-chapter-rule"/>
+			<!-- wp:separator {"opacity":"css","className":"is-style-separator-draw"} -->
+			<hr class="wp-block-separator has-css-opacity is-style-separator-draw"/>
 			<!-- /wp:separator -->
 
 		</header>

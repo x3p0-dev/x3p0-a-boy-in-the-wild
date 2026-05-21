@@ -80,8 +80,8 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 				</div>
 				<!-- /wp:group -->
 
-				<!-- wp:separator {"opacity":"css","className":"is-style-separator-chapter-rule"} -->
-				<hr class="wp-block-separator has-css-opacity is-style-separator-chapter-rule"/>
+				<!-- wp:separator {"opacity":"css","className":"is-style-separator-draw"} -->
+				<hr class="wp-block-separator has-css-opacity is-style-separator-draw"/>
 				<!-- /wp:separator -->
 
 			</header>

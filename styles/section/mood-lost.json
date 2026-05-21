@@ -9,6 +9,21 @@
 		"color": {
 			"background": "var(--wp--preset--color--parchment)",
 			"text": "var(--wp--preset--color--ink)"
+		},
+		"blocks": {
+			"core/separator": {
+				"color": {
+					"background": "var(--wp--preset--color--rule)"
+				},
+				"dimensions": {
+					"minHeight": "12px"
+				},
+				"border": {
+					"width": "0",
+					"style": "none"
+				},
+				"css": "mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 12' preserveAspectRatio='none'%3E%3Cpath d='M0,6 C200,0 400,12 600,6 800,0 800,6 800,6' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E\"); mask-repeat: no-repeat; mask-size: 100% 100%;"
+			}
 		}
 	}
 }

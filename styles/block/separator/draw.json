@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Draw",
+	"slug": "separator-draw",
+	"blockTypes": ["core/separator"],
+	"styles": {
+		"css": "transform-origin: left center;\nanimation: draw 0.6s ease-out both;\nanimation-delay: 0.3s;"
+	}
+}

@@ -68,8 +68,8 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 			</header>
 			<!-- /wp:group -->
 
-			<!-- wp:separator {"className":"is-style-separator-chapter-rule"} -->
-			<hr class="wp-block-separator has-alpha-channel-opacity is-style-separator-chapter-rule"/>
+			<!-- wp:separator {"className":"is-style-separator-draw"} -->
+			<hr class="wp-block-separator has-alpha-channel-opacity is-style-separator-draw"/>
 			<!-- /wp:separator -->
 
 			<!-- wp:group {
