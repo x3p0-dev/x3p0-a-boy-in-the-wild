@@ -9,9 +9,9 @@
 	50% { opacity: 0; }
 }
 
-@keyframes rule-draw {
-	from { transform: scaleX(0); }
-	to   { transform: scaleX(1); }
+@keyframes draw {
+	from { clip-path: inset(0 100% 0 0); }
+	to   { clip-path: inset(0 36% 0 0); }
 }
 
 @keyframes pulse-ring {
