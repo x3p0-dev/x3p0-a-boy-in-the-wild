@@ -16,7 +16,7 @@ namespace X3P0\ABoyInTheWild\Block\Category;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
- * Registers custom block categories.
+ * Registers custom block categories used for variations in the theme.
  */
 final class BlockCategoryRegistrar implements Bootable
 {

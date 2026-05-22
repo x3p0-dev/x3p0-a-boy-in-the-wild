@@ -4,7 +4,7 @@
  * Block bindings source registrar.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
- * @copyright Copyright (c) 2023-2025, Justin Tadlock
+ * @copyright Copyright (c) 2026, Justin Tadlock
  * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
  * @link      https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
  */
@@ -23,10 +23,15 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 final class BindingSourceRegistrar implements Bootable
 {
 	/**
-	 * Sets up the initial object state.
+	 * Array of block binding source classnames.
 	 */
-	public function __construct(private readonly array $sources)
-	{}
+	private const SOURCES = [
+		Sources\Post::class,
+		Sources\Query::class,
+		Sources\Site::class,
+		Sources\Story::class,
+		Sources\Term::class
+	];
 
 	/**
 	 * @inheritDoc
@@ -40,18 +45,8 @@ final class BindingSourceRegistrar implements Bootable
 	 */
 	public function register(): void
 	{
-		foreach ($this->sources as $source) {
-			if (is_string($source)) {
-				$source = new $source;
-			}
-
-			if (! $source instanceof BindingSource) {
-				throw new TypeError(esc_html(sprintf(
-					// Translators: %s is a PHP class name.
-					__('Only %s classes can be registered', 'x3p0-a-boy-in-the-wild'),
-					BindingSource::class
-				)));
-			}
+		foreach (self::SOURCES as $name) {
+			$source = new $name;
 
 			register_block_bindings_source($source->getName(), [
 				'label'              => $source->getLabel(),

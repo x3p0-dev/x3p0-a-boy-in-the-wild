@@ -4,9 +4,9 @@
  * Icon registrar.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
- * @copyright Copyright (c) 2023-2025, Justin Tadlock
+ * @copyright Copyright (c) 2026, Justin Tadlock
  * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
- * @link      https://github.com/x3p0-dev/x3p0-ideas
+ * @link      https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
  */
 
 declare(strict_types=1);
@@ -34,6 +34,24 @@ final class IconRegistrar implements Bootable
 	}
 
 	/**
+	 * Returns an array of icons.
+	 */
+	private function icons(): array
+	{
+		return [
+			'compass'      => __('Compass',      'x3p0-a-boy-in-the-wild'),
+			'draw'         => __('Draw',         'x3p0-a-boy-in-the-wild'),
+			'history'      => __('History',      'x3p0-a-boy-in-the-wild'),
+			'landscape'    => __('Landscape',    'x3p0-a-boy-in-the-wild'),
+			'linear-scale' => __('Linear Scale', 'x3p0-a-boy-in-the-wild'),
+			'route'        => __('Route',        'x3p0-a-boy-in-the-wild'),
+			'sealed-key'   => __('Sealed Key',   'x3p0-a-boy-in-the-wild'),
+			'sundial'      => __('Sundial',      'x3p0-a-boy-in-the-wild'),
+			'sun-path'     => __('Sun Path',     'x3p0-a-boy-in-the-wild')
+		];
+	}
+
+	/**
 	 * Registers custom icons.
 	 *
 	 * @throws ReflectionException
@@ -54,23 +72,5 @@ final class IconRegistrar implements Bootable
 				'filePath' => get_parent_theme_file_path("public/media/svg/{$name}.svg")
 			]);
 		}
-	}
-
-	/**
-	 * Returns an array of icons.
-	 */
-	private function icons(): array
-	{
-		return [
-			'compass'      => __('Compass', 'x3p0-a-boy-in-the-wild'),
-			'draw'         => __('Draw', 'x3p0-a-boy-in-the-wild'),
-			'history'      => __('History', 'x3p0-a-boy-in-the-wild'),
-			'landscape'    => __('Landscape', 'x3p0-a-boy-in-the-wild'),
-			'linear-scale' => __('Linear Scale', 'x3p0-a-boy-in-the-wild'),
-			'route'        => __('Route', 'x3p0-a-boy-in-the-wild'),
-			'sealed-key'   => __('Sealed Key', 'x3p0-a-boy-in-the-wild'),
-			'sundial'      => __('Sundial', 'x3p0-a-boy-in-the-wild'),
-			'sun-path'     => __('Sun Path', 'x3p0-a-boy-in-the-wild'),
-		];
 	}
 }

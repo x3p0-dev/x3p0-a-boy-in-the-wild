@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Search data binding class.
+ * Query binding class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -15,12 +15,10 @@ namespace X3P0\ABoyInTheWild\Block\Binding\Sources;
 
 use WP_Block;
 use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
-use WP_Query;
-use WP_Term;
 
 /**
- * Handles registering the `x3p0/query` block bindings source and
- * rendering its output based on the given arguments.
+ * Handles registering the `x3p0/query` block bindings source and rendering its
+ * output based on the given arguments.
  */
 final class Query extends BindingSource
 {
@@ -41,12 +39,12 @@ final class Query extends BindingSource
 	{
 		return match ($args['field'] ?? null) {
 			'count' => $this->renderCount(),
-			default  => null
+			default => null
 		};
 	}
 
 	/**
-	 * Returns the search results count.
+	 * Returns the query results count.
 	 */
 	private function renderCount(): ?string
 	{

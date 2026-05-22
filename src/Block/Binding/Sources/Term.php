@@ -18,8 +18,8 @@ use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
 use WP_Term;
 
 /**
- * Handles registering the `x3p0/term` block bindings source and
- * rendering its output based on the given arguments.
+ * Handles registering the `x3p0/term` block bindings source and rendering its
+ * output based on the given arguments.
  */
 final class Term extends BindingSource
 {

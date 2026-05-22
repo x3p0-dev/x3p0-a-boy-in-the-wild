@@ -3,10 +3,10 @@
 /**
  * Post content service.
  *
- * @author    Bifrost
- * @copyright Copyright (c) 2026
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2026, Justin Tadlock
  * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
- * @link      https://github.com/wptrainingteam/developer-showcase
+ * @link      https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
  */
 
 declare(strict_types=1);
@@ -15,7 +15,7 @@ namespace X3P0\ABoyInTheWild\Content;
 
 use WP_Post;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\Season;
+use X3P0\ABoyInTheWild\Support\StorySeason;
 
 final class Post implements Bootable
 {
@@ -31,6 +31,9 @@ final class Post implements Bootable
 		add_filter('post_date_column_status', $this->postDateColumnStatus(...), 10, 4);
 	}
 
+	/**
+	 * Filters the `post` post type arguments to add custom labels.
+	 */
 	private function postTypeArgs(array $args, string $postType): array
 	{
 		if ('post' !== $postType) {
@@ -40,39 +43,39 @@ final class Post implements Bootable
 		$args['menu_icon'] = 'dashicons-book-alt';
 
 		$args['labels'] = [
-			'name'                     => _x( 'Chapters', 'post type general name', 'textdomain' ),
-			'singular_name'            => _x( 'Chapter', 'post type singular name', 'textdomain' ),
-			'add_new'                  => __( 'Add New', 'textdomain' ),
-			'add_new_item'             => __( 'Add New Chapter', 'textdomain' ),
-			'edit_item'                => __( 'Edit Chapter', 'textdomain' ),
-			'new_item'                 => __( 'New Chapter', 'textdomain' ),
-			'view_item'                => __( 'View Chapter', 'textdomain' ),
-			'view_items'               => __( 'View Chapters', 'textdomain' ),
-			'search_items'             => __( 'Search Chapters', 'textdomain' ),
-			'not_found'                => __( 'No chapters found.', 'textdomain' ),
-			'not_found_in_trash'       => __( 'No chapters found in Trash.', 'textdomain' ),
-			'parent_item_colon'        => __( 'Parent Chapter:', 'textdomain' ),
-			'all_items'                => __( 'All Chapters', 'textdomain' ),
-			'archives'                 => __( 'Chapter Archives', 'textdomain' ),
-			'attributes'               => __( 'Chapter Attributes', 'textdomain' ),
-			'insert_into_item'         => __( 'Insert into chapter', 'textdomain' ),
-			'uploaded_to_this_item'    => __( 'Uploaded to this chapter', 'textdomain' ),
-			'featured_image'           => _x( 'Featured Image', 'chapter', 'textdomain' ),
-			'set_featured_image'       => _x( 'Set featured image', 'chapter', 'textdomain' ),
-			'remove_featured_image'    => _x( 'Remove featured image', 'chapter', 'textdomain' ),
-			'use_featured_image'       => _x( 'Use as featured image', 'chapter', 'textdomain' ),
-			'menu_name'                => _x( 'Story', 'admin menu', 'textdomain' ),
-			'filter_items_list'        => __( 'Filter chapters list', 'textdomain' ),
-			'filter_by_date'           => __( 'Filter by date', 'textdomain' ),
-			'items_list_navigation'    => __( 'Chapters list navigation', 'textdomain' ),
-			'items_list'               => __( 'Chapters list', 'textdomain' ),
-			'item_published'           => __( 'Chapter published.', 'textdomain' ),
-			'item_published_privately' => __( 'Chapter published privately.', 'textdomain' ),
-			'item_reverted_to_draft'   => __( 'Chapter reverted to draft.', 'textdomain' ),
-			'item_scheduled'           => __( 'Chapter scheduled.', 'textdomain' ),
-			'item_updated'             => __( 'Chapter updated.', 'textdomain' ),
-			'item_link'                => _x( 'Chapter Link', 'navigation link block title', 'textdomain' ),
-			'item_link_description'    => _x( 'A link to a chapter.', 'navigation link block description', 'textdomain' ),
+			'name'                     => _x('Chapters', 'post type general name', 'x3p0-a-boy-in-the-wild'),
+			'singular_name'            => _x('Chapter', 'post type singular name', 'x3p0-a-boy-in-the-wild'),
+			'add_new'                  => __('Add New', 'x3p0-a-boy-in-the-wild'),
+			'add_new_item'             => __('Add New Chapter', 'x3p0-a-boy-in-the-wild'),
+			'edit_item'                => __('Edit Chapter', 'x3p0-a-boy-in-the-wild'),
+			'new_item'                 => __('New Chapter', 'x3p0-a-boy-in-the-wild'),
+			'view_item'                => __('View Chapter', 'x3p0-a-boy-in-the-wild'),
+			'view_items'               => __('View Chapters', 'x3p0-a-boy-in-the-wild'),
+			'search_items'             => __('Search Chapters', 'x3p0-a-boy-in-the-wild'),
+			'not_found'                => __('No chapters found.', 'x3p0-a-boy-in-the-wild'),
+			'not_found_in_trash'       => __('No chapters found in Trash.', 'x3p0-a-boy-in-the-wild'),
+			'parent_item_colon'        => __('Parent Chapter:', 'x3p0-a-boy-in-the-wild'),
+			'all_items'                => __('All Chapters', 'x3p0-a-boy-in-the-wild'),
+			'archives'                 => __('Chapter Archives', 'x3p0-a-boy-in-the-wild'),
+			'attributes'               => __('Chapter Attributes', 'x3p0-a-boy-in-the-wild'),
+			'insert_into_item'         => __('Insert into chapter', 'x3p0-a-boy-in-the-wild'),
+			'uploaded_to_this_item'    => __('Uploaded to this chapter', 'x3p0-a-boy-in-the-wild'),
+			'featured_image'           => _x('Featured Image', 'chapter', 'x3p0-a-boy-in-the-wild'),
+			'set_featured_image'       => _x('Set featured image', 'chapter', 'x3p0-a-boy-in-the-wild'),
+			'remove_featured_image'    => _x('Remove featured image', 'chapter', 'x3p0-a-boy-in-the-wild'),
+			'use_featured_image'       => _x('Use as featured image', 'chapter', 'x3p0-a-boy-in-the-wild'),
+			'menu_name'                => _x('Story', 'admin menu', 'x3p0-a-boy-in-the-wild'),
+			'filter_items_list'        => __('Filter chapters list', 'x3p0-a-boy-in-the-wild'),
+			'filter_by_date'           => __('Filter by date', 'x3p0-a-boy-in-the-wild'),
+			'items_list_navigation'    => __('Chapters list navigation', 'x3p0-a-boy-in-the-wild'),
+			'items_list'               => __('Chapters list', 'x3p0-a-boy-in-the-wild'),
+			'item_published'           => __('Chapter published.', 'x3p0-a-boy-in-the-wild'),
+			'item_published_privately' => __('Chapter published privately.', 'x3p0-a-boy-in-the-wild'),
+			'item_reverted_to_draft'   => __('Chapter reverted to draft.', 'x3p0-a-boy-in-the-wild'),
+			'item_scheduled'           => __('Chapter scheduled.', 'x3p0-a-boy-in-the-wild'),
+			'item_updated'             => __('Chapter updated.', 'x3p0-a-boy-in-the-wild'),
+			'item_link'                => _x('Chapter Link', 'navigation link block title', 'x3p0-a-boy-in-the-wild'),
+			'item_link_description'    => _x('A link to a chapter.', 'navigation link block description', 'x3p0-a-boy-in-the-wild'),
 		];
 
 		return $args;
@@ -105,7 +108,7 @@ final class Post implements Bootable
 			return $h_time;
 		}
 
-		$season = Season::seasonFromDate($timestamp);
+		$season = StorySeason::seasonFromDate($timestamp);
 		$date   = date_i18n(get_option('date_format'), $timestamp);
 
 		return esc_html($season) . '<br>' . esc_html($date);

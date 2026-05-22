@@ -3,10 +3,10 @@
 /**
  * Content service provider.
  *
- * @author    Bifrost
- * @copyright Copyright (c) 2026
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2026, Justin Tadlock
  * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
- * @link      https://github.com/wptrainingteam/developer-showcase
+ * @link      https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
  */
 
 declare(strict_types=1);
@@ -25,7 +25,8 @@ final class ContentServiceProvider extends ServiceProvider implements Bootable
 	{
 		$this->container->get(Category::class)->boot();
 		$this->container->get(Post::class)->boot();
+		$this->container->get(PostStatus::class)->boot();
 		$this->container->get(PostTag::class)->boot();
-		$this->container->get(PostStatusManager::class )->boot();
+		$this->container->get(PostTitleFormat::class)->boot();
 	}
 }

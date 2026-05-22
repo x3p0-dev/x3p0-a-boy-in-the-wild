@@ -4,7 +4,7 @@
  * Audio interactivity handler.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
- * @copyright Copyright (c) 2023-2025, Justin Tadlock
+ * @copyright Copyright (c) 2026, Justin Tadlock
  * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
  * @link      https://github.com/x3p0-dev/x3p0-a-boy-in-the-wild
  */
@@ -107,14 +107,14 @@ final class AudioInteractivity
 	private function setState(): void
 	{
 		wp_interactivity_state(self::STORE, [
-			'url'               => $this->resolver->getCurrentAudioFile(),
-			'volume'            => 0.1,
+			'url'    => $this->resolver->getCurrentAudioFile(),
+			'volume' => 0.1,
 			'text'   => [
 				'listen'      => __('Listen', 'x3p0-a-boy-in-the-wild'),
 				'stop'        => __('Stop', 'x3p0-a-boy-in-the-wild'),
 				'startSound'  => __('Start chapter sound', 'x3p0-a-boy-in-the-wild'),
 				'unmuteSound' => __('Unmute chapter sound', 'x3p0-a-boy-in-the-wild'),
-				'muteSound'   => __('Mute chapter sound', 'x3p0-a-boy-in-the-wild'),
+				'muteSound'   => __('Mute chapter sound', 'x3p0-a-boy-in-the-wild')
 			]
 		]);
 	}

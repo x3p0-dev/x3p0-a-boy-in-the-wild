@@ -14,7 +14,6 @@ final class AdminServiceProvider extends ServiceProvider implements Bootable
 	 */
 	public function boot(): void
 	{
-		$this->container->get(AdminBarTweaks::class)->boot();
 		$this->container->get(AdminColorRegistrar::class)->boot();
 	}
 }

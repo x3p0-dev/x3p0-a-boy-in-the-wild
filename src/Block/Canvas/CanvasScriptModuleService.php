@@ -31,14 +31,14 @@ final class CanvasScriptModuleService implements Bootable
 	 */
 	public function boot(): void
 	{
-		add_filter('render_block_core/html', $this->render(...), 10, 3);
+		add_filter('render_block_core/html', $this->render(...));
 	}
 
 	/**
 	 * Scans the rendered HTML block for canvas elements and enqueues any
 	 * registered script modules whose trigger class is present.
 	 */
-	private function render(string $content, array $block, WP_Block $instance): string
+	private function render(string $content): string
 	{
 		if (is_admin()) {
 			return $content;

@@ -38,7 +38,7 @@ final class CanvasScriptModuleRegistrar
 			'rising-embers',
 			'snow-embers',
 			'storm'
-		],
+		]
 	];
 
 	/**

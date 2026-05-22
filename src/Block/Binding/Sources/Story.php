@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Site binding class.
+ * Story binding class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -20,7 +20,7 @@ use X3P0\ABoyInTheWild\Support\StoryDay;
 use X3P0\ABoyInTheWild\Support\StoryYear;
 
 /**
- * Handles registering the `x3p0/site-data` block bindings source and rendering its
+ * Handles registering the `x3p0/story` block bindings source and rendering its
  * output based on the given arguments.
  */
 final class Story extends BindingSource
@@ -28,10 +28,8 @@ final class Story extends BindingSource
 	protected const NAME = 'x3p0/story';
 
 	/**
-	 * Stores the post ID.
+	 * Stores the first chapter.
 	 */
-	private int $postId = 0;
-
 	private ?WP_Post $firstChapter = null;
 
 	/**
@@ -39,7 +37,7 @@ final class Story extends BindingSource
 	 */
 	public function getLabel(): string
 	{
-		return __('Story Data', 'x3p0-ideas');
+		return __('Story Data', 'x3p0-a-boy-in-the-wild');
 	}
 
 	/**
@@ -55,32 +53,39 @@ final class Story extends BindingSource
 	 */
 	public function callback(array $args, WP_Block $block, string $name): ?string
 	{
-		$this->postId = absint($block->context['postId'] ?? get_the_ID());
+		$postId = absint($block->context['postId'] ?? get_the_ID());
 
 		return match ($args['field'] ?? '') {
-			'chapterUrl'        => get_permalink($this->postId),
+			'chapterUrl'        => get_permalink($postId),
 			'firstChapterUrl'   => $this->renderFirstChapterUrl(),
 			'firstChapterLabel' => $this->renderFirstChapterLabel(),
-			'day'         => $this->storyDay(strtotime(get_post($this->postId)->post_date))?->number(),
-			'dayNumeric'  => $this->storyDay(strtotime(get_post($this->postId)->post_date))?->numeric(),
-			'dayOrdinal'  => $this->storyDay(strtotime(get_post($this->postId)->post_date))?->ordinal(),
-			'year'              => $this->storyYear(strtotime(get_post($this->postId)->post_date))?->number(),
-			'yearNumeric'     => $this->storyYear(strtotime(get_post($this->postId)->post_date))?->numeric(),
-			'yearOrdinal'     => $this->storyYear(strtotime(get_post($this->postId)->post_date))?->ordinal(),
-			'yearWord'        => $this->storyYear(strtotime(get_post($this->postId)->post_date))?->word(),
-			'yearWithArticle' => $this->storyYear(strtotime(get_post($this->postId)->post_date))?->withArticle(),
-			default                => null
+			'day'               => $this->storyDay($postId)?->number(),
+			'dayNumeric'        => $this->storyDay($postId)?->numeric(),
+			'dayOrdinal'        => $this->storyDay($postId)?->ordinal(),
+			'year'              => $this->storyYear($postId)?->number(),
+			'yearNumeric'       => $this->storyYear($postId)?->numeric(),
+			'yearOrdinal'       => $this->storyYear($postId)?->ordinal(),
+			'yearWord'          => $this->storyYear($postId)?->word(),
+			'yearWithArticle'   => $this->storyYear($postId)?->withArticle(),
+			default             => null
 		};
 	}
 
+	/**
+	 * Returns the first published chapter/post.
+	 */
 	private function getFirstChapter(): ?WP_Post
 	{
-		$posts = get_posts( [
+		if (! is_null($this->firstChapter)) {
+			return $this->firstChapter;
+		}
+
+		$posts = get_posts([
 			'numberposts' => 1,
 			'order'       => 'ASC',
 			'orderby'     => 'date',
 			'post_status' => 'publish',
-		] );
+		]);
 
 		if (! empty($posts) && isset($posts[0])) {
 			$this->firstChapter = $posts[0];
@@ -89,6 +94,9 @@ final class Story extends BindingSource
 		return $this->firstChapter;
 	}
 
+	/**
+	 * Renders the first chapter's URL.
+	 */
 	private function renderFirstChapterUrl(): ?string
 	{
 		if (! $post = $this->getFirstChapter()) {
@@ -98,6 +106,9 @@ final class Story extends BindingSource
 		return esc_url(get_permalink($post->ID));
 	}
 
+	/**
+	 * Renders the first chapter's label.
+	 */
 	private function renderFirstChapterLabel(): ?string
 	{
 		if (! $post = $this->getFirstChapter()) {
@@ -110,13 +121,19 @@ final class Story extends BindingSource
 		);
 	}
 
-	private function storyYear(int $timestamp): ?StoryYear
+	/**
+	 * Returns the story year based on the timestamp.
+	 */
+	private function storyYear(int $postId): ?StoryYear
 	{
-		return StoryYear::fromTimestamp($timestamp);
+		return StoryYear::fromTimestamp(strtotime(get_post($postId)->post_date));
 	}
 
-	private function storyDay(int $timestamp): ?StoryDay
+	/**
+	 * Returns the story day based on the timestamp.
+	 */
+	private function storyDay(int $postId): ?StoryDay
 	{
-		return StoryDay::fromTimestamp($timestamp);
+		return StoryDay::fromTimestamp(strtotime(get_post($postId)->post_date));
 	}
 }
