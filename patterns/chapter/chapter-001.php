@@ -72,8 +72,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 				} -->
 				<div class="wp-block-group alignfull">
 
-
-				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
+					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
 
 					<!-- wp:post-title {"level":1} /-->
 
@@ -143,6 +142,12 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 				<div class="wp-block-group">
 
 					<!-- wp:post-title {"level":6} /-->
+
+					<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
+					<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
+					<!-- /wp:separator -->
+
+					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-day"} /-->
 
 					<!-- wp:separator {"tagName":"div","className":"is-style-separator-inline"} -->
 					<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>

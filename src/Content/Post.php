@@ -15,7 +15,7 @@ namespace X3P0\ABoyInTheWild\Content;
 
 use WP_Post;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\StorySeason;
+use X3P0\ABoyInTheWild\Support\ChapterSeason;
 
 final class Post implements Bootable
 {
@@ -108,7 +108,7 @@ final class Post implements Bootable
 			return $h_time;
 		}
 
-		$season = StorySeason::seasonFromDate($timestamp);
+		$season = ChapterSeason::fromTimestamp($timestamp);
 		$date   = date_i18n(get_option('date_format'), $timestamp);
 
 		return esc_html($season) . '<br>' . esc_html($date);
@@ -125,7 +125,7 @@ final class Post implements Bootable
 		}
 
 		if (isset($columns['date'])) {
-			$columns['date'] = __('Season', 'x3p0-a-boy-in-the-wild');
+			$columns['date'] = __('Time', 'x3p0-a-boy-in-the-wild');
 		}
 
 		return $columns;

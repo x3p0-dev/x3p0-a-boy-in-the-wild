@@ -26,7 +26,7 @@ final class BindingSourceRegistrar implements Bootable
 	 * Array of block binding source classnames.
 	 */
 	private const SOURCES = [
-		Sources\Post::class,
+		Sources\Chapter::class,
 		Sources\Query::class,
 		Sources\Site::class,
 		Sources\Story::class,

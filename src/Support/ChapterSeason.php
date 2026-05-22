@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Support;
 
-class StorySeason
+class ChapterSeason
 {
 	/**
 	 * Minnesota seasonal calendar. Each entry defines the inclusive start
@@ -126,14 +126,14 @@ class StorySeason
 				'end_month'   => 3,
 				'end_day'     => 20,
 				'name'        => __('Late Winter', 'x3p0-a-boy-in-the-wild'),
-			],
+			]
 		];
 	}
 
 	/**
 	 * Resolves a season name from a month and day.
 	 */
-	public static function seasonFromDate(int $timestamp): string
+	public static function fromTimestamp(int $timestamp): string
 	{
 		$month = (int) date('n', $timestamp);
 		$day   = (int) date('j', $timestamp);
