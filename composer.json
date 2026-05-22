@@ -4,7 +4,6 @@
 	"license": "GPL-3.0-or-later",
 	"scripts": {
 		"build": [
-			"composer var-reset",
 			"composer update --no-dev",
 			"composer dump-autoload -o --no-dev"
 		],
