@@ -22,9 +22,7 @@ final class CanvasServiceProvider extends ServiceProvider implements Bootable
 	 * @inheritDoc
 	 */
 	public function register(): void
-	{
-		$this->container->singleton(CanvasScriptModuleRegistry::class);
-	}
+	{}
 
 	/**
 	 * @inheritDoc
@@ -32,9 +30,5 @@ final class CanvasServiceProvider extends ServiceProvider implements Bootable
 	public function boot(): void
 	{
 		$this->container->get(CanvasScriptModuleService::class)->boot();
-
-		CanvasScriptModuleRegistrar::register(
-			$this->container->get(CanvasScriptModuleRegistry::class)
-		);
 	}
 }
