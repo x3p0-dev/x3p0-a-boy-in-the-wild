@@ -48,7 +48,21 @@ $sketch     = get_theme_file_uri('public/media/images/template/era-sketch.webp')
 			} -->
 			<header class="wp-block-group">
 
-				<!-- wp:site-title {"metadata":{"name":"<?= esc_attr__('The Title', 'x3p0-a-boy-in-the-wild') ?>"}} /-->
+				<!-- wp:group {
+					"metadata":{"name":"<?= esc_attr__('The Brand', 'x3p0-a-boy-in-the-wild') ?>"},
+					"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},
+					"layout":{"type":"flex","flexWrap":"nowrap"}
+				} -->
+				<div class="wp-block-group">
+
+					<!-- wp:site-logo {"width":25} /-->
+
+					<!-- wp:site-title {
+						"metadata":{"name":"<?= esc_attr__('The Title', 'x3p0-a-boy-in-the-wild') ?>"}
+					} /-->
+
+				</div>
+				<!-- /wp:group -->
 
 				<!-- wp:group {
 					"metadata":{"name":"<?= esc_attr__('The Opening', 'x3p0-a-boy-in-the-wild') ?>"},

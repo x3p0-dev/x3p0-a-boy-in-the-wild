@@ -41,6 +41,7 @@ final class IconRegistrar implements Bootable
 		return [
 			'bird-horizon' => __('Bird Horizon', 'x3p0-a-boy-in-the-wild'),
 			'compass'      => __('Compass',      'x3p0-a-boy-in-the-wild'),
+			'crosshair'    => __('Crosshair',    'x3p0-a-boy-in-the-wild'),
 			'draw'         => __('Draw',         'x3p0-a-boy-in-the-wild'),
 			'route'        => __('Route',        'x3p0-a-boy-in-the-wild'),
 			'sealed-key'   => __('Sealed Key',   'x3p0-a-boy-in-the-wild'),
