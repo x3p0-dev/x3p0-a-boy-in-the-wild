@@ -41,8 +41,8 @@ final class TemplateRegistrar implements Bootable
 		];
 
 		$types['home'] = [
-			'title'       => _x('The Field Notes', 'Template name', 'x3p0-a-boy-in-the-wild'),
-			'description' => __('Displays the chapter list when the front page is set to a static page.', 'x3p0-a-boy-in-the-wild'),
+			'title'       => _x('The Story', 'Template name', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Displays the chapter list when the front page is set to show blog posts.', 'x3p0-a-boy-in-the-wild'),
 		];
 
 		$types['single-post'] = [
@@ -56,8 +56,8 @@ final class TemplateRegistrar implements Bootable
 		];
 
 		$types['page'] = [
-			'title'       => _x('Waymark', 'Template name', 'x3p0-a-boy-in-the-wild'),
-			'description' => __('Displays static waymarks such as the guestbook or introduction.', 'x3p0-a-boy-in-the-wild'),
+			'title'       => _x('Page', 'Template name', 'x3p0-a-boy-in-the-wild'),
+			'description' => __('Displays static pages such as the guestbook or introduction.', 'x3p0-a-boy-in-the-wild'),
 		];
 
 		$types['archive'] = [
@@ -76,7 +76,7 @@ final class TemplateRegistrar implements Bootable
 		];
 
 		$types['author'] = [
-			'title'       => _x('The Narrator', 'Template name', 'x3p0-a-boy-in-the-wild'),
+			'title'       => _x('Narrator', 'Template name', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Displays chapters written by a specific narrator.', 'x3p0-a-boy-in-the-wild'),
 		];
 
