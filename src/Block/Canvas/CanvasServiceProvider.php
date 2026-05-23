@@ -29,6 +29,6 @@ final class CanvasServiceProvider extends ServiceProvider implements Bootable
 	 */
 	public function boot(): void
 	{
-		$this->container->get(CanvasScriptModuleService::class)->boot();
+		$this->container->get(CanvasScriptModuleLoader::class)->boot();
 	}
 }

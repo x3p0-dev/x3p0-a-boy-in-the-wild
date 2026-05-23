@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Canvas script module service.
+ * Canvas script module loader.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -24,7 +24,7 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
  * the matching `public/js/canvas/{namespace}/{slug}.js` module if its built
  * `.asset.php` file exists.
  */
-final class CanvasScriptModuleService implements Bootable
+final class CanvasScriptModuleLoader implements Bootable
 {
 	/**
 	 * CSS class prefix used to detect a module on a canvas element.

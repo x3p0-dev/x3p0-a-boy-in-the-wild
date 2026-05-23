@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Stylesheet service.
+ * Stylesheet loader.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -18,11 +18,11 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 /**
  * Handles registering and enqueueing block stylesheets.
  *
- * This service automatically discovers and enqueues block-specific stylesheets
+ * This loader automatically discovers and enqueues block-specific stylesheets
  * using WordPress's block style API. Stylesheets are only loaded when their
  * associated blocks are actually used on a page, improving performance.
  */
-final class StylesheetService implements Bootable
+final class StylesheetLoader implements Bootable
 {
 	/**
 	 * Handle prefix used for registering block styles.
@@ -30,7 +30,7 @@ final class StylesheetService implements Bootable
 	private const HANDLE_PREFIX = 'x3p0-a-boy-in-the-wild-block';
 
 	/**
-	 * Sets up the stylesheet service.
+	 * Sets up the stylesheet loader.
 	 */
 	public function __construct(private readonly StylesheetIterator $discovery)
 	{}

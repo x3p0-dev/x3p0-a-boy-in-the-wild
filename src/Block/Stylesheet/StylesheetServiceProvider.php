@@ -36,6 +36,6 @@ class StylesheetServiceProvider extends ServiceProvider implements Bootable
 	 */
 	public function boot(): void
 	{
-		$this->container->get(StylesheetService::class)->boot();
+		$this->container->get(StylesheetLoader::class)->boot();
 	}
 }
