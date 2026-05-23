@@ -122,8 +122,8 @@ $sketch     = get_theme_file_uri('public/media/images/template/home-sketch.webp'
 					</div>
 					<!-- /wp:group -->
 
-					<!-- wp:separator {"opacity":"css","className":"is-style-separator-hand-drawn"} -->
-					<hr class="wp-block-separator has-css-opacity is-style-separator-hand-drawn"/>
+					<!-- wp:separator {"opacity":"css"} -->
+					<hr class="wp-block-separator has-css-opacity"/>
 					<!-- /wp:separator -->
 
 				</div>
@@ -131,8 +131,8 @@ $sketch     = get_theme_file_uri('public/media/images/template/home-sketch.webp'
 
 				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/query-trail"} /-->
 
-				<!-- wp:separator {"opacity":"css","className":"is-style-separator-hand-drawn"} -->
-				<hr class="wp-block-separator has-css-opacity is-style-separator-hand-drawn"/>
+				<!-- wp:separator {"opacity":"css"} -->
+				<hr class="wp-block-separator has-css-opacity"/>
 				<!-- /wp:separator -->
 
 				<!-- wp:buttons {"metadata":{"name":"<?= esc_attr__('The Beginning', 'x3p0-a-boy-in-the-wild') ?>"}} -->

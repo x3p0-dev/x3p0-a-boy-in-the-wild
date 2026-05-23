@@ -134,9 +134,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 			} -->
 			<footer class="wp-block-group is-style-container-meta">
 
-				<!-- wp:separator {"className":"is-style-separator-endmark-field-note"} -->
-				<hr class="wp-block-separator has-alpha-channel-opacity is-style-separator-endmark-field-note"/>
-				<!-- /wp:separator -->
+				<!-- wp:icon {"icon":"x3p0/bird-horizon","style":{"layout":{"selfStretch":"fit","flexSize":null},"dimensions":{"width":"40px"}}} /-->
 
 				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"}} -->
 				<div class="wp-block-group">
