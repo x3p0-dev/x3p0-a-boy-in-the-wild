@@ -22,7 +22,7 @@ use X3P0\ABoyInTheWild\Support\ChapterTime;
 use X3P0\ABoyInTheWild\Support\ChapterYear;
 
 /**
- * Registers fields with the REST API needed for the block in the editor.
+ * Registers fields with the REST API needed in the editor.
  */
 final class RestRegistrar implements Bootable
 {
@@ -63,9 +63,13 @@ final class RestRegistrar implements Bootable
 		]);
 	}
 
+	/**
+	 * Resolves the chapter metadata payload returned for each post in
+	 * the REST API response.
+	 */
 	private function getChapterData(array $post): array
 	{
-		$timestamp   = strtotime($post['date']);
+		$timestamp = strtotime($post['date']);
 
 		return [
 			'day'         => ChapterDay::fromTimestamp($timestamp)->numeric(),

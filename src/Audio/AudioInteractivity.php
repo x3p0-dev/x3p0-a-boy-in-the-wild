@@ -42,21 +42,29 @@ final class AudioInteractivity
 	public const CALLBACK_INIT = 'callbacks.init';
 
 	/**
+	 * Interactive state path tracking whether audio is currently playing.
+	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	public const STATE_IS_PLAYING = 'state.playing';
 
 	/**
+	 * Interactive state path tracking whether audio is currently muted.
+	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	public const STATE_IS_MUTED = 'state.muted';
 
 	/**
+	 * Interactive state path for the audio control's `aria-label`.
+	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	public const STATE_ARIA_LABEL = 'state.ariaLabel';
 
 	/**
+	 * Interactive state path for the audio control's visible label.
+	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	public const STATE_LABEL = 'state.label';

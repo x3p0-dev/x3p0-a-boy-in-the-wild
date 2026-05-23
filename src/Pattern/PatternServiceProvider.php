@@ -16,6 +16,9 @@ namespace X3P0\ABoyInTheWild\Pattern;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Pattern domain.
+ */
 final class PatternServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

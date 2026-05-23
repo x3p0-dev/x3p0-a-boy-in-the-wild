@@ -22,10 +22,14 @@ use WP_Block;
  */
 abstract class BindingSource
 {
+	/**
+	 * The binding source identifier (e.g., 'x3p0/chapter'). Subclasses
+	 * must override this constant.
+	 */
 	protected const NAME = '';
 
 	/**
-	 * Returns the binding source name (e.g., 'x3p0/post').
+	 * Returns the binding source name (e.g., 'x3p0/chapter').
 	 */
 	public function getName(): string
 	{

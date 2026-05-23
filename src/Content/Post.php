@@ -17,6 +17,10 @@ use WP_Post;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Support\ChapterSeason;
 
+/**
+ * Rebrands the built-in post type as "Chapters" and customizes its admin list
+ * table presentation.
+ */
 final class Post implements Bootable
 {
 	/**
@@ -81,6 +85,10 @@ final class Post implements Bootable
 		return $args;
 	}
 
+	/**
+	 * Hides the published/scheduled status label above the date column
+	 * for chapters so the column only shows the season and date.
+	 */
 	private function postDateColumnStatus(string $status, WP_Post $post, string $column_name, string $mode): string
 	{
 		if ('post' !== $post->post_type) {
@@ -90,6 +98,10 @@ final class Post implements Bootable
 		return '';
 	}
 
+	/**
+	 * Replaces the date column's time value with the chapter's season and
+	 * publish date so the list table reads in narrative time.
+	 */
 	private function postDateColumnTime(string $h_time, WP_Post $post, string $column_name, string $mode): string
 	{
 		if ('post' !== $post->post_type) {
@@ -114,6 +126,9 @@ final class Post implements Bootable
 		return esc_html($season) . '<br>' . esc_html($date);
 	}
 
+	/**
+	 * Relabels the post list table columns to match the chapter vocabulary.
+	 */
 	private function managePostsColumns(array $columns): array
 	{
 		if (isset($columns['author'])) {
@@ -131,6 +146,10 @@ final class Post implements Bootable
 		return $columns;
 	}
 
+	/**
+	 * Rewrites the row action link labels (Edit/Trash/View) to use the
+	 * chapter vocabulary.
+	 */
 	private function postRowActions(array $actions, WP_Post $post): array
 	{
 		if (isset($actions['edit'])) {

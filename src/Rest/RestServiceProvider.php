@@ -16,6 +16,9 @@ namespace X3P0\ABoyInTheWild\Rest;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Rest domain.
+ */
 class RestServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

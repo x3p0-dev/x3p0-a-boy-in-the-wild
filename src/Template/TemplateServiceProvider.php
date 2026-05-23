@@ -16,6 +16,9 @@ namespace X3P0\ABoyInTheWild\Template;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Template domain.
+ */
 final class TemplateServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

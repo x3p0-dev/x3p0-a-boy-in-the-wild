@@ -16,6 +16,9 @@ namespace X3P0\ABoyInTheWild\Icon;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Icon domain.
+ */
 final class IconServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Support;
 
+/**
+ * Resolves a publication time to a named period of the day (Dawn,
+ * Morning, Dusk, Night, etc.).
+ */
 class ChapterTime
 {
 	/**

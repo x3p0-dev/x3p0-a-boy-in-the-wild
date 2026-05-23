@@ -40,6 +40,9 @@ final class AudioService
 		return $this->resolver;
 	}
 
+	/**
+	 * Returns the interactivity helper for enabling audio interactions.
+	 */
 	public function interactivity(): AudioInteractivity
 	{
 		return $this->interactivity;

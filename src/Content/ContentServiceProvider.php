@@ -16,6 +16,9 @@ namespace X3P0\ABoyInTheWild\Content;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Content domain.
+ */
 final class ContentServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

@@ -16,6 +16,9 @@ namespace X3P0\ABoyInTheWild\Audio;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Audio domain.
+ */
 final class AudioServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

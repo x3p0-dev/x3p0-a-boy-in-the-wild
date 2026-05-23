@@ -15,6 +15,10 @@ namespace X3P0\ABoyInTheWild\Content;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
+/**
+ * Rebrands the built-in category taxonomy as "Eras" to match the narrative
+ * framing of the theme.
+ */
 final class Category implements Bootable
 {
 	/**

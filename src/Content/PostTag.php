@@ -15,6 +15,10 @@ namespace X3P0\ABoyInTheWild\Content;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
+/**
+ * Rebrands the built-in post tag taxonomy as "Arcs" to match the narrative
+ * framing of the theme.
+ */
 final class PostTag implements Bootable
 {
 	/**

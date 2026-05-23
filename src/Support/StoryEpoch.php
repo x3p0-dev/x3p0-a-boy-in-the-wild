@@ -23,6 +23,10 @@ use DateTimeZone;
  */
 class StoryEpoch
 {
+	/**
+	 * Cached epoch value for the current request. `null` means
+	 * "not yet resolved", `false` means "resolved, no posts exist".
+	 */
 	private static DateTimeImmutable|false|null $epoch = null;
 
 	/**

@@ -17,6 +17,9 @@ use WP_Block_Bindings_Registry;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the bindings registered under the Block Binding domain.
+ */
 final class BindingServiceProvider extends ServiceProvider implements Bootable
 {
 	/**

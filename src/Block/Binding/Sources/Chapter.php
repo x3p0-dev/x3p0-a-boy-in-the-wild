@@ -15,11 +15,13 @@ namespace X3P0\ABoyInTheWild\Block\Binding\Sources;
 
 use WP_Block;
 use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
-use X3P0\ABoyInTheWild\Support\ChapterDay;
-use X3P0\ABoyInTheWild\Support\ChapterNumber;
-use X3P0\ABoyInTheWild\Support\ChapterSeason;
-use X3P0\ABoyInTheWild\Support\ChapterTime;
-use X3P0\ABoyInTheWild\Support\ChapterYear;
+use X3P0\ABoyInTheWild\Support\{
+	ChapterDay,
+	ChapterNumber,
+	ChapterSeason,
+	ChapterTime,
+	ChapterYear
+};
 
 /**
  * Handles registering the `x3p0/chapter` block bindings source and rendering its

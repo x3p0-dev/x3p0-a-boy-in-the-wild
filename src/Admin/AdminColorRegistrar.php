@@ -16,7 +16,7 @@ namespace X3P0\ABoyInTheWild\Admin;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
- * ...
+ * Registers custom admin color schemes for the theme.
  */
 final class AdminColorRegistrar implements Bootable
 {
@@ -28,6 +28,9 @@ final class AdminColorRegistrar implements Bootable
 		add_action('admin_init', $this->register(...));
 	}
 
+	/**
+	 * Registers the custom admin color scheme with WordPress.
+	 */
 	private function register(): void
 	{
 		wp_admin_css_color(

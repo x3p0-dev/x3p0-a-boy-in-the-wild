@@ -23,6 +23,9 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
  */
 final class IconRegistrar implements Bootable
 {
+	/**
+	 * Namespace prefix applied to every registered icon name.
+	 */
 	private const NAMESPACE = 'x3p0';
 
 	/**

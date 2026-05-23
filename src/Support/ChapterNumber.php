@@ -32,8 +32,16 @@ class ChapterNumber
 	 */
 	private static array $cache = [];
 
+	/**
+	 * Builds an instance from a resolved chapter number. Use one of the
+	 * named factories below to construct the value.
+	 */
 	private function __construct(private readonly int $number) {}
 
+	/**
+	 * Resolves the chapter number for a given post by counting all
+	 * published posts up to and including its date.
+	 */
 	public static function fromPost(WP_Post $post): static
 	{
 		if (isset(self::$cache[$post->ID])) {
@@ -52,6 +60,10 @@ class ChapterNumber
 		return new static(self::$cache[$post->ID]);
 	}
 
+	/**
+	 * Resolves the chapter number from a post ID. Returns null when the
+	 * post cannot be loaded.
+	 */
 	public static function fromPostId(int $postId): ?static
 	{
 		$post = get_post($postId);
@@ -96,6 +108,9 @@ class ChapterNumber
 		);
 	}
 
+	/**
+	 * Converts a positive integer (1–3999) to its Roman numeral string.
+	 */
 	private function toRoman(int $n): string
 	{
 		if ($n < 1) {

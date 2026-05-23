@@ -17,11 +17,7 @@ use WP_Post;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
- * Manages the modification of post type settings during WordPress registration.
- *
- * This manager acts as a coordinator between the post type modifier registry and
- * factory. It hooks into WordPress's CPT registration process and applies
- * custom modifications to CPT args when a modifier is registered for that type.
+ * Rebrands the built-in post statuses to match the narrative framing of the theme.
  */
 final class PostStatus implements Bootable
 {

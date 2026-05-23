@@ -28,6 +28,10 @@ final class PostNavigation implements Bootable
 		add_filter('next_post_link', $this->nextPostLink(...));
 	}
 
+	/**
+	 * Provides a custom fallback label for the next post link when there
+	 * is no following post in the chapter sequence.
+	 */
 	private function nextPostLink(string $output): string
 	{
 		if ('' === $output) {

@@ -27,8 +27,16 @@ use WP_Post;
  */
 class ChapterDay
 {
+	/**
+	 * Builds an instance from a resolved day number. Use one of the
+	 * named factories below to construct the value.
+	 */
 	private function __construct(private readonly int $day) {}
 
+	/**
+	 * Resolves the chapter day for a given post based on its
+	 * publication date.
+	 */
 	public static function fromPost(WP_Post $post): static
 	{
 		$zone = new DateTimeZone(wp_timezone_string());
@@ -41,6 +49,9 @@ class ChapterDay
 		return static::fromDate($date ?: new DateTimeImmutable('now', $zone));
 	}
 
+	/**
+	 * Resolves the chapter day from a Unix timestamp.
+	 */
 	public static function fromTimestamp(int $timestamp): static
 	{
 		$zone = new DateTimeZone(wp_timezone_string());
@@ -49,6 +60,10 @@ class ChapterDay
 		return static::fromDate($date);
 	}
 
+	/**
+	 * Resolves the chapter day by diffing the given date against the
+	 * shared story epoch.
+	 */
 	public static function fromDate(DateTimeImmutable $date): static
 	{
 		$epoch = StoryEpoch::get();

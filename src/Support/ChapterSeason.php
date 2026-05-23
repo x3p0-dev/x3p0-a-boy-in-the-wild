@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Support;
 
+/**
+ * Resolves a publication date to a named season on the story's
+ * seasonal calendar.
+ */
 class ChapterSeason
 {
 	/**
