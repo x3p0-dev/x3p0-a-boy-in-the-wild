@@ -17,6 +17,7 @@
 /// Canvas backgrounds.
 ///
 .x3p0-canvas-bg {
+	position: fixed;
 	z-index: 0;
 	inset: 0;
 	top: 0;
@@ -27,43 +28,6 @@
 	margin: 0 !important;
 	pointer-events: none;
 }
-
-///
-/// Fixed canvas backgrounds
-///
-.x3p0-canvas-bg--adrift,
-.x3p0-canvas-bg--rising-embers,
-.x3p0-canvas-bg--lost-moon,
-.x3p0-canvas-bg--lost-motes,
-.x3p0-canvas-bg--lost-terrain,
-.x3p0-canvas-bg--motes {
-	position: fixed;
-}
-
-.x3p0-canvas-bg--storm {
-	height: 100vh;
-}
-
-///
-/// Absolute positioned backgrounds.
-///
-.x3p0-canvas-bg--flow-field,
-.x3p0-canvas-bg--snow-embers {
-	position: absolute;
-}
-
-
-.x3p0-canvas-bg--storm {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	max-width: 100% !important;
-	margin: 0 !important;
-	height: 100vh;
-	pointer-events: none;
-}
-
 
 // -----------------------------------------------------------------------------
 // Block style variations.
