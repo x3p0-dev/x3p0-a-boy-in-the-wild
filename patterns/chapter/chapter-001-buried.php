@@ -122,7 +122,7 @@ declare(strict_types=1);
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-bg-adrift"} /-->
+	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-scene-adrift"} /-->
 
 </div>
 <!-- /wp:group -->

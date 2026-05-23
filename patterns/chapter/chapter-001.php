@@ -167,7 +167,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/story-navigation-default-full"} /-->
 
-	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-bg-rising-embers"} /-->
+	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-scene-rising-embers"} /-->
 
 </div>
 <!-- /wp:group -->

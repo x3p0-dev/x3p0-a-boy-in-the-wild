@@ -127,7 +127,7 @@ module.exports = (() => {
 			...moduleConfig,
 			...{
 				entry: {
-					...groupScriptModules('canvas'),
+					...groupScriptModules('canvas/scene'),
 					...groupScriptModules('interactive')
 				}
 			}

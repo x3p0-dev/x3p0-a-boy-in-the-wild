@@ -327,7 +327,7 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/story-navigation-default"} /-->
 
-	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-bg-motes"} /-->
+	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-scene-motes"} /-->
 
 </div>
 <!-- /wp:group -->

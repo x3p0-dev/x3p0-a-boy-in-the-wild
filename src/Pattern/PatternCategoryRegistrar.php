@@ -43,12 +43,12 @@ final class PatternCategoryRegistrar implements Bootable
 	private function register(): void
 	{
 		register_block_pattern_category('x3p0-chapters', [
-			'label'       => __('Story Chapters', 'x3p0-a-boy-in-the-wild'),
+			'label'       => __('Chapters', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Starter patterns that contain a new chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
 		]);
 
 		register_block_pattern_category('x3p0-chapters-buried', [
-			'label'       => __('Story Chapters (Buried)', 'x3p0-a-boy-in-the-wild'),
+			'label'       => __('Chapters (Buried)', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Starter patterns that contain a new buried chapter of the story with unique designs.' ,'x3p0-a-boy-in-the-wild')
 		]);
 
@@ -57,8 +57,8 @@ final class PatternCategoryRegistrar implements Bootable
 			'description' => __('Patterns used for various chapter elements.' ,'x3p0-a-boy-in-the-wild')
 		]);
 
-		register_block_pattern_category('x3p0-background-animations', [
-			'label'       => __('Background Animations', 'x3p0-a-boy-in-the-wild'),
+		register_block_pattern_category('x3p0-canvas-scenes', [
+			'label'       => __('Scenes (Animated Backgrounds)', 'x3p0-a-boy-in-the-wild'),
 			'description' => __('Animated backgrounds meant for use for the page.' ,'x3p0-a-boy-in-the-wild')
 		]);
 

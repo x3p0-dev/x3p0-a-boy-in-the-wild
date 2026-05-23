@@ -232,7 +232,7 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 
 	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/story-navigation-default-full"} /-->
 
-	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-bg-storm"} /-->
+	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-scene-storm"} /-->
 
 </div>
 <!-- /wp:group -->

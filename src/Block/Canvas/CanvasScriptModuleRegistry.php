@@ -70,7 +70,7 @@ final class CanvasScriptModuleRegistry
 			foreach ($slugs as $slug) {
 				yield self::CSS_PREFIX . "-{$type}--{$slug}" => [
 					'handle' => self::HANDLE_PREFIX . "-{$type}-{$slug}",
-					'src'    => self::SRC_PREFIX    . "/{$slug}.js",
+					'src'    => self::SRC_PREFIX    . "/{$type}/{$slug}.js",
 				];
 			}
 		}

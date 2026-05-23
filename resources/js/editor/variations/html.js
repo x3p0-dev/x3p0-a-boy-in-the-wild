@@ -21,5 +21,5 @@ registerBlockVariation( 'core/html', {
 	icon:        iconStorm,
 	scope:       [ 'block', 'inserter' ],
 	isActive:    ( attributes ) =>
-		attributes.content?.includes( 'x3p0-canvas-bg' ),
+		attributes.content?.includes( 'x3p0-canvas-scene' ),
 } );

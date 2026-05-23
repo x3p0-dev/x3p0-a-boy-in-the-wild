@@ -191,7 +191,7 @@ $sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
 	</article>
 	<!-- /wp:group -->
 
-	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-bg-lost-moon-terrain-motes"} /-->
+	<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/canvas-scene-lost-moon-terrain-motes"} /-->
 
 </main>
 <!-- /wp:group -->

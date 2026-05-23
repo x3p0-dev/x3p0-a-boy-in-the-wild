@@ -17,7 +17,7 @@
 /// Ensures siblings for nested `<canvas>` elements are positioned over the
 /// background effect.
 ///
-.wp-block-group:has(.x3p0-canvas-bg) > *:not(.x3p0-canvas-bg) {
+.wp-block-group:has(.x3p0-canvas-scene) > *:not(.x3p0-canvas-scene) {
 	position: relative;
 	z-index: 1;
 }
