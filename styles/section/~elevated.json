@@ -9,13 +9,15 @@
 		"core/group"
 	],
 	"styles": {
+		"css": "corner-shape: var(--wp--custom--corner--global--shape);",
 		"color": {
 			"background": "color-mix(in oklab, var(--wp--preset--color--parchment-accent) 38%, transparent)"
 		},
 		"border": {
 			"color": "var(--wp--preset--color--rule)",
-			"style": "solid",
-			"width": "1px"
+			"style": "var(--wp--custom--border--global--style)",
+			"width": "var(--wp--custom--border--global--width)",
+			"radius": "var(--wp--custom--border--global--radius)"
 		}
 	}
 }

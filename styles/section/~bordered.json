@@ -9,10 +9,12 @@
 		"core/group"
 	],
 	"styles": {
+		"css": "corner-shape: var(--wp--custom--corner--global--shape);",
 		"border": {
 			"color": "var(--wp--preset--color--rule)",
-			"style": "solid",
-			"width": "1px"
+			"style": "var(--wp--custom--border--global--style)",
+			"width": "var(--wp--custom--border--global--width)",
+			"radius": "var(--wp--custom--border--global--radius)"
 		}
 	}
 }
