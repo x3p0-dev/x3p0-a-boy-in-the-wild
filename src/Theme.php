@@ -41,6 +41,7 @@ final class Theme extends Application
 		Block\Category\BlockCategoryServiceProvider::class,
 		Block\Render\RenderServiceProvider::class,
 		Block\Settings\SettingsServiceProvider::class,
+		Block\Style\StyleServiceProvider::class,
 		Block\Stylesheet\StylesheetServiceProvider::class,
 		Content\ContentServiceProvider::class,
 		Editor\EditorServiceProvider::class,
