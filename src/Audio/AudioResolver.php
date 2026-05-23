@@ -19,24 +19,34 @@ namespace X3P0\ABoyInTheWild\Audio;
 final class AudioResolver
 {
 	/**
+	 * Default audio files for specific contexts where no post meta is set.
+	 */
+	private const DEFAULTS = [
+		'404' => 'public/media/audio/music/moonless-pine-drift.mp3',
+	];
+
+	/**
 	 * Gets the current audio.
 	 */
 	public function getCurrentAudioFile(): string
 	{
-		$audioId = 0;
-		$audioUrl = '';
+		return match (true) {
+			is_singular('post') => $this->getPostAudioUrl(get_queried_object_id()),
+			is_404()            => get_theme_file_uri(self::DEFAULTS['404']),
+			default             => '',
+		};
+	}
 
-		if (is_singular('post')) {
-			$audioId = get_post_meta(get_queried_object_id(), AudioMeta::META_KEY, true);
-		} elseif (is_404()) {
-			$audioUrl = get_theme_file_uri('public/media/audio/music/moonless-pine-drift.mp3');
-		}
+	/**
+	 * Gets a specific post's audio URL.
+	 */
+	private function getPostAudioUrl(int $postId): string
+	{
+		$audioId = get_post_meta($postId, AudioMeta::META_KEY, true);
 
-		if ($audioId) {
-			$audioUrl = wp_get_attachment_url($audioId);
-		}
-
-		return $audioUrl;
+		return $audioId
+			? (string) wp_get_attachment_url(absint($audioId))
+			: '';
 	}
 
 	/**

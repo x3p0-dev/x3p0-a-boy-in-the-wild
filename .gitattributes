@@ -53,8 +53,8 @@ webpack.config.js export-ignore
 /resources/fonts export-ignore
 /resources/media export-ignore
 
-# Don't export audio files for now. Keeping size reasonable.
-/public/media/audio export-ignore
+# Don't export audio files meant for use upload to keep the theme ZIP smaller.
+/public/media/audio/uploads export-ignore
 
 # Don't export experimental features.
 /experiments export-ignore
