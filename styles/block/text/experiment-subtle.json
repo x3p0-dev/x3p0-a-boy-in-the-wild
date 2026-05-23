@@ -1,17 +1,16 @@
 {
 	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/wp/6.8/schemas/json/theme.json",
 	"version": 3,
-	"title": "Muted",
-	"description": "Normalizes the text and gives it a muted ink color.",
-	"slug": "text-muted",
+	"title": "Subtle (Experiment)",
+	"description": "Normalizes the text and gives it a subtle ink color.",
+	"slug": "text-subtle",
 	"blockTypes": [
 		"core/heading",
-		"core/paragraph",
-		"core/post-author-biography"
+		"core/paragraph"
 	],
 	"styles": {
 		"color": {
-			"text": "var(--wp--preset--color--ink-muted)"
+			"text": "var(--wp--preset--color--ink-subtle)"
 		},
 		"typography": {
 			"fontFamily": "inherit",

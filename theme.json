@@ -9,11 +9,11 @@
 			"gradient": true
 		},
 		"border": {
-			"color": true,
-			"radius": true,
+			"color": false,
+			"radius": false,
 			"radiusSizes": [],
-			"width": true,
-			"style": true
+			"width": false,
+			"style": false
 		},
 		"color": {
 			"background": false,
