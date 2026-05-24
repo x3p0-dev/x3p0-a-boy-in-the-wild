@@ -78,7 +78,7 @@ $sketch     = get_theme_file_uri('public/media/images/template/home-sketch.webp'
 					<!-- /wp:heading -->
 
 					<!-- wp:paragraph {"className":"is-style-text-caption"} -->
-					<p class="is-style-text-caption"><?= esc_html__('Notes on finding the way back, chronicled one marker at a time. The path shifts, but the direction holds.', 'x3p0-a-boy-in-the-wild') ?></p>
+					<p class="is-style-text-caption"><?= esc_html__("I am keeping a record. What I know, what I got wrong, what worked, and what didn't. The fire, the shelter, the weather, the things I found, and the things I lost. Field notes from the wild.", 'x3p0-a-boy-in-the-wild') ?></p>
 					<!-- /wp:paragraph -->
 
 				</div>
