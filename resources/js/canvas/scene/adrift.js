@@ -4,9 +4,10 @@
  * Used by Chapter 001-buried ("Buried"). Particles gather in loose clusters
  * and wobble independently around each cluster's centre, all carried sideways
  * by a steady horizontal current. Reads as dust caught in late-summer air —
- * or memory motes hanging where they fell. Variety comes from per-particle
- * alpha and a radius distribution skewed toward small; the hue is the
- * chapter's ink-accent token.
+ * or memory motes hanging where they fell. Tonal variety comes from a small
+ * palette built from four warm ink/parchment tokens; each particle picks
+ * one. Per-particle alpha and a radius distribution skewed toward small
+ * add further depth.
  *
  * Canvas class  : x3p0-canvas-scene--adrift
  * Position      : fixed — fills the viewport regardless of scroll
@@ -108,7 +109,14 @@ const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).ma
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-let rgb = extractRGB( canvas, '--wp--preset--color--ink-accent', '122,64,16' );
+// A small warm palette — each particle picks one index. The variety reads as
+// dust catching different bits of light through a tree canopy.
+let rgbs = [
+	extractRGB( canvas, '--wp--preset--color--ink-accent',       '122,64,16'  ),
+	extractRGB( canvas, '--wp--preset--color--ink-subtle',       '92,44,8'    ),
+	extractRGB( canvas, '--wp--preset--color--ink-muted',        '154,88,24'  ),
+	extractRGB( canvas, '--wp--preset--color--parchment-accent', '154,88,24'  ),
+];
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
@@ -132,6 +140,7 @@ function makeCluster( randomX ) {
 			wobbleOffset: Math.random() * Math.PI * 2,
 			wobbleSpeed:  randomBetween( CONFIG.wobbleSpeedMin, CONFIG.wobbleSpeedMax ),
 			wobbleAmp:    randomBetween( CONFIG.wobbleAmpMin,   CONFIG.wobbleAmpMax   ),
+			colorIndex:   Math.floor( Math.random() * rgbs.length ),
 		} );
 	}
 
@@ -174,7 +183,7 @@ function draw( t ) {
 
 			ctx.beginPath();
 			ctx.arc( px, py, p.r, 0, Math.PI * 2 );
-			ctx.fillStyle = `rgba(${ rgb },${ p.alpha.toFixed( 3 ) })`;
+			ctx.fillStyle = `rgba(${ rgbs[ p.colorIndex ] },${ p.alpha.toFixed( 3 ) })`;
 			ctx.fill();
 		} );
 	}

@@ -327,20 +327,35 @@ via the `map` object — never rely on implicit conversion.
 
 ## Colour
 
-- Always read colour from a CSS custom property on the canvas element using
-  `extractRGB()`. Scene canvases inherit CSS custom properties from the
-  Entry Group, so reading from the canvas directly is equivalent.
-- Use the value directly as the RGB components of an `rgba()` string.
+- All colour comes from CSS custom properties read via `extractRGB()`.
+  Scene canvases inherit CSS custom properties from the Entry Group, so
+  reading from the canvas directly is equivalent.
+- Use each value directly as the RGB components of an `rgba()` string.
 - Control opacity per-particle or per-line via `ctx.globalAlpha` or the
   alpha argument of `rgba()`.
 - Always provide a hardcoded fallback matching the late-summer palette.
+
+An effect may read **one or several** tokens depending on what its visual
+character needs:
+
+- **One token** is the default. Variety comes from per-particle alpha,
+  radius, and (for warm effects) additive blending stacking the same hue
+  into brighter regions. Use this whenever it looks right.
+- **A small palette of tokens** is appropriate when the effect reads as
+  monotone with a single hue — clusters of distinct particles, line
+  networks, anything where tonal range is part of the design. Each
+  particle picks an index into a `let rgbs = [...]` array built from
+  separate `extractRGB()` calls. Do not invent intermediate hues by
+  shifting HSL — use what the palette gives you.
 
 The most useful anchor tokens:
 
 | Token | Role |
 |---|---|
 | `--wp--preset--color--ink-accent` | Darkest / most saturated, base hue |
-| `--wp--preset--color--parchment-accent` | Mid tone, secondary hue |
+| `--wp--preset--color--ink-subtle` | Mid–dark variant of ink |
+| `--wp--preset--color--ink-muted` | Mid–light variant of ink |
+| `--wp--preset--color--parchment-accent` | Secondary warm hue |
 | `--wp--preset--color--ink` | Foreground colour |
 | `--wp--preset--color--rule` | Separator colour, subtle line effects |
 
