@@ -1,314 +1,242 @@
 /**
- * Chapter 2 — The Map I Drew
- * Canvas effect: forest motes drifting across the map.
+ * Motes — small particles drifting across a vertical band, occasionally
+ * pausing or briefly drifting back as in an intermittent breeze.
  *
- * A handful of particles drift slowly left to right at varying speeds and
- * depths, occasionally pausing or reversing as an intermittent breeze would
- * move something light and dry. The effect is subliminal — the map feels like
- * an outdoor document rather than a finished thing on a desk.
+ * Used by Chapter 002 ("The Map I Drew"). Particles travel slowly left to
+ * right within a band confined to the upper portion of the viewport — the
+ * map zone. Each mote runs a tiny state machine (`drifting` / `paused` /
+ * `reversing`) with low transition probabilities, so motion reads as
+ * occasional natural pauses rather than scripted choreography. The effect
+ * is subliminal: present enough to make the map feel like an outdoor
+ * document, not so present that it competes with the prose.
  *
- * Canvas class: x3p0-canvas-scene x3p0-canvas-scene--motes
- * Positioning:  fixed (viewport-scale ambient effect)
- * Reduced motion: canvas is created and sized but never animated.
+ * Canvas class  : x3p0-canvas-scene--motes
+ * Position      : fixed — fills the viewport regardless of scroll
+ * Reduced motion: canvas is sized but not drawn (mid-flight motes would
+ *                 read as flyspeck on a static page)
+ *
+ * @file resources/js/canvas/scene/motes.js
  */
 
-( function () {
+import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
 
-	// -------------------------------------------------------------------------
-	// CONFIG — all tuneable values in one place.
-	// -------------------------------------------------------------------------
+const canvas = document.querySelector( '.x3p0-canvas-scene--motes' );
 
-	const CONFIG = {
-		// Number of mote particles.
-		moteCount: 10,
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-		// Horizontal drift speed range (px/frame, positive = rightward).
-		// Kept very slow so motes are subliminal rather than distracting.
-		driftSpeedMin: 0.08,
-		driftSpeedMax: 0.28,
+const CONFIG = {
 
-		// Vertical drift range (px/frame). Slight vertical wobble only.
-		// Negative = upward, positive = downward. Range is symmetric.
-		verticalWobbleAmp: 0.06,
+	// Number of motes on screen at once.
+	moteCount: 10,
 
-		// Pause probability per frame (chance a mote briefly stops drifting).
-		// Very low — pauses should feel occasional and natural.
-		pauseChance: 0.0008,
+	// Horizontal drift speed range (px/frame, positive = rightward).
+	// Kept very slow so motes are subliminal rather than distracting.
+	driftSpeedMin: 0.08,
+	driftSpeedMax: 0.28,
 
-		// Reversal probability per frame (chance a mote briefly drifts back).
-		// Even lower than pause — reversals are rare wind-back moments.
-		reversalChance: 0.0003,
+	// Vertical wobble — small sinusoidal wander (px/frame amplitude).
+	verticalWobbleAmp: 0.06,
 
-		// Duration range for pauses (frames).
-		pauseDurationMin: 40,
-		pauseDurationMax: 120,
+	// Vertical wobble cycle speed range (radians/frame).
+	vertWobbleSpeedMin: 0.004,
+	vertWobbleSpeedMax: 0.012,
 
-		// Duration range for reversals (frames).
-		reversalDurationMin: 20,
-		reversalDurationMax: 60,
+	// State transition probabilities per frame. Low values — pauses and
+	// reversals should feel occasional, not scheduled.
+	pauseChance:    0.0008,
+	reversalChance: 0.0003,
 
-		// Opacity range. Low but perceptible — present without competing with the map.
-		alphaMin: 0.12,
-		alphaMax: 0.35,
+	// Pause duration range (frames).
+	pauseDurationMin: 40,
+	pauseDurationMax: 120,
 
-		// Mote radius range (px). Small and irregular.
-		radiusMin: 0.8,
-		radiusMax: 2.2,
+	// Reversal duration range (frames).
+	reversalDurationMin: 20,
+	reversalDurationMax: 60,
 
-		// Vertical band within which motes spawn and travel.
-		// Expressed as fractions of viewport height (0 = top, 1 = bottom).
-		// Constrains effect to roughly the map zone at the top of the chapter.
-		bandTop:    0.0,
-		bandBottom: 0.52,
+	// Reversal drift is slower than forward drift — this multiplier scales
+	// the mote's normal driftSpeed during the reversal state.
+	reversalSpeedFactor: 0.4,
 
-		// Horizontal spawn margin — motes start just off the left edge.
-		spawnOffsetLeft: -20,
+	// Per-mote alpha range. Low but perceptible.
+	alphaMin: 0.12,
+	alphaMax: 0.35,
 
-		// Recycle x threshold — motes recycle when this far past right edge.
-		recycleOffsetRight: 30,
+	// Mote radius range (px).
+	radiusMin: 0.8,
+	radiusMax: 2.2,
+
+	// Vertical band motes occupy, as fractions of viewport height
+	// (0 = top, 1 = bottom). Restricts the effect to the map zone.
+	bandTop:    0.0,
+	bandBottom: 0.52,
+
+	// Horizontal spawn x for recycled motes (just off the left edge).
+	spawnOffsetLeft: -20,
+
+	// Recycle threshold — motes recycle this far past the right edge.
+	recycleOffsetRight: 30,
+
+};
+
+// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
+
+( () => {
+	const map = {
+		moteCount:           Number,
+		driftSpeedMin:       Number,
+		driftSpeedMax:       Number,
+		verticalWobbleAmp:   Number,
+		vertWobbleSpeedMin:  Number,
+		vertWobbleSpeedMax:  Number,
+		pauseChance:         Number,
+		reversalChance:      Number,
+		pauseDurationMin:    Number,
+		pauseDurationMax:    Number,
+		reversalDurationMin: Number,
+		reversalDurationMax: Number,
+		reversalSpeedFactor: Number,
+		alphaMin:            Number,
+		alphaMax:            Number,
+		radiusMin:           Number,
+		radiusMax:           Number,
+		bandTop:             Number,
+		bandBottom:          Number,
+		spawnOffsetLeft:     Number,
+		recycleOffsetRight:  Number,
 	};
 
-	// -------------------------------------------------------------------------
-	// Canvas setup.
-	// -------------------------------------------------------------------------
-
-	const canvas = document.querySelector( '.x3p0-canvas-scene--motes' );
-
-	if ( ! canvas ) {
-		return;
-	}
-
-	const ctx   = canvas.getContext( '2d' );
-	const group = canvas.parentElement;
-
-	function resize() {
-		canvas.width  = window.innerWidth;
-		canvas.height = window.innerHeight;
-	}
-
-	resize();
-	window.addEventListener( 'resize', resize );
-
-	// -------------------------------------------------------------------------
-	// Data attribute overrides — any CONFIG key can be set via data-* on canvas.
-	// -------------------------------------------------------------------------
-
-	( function () {
-		const map = {
-			moteCount:           Number,
-			driftSpeedMin:       Number,
-			driftSpeedMax:       Number,
-			verticalWobbleAmp:   Number,
-			pauseChance:         Number,
-			reversalChance:      Number,
-			pauseDurationMin:    Number,
-			pauseDurationMax:    Number,
-			reversalDurationMin: Number,
-			reversalDurationMax: Number,
-			alphaMin:            Number,
-			alphaMax:            Number,
-			radiusMin:           Number,
-			radiusMax:           Number,
-			bandTop:             Number,
-			bandBottom:          Number,
-			spawnOffsetLeft:     Number,
-			recycleOffsetRight:  Number,
-		};
-
-		Object.keys( map ).forEach( ( key ) => {
-			if ( canvas.dataset[ key ] !== undefined ) {
-				CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
-			}
-		} );
-	} )();
-
-	// -------------------------------------------------------------------------
-	// Reduced motion guard.
-	// -------------------------------------------------------------------------
-
-	if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
-		return;
-	}
-
-	// -------------------------------------------------------------------------
-	// Colour — read directly from the style variation custom property.
-	// The value is always a valid CSS colour. Alpha is controlled per-particle
-	// via ctx.globalAlpha, so any alpha in the source value is ignored.
-	// -------------------------------------------------------------------------
-
-	const style     = getComputedStyle( group );
-	const moteColor = style.getPropertyValue( '--wp--preset--color--ink-accent' ).trim()
-		|| '#4a2808';
-
-	// -------------------------------------------------------------------------
-	// Helpers.
-	// -------------------------------------------------------------------------
-
-	function rand( min, max ) {
-		return min + Math.random() * ( max - min );
-	}
-
-	function randInt( min, max ) {
-		return Math.floor( rand( min, max + 1 ) );
-	}
-
-	// -------------------------------------------------------------------------
-	// Mote system.
-	// -------------------------------------------------------------------------
-
-	/**
-	 * A single mote particle.
-	 *
-	 * State machine: 'drifting' | 'paused' | 'reversing'
-	 * Transitions are probabilistic per frame (see CONFIG).
-	 */
-	function createMote( spawnAnywhere ) {
-		const bandH = ( CONFIG.bandBottom - CONFIG.bandTop ) * window.innerHeight;
-		const bandY = CONFIG.bandTop * window.innerHeight;
-
-		// spawnAnywhere = true on init so motes are spread across the screen,
-		// not all queued at the left edge.
-		const x = spawnAnywhere
-			? rand( 0, window.innerWidth )
-			: CONFIG.spawnOffsetLeft;
-
-		return {
-			x,
-			y:             rand( bandY, bandY + bandH ),
-			radius:        rand( CONFIG.radiusMin, CONFIG.radiusMax ),
-			alpha:         rand( CONFIG.alphaMin, CONFIG.alphaMax ),
-			driftSpeed:    rand( CONFIG.driftSpeedMin, CONFIG.driftSpeedMax ),
-			vertOffset:    rand( 0, Math.PI * 2 ),   // phase for vertical wobble
-			vertSpeed:     rand( 0.004, 0.012 ),      // how fast the wobble cycles
-			state:         'drifting',
-			stateTimer:    0,
-			stateDuration: 0,
-		};
-	}
-
-	// Initialise motes spread across the viewport.
-	const motes = Array.from( { length: CONFIG.moteCount }, () => createMote( true ) );
-
-	// -------------------------------------------------------------------------
-	// Draw.
-	// -------------------------------------------------------------------------
-
-	function drawMote( mote ) {
-		ctx.save();
-		ctx.globalAlpha = mote.alpha;
-		ctx.fillStyle   = moteColor;
-		ctx.beginPath();
-		ctx.arc( mote.x, mote.y, mote.radius, 0, Math.PI * 2 );
-		ctx.fill();
-		ctx.restore();
-	}
-
-	// -------------------------------------------------------------------------
-	// Update.
-	// -------------------------------------------------------------------------
-
-	function updateMote( mote ) {
-		// Vertical wobble — continuous regardless of horizontal state.
-		mote.vertOffset += mote.vertSpeed;
-		mote.y += Math.sin( mote.vertOffset ) * CONFIG.verticalWobbleAmp;
-
-		// Clamp y to band.
-		const bandH = ( CONFIG.bandBottom - CONFIG.bandTop ) * canvas.height;
-		const bandY = CONFIG.bandTop * canvas.height;
-		mote.y = Math.max( bandY, Math.min( bandY + bandH, mote.y ) );
-
-		// State machine.
-		switch ( mote.state ) {
-
-			case 'drifting':
-				mote.x += mote.driftSpeed;
-
-				// Probabilistic transition to pause.
-				if ( Math.random() < CONFIG.pauseChance ) {
-					mote.state         = 'paused';
-					mote.stateTimer    = 0;
-					mote.stateDuration = randInt(
-						CONFIG.pauseDurationMin,
-						CONFIG.pauseDurationMax
-					);
-					break;
-				}
-
-				// Probabilistic transition to reversal.
-				if ( Math.random() < CONFIG.reversalChance ) {
-					mote.state         = 'reversing';
-					mote.stateTimer    = 0;
-					mote.stateDuration = randInt(
-						CONFIG.reversalDurationMin,
-						CONFIG.reversalDurationMax
-					);
-					break;
-				}
-				break;
-
-			case 'paused':
-				mote.stateTimer++;
-				if ( mote.stateTimer >= mote.stateDuration ) {
-					mote.state = 'drifting';
-				}
-				break;
-
-			case 'reversing':
-				mote.x -= mote.driftSpeed * 0.4; // drift back slower than forward
-				mote.stateTimer++;
-				if ( mote.stateTimer >= mote.stateDuration ) {
-					mote.state = 'drifting';
-				}
-				break;
-		}
-
-		// Recycle when past right edge.
-		if ( mote.x > canvas.width + CONFIG.recycleOffsetRight ) {
-			const recycled     = createMote( false );
-			mote.x             = recycled.x;
-			mote.y             = recycled.y;
-			mote.radius        = recycled.radius;
-			mote.alpha         = recycled.alpha;
-			mote.driftSpeed    = recycled.driftSpeed;
-			mote.vertOffset    = recycled.vertOffset;
-			mote.vertSpeed     = recycled.vertSpeed;
-			mote.state         = 'drifting';
-			mote.stateTimer    = 0;
-			mote.stateDuration = 0;
-		}
-	}
-
-	// -------------------------------------------------------------------------
-	// Animation loop.
-	// -------------------------------------------------------------------------
-
-	let rafId;
-
-	function tick() {
-		ctx.clearRect( 0, 0, canvas.width, canvas.height );
-
-		motes.forEach( ( mote ) => {
-			updateMote( mote );
-			drawMote( mote );
-		} );
-
-		rafId = requestAnimationFrame( tick );
-	}
-
-	rafId = requestAnimationFrame( tick );
-
-	// -------------------------------------------------------------------------
-	// Cleanup — cancel loop if Entry Group is removed from DOM.
-	// -------------------------------------------------------------------------
-
-	const observer = new MutationObserver( () => {
-		if ( ! document.contains( group ) ) {
-			cancelAnimationFrame( rafId );
-			window.removeEventListener( 'resize', resize );
-			observer.disconnect();
+	Object.keys( map ).forEach( ( key ) => {
+		if ( canvas.dataset[ key ] !== undefined ) {
+			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
 		}
 	} );
-
-	observer.observe( document.body, { childList: true, subtree: true } );
-
 } )();
+
+// ─── CANVAS SETUP ────────────────────────────────────────────────────────────
+
+const rafRef = { current: null };
+
+const { ctx, resize } = setupCanvas( canvas );
+
+// ─── REDUCED MOTION ──────────────────────────────────────────────────────────
+
+const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+// ─── COLOUR ──────────────────────────────────────────────────────────────────
+
+let rgb = extractRGB( canvas, '--wp--preset--color--ink-accent', '74,40,8' );
+
+// ─── EFFECT STATE ────────────────────────────────────────────────────────────
+
+function randomBetween( min, max ) {
+	return min + Math.random() * ( max - min );
+}
+
+function randomIntBetween( min, max ) {
+	return Math.floor( randomBetween( min, max + 1 ) );
+}
+
+function bandYRange() {
+	const top    = CONFIG.bandTop    * window.innerHeight;
+	const bottom = CONFIG.bandBottom * window.innerHeight;
+	return { top, bottom };
+}
+
+function createMote( spawnAnywhere ) {
+	const { top, bottom } = bandYRange();
+
+	return {
+		x:             spawnAnywhere ? randomBetween( 0, window.innerWidth ) : CONFIG.spawnOffsetLeft,
+		y:             randomBetween( top, bottom ),
+		radius:        randomBetween( CONFIG.radiusMin,       CONFIG.radiusMax       ),
+		alpha:         randomBetween( CONFIG.alphaMin,        CONFIG.alphaMax        ),
+		driftSpeed:    randomBetween( CONFIG.driftSpeedMin,   CONFIG.driftSpeedMax   ),
+		vertOffset:    randomBetween( 0, Math.PI * 2 ),
+		vertSpeed:     randomBetween( CONFIG.vertWobbleSpeedMin, CONFIG.vertWobbleSpeedMax ),
+		state:         'drifting',  // 'drifting' | 'paused' | 'reversing'
+		stateTimer:    0,
+		stateDuration: 0,
+	};
+}
+
+const motes = Array.from( { length: CONFIG.moteCount }, () => createMote( true ) );
+
+// ─── DRAW ────────────────────────────────────────────────────────────────────
+
+function updateMote( m ) {
+	m.vertOffset += m.vertSpeed;
+	m.y          += Math.sin( m.vertOffset ) * CONFIG.verticalWobbleAmp;
+
+	const { top, bottom } = bandYRange();
+	m.y = Math.max( top, Math.min( bottom, m.y ) );
+
+	switch ( m.state ) {
+
+		case 'drifting':
+			m.x += m.driftSpeed;
+
+			if ( Math.random() < CONFIG.pauseChance ) {
+				m.state         = 'paused';
+				m.stateTimer    = 0;
+				m.stateDuration = randomIntBetween( CONFIG.pauseDurationMin, CONFIG.pauseDurationMax );
+				break;
+			}
+
+			if ( Math.random() < CONFIG.reversalChance ) {
+				m.state         = 'reversing';
+				m.stateTimer    = 0;
+				m.stateDuration = randomIntBetween( CONFIG.reversalDurationMin, CONFIG.reversalDurationMax );
+			}
+			break;
+
+		case 'paused':
+			m.stateTimer++;
+			if ( m.stateTimer >= m.stateDuration ) m.state = 'drifting';
+			break;
+
+		case 'reversing':
+			m.x -= m.driftSpeed * CONFIG.reversalSpeedFactor;
+			m.stateTimer++;
+			if ( m.stateTimer >= m.stateDuration ) m.state = 'drifting';
+			break;
+	}
+
+	if ( m.x > window.innerWidth + CONFIG.recycleOffsetRight ) {
+		Object.assign( m, createMote( false ) );
+	}
+}
+
+function drawMote( m ) {
+	ctx.beginPath();
+	ctx.arc( m.x, m.y, m.radius, 0, Math.PI * 2 );
+	ctx.fillStyle = `rgba(${ rgb },${ m.alpha.toFixed( 3 ) })`;
+	ctx.fill();
+}
+
+function draw() {
+	ctx.clearRect( 0, 0, window.innerWidth, window.innerHeight );
+
+	for ( let i = 0; i < motes.length; i++ ) {
+		updateMote( motes[ i ] );
+		drawMote(   motes[ i ] );
+	}
+}
+
+// ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
+
+if ( reducedMotion ) {
+	createCleanup( canvas, rafRef, resize );
+}
+
+// ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
+
+else {
+	function tick() {
+		draw();
+		rafRef.current = requestAnimationFrame( tick );
+	}
+
+	rafRef.current = requestAnimationFrame( tick );
+	createCleanup( canvas, rafRef, resize );
+}
