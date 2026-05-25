@@ -20,9 +20,9 @@
  * @file resources/js/canvas/scene/flow-field.js
  */
 
-import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
+import {setupCanvas, extractColour, withAlpha, createCleanup} from 'x3p0/canvas-utils';
 
-const canvas = document.querySelector( '.x3p0-canvas-scene--flow-field' );
+const canvas = document.querySelector('.x3p0-canvas-scene--flow-field');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -74,19 +74,18 @@ const CONFIG = {
 	// How far past the viewport edge a line may wander before it terminates.
 	wanderMargin: 5,
 
-	// Noise harmonic weights. Each entry: [ yFreq, xFreq, tFreq, weight ].
+	// Noise harmonic weights. Each entry: [yFreq, xFreq, tFreq, weight].
 	harmonics: [
-		[ 0.8, 0.15, 0.50, 0.60 ],
-		[ 1.8, 0.25, 0.35, 0.25 ],
-		[ 3.2, 0.10, 0.20, 0.10 ],
-		[ 0.0, 0.50, 0.15, 0.05 ],
-	],
-
+		[0.8, 0.15, 0.50, 0.60],
+		[1.8, 0.25, 0.35, 0.25],
+		[3.2, 0.10, 0.20, 0.10],
+		[0.0, 0.50, 0.15, 0.05]
+	]
 };
 
 // ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-( () => {
+(() => {
 	const map = {
 		lineCount:      Number,
 		fieldCols:      Number,
@@ -104,42 +103,42 @@ const CONFIG = {
 		driftSpeed:     Number,
 		noiseXScale:    Number,
 		noiseYScale:    Number,
-		wanderMargin:   Number,
+		wanderMargin:   Number
 		// `harmonics` is intentionally not data-overridable — it's a
 		// structured value, not a scalar.
 	};
 
-	Object.keys( map ).forEach( ( key ) => {
-		if ( canvas.dataset[ key ] !== undefined ) {
-			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+	Object.keys(map).forEach((key) => {
+		if (canvas.dataset[key] !== undefined) {
+			CONFIG[key] = map[key](canvas.dataset[key]);
 		}
-	} );
-} )();
+	});
+})();
 
 // ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-const rafRef = { current: null };
+const rafRef = {current: null};
 
-const { ctx, resize } = setupCanvas( canvas );
+const {ctx, resize} = setupCanvas(canvas);
 
 // ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
 // Spine palette's `--rule` carries an intentional 0.18 alpha; withAlpha()
 // multiplies it through per-line so the contours stay well back from the prose.
-let colour = extractColour( canvas, '--wp--preset--color--rule', '90,55,12,0.18' );
+let colour = extractColour(canvas, '--wp--preset--color--rule', '90,55,12,0.18');
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
-function noise( x, y, t ) {
+function noise(x, y, t) {
 	let value = 0;
 
-	for ( const [ yFreq, xFreq, tFreq, weight ] of CONFIG.harmonics ) {
+	for (const [yFreq, xFreq, tFreq, weight] of CONFIG.harmonics) {
 		const yTerm = yFreq > 0 ? yFreq * y : 0;
-		value += Math.sin( yTerm + xFreq * x + tFreq * t ) * weight;
+		value += Math.sin(yTerm + xFreq * x + tFreq * t) * weight;
 	}
 
 	return value;
@@ -147,71 +146,71 @@ function noise( x, y, t ) {
 
 const field = [];
 
-function buildField( t ) {
-	const { fieldCols, fieldRows, noiseXScale, noiseYScale } = CONFIG;
+function buildField(t) {
+	const {fieldCols, fieldRows, noiseXScale, noiseYScale} = CONFIG;
 
-	for ( let r = 0; r <= fieldRows; r++ ) {
-		if ( ! field[ r ] ) field[ r ] = [];
+	for (let r = 0; r <= fieldRows; r++) {
+		if (! field[r]) field[r] = [];
 
-		for ( let c = 0; c <= fieldCols; c++ ) {
-			field[ r ][ c ] = noise(
-				( c / fieldCols ) * noiseXScale,
-				( r / fieldRows ) * noiseYScale,
+		for (let c = 0; c <= fieldCols; c++) {
+			field[r][c] = noise(
+				(c / fieldCols) * noiseXScale,
+				(r / fieldRows) * noiseYScale,
 				t
 			) * Math.PI;
 		}
 	}
 }
 
-function getAngle( x, y ) {
-	const { fieldCols, fieldRows } = CONFIG;
-	const c = Math.min( Math.max( Math.floor( x / window.innerWidth  * fieldCols ), 0 ), fieldCols - 1 );
-	const r = Math.min( Math.max( Math.floor( y / window.innerHeight * fieldRows ), 0 ), fieldRows - 1 );
-	return field[ r ]?.[ c ] ?? 0;
+function getAngle(x, y) {
+	const {fieldCols, fieldRows} = CONFIG;
+	const c = Math.min(Math.max(Math.floor(x / window.innerWidth  * fieldCols), 0), fieldCols - 1);
+	const r = Math.min(Math.max(Math.floor(y / window.innerHeight * fieldRows), 0), fieldRows - 1);
+	return field[r]?.[c] ?? 0;
 }
 
-const seeds = Array.from( { length: CONFIG.lineCount }, ( _, i ) => {
-	const band   = Math.floor( i / ( CONFIG.lineCount / CONFIG.bandCount ) );
-	const isHigh = band % 2 === 0;
+const seeds = Array.from({length: CONFIG.lineCount}, (_, i) => {
+	const band    = Math.floor(i / (CONFIG.lineCount / CONFIG.bandCount));
+	const isHigh  = band % 2 === 0;
 	const opacity = isHigh
-		? CONFIG.opacityHighMin + Math.random() * ( CONFIG.opacityHighMax - CONFIG.opacityHighMin )
-		: CONFIG.opacityLowMin  + Math.random() * ( CONFIG.opacityLowMax  - CONFIG.opacityLowMin  );
+		? CONFIG.opacityHighMin + Math.random() * (CONFIG.opacityHighMax - CONFIG.opacityHighMin)
+		: CONFIG.opacityLowMin  + Math.random() * (CONFIG.opacityLowMax  - CONFIG.opacityLowMin );
 
 	return {
 		x:        Math.random() * window.innerWidth,
 		y:        Math.random() * window.innerHeight,
-		segments: Math.floor( CONFIG.segmentsMin + Math.random() * ( CONFIG.segmentsMax - CONFIG.segmentsMin ) ),
-		opacity,
+		segments: Math.floor(CONFIG.segmentsMin + Math.random() * (CONFIG.segmentsMax - CONFIG.segmentsMin)),
+		opacity
 	};
-} );
+});
 
 // ─── DRAW ────────────────────────────────────────────────────────────────────
 
-function draw( t ) {
+function draw(t) {
 	const W = window.innerWidth;
 	const H = window.innerHeight;
 	const M = CONFIG.wanderMargin;
 
-	buildField( t );
-	ctx.clearRect( 0, 0, W, H );
+	buildField(t);
+	ctx.clearRect(0, 0, W, H);
 	ctx.lineWidth = CONFIG.lineWidth;
 
-	for ( const s of seeds ) {
+	for (const s of seeds) {
 		let x = s.x;
 		let y = s.y;
 
-		ctx.strokeStyle = withAlpha( colour, s.opacity );
+		ctx.strokeStyle = withAlpha(colour, s.opacity);
 		ctx.beginPath();
-		ctx.moveTo( x, y );
+		ctx.moveTo(x, y);
 
-		for ( let i = 0; i < s.segments; i++ ) {
-			const a = getAngle( x, y );
-			x += Math.cos( a ) * CONFIG.stepX;
-			y += Math.sin( a ) * CONFIG.stepY;
+		for (let i = 0; i < s.segments; i++) {
+			const a = getAngle(x, y);
+			x += Math.cos(a) * CONFIG.stepX;
+			y += Math.sin(a) * CONFIG.stepY;
 
-			if ( x < -M || x > W + M || y < -M || y > H + M ) break;
+			if (x < -M || x > W + M || y < -M || y > H + M) break;
 
-			ctx.lineTo( x, y );
+			ctx.lineTo(x, y);
 		}
 
 		ctx.stroke();
@@ -220,9 +219,9 @@ function draw( t ) {
 
 // ─── REDUCED MOTION — draw once at t=0, then stop ────────────────────────────
 
-if ( reducedMotion ) {
-	draw( 0 );
-	createCleanup( canvas, rafRef, resize );
+if (reducedMotion) {
+	draw(0);
+	createCleanup(canvas, rafRef, resize);
 }
 
 // ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
@@ -232,10 +231,10 @@ else {
 
 	function tick() {
 		t += CONFIG.driftSpeed;
-		draw( t );
-		rafRef.current = requestAnimationFrame( tick );
+		draw(t);
+		rafRef.current = requestAnimationFrame(tick);
 	}
 
-	rafRef.current = requestAnimationFrame( tick );
-	createCleanup( canvas, rafRef, resize );
+	rafRef.current = requestAnimationFrame(tick);
+	createCleanup(canvas, rafRef, resize);
 }

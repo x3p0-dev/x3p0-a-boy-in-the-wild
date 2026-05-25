@@ -1,6 +1,6 @@
-import { registerBlockVariation } from '@wordpress/blocks';
-import { SVG, Path } from '@wordpress/primitives';
-import { __ } from '@wordpress/i18n';
+import {registerBlockVariation} from '@wordpress/blocks';
+import {SVG, Path} from '@wordpress/primitives';
+import {__} from '@wordpress/i18n';
 
 const ChapterSketchIcon = (
 	<SVG
@@ -14,14 +14,14 @@ const ChapterSketchIcon = (
 	</SVG>
 );
 
-registerBlockVariation( 'core/image', {
+registerBlockVariation('core/image', {
 	name:        'chapter-field-sketch',
-	title:       __( 'Field Sketch', 'x3p0-a-boy-in-the-wild' ),
-	description: __( 'A hand-drawn field sketch with paper texture and tilted border.', 'x3p0-a-boy-in-the-wild' ),
+	title:       __('Field Sketch', 'x3p0-a-boy-in-the-wild'),
+	description: __('A hand-drawn field sketch with paper texture and tilted border.', 'x3p0-a-boy-in-the-wild'),
 	icon:        ChapterSketchIcon,
 	attributes:  {
-		className: 'is-style-chapter-sketch',
+		className: 'is-style-chapter-sketch'
 	},
-	isActive: ( blockAttributes ) =>
-		blockAttributes.className?.includes( 'is-style-chapter-field-sketch' ),
-} );
+	isActive: (blockAttributes) =>
+		blockAttributes.className?.includes('is-style-chapter-field-sketch')
+});

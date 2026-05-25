@@ -17,9 +17,9 @@
  * @file resources/js/canvas/scene/adrift.js
  */
 
-import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
+import {setupCanvas, extractColour, withAlpha, createCleanup} from 'x3p0/canvas-utils';
 
-const canvas = document.querySelector( '.x3p0-canvas-scene--adrift' );
+const canvas = document.querySelector('.x3p0-canvas-scene--adrift');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -61,13 +61,12 @@ const CONFIG = {
 
 	// Cluster-level wobble speed — drives the cluster's own vertical wander.
 	clusterWobbleSpeedMin: 0.012,  // radians/frame
-	clusterWobbleSpeedMax: 0.020,
-
+	clusterWobbleSpeedMax: 0.020
 };
 
 // ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-( () => {
+(() => {
 	const map = {
 		clusterCount:          Number,
 		particlesMin:          Number,
@@ -87,25 +86,25 @@ const CONFIG = {
 		wobbleSpeedMin:        Number,
 		wobbleSpeedMax:        Number,
 		clusterWobbleSpeedMin: Number,
-		clusterWobbleSpeedMax: Number,
+		clusterWobbleSpeedMax: Number
 	};
 
-	Object.keys( map ).forEach( ( key ) => {
-		if ( canvas.dataset[ key ] !== undefined ) {
-			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+	Object.keys(map).forEach((key) => {
+		if (canvas.dataset[key] !== undefined) {
+			CONFIG[key] = map[key](canvas.dataset[key]);
 		}
-	} );
-} )();
+	});
+})();
 
 // ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-const rafRef = { current: null };
+const rafRef = {current: null};
 
-const { ctx, resize } = setupCanvas( canvas );
+const {ctx, resize} = setupCanvas(canvas);
 
 // ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
@@ -114,87 +113,87 @@ const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).ma
 // alphas mirror the state-buried token values, so the effect stays subtle
 // even if the CSS variables fail to resolve.
 let colours = [
-	extractColour( canvas, '--wp--preset--color--ink-accent',       '100,62,12,0.45' ),
-	extractColour( canvas, '--wp--preset--color--ink-subtle',       '30,16,2,0.68'   ),
-	extractColour( canvas, '--wp--preset--color--ink-muted',        '30,16,2,0.50'   ),
-	extractColour( canvas, '--wp--preset--color--parchment-accent', '100,62,12,0.45' ),
+	extractColour(canvas, '--wp--preset--color--ink-accent',       '100,62,12,0.45'),
+	extractColour(canvas, '--wp--preset--color--ink-subtle',       '30,16,2,0.68'  ),
+	extractColour(canvas, '--wp--preset--color--ink-muted',        '30,16,2,0.50'  ),
+	extractColour(canvas, '--wp--preset--color--parchment-accent', '100,62,12,0.45')
 ];
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
-function randomBetween( min, max ) {
-	return min + Math.random() * ( max - min );
+function randomBetween(min, max) {
+	return min + Math.random() * (max - min);
 }
 
-function makeCluster( randomX ) {
+function makeCluster(randomX) {
 	const W = window.innerWidth;
 	const H = window.innerHeight;
-	const n = CONFIG.particlesMin + Math.floor( Math.random() * ( CONFIG.particlesMax - CONFIG.particlesMin + 1 ) );
+	const n = CONFIG.particlesMin + Math.floor(Math.random() * (CONFIG.particlesMax - CONFIG.particlesMin + 1));
 
 	const particles = [];
 
-	for ( let i = 0; i < n; i++ ) {
-		particles.push( {
-			ox:           ( Math.random() - 0.5 ) * CONFIG.particleSpreadX,
-			oy:           ( Math.random() - 0.5 ) * CONFIG.particleSpreadY,
-			r:            CONFIG.particleRadiusMin + Math.pow( Math.random(), CONFIG.particleRadiusSkew ) * ( CONFIG.particleRadiusMax - CONFIG.particleRadiusMin ),
-			alpha:        randomBetween( CONFIG.particleAlphaMin, CONFIG.particleAlphaMax ),
+	for (let i = 0; i < n; i++) {
+		particles.push({
+			ox:           (Math.random() - 0.5) * CONFIG.particleSpreadX,
+			oy:           (Math.random() - 0.5) * CONFIG.particleSpreadY,
+			r:            CONFIG.particleRadiusMin + Math.pow(Math.random(), CONFIG.particleRadiusSkew) * (CONFIG.particleRadiusMax - CONFIG.particleRadiusMin),
+			alpha:        randomBetween(CONFIG.particleAlphaMin, CONFIG.particleAlphaMax),
 			wobbleOffset: Math.random() * Math.PI * 2,
-			wobbleSpeed:  randomBetween( CONFIG.wobbleSpeedMin, CONFIG.wobbleSpeedMax ),
-			wobbleAmp:    randomBetween( CONFIG.wobbleAmpMin,   CONFIG.wobbleAmpMax   ),
-			colorIndex:   Math.floor( Math.random() * colours.length ),
-		} );
+			wobbleSpeed:  randomBetween(CONFIG.wobbleSpeedMin, CONFIG.wobbleSpeedMax),
+			wobbleAmp:    randomBetween(CONFIG.wobbleAmpMin,   CONFIG.wobbleAmpMax  ),
+			colorIndex:   Math.floor(Math.random() * colours.length)
+		});
 	}
 
 	return {
 		cx:           randomX ? Math.random() * W : -16,
-		cy:           15 + Math.random() * ( H - 30 ),
-		vx:           randomBetween( CONFIG.speedMin, CONFIG.speedMax ),
-		vy:           ( Math.random() - 0.5 ) * CONFIG.vertDriftAmp,
+		cy:           15 + Math.random() * (H - 30),
+		vx:           randomBetween(CONFIG.speedMin, CONFIG.speedMax),
+		vy:           (Math.random() - 0.5) * CONFIG.vertDriftAmp,
 		wobbleOffset: Math.random() * Math.PI * 2,
-		wobbleSpeed:  randomBetween( CONFIG.clusterWobbleSpeedMin, CONFIG.clusterWobbleSpeedMax ),
-		particles,
+		wobbleSpeed:  randomBetween(CONFIG.clusterWobbleSpeedMin, CONFIG.clusterWobbleSpeedMax),
+		particles
 	};
 }
 
-const clusters = Array.from( { length: CONFIG.clusterCount }, () => makeCluster( true ) );
+const clusters = Array.from({length: CONFIG.clusterCount}, () => makeCluster(true));
 
 // ─── DRAW ────────────────────────────────────────────────────────────────────
 
-function draw( t ) {
+function draw(t) {
 	const W = window.innerWidth;
 	const H = window.innerHeight;
 
-	ctx.clearRect( 0, 0, W, H );
+	ctx.clearRect(0, 0, W, H);
 
-	for ( let i = clusters.length - 1; i >= 0; i-- ) {
-		const c = clusters[ i ];
+	for (let i = clusters.length - 1; i >= 0; i--) {
+		const c = clusters[i];
 
 		c.cx += c.vx;
-		c.cy += c.vy + Math.sin( t * c.wobbleSpeed + c.wobbleOffset ) * 0.06;
+		c.cy += c.vy + Math.sin(t * c.wobbleSpeed + c.wobbleOffset) * 0.06;
 
-		if ( c.cx > W + 24 ) {
-			clusters.splice( i, 1 );
-			clusters.push( makeCluster( false ) );
+		if (c.cx > W + 24) {
+			clusters.splice(i, 1);
+			clusters.push(makeCluster(false));
 			continue;
 		}
 
-		c.particles.forEach( ( p ) => {
-			const px = c.cx + p.ox + Math.sin( t * p.wobbleSpeed       + p.wobbleOffset ) * p.wobbleAmp;
-			const py = c.cy + p.oy + Math.cos( t * p.wobbleSpeed * 0.7 + p.wobbleOffset ) * p.wobbleAmp * 0.5;
+		c.particles.forEach((p) => {
+			const px = c.cx + p.ox + Math.sin(t * p.wobbleSpeed       + p.wobbleOffset) * p.wobbleAmp;
+			const py = c.cy + p.oy + Math.cos(t * p.wobbleSpeed * 0.7 + p.wobbleOffset) * p.wobbleAmp * 0.5;
 
 			ctx.beginPath();
-			ctx.arc( px, py, p.r, 0, Math.PI * 2 );
-			ctx.fillStyle = withAlpha( colours[ p.colorIndex ], p.alpha );
+			ctx.arc(px, py, p.r, 0, Math.PI * 2);
+			ctx.fillStyle = withAlpha(colours[p.colorIndex], p.alpha);
 			ctx.fill();
-		} );
+		});
 	}
 }
 
 // ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
 
-if ( reducedMotion ) {
-	createCleanup( canvas, rafRef, resize );
+if (reducedMotion) {
+	createCleanup(canvas, rafRef, resize);
 }
 
 // ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
@@ -204,10 +203,10 @@ else {
 
 	function tick() {
 		t++;
-		draw( t );
-		rafRef.current = requestAnimationFrame( tick );
+		draw(t);
+		rafRef.current = requestAnimationFrame(tick);
 	}
 
-	rafRef.current = requestAnimationFrame( tick );
-	createCleanup( canvas, rafRef, resize );
+	rafRef.current = requestAnimationFrame(tick);
+	createCleanup(canvas, rafRef, resize);
 }

@@ -18,9 +18,9 @@
  * @file resources/js/canvas/scene/motes.js
  */
 
-import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
+import {setupCanvas, extractColour, withAlpha, createCleanup} from 'x3p0/canvas-utils';
 
-const canvas = document.querySelector( '.x3p0-canvas-scene--motes' );
+const canvas = document.querySelector('.x3p0-canvas-scene--motes');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -75,13 +75,12 @@ const CONFIG = {
 	spawnOffsetLeft: -20,
 
 	// Recycle threshold — motes recycle this far past the right edge.
-	recycleOffsetRight: 30,
-
+	recycleOffsetRight: 30
 };
 
 // ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-( () => {
+(() => {
 	const map = {
 		moteCount:           Number,
 		driftSpeedMin:       Number,
@@ -103,130 +102,130 @@ const CONFIG = {
 		bandTop:             Number,
 		bandBottom:          Number,
 		spawnOffsetLeft:     Number,
-		recycleOffsetRight:  Number,
+		recycleOffsetRight:  Number
 	};
 
-	Object.keys( map ).forEach( ( key ) => {
-		if ( canvas.dataset[ key ] !== undefined ) {
-			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+	Object.keys(map).forEach((key) => {
+		if (canvas.dataset[key] !== undefined) {
+			CONFIG[key] = map[key](canvas.dataset[key]);
 		}
-	} );
-} )();
+	});
+})();
 
 // ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-const rafRef = { current: null };
+const rafRef = {current: null};
 
-const { ctx, resize } = setupCanvas( canvas );
+const {ctx, resize} = setupCanvas(canvas);
 
 // ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '74,40,8' );
+let colour = extractColour(canvas, '--wp--preset--color--ink-accent', '74,40,8');
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
-function randomBetween( min, max ) {
-	return min + Math.random() * ( max - min );
+function randomBetween(min, max) {
+	return min + Math.random() * (max - min);
 }
 
-function randomIntBetween( min, max ) {
-	return Math.floor( randomBetween( min, max + 1 ) );
+function randomIntBetween(min, max) {
+	return Math.floor(randomBetween(min, max + 1));
 }
 
 function bandYRange() {
 	const top    = CONFIG.bandTop    * window.innerHeight;
 	const bottom = CONFIG.bandBottom * window.innerHeight;
-	return { top, bottom };
+	return {top, bottom};
 }
 
-function createMote( spawnAnywhere ) {
-	const { top, bottom } = bandYRange();
+function createMote(spawnAnywhere) {
+	const {top, bottom} = bandYRange();
 
 	return {
-		x:             spawnAnywhere ? randomBetween( 0, window.innerWidth ) : CONFIG.spawnOffsetLeft,
-		y:             randomBetween( top, bottom ),
-		radius:        randomBetween( CONFIG.radiusMin,       CONFIG.radiusMax       ),
-		alpha:         randomBetween( CONFIG.alphaMin,        CONFIG.alphaMax        ),
-		driftSpeed:    randomBetween( CONFIG.driftSpeedMin,   CONFIG.driftSpeedMax   ),
-		vertOffset:    randomBetween( 0, Math.PI * 2 ),
-		vertSpeed:     randomBetween( CONFIG.vertWobbleSpeedMin, CONFIG.vertWobbleSpeedMax ),
+		x:             spawnAnywhere ? randomBetween(0, window.innerWidth) : CONFIG.spawnOffsetLeft,
+		y:             randomBetween(top, bottom),
+		radius:        randomBetween(CONFIG.radiusMin,          CONFIG.radiusMax         ),
+		alpha:         randomBetween(CONFIG.alphaMin,           CONFIG.alphaMax          ),
+		driftSpeed:    randomBetween(CONFIG.driftSpeedMin,      CONFIG.driftSpeedMax     ),
+		vertOffset:    randomBetween(0, Math.PI * 2),
+		vertSpeed:     randomBetween(CONFIG.vertWobbleSpeedMin, CONFIG.vertWobbleSpeedMax),
 		state:         'drifting',  // 'drifting' | 'paused' | 'reversing'
 		stateTimer:    0,
-		stateDuration: 0,
+		stateDuration: 0
 	};
 }
 
-const motes = Array.from( { length: CONFIG.moteCount }, () => createMote( true ) );
+const motes = Array.from({length: CONFIG.moteCount}, () => createMote(true));
 
 // ─── DRAW ────────────────────────────────────────────────────────────────────
 
-function updateMote( m ) {
+function updateMote(m) {
 	m.vertOffset += m.vertSpeed;
-	m.y          += Math.sin( m.vertOffset ) * CONFIG.verticalWobbleAmp;
+	m.y          += Math.sin(m.vertOffset) * CONFIG.verticalWobbleAmp;
 
-	const { top, bottom } = bandYRange();
-	m.y = Math.max( top, Math.min( bottom, m.y ) );
+	const {top, bottom} = bandYRange();
+	m.y = Math.max(top, Math.min(bottom, m.y));
 
-	switch ( m.state ) {
+	switch (m.state) {
 
 		case 'drifting':
 			m.x += m.driftSpeed;
 
-			if ( Math.random() < CONFIG.pauseChance ) {
+			if (Math.random() < CONFIG.pauseChance) {
 				m.state         = 'paused';
 				m.stateTimer    = 0;
-				m.stateDuration = randomIntBetween( CONFIG.pauseDurationMin, CONFIG.pauseDurationMax );
+				m.stateDuration = randomIntBetween(CONFIG.pauseDurationMin, CONFIG.pauseDurationMax);
 				break;
 			}
 
-			if ( Math.random() < CONFIG.reversalChance ) {
+			if (Math.random() < CONFIG.reversalChance) {
 				m.state         = 'reversing';
 				m.stateTimer    = 0;
-				m.stateDuration = randomIntBetween( CONFIG.reversalDurationMin, CONFIG.reversalDurationMax );
+				m.stateDuration = randomIntBetween(CONFIG.reversalDurationMin, CONFIG.reversalDurationMax);
 			}
 			break;
 
 		case 'paused':
 			m.stateTimer++;
-			if ( m.stateTimer >= m.stateDuration ) m.state = 'drifting';
+			if (m.stateTimer >= m.stateDuration) m.state = 'drifting';
 			break;
 
 		case 'reversing':
 			m.x -= m.driftSpeed * CONFIG.reversalSpeedFactor;
 			m.stateTimer++;
-			if ( m.stateTimer >= m.stateDuration ) m.state = 'drifting';
+			if (m.stateTimer >= m.stateDuration) m.state = 'drifting';
 			break;
 	}
 
-	if ( m.x > window.innerWidth + CONFIG.recycleOffsetRight ) {
-		Object.assign( m, createMote( false ) );
+	if (m.x > window.innerWidth + CONFIG.recycleOffsetRight) {
+		Object.assign(m, createMote(false));
 	}
 }
 
-function drawMote( m ) {
+function drawMote(m) {
 	ctx.beginPath();
-	ctx.arc( m.x, m.y, m.radius, 0, Math.PI * 2 );
-	ctx.fillStyle = withAlpha( colour, m.alpha );
+	ctx.arc(m.x, m.y, m.radius, 0, Math.PI * 2);
+	ctx.fillStyle = withAlpha(colour, m.alpha);
 	ctx.fill();
 }
 
 function draw() {
-	ctx.clearRect( 0, 0, window.innerWidth, window.innerHeight );
+	ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-	for ( let i = 0; i < motes.length; i++ ) {
-		updateMote( motes[ i ] );
-		drawMote(   motes[ i ] );
+	for (let i = 0; i < motes.length; i++) {
+		updateMote(motes[i]);
+		drawMote(  motes[i]);
 	}
 }
 
 // ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
 
-if ( reducedMotion ) {
-	createCleanup( canvas, rafRef, resize );
+if (reducedMotion) {
+	createCleanup(canvas, rafRef, resize);
 }
 
 // ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
@@ -234,9 +233,9 @@ if ( reducedMotion ) {
 else {
 	function tick() {
 		draw();
-		rafRef.current = requestAnimationFrame( tick );
+		rafRef.current = requestAnimationFrame(tick);
 	}
 
-	rafRef.current = requestAnimationFrame( tick );
-	createCleanup( canvas, rafRef, resize );
+	rafRef.current = requestAnimationFrame(tick);
+	createCleanup(canvas, rafRef, resize);
 }

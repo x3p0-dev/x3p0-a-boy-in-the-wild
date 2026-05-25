@@ -17,9 +17,9 @@
  * @file resources/js/canvas/scene/lost-terrain.js
  */
 
-import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
+import {setupCanvas, extractColour, withAlpha, createCleanup} from 'x3p0/canvas-utils';
 
-const canvas = document.querySelector( '.x3p0-canvas-scene--lost-terrain' );
+const canvas = document.querySelector('.x3p0-canvas-scene--lost-terrain');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -55,13 +55,12 @@ const CONFIG = {
 
 	// How far past the viewport edge a line is allowed to wander before it
 	// terminates (px). Prevents lines from looping in off-screen space.
-	wanderMargin: 20,
-
+	wanderMargin: 20
 };
 
 // ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-( () => {
+(() => {
 	const map = {
 		lineCount:     Number,
 		lineLength:    Number,
@@ -77,92 +76,92 @@ const CONFIG = {
 		harmonic2Amp:  Number,
 		harmonic3Freq: Number,
 		harmonic3Amp:  Number,
-		wanderMargin:  Number,
+		wanderMargin:  Number
 	};
 
-	Object.keys( map ).forEach( ( key ) => {
-		if ( canvas.dataset[ key ] !== undefined ) {
-			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+	Object.keys(map).forEach((key) => {
+		if (canvas.dataset[key] !== undefined) {
+			CONFIG[key] = map[key](canvas.dataset[key]);
 		}
-	} );
-} )();
+	});
+})();
 
 // ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-const rafRef = { current: null };
+const rafRef = {current: null};
 
 let seeds = [];
 
-const { ctx, resize } = setupCanvas( canvas, () => {
+const {ctx, resize} = setupCanvas(canvas, () => {
 	seeds = buildSeeds();
-} );
+});
 
 // ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
 // `--rule` carries low alpha (0.14 in mood-lost) — that subtlety is
 // intentional. withAlpha() multiplies it through per-line.
-let colour = extractColour( canvas, '--wp--preset--color--rule', '185,165,85,0.14' );
+let colour = extractColour(canvas, '--wp--preset--color--rule', '185,165,85,0.14');
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
-function randomBetween( min, max ) {
-	return min + Math.random() * ( max - min );
+function randomBetween(min, max) {
+	return min + Math.random() * (max - min);
 }
 
 function buildSeeds() {
 	const list = [];
-	for ( let i = 0; i < CONFIG.lineCount; i++ ) {
-		list.push( {
+	for (let i = 0; i < CONFIG.lineCount; i++) {
+		list.push({
 			x0:    Math.random() * window.innerWidth,
 			y0:    Math.random() * window.innerHeight,
-			alpha: randomBetween( CONFIG.alphaMin, CONFIG.alphaMax ),
-			width: randomBetween( CONFIG.widthMin, CONFIG.widthMax ),
-		} );
+			alpha: randomBetween(CONFIG.alphaMin, CONFIG.alphaMax),
+			width: randomBetween(CONFIG.widthMin, CONFIG.widthMax)
+		});
 	}
 	return list;
 }
 
-function fieldAngle( x, y, t ) {
-	const a1 = Math.sin( x * CONFIG.harmonic1Freq + t * 0.7 )
-		* Math.cos( y * CONFIG.harmonic1Freq * 0.9 + t * 0.5 )
+function fieldAngle(x, y, t) {
+	const a1 = Math.sin(x * CONFIG.harmonic1Freq + t * 0.7)
+		* Math.cos(y * CONFIG.harmonic1Freq * 0.9 + t * 0.5)
 		* CONFIG.harmonic1Amp;
-	const a2 = Math.sin( x * CONFIG.harmonic2Freq - y * CONFIG.harmonic2Freq * 1.1 + t * 0.4 )
+	const a2 = Math.sin(x * CONFIG.harmonic2Freq - y * CONFIG.harmonic2Freq * 1.1 + t * 0.4)
 		* CONFIG.harmonic2Amp;
-	const a3 = Math.cos( x * CONFIG.harmonic3Freq * 0.8 + y * CONFIG.harmonic3Freq + t * 0.3 )
+	const a3 = Math.cos(x * CONFIG.harmonic3Freq * 0.8 + y * CONFIG.harmonic3Freq + t * 0.3)
 		* CONFIG.harmonic3Amp;
-	return ( a1 + a2 + a3 ) * Math.PI;
+	return (a1 + a2 + a3) * Math.PI;
 }
 
 // ─── DRAW ────────────────────────────────────────────────────────────────────
 
-function draw( t ) {
+function draw(t) {
 	const W = window.innerWidth;
 	const H = window.innerHeight;
 	const M = CONFIG.wanderMargin;
 
-	ctx.clearRect( 0, 0, W, H );
+	ctx.clearRect(0, 0, W, H);
 	ctx.lineCap = 'round';
 
-	for ( const s of seeds ) {
+	for (const s of seeds) {
 		let x = s.x0;
 		let y = s.y0;
 
-		ctx.strokeStyle = withAlpha( colour, s.alpha );
+		ctx.strokeStyle = withAlpha(colour, s.alpha);
 		ctx.lineWidth   = s.width;
 		ctx.beginPath();
-		ctx.moveTo( x, y );
+		ctx.moveTo(x, y);
 
-		for ( let step = 0; step < CONFIG.lineLength; step++ ) {
-			const angle = fieldAngle( x, y, t );
-			x += Math.cos( angle ) * CONFIG.stepSize;
-			y += Math.sin( angle ) * CONFIG.stepSize;
-			ctx.lineTo( x, y );
+		for (let step = 0; step < CONFIG.lineLength; step++) {
+			const angle = fieldAngle(x, y, t);
+			x += Math.cos(angle) * CONFIG.stepSize;
+			y += Math.sin(angle) * CONFIG.stepSize;
+			ctx.lineTo(x, y);
 
-			if ( x < -M || x > W + M || y < -M || y > H + M ) break;
+			if (x < -M || x > W + M || y < -M || y > H + M) break;
 		}
 
 		ctx.stroke();
@@ -171,9 +170,9 @@ function draw( t ) {
 
 // ─── REDUCED MOTION — draw once, then stop ───────────────────────────────────
 
-if ( reducedMotion ) {
-	draw( 0 );
-	createCleanup( canvas, rafRef, resize );
+if (reducedMotion) {
+	draw(0);
+	createCleanup(canvas, rafRef, resize);
 }
 
 // ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
@@ -182,11 +181,11 @@ else {
 	let t = 0;
 
 	function tick() {
-		draw( t );
+		draw(t);
 		t += CONFIG.driftSpeed;
-		rafRef.current = requestAnimationFrame( tick );
+		rafRef.current = requestAnimationFrame(tick);
 	}
 
-	rafRef.current = requestAnimationFrame( tick );
-	createCleanup( canvas, rafRef, resize );
+	rafRef.current = requestAnimationFrame(tick);
+	createCleanup(canvas, rafRef, resize);
 }

@@ -18,9 +18,9 @@
  * @file resources/js/canvas/scene/lost-motes.js
  */
 
-import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
+import {setupCanvas, extractColour, withAlpha, createCleanup} from 'x3p0/canvas-utils';
 
-const canvas = document.querySelector( '.x3p0-canvas-scene--lost-motes' );
+const canvas = document.querySelector('.x3p0-canvas-scene--lost-motes');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -66,13 +66,12 @@ const CONFIG = {
 	glowRadiusMultiplier: 3.2,
 
 	// Glow halo alpha as a fraction of the mote's current alpha.
-	glowAlphaFraction: 0.18,
-
+	glowAlphaFraction: 0.18
 };
 
 // ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-( () => {
+(() => {
 	const map = {
 		moteCount:            Number,
 		originXMin:           Number,
@@ -91,98 +90,98 @@ const CONFIG = {
 		radiusMin:            Number,
 		radiusMax:            Number,
 		glowRadiusMultiplier: Number,
-		glowAlphaFraction:    Number,
+		glowAlphaFraction:    Number
 	};
 
-	Object.keys( map ).forEach( ( key ) => {
-		if ( canvas.dataset[ key ] !== undefined ) {
-			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+	Object.keys(map).forEach((key) => {
+		if (canvas.dataset[key] !== undefined) {
+			CONFIG[key] = map[key](canvas.dataset[key]);
 		}
-	} );
-} )();
+	});
+})();
 
 // ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-const rafRef = { current: null };
+const rafRef = {current: null};
 
-const { ctx, resize } = setupCanvas( canvas );
+const {ctx, resize} = setupCanvas(canvas);
 
 // ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '200,178,85,0.72' );
+let colour = extractColour(canvas, '--wp--preset--color--ink-accent', '200,178,85,0.72');
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
-function randomBetween( min, max ) {
-	return min + Math.random() * ( max - min );
+function randomBetween(min, max) {
+	return min + Math.random() * (max - min);
 }
 
 function spawnMote() {
 	return {
-		x:      randomBetween( CONFIG.originXMin,  CONFIG.originXMax  ) * window.innerWidth,
-		y:      randomBetween( CONFIG.originYMin,  CONFIG.originYMax  ) * window.innerHeight,
-		vy:     randomBetween( CONFIG.riseSpeedMin, CONFIG.riseSpeedMax ),
-		vx:     randomBetween( CONFIG.driftXMin,    CONFIG.driftXMax    ),
-		alpha:  randomBetween( CONFIG.alphaMin,     CONFIG.alphaMax     ),
-		radius: randomBetween( CONFIG.radiusMin,    CONFIG.radiusMax    ),
+		x:      randomBetween(CONFIG.originXMin,   CONFIG.originXMax  ) * window.innerWidth,
+		y:      randomBetween(CONFIG.originYMin,   CONFIG.originYMax  ) * window.innerHeight,
+		vy:     randomBetween(CONFIG.riseSpeedMin, CONFIG.riseSpeedMax),
+		vx:     randomBetween(CONFIG.driftXMin,    CONFIG.driftXMax   ),
+		alpha:  randomBetween(CONFIG.alphaMin,     CONFIG.alphaMax    ),
+		radius: randomBetween(CONFIG.radiusMin,    CONFIG.radiusMax   ),
 		phase:  Math.random() * Math.PI * 2,
-		freq:   CONFIG.wobbleFreq * randomBetween( 0.7, 1.3 ),
+		freq:   CONFIG.wobbleFreq * randomBetween(0.7, 1.3)
 	};
 }
 
-const motes = Array.from( { length: CONFIG.moteCount }, spawnMote );
+const motes = Array.from({length: CONFIG.moteCount}, spawnMote);
 
 // ─── DRAW ────────────────────────────────────────────────────────────────────
 
-function drawMote( m ) {
+function drawMote(m) {
 	const glowR = m.radius * CONFIG.glowRadiusMultiplier;
-	const glow  = ctx.createRadialGradient( m.x, m.y, 0, m.x, m.y, glowR );
+	const glow  = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, glowR);
 
-	glow.addColorStop( 0, withAlpha( colour, m.alpha * CONFIG.glowAlphaFraction ) );
-	glow.addColorStop( 1, withAlpha( colour, 0 ) );
+	glow.addColorStop(0, withAlpha(colour, m.alpha * CONFIG.glowAlphaFraction));
+	glow.addColorStop(1, withAlpha(colour, 0));
 
 	ctx.beginPath();
-	ctx.arc( m.x, m.y, glowR, 0, Math.PI * 2 );
+	ctx.arc(m.x, m.y, glowR, 0, Math.PI * 2);
 	ctx.fillStyle = glow;
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.arc( m.x, m.y, m.radius, 0, Math.PI * 2 );
-	ctx.fillStyle = withAlpha( colour, m.alpha );
+	ctx.arc(m.x, m.y, m.radius, 0, Math.PI * 2);
+	ctx.fillStyle = withAlpha(colour, m.alpha);
 	ctx.fill();
 }
 
-function draw( t ) {
+function draw(t) {
 	const W       = window.innerWidth;
 	const beamMin = CONFIG.originXMin * W;
 	const beamMax = CONFIG.originXMax * W;
 
-	ctx.clearRect( 0, 0, W, window.innerHeight );
+	ctx.clearRect(0, 0, W, window.innerHeight);
 
-	for ( const m of motes ) {
+	for (const m of motes) {
 		m.y += m.vy;
-		m.x += m.vx + Math.sin( t * m.freq * 60 + m.phase ) * CONFIG.wobbleAmp;
+		m.x += m.vx + Math.sin(t * m.freq * 60 + m.phase) * CONFIG.wobbleAmp;
 
-		if ( m.x < beamMin || m.x > beamMax ) {
-			m.alpha = Math.max( 0, m.alpha - CONFIG.fadeRate );
+		if (m.x < beamMin || m.x > beamMax) {
+			m.alpha = Math.max(0, m.alpha - CONFIG.fadeRate);
 		}
 
-		if ( m.alpha <= 0 || m.y < -10 ) {
-			Object.assign( m, spawnMote() );
+		if (m.alpha <= 0 || m.y < -10) {
+			Object.assign(m, spawnMote());
 		}
 
-		drawMote( m );
+		drawMote(m);
 	}
 }
 
 // ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
 
-if ( reducedMotion ) {
-	createCleanup( canvas, rafRef, resize );
+if (reducedMotion) {
+	createCleanup(canvas, rafRef, resize);
 }
 
 // ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
@@ -191,11 +190,11 @@ else {
 	let t = 0;
 
 	function tick() {
-		draw( t );
+		draw(t);
 		t += 0.016;
-		rafRef.current = requestAnimationFrame( tick );
+		rafRef.current = requestAnimationFrame(tick);
 	}
 
-	rafRef.current = requestAnimationFrame( tick );
-	createCleanup( canvas, rafRef, resize );
+	rafRef.current = requestAnimationFrame(tick);
+	createCleanup(canvas, rafRef, resize);
 }

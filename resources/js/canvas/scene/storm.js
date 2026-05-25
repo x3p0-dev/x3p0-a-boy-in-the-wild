@@ -19,9 +19,9 @@
  * @file resources/js/canvas/scene/storm.js
  */
 
-import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
+import {setupCanvas, extractColour, withAlpha, createCleanup} from 'x3p0/canvas-utils';
 
-const canvas = document.querySelector( '.x3p0-canvas-scene--storm' );
+const canvas = document.querySelector('.x3p0-canvas-scene--storm');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -93,13 +93,12 @@ const CONFIG = {
 	splashPartRadius: 1,
 
 	// Splash life decay per frame (fraction of full life).
-	splashDecay: 0.055,
-
+	splashDecay: 0.055
 };
 
 // ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-( () => {
+(() => {
 	const map = {
 		count:             Number,
 		windX:             Number,
@@ -127,41 +126,41 @@ const CONFIG = {
 		splashLaunchY:     Number,
 		splashGravity:     Number,
 		splashPartRadius:  Number,
-		splashDecay:       Number,
+		splashDecay:       Number
 	};
 
-	Object.keys( map ).forEach( ( key ) => {
-		if ( canvas.dataset[ key ] !== undefined ) {
-			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+	Object.keys(map).forEach((key) => {
+		if (canvas.dataset[key] !== undefined) {
+			CONFIG[key] = map[key](canvas.dataset[key]);
 		}
-	} );
-} )();
+	});
+})();
 
 // ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-const rafRef = { current: null };
+const rafRef = {current: null};
 
-const { ctx, resize } = setupCanvas( canvas );
+const {ctx, resize} = setupCanvas(canvas);
 
 // ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
 // Storm-mood ink-accent is a cool greenish-grey at alpha 0.70. The token's
 // alpha is preserved through withAlpha() so the rain stays as subtle as the
 // designer intended.
-let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '160,200,160,0.70' );
+let colour = extractColour(canvas, '--wp--preset--color--ink-accent', '160,200,160,0.70');
 
-function rainColour( alpha ) {
-	return withAlpha( colour, alpha );
+function rainColour(alpha) {
+	return withAlpha(colour, alpha);
 }
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
-function randomBetween( min, max ) {
-	return min + Math.random() * ( max - min );
+function randomBetween(min, max) {
+	return min + Math.random() * (max - min);
 }
 
 function mkDrop() {
@@ -173,45 +172,45 @@ function mkDrop() {
 	return {
 		x:     Math.random() * W * 1.5 - W * 0.25,
 		y:     -Math.random() * H,
-		len:   randomBetween( CONFIG.dropLenMin,   CONFIG.dropLenMax   ) * depth,
-		speed: randomBetween( CONFIG.dropSpeedMin, CONFIG.dropSpeedMax ) * depth,
+		len:   randomBetween(CONFIG.dropLenMin,   CONFIG.dropLenMax  ) * depth,
+		speed: randomBetween(CONFIG.dropSpeedMin, CONFIG.dropSpeedMax) * depth,
 		alpha: CONFIG.dropAlphaMin + layer * CONFIG.dropAlphaMax,
 		width: CONFIG.dropWidthMin + layer * CONFIG.dropWidthMax,
-		layer,
+		layer
 	};
 }
 
-function spawnSplash( x, y, layer ) {
-	const count = CONFIG.splashPartsMin + Math.floor( Math.random() * ( CONFIG.splashPartsMax - CONFIG.splashPartsMin ) );
+function spawnSplash(x, y, layer) {
+	const count = CONFIG.splashPartsMin + Math.floor(Math.random() * (CONFIG.splashPartsMax - CONFIG.splashPartsMin));
 	const parts = [];
 
-	for ( let i = 0; i < count; i++ ) {
+	for (let i = 0; i < count; i++) {
 		const angle = -Math.PI + Math.random() * Math.PI;
-		const speed = randomBetween( CONFIG.splashSpeedMin, CONFIG.splashSpeedMax );
+		const speed = randomBetween(CONFIG.splashSpeedMin, CONFIG.splashSpeedMax);
 
-		parts.push( {
+		parts.push({
 			x,
 			y,
-			vx: Math.cos( angle ) * speed,
-			vy: Math.sin( angle ) * speed + CONFIG.splashLaunchY,
-		} );
+			vx: Math.cos(angle) * speed,
+			vy: Math.sin(angle) * speed + CONFIG.splashLaunchY
+		});
 	}
 
-	splashes.push( {
+	splashes.push({
 		x,
 		y,
-		r:     randomBetween( CONFIG.splashRadiusMin, CONFIG.splashRadiusMax ) * ( 0.4 + layer * 0.8 ),
+		r:     randomBetween(CONFIG.splashRadiusMin, CONFIG.splashRadiusMax) * (0.4 + layer * 0.8),
 		parts,
 		life:  1,
-		alpha: CONFIG.splashAlphaMin + layer * CONFIG.splashAlphaMax,
-	} );
+		alpha: CONFIG.splashAlphaMin + layer * CONFIG.splashAlphaMax
+	});
 }
 
-const drops    = Array.from( { length: CONFIG.count }, () => {
+const drops    = Array.from({length: CONFIG.count}, () => {
 	const d = mkDrop();
 	d.y     = Math.random() * window.innerHeight;
 	return d;
-} );
+});
 
 const splashes = [];
 
@@ -222,63 +221,63 @@ function draw() {
 	const H         = window.innerHeight;
 	const speedMult = CONFIG.speed / CONFIG.speedReference;
 
-	ctx.clearRect( 0, 0, W, H );
+	ctx.clearRect(0, 0, W, H);
 	ctx.globalAlpha = CONFIG.opacity;
 
-	for ( let i = 0; i < drops.length; i++ ) {
-		const d  = drops[ i ];
-		const vx = CONFIG.windX * ( 0.3 + d.layer * 0.9 ) * speedMult;
+	for (let i = 0; i < drops.length; i++) {
+		const d  = drops[i];
+		const vx = CONFIG.windX * (0.3 + d.layer * 0.9) * speedMult;
 		const vy = d.speed * speedMult;
 
 		d.x += vx;
 		d.y += vy;
 
-		const tx   = d.x - ( vx / vy ) * d.len;
+		const tx   = d.x - (vx / vy) * d.len;
 		const ty   = d.y - d.len;
-		const grad = ctx.createLinearGradient( tx, ty, d.x, d.y );
+		const grad = ctx.createLinearGradient(tx, ty, d.x, d.y);
 
-		grad.addColorStop( 0, rainColour( 0 ) );
-		grad.addColorStop( 1, rainColour( d.alpha ) );
+		grad.addColorStop(0, rainColour(0));
+		grad.addColorStop(1, rainColour(d.alpha));
 
 		ctx.beginPath();
-		ctx.moveTo( tx, ty );
-		ctx.lineTo( d.x, d.y );
+		ctx.moveTo(tx, ty);
+		ctx.lineTo(d.x, d.y);
 		ctx.strokeStyle = grad;
 		ctx.lineWidth   = d.width;
 		ctx.stroke();
 
-		if ( d.y > H + d.len ) {
-			spawnSplash( d.x, H, d.layer );
-			drops[ i ] = mkDrop();
-		} else if ( d.x > W * 1.3 || d.x < -W * 0.3 ) {
-			drops[ i ] = mkDrop();
+		if (d.y > H + d.len) {
+			spawnSplash(d.x, H, d.layer);
+			drops[i] = mkDrop();
+		} else if (d.x > W * 1.3 || d.x < -W * 0.3) {
+			drops[i] = mkDrop();
 		}
 	}
 
-	for ( let si = splashes.length - 1; si >= 0; si-- ) {
-		const sp = splashes[ si ];
+	for (let si = splashes.length - 1; si >= 0; si--) {
+		const sp = splashes[si];
 		sp.life -= CONFIG.splashDecay;
 
-		if ( sp.life <= 0 ) {
-			splashes.splice( si, 1 );
+		if (sp.life <= 0) {
+			splashes.splice(si, 1);
 			continue;
 		}
 
 		ctx.beginPath();
-		ctx.arc( sp.x, sp.y, sp.r * ( 1 + ( 1 - sp.life ) * CONFIG.splashRingGrowth ), 0, Math.PI * 2 );
-		ctx.strokeStyle = rainColour( sp.alpha * sp.life );
+		ctx.arc(sp.x, sp.y, sp.r * (1 + (1 - sp.life) * CONFIG.splashRingGrowth), 0, Math.PI * 2);
+		ctx.strokeStyle = rainColour(sp.alpha * sp.life);
 		ctx.lineWidth   = CONFIG.splashStrokeWidth;
 		ctx.stroke();
 
-		for ( const p of sp.parts ) {
+		for (const p of sp.parts) {
 			p.x  += p.vx;
 			p.y  += p.vy;
 			p.vy += CONFIG.splashGravity;
 
-			if ( p.y < H ) {
+			if (p.y < H) {
 				ctx.beginPath();
-				ctx.arc( p.x, p.y, CONFIG.splashPartRadius, 0, Math.PI * 2 );
-				ctx.fillStyle = rainColour( sp.alpha * sp.life * 0.5 );
+				ctx.arc(p.x, p.y, CONFIG.splashPartRadius, 0, Math.PI * 2);
+				ctx.fillStyle = rainColour(sp.alpha * sp.life * 0.5);
 				ctx.fill();
 			}
 		}
@@ -289,8 +288,8 @@ function draw() {
 
 // ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
 
-if ( reducedMotion ) {
-	createCleanup( canvas, rafRef, resize );
+if (reducedMotion) {
+	createCleanup(canvas, rafRef, resize);
 }
 
 // ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
@@ -298,9 +297,9 @@ if ( reducedMotion ) {
 else {
 	function tick() {
 		draw();
-		rafRef.current = requestAnimationFrame( tick );
+		rafRef.current = requestAnimationFrame(tick);
 	}
 
-	rafRef.current = requestAnimationFrame( tick );
-	createCleanup( canvas, rafRef, resize );
+	rafRef.current = requestAnimationFrame(tick);
+	createCleanup(canvas, rafRef, resize);
 }

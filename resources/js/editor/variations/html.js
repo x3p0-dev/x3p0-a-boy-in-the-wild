@@ -1,5 +1,5 @@
-import { registerBlockVariation } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import {registerBlockVariation} from '@wordpress/blocks';
+import {__} from '@wordpress/i18n';
 
 const iconStorm = (
 	<svg
@@ -13,13 +13,13 @@ const iconStorm = (
 	</svg>
 );
 
-registerBlockVariation( 'core/html', {
+registerBlockVariation('core/html', {
 	name:        'x3p0/canvas-bg',
-	title:       __( 'Background Animation', 'x3p0-a-boy-in-the-wild' ),
+	title:       __('Background Animation', 'x3p0-a-boy-in-the-wild'),
 	category:    'x3p0-animations',
-	description: __( 'Background animation that renders behind the content.', 'x3p0-a-boy-in-the-wild' ),
+	description: __('Background animation that renders behind the content.', 'x3p0-a-boy-in-the-wild'),
 	icon:        iconStorm,
-	scope:       [ 'block', 'inserter' ],
-	isActive:    ( attributes ) =>
-		attributes.content?.includes( 'x3p0-canvas-scene' ),
-} );
+	scope:       ['block', 'inserter'],
+	isActive:    (attributes) =>
+		attributes.content?.includes('x3p0-canvas-scene')
+});
