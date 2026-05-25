@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array(), 'version' => 'b530f355d6904b5ec412', 'type' => 'module');
+<?php return array('dependencies' => array('x3p0/canvas-utils'), 'version' => '4ce086dbb7d23031260b', 'type' => 'module');

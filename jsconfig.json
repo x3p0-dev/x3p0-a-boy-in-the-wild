@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"x3p0/canvas-utils": ["./resources/js/canvas/utils.js"]
+		},
+		"module": "esnext",
+		"moduleResolution": "node",
+		"target": "esnext",
+		"allowJs": true,
+		"checkJs": false
+	},
+	"exclude": [
+		"node_modules",
+		"public",
+		"vendor"
+	]
+}

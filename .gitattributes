@@ -39,6 +39,7 @@ tests/ export-ignore
 # Ignore development files.
 composer.json export-ignore
 composer.lock export-ignore
+jsconfig.json export-ignore
 package-lock.json export-ignore
 package.json export-ignore
 phpstan.neon export-ignore

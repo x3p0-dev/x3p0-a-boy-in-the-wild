@@ -93,8 +93,14 @@ Do not add per-effect positioning rules.
 
 ## Shared utilities (`resources/js/canvas/utils.js`)
 
-All new effects import from the shared utilities module. If `utils.js` does
-not exist, create it with the exports below before writing the effect.
+All new effects import from the shared utilities module via the bare
+specifier `x3p0/canvas-utils`. The specifier is externalized by webpack
+(see `webpack.config.js` — `requestToExternalModule`) and resolved at
+runtime through the WordPress Script Modules import map, so the file is
+fetched once per page rather than bundled into every scene.
+
+If `utils.js` does not exist, create it with the exports below before
+writing the effect.
 
 ```js
 /**
@@ -173,7 +179,7 @@ Every effect file follows this structure, in order:
 
 1. File header comment
 2. Imports from utils
-3. Canvas lookup — warn and stop if not found
+3. Canvas lookup
 4. CONFIG block — all tuneable values
 5. Data attribute overrides
 6. Canvas setup via `setupCanvas()`
@@ -183,6 +189,11 @@ Every effect file follows this structure, in order:
 10. Draw function(s)
 11. Animation loop — or static draw if reduced motion
 12. Cleanup via `createCleanup()`
+
+The canvas element is guaranteed to exist when the module runs —
+`CanvasScriptModuleLoader` only enqueues a scene module after it has
+seen the matching trigger class in the rendered HTML. No `if (!canvas)`
+guard is needed.
 
 ### Minimal template
 
@@ -200,15 +211,9 @@ Every effect file follows this structure, in order:
  * @file resources/js/canvas/scene/{effect}.js
  */
 
-import { setupCanvas, extractRGB, createCleanup } from '../utils.js';
+import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
 
 const canvas = document.querySelector('.x3p0-canvas-scene--{effect}');
-
-if (!canvas) {
-    console.warn('[x3p0] Canvas element .x3p0-canvas-scene--{effect} not found.');
-}
-
-if (canvas) {
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -286,8 +291,6 @@ else {
     rafRef.current = requestAnimationFrame(tick);
     createCleanup(canvas, rafRef, resize);
 }
-
-} // end if (canvas)
 ```
 
 ---
@@ -357,25 +360,26 @@ The most useful anchor tokens:
 
 ## Enqueuing
 
-Scripts are enqueued as ES module scripts via `wp_enqueue_script_module()`,
-scoped to the chapter post that uses the effect. The shared utils module
-must also be registered so WordPress can resolve the import:
+Scene modules are enqueued automatically — no per-effect PHP is required.
 
-```php
-wp_register_script_module(
-    'x3p0/canvas-utils',
-    get_theme_file_uri('public/js/canvas/utils.js'),
-    [],
-    '1.0.0'
-);
+`CanvasScriptModuleLoader` (in `src/Block/Canvas/`) scans rendered Custom
+HTML blocks for any `<canvas>` carrying a class of the form
+`x3p0-canvas-{namespace}--{slug}`, and enqueues the matching module at
+`public/js/canvas/{namespace}/{slug}.js` if its compiled `.asset.php`
+exists. The
+asset file's `dependencies` array is passed through to
+`wp_enqueue_script_module()`, so anything webpack externalized — including
+`x3p0/canvas-utils` — is resolved through the WordPress import map.
 
-wp_enqueue_script_module(
-    'x3p0/canvas-{effect}',
-    get_theme_file_uri('public/js/canvas/scene/{effect}.js'),
-    [ 'x3p0/canvas-utils' ],
-    '1.0.0'
-);
-```
+The shared utils module is registered once at theme boot by the same
+loader (`registerSharedModules()`), so scenes that depend on it are wired
+up without any per-effect work.
+
+To ship a new effect, the only steps are:
+
+1. Author `resources/js/canvas/scene/{effect}.js` per the template above.
+2. Add the `<canvas>` HTML block to the chapter pattern.
+3. Run the build.
 
 ---
 

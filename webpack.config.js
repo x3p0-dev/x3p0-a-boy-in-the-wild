@@ -10,9 +10,10 @@
 const [scriptConfig, moduleConfig] = require('@wordpress/scripts/config/webpack.config');
 
 // Plugins.
-const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
-const CopyPlugin               = require('copy-webpack-plugin');
-const RtlCssPlugin             = require('@wordpress/scripts/plugins/rtlcss-webpack-plugin');
+const RemoveEmptyScriptsPlugin        = require('webpack-remove-empty-scripts');
+const CopyPlugin                      = require('copy-webpack-plugin');
+const RtlCssPlugin                    = require('@wordpress/scripts/plugins/rtlcss-webpack-plugin');
+const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 
 // Utilities.
 const path         = require('path');
@@ -127,9 +128,31 @@ module.exports = (() => {
 			...moduleConfig,
 			...{
 				entry: {
+					...groupScriptModules('canvas'),
 					...groupScriptModules('canvas/scene'),
 					...groupScriptModules('interactive')
-				}
+				},
+				plugins: [
+					// Replace the default DependencyExtractionWebpackPlugin
+					// with one that externalizes `x3p0/canvas-utils`, so the
+					// shared utils module is fetched once per page instead of
+					// inlined into every scene.
+					...moduleConfig.plugins.filter(
+						(plugin) => !(plugin instanceof DependencyExtractionWebpackPlugin)
+					),
+					new DependencyExtractionWebpackPlugin({
+						requestToExternalModule(request) {
+							if (request === 'x3p0/canvas-utils') {
+								return `module ${request}`;
+							}
+						},
+						requestToHandle(request) {
+							if (request === 'x3p0/canvas-utils') {
+								return 'x3p0/canvas-utils';
+							}
+						}
+					})
+				]
 			}
 		}
 	]

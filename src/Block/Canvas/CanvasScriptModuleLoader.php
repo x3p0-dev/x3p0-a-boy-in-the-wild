@@ -46,7 +46,35 @@ final class CanvasScriptModuleLoader implements Bootable
 	 */
 	public function boot(): void
 	{
+		add_action('init', $this->registerSharedModules(...));
 		add_filter('render_block_core/html', $this->render(...));
+	}
+
+	/**
+	 * Registers the shared utils module so scene modules can import it via
+	 * the bare specifier `x3p0/canvas-utils`. Each scene's compiled asset
+	 * file lists this handle in its dependencies array; WordPress emits the
+	 * matching import map entry and recursively enqueues this module when
+	 * a scene that depends on it is enqueued.
+	 */
+	private function registerSharedModules(): void
+	{
+		$path      = self::FILE_PREFIX . '/utils';
+		$assetFile = get_parent_theme_file_path("{$path}.asset.php");
+
+		if (! file_exists($assetFile)) {
+			return;
+		}
+
+		$asset = include $assetFile;
+
+		wp_register_script_module(
+			'x3p0/canvas-utils',
+			get_parent_theme_file_uri("{$path}.js"),
+			$asset['dependencies'],
+			$asset['version'],
+			[ 'in_footer' => true, 'fetchpriority' => 'low' ]
+		);
 	}
 
 	/**
