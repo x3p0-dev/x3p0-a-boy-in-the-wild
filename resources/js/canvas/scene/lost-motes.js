@@ -1,217 +1,201 @@
 /**
- * Canvas effect: Moonbeam motes — 404 Lost page.
+ * Lost motes — particles drifting up through the moonbeam shaft.
  *
- * Tiny particles of dust, pollen, and spore drifting slowly upward through
- * the moonbeam shaft. They are visible because the light catches them. They
- * drift laterally on cold air. They fade at the edges of the beam. They rise
- * because things rise in still cold air when something warm cuts through it.
+ * Used by the 404 page, layered above lost-moon and lost-terrain. Tiny
+ * particles — dust, pollen, spore — rise slowly through the central beam,
+ * drift laterally as they go, and fade once they wander outside the beam's
+ * width. They are visible because the light catches them. They rise because
+ * cold still air around something warm drives a slow vertical convection.
  *
- * Canvas class : x3p0-canvas-scene--lost-motes
- * Position     : fixed — fills the viewport regardless of scroll
- * Reduced motion: canvas is sized but never animated
+ * Each particle has its own rise speed, lateral wobble, and phase, so the
+ * field never appears choreographed.
  *
- * @file resources/js/canvas/chapter-lost-motes.js
+ * Canvas class  : x3p0-canvas-scene--lost-motes
+ * Position      : fixed — fills the viewport regardless of scroll
+ * Reduced motion: canvas is sized but not drawn (mid-flight motes would
+ *                 read as static specks, not motion)
+ *
+ * @file resources/js/canvas/scene/lost-motes.js
  */
 
-( function () {
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
-	const canvas = document.querySelector( '.x3p0-canvas-scene--lost-motes' );
+const canvas = document.querySelector( '.x3p0-canvas-scene--lost-motes' );
 
-	if ( ! canvas ) {
-		return;
-	}
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-	const group = canvas.parentElement;
-	const ctx   = canvas.getContext( '2d' );
+const CONFIG = {
 
-	// ─── CONFIG ──────────────────────────────────────────────────────────────
+	// Number of motes on screen at once.
+	moteCount: 55,
 
-	const CONFIG = {
-		// Number of mote particles.
-		moteCount: 55,
+	// Horizontal spawn range, as fractions of viewport width. Matches the
+	// moonbeam shaft — centre third by default.
+	originXMin: 0.34,
+	originXMax: 0.66,
 
-		// Horizontal origin as fraction of viewport width.
-		// Motes spawn within the moonbeam shaft — centre third.
-		originXMin: 0.34,
-		originXMax: 0.66,
+	// Vertical spawn range, as fractions of viewport height.
+	originYMin: 0.30,
+	originYMax: 1.05,
 
-		// Vertical spawn band — lower two thirds of viewport.
-		originYMin: 0.30,
-		originYMax: 1.05,
+	// Rise speed range (px/frame). Negative = upward.
+	riseSpeedMin: -0.22,
+	riseSpeedMax: -0.07,
 
-		// Rise speed range (px/frame, negative = upward).
-		riseSpeedMin: -0.22,
-		riseSpeedMax: -0.07,
+	// Linear horizontal drift range (px/frame). Combined with the sine
+	// wobble below for the total lateral motion.
+	driftXMin: -0.06,
+	driftXMax:  0.06,
 
-		// Lateral drift amplitude (px) — how far a mote wanders sideways.
-		wobbleAmp: 0.55,
+	// Lateral wobble — sinusoidal oscillation layered over linear drift.
+	wobbleAmp:  0.55,    // px
+	wobbleFreq: 0.012,   // base radians/frame; randomised per particle
 
-		// Wobble frequency — lower = lazier drift.
-		wobbleFreq: 0.012,
+	// Per-particle alpha range.
+	alphaMin: 0.06,
+	alphaMax: 0.28,
 
-		// Opacity range.
-		alphaMin: 0.06,
-		alphaMax: 0.28,
+	// Alpha lost per frame when a mote drifts outside the beam x-range.
+	fadeRate: 0.004,
 
-		// Fade rate per frame when a mote drifts outside the beam.
-		fadeRate: 0.004,
+	// Mote radius range (px).
+	radiusMin: 0.6,
+	radiusMax: 1.8,
 
-		// Particle radius range (px).
-		radiusMin: 0.6,
-		radiusMax: 1.8,
+	// Glow halo radius as a multiplier of the mote's core radius.
+	glowRadiusMultiplier: 3.2,
 
-		// Glow radius multiplier — soft halo around each mote.
-		glowRadiusMultiplier: 3.2,
+	// Glow halo alpha as a fraction of the mote's current alpha.
+	glowAlphaFraction: 0.18,
 
-		// Glow opacity as a fraction of the mote's current alpha.
-		glowAlphaFraction: 0.18,
+};
+
+// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
+
+( () => {
+	const map = {
+		moteCount:            Number,
+		originXMin:           Number,
+		originXMax:           Number,
+		originYMin:           Number,
+		originYMax:           Number,
+		riseSpeedMin:         Number,
+		riseSpeedMax:         Number,
+		driftXMin:            Number,
+		driftXMax:            Number,
+		wobbleAmp:            Number,
+		wobbleFreq:           Number,
+		alphaMin:             Number,
+		alphaMax:             Number,
+		fadeRate:             Number,
+		radiusMin:            Number,
+		radiusMax:            Number,
+		glowRadiusMultiplier: Number,
+		glowAlphaFraction:    Number,
 	};
 
-	// ─── CANVAS SETUP ────────────────────────────────────────────────────────
-
-	function resize() {
-		canvas.width  = window.innerWidth;
-		canvas.height = window.innerHeight;
-	}
-
-	resize();
-	window.addEventListener( 'resize', resize );
-
-	// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────
-
-	( function () {
-		const map = {
-			moteCount:            Number,
-			originXMin:           Number,
-			originXMax:           Number,
-			originYMin:           Number,
-			originYMax:           Number,
-			riseSpeedMin:         Number,
-			riseSpeedMax:         Number,
-			wobbleAmp:            Number,
-			wobbleFreq:           Number,
-			alphaMin:             Number,
-			alphaMax:             Number,
-			fadeRate:             Number,
-			radiusMin:            Number,
-			radiusMax:            Number,
-			glowRadiusMultiplier: Number,
-			glowAlphaFraction:    Number,
-		};
-
-		Object.keys( map ).forEach( ( key ) => {
-			if ( canvas.dataset[ key ] !== undefined ) {
-				CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
-			}
-		} );
-	} )();
-
-	// ─── REDUCED MOTION GUARD ────────────────────────────────────────────────
-
-	if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
-		return;
-	}
-
-	// ─── COLOUR ──────────────────────────────────────────────────────────────
-
-	// Read ink-accent directly from the style variation — used as-is.
-	// Alpha is controlled per-particle via ctx.globalAlpha.
-	// Fallback: late-summer ink-accent.
-	const style     = getComputedStyle( group );
-	const fillColor = style.getPropertyValue( '--wp--preset--color--ink-accent' ).trim()
-		|| '#4a2808';
-
-	// ─── PARTICLE SYSTEM ─────────────────────────────────────────────────────
-
-	function rand( min, max ) {
-		return min + Math.random() * ( max - min );
-	}
-
-	function spawnMote() {
-		return {
-			x:      rand( CONFIG.originXMin, CONFIG.originXMax ) * canvas.width,
-			y:      rand( CONFIG.originYMin, CONFIG.originYMax ) * canvas.height,
-			vy:     rand( CONFIG.riseSpeedMin, CONFIG.riseSpeedMax ),
-			vx:     rand( -0.06, 0.06 ),
-			alpha:  rand( CONFIG.alphaMin, CONFIG.alphaMax ),
-			radius: rand( CONFIG.radiusMin, CONFIG.radiusMax ),
-			phase:  rand( 0, Math.PI * 2 ),
-			freq:   CONFIG.wobbleFreq * rand( 0.7, 1.3 ),
-		};
-	}
-
-	const motes = Array.from( { length: CONFIG.moteCount }, spawnMote );
-
-	// ─── DRAW ─────────────────────────────────────────────────────────────────
-
-	function drawMote( m ) {
-		// Glow halo
-		const glowR = m.radius * CONFIG.glowRadiusMultiplier;
-		const glow  = ctx.createRadialGradient( m.x, m.y, 0, m.x, m.y, glowR );
-
-		ctx.globalAlpha = m.alpha * CONFIG.glowAlphaFraction;
-		glow.addColorStop( 0, fillColor );
-		glow.addColorStop( 1, 'transparent' );
-
-		ctx.beginPath();
-		ctx.arc( m.x, m.y, glowR, 0, Math.PI * 2 );
-		ctx.fillStyle = glow;
-		ctx.fill();
-
-		// Mote core
-		ctx.globalAlpha = m.alpha;
-		ctx.fillStyle   = fillColor;
-		ctx.beginPath();
-		ctx.arc( m.x, m.y, m.radius, 0, Math.PI * 2 );
-		ctx.fill();
-	}
-
-	// ─── ANIMATION LOOP ───────────────────────────────────────────────────────
-
-	let t     = 0;
-	let rafId = null;
-
-	function tick() {
-		ctx.clearRect( 0, 0, canvas.width, canvas.height );
-		ctx.globalAlpha = 1;
-
-		for ( const m of motes ) {
-			m.y += m.vy;
-			m.x += m.vx + Math.sin( t * m.freq * 60 + m.phase ) * CONFIG.wobbleAmp;
-
-			// Fade motes that drift outside the beam
-			const beamMin = CONFIG.originXMin * canvas.width;
-			const beamMax = CONFIG.originXMax * canvas.width;
-
-			if ( m.x < beamMin || m.x > beamMax ) {
-				m.alpha = Math.max( 0, m.alpha - CONFIG.fadeRate );
-			}
-
-			// Recycle when invisible or above viewport
-			if ( m.alpha <= 0 || m.y < -10 ) {
-				Object.assign( m, spawnMote() );
-			}
-
-			drawMote( m );
-		}
-
-		ctx.globalAlpha = 1;
-		t    += 0.016;
-		rafId = requestAnimationFrame( tick );
-	}
-
-	rafId = requestAnimationFrame( tick );
-
-	// ─── CLEANUP ─────────────────────────────────────────────────────────────
-
-	const observer = new MutationObserver( () => {
-		if ( ! document.contains( group ) ) {
-			cancelAnimationFrame( rafId );
-			window.removeEventListener( 'resize', resize );
-			observer.disconnect();
+	Object.keys( map ).forEach( ( key ) => {
+		if ( canvas.dataset[ key ] !== undefined ) {
+			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
 		}
 	} );
-
-	observer.observe( document.body, { childList: true, subtree: true } );
-
 } )();
+
+// ─── CANVAS SETUP ────────────────────────────────────────────────────────────
+
+const rafRef = { current: null };
+
+const { ctx, resize } = setupCanvas( canvas );
+
+// ─── REDUCED MOTION ──────────────────────────────────────────────────────────
+
+const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+// ─── COLOUR ──────────────────────────────────────────────────────────────────
+
+let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '200,178,85,0.72' );
+
+// ─── EFFECT STATE ────────────────────────────────────────────────────────────
+
+function randomBetween( min, max ) {
+	return min + Math.random() * ( max - min );
+}
+
+function spawnMote() {
+	return {
+		x:      randomBetween( CONFIG.originXMin,  CONFIG.originXMax  ) * window.innerWidth,
+		y:      randomBetween( CONFIG.originYMin,  CONFIG.originYMax  ) * window.innerHeight,
+		vy:     randomBetween( CONFIG.riseSpeedMin, CONFIG.riseSpeedMax ),
+		vx:     randomBetween( CONFIG.driftXMin,    CONFIG.driftXMax    ),
+		alpha:  randomBetween( CONFIG.alphaMin,     CONFIG.alphaMax     ),
+		radius: randomBetween( CONFIG.radiusMin,    CONFIG.radiusMax    ),
+		phase:  Math.random() * Math.PI * 2,
+		freq:   CONFIG.wobbleFreq * randomBetween( 0.7, 1.3 ),
+	};
+}
+
+const motes = Array.from( { length: CONFIG.moteCount }, spawnMote );
+
+// ─── DRAW ────────────────────────────────────────────────────────────────────
+
+function drawMote( m ) {
+	const glowR = m.radius * CONFIG.glowRadiusMultiplier;
+	const glow  = ctx.createRadialGradient( m.x, m.y, 0, m.x, m.y, glowR );
+
+	glow.addColorStop( 0, withAlpha( colour, m.alpha * CONFIG.glowAlphaFraction ) );
+	glow.addColorStop( 1, withAlpha( colour, 0 ) );
+
+	ctx.beginPath();
+	ctx.arc( m.x, m.y, glowR, 0, Math.PI * 2 );
+	ctx.fillStyle = glow;
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc( m.x, m.y, m.radius, 0, Math.PI * 2 );
+	ctx.fillStyle = withAlpha( colour, m.alpha );
+	ctx.fill();
+}
+
+function draw( t ) {
+	const W       = window.innerWidth;
+	const beamMin = CONFIG.originXMin * W;
+	const beamMax = CONFIG.originXMax * W;
+
+	ctx.clearRect( 0, 0, W, window.innerHeight );
+
+	for ( const m of motes ) {
+		m.y += m.vy;
+		m.x += m.vx + Math.sin( t * m.freq * 60 + m.phase ) * CONFIG.wobbleAmp;
+
+		if ( m.x < beamMin || m.x > beamMax ) {
+			m.alpha = Math.max( 0, m.alpha - CONFIG.fadeRate );
+		}
+
+		if ( m.alpha <= 0 || m.y < -10 ) {
+			Object.assign( m, spawnMote() );
+		}
+
+		drawMote( m );
+	}
+}
+
+// ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
+
+if ( reducedMotion ) {
+	createCleanup( canvas, rafRef, resize );
+}
+
+// ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
+
+else {
+	let t = 0;
+
+	function tick() {
+		draw( t );
+		t += 0.016;
+		rafRef.current = requestAnimationFrame( tick );
+	}
+
+	rafRef.current = requestAnimationFrame( tick );
+	createCleanup( canvas, rafRef, resize );
+}

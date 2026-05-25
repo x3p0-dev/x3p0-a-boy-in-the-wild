@@ -18,7 +18,7 @@
  * @file resources/js/canvas/scene/motes.js
  */
 
-import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
 const canvas = document.querySelector( '.x3p0-canvas-scene--motes' );
 
@@ -125,7 +125,7 @@ const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).ma
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-let rgb = extractRGB( canvas, '--wp--preset--color--ink-accent', '74,40,8' );
+let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '74,40,8' );
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
@@ -210,7 +210,7 @@ function updateMote( m ) {
 function drawMote( m ) {
 	ctx.beginPath();
 	ctx.arc( m.x, m.y, m.radius, 0, Math.PI * 2 );
-	ctx.fillStyle = `rgba(${ rgb },${ m.alpha.toFixed( 3 ) })`;
+	ctx.fillStyle = withAlpha( colour, m.alpha );
 	ctx.fill();
 }
 

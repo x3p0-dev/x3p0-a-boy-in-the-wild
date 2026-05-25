@@ -17,7 +17,7 @@
  * @file resources/js/canvas/scene/adrift.js
  */
 
-import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
 const canvas = document.querySelector( '.x3p0-canvas-scene--adrift' );
 
@@ -110,12 +110,14 @@ const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).ma
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
 // A small warm palette — each particle picks one index. The variety reads as
-// dust catching different bits of light through a tree canopy.
-let rgbs = [
-	extractRGB( canvas, '--wp--preset--color--ink-accent',       '122,64,16'  ),
-	extractRGB( canvas, '--wp--preset--color--ink-subtle',       '92,44,8'    ),
-	extractRGB( canvas, '--wp--preset--color--ink-muted',        '154,88,24'  ),
-	extractRGB( canvas, '--wp--preset--color--parchment-accent', '154,88,24'  ),
+// dust catching different bits of light through a tree canopy. Fallback
+// alphas mirror the state-buried token values, so the effect stays subtle
+// even if the CSS variables fail to resolve.
+let colours = [
+	extractColour( canvas, '--wp--preset--color--ink-accent',       '100,62,12,0.45' ),
+	extractColour( canvas, '--wp--preset--color--ink-subtle',       '30,16,2,0.68'   ),
+	extractColour( canvas, '--wp--preset--color--ink-muted',        '30,16,2,0.50'   ),
+	extractColour( canvas, '--wp--preset--color--parchment-accent', '100,62,12,0.45' ),
 ];
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
@@ -140,7 +142,7 @@ function makeCluster( randomX ) {
 			wobbleOffset: Math.random() * Math.PI * 2,
 			wobbleSpeed:  randomBetween( CONFIG.wobbleSpeedMin, CONFIG.wobbleSpeedMax ),
 			wobbleAmp:    randomBetween( CONFIG.wobbleAmpMin,   CONFIG.wobbleAmpMax   ),
-			colorIndex:   Math.floor( Math.random() * rgbs.length ),
+			colorIndex:   Math.floor( Math.random() * colours.length ),
 		} );
 	}
 
@@ -183,7 +185,7 @@ function draw( t ) {
 
 			ctx.beginPath();
 			ctx.arc( px, py, p.r, 0, Math.PI * 2 );
-			ctx.fillStyle = `rgba(${ rgbs[ p.colorIndex ] },${ p.alpha.toFixed( 3 ) })`;
+			ctx.fillStyle = withAlpha( colours[ p.colorIndex ], p.alpha );
 			ctx.fill();
 		} );
 	}

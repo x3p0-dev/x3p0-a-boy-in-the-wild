@@ -14,7 +14,7 @@
  * @file resources/js/canvas/scene/rising-embers.js
  */
 
-import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
 const canvas = document.querySelector( '.x3p0-canvas-scene--rising-embers' );
 
@@ -123,7 +123,7 @@ const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).ma
 // The ember hue is the chapter's warm anchor. Additive blending in the draw
 // loop is what gives the cores their brightened, glowing feel — there is no
 // per-particle colour variation.
-let rgb = extractRGB( canvas, '--wp--preset--color--ink-accent', '122,64,16' );
+let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '122,64,16' );
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
@@ -168,8 +168,8 @@ function drawEmber( e ) {
 	const glowRadius = e.radius * CONFIG.glowRadiusMultiplier;
 
 	const glow = ctx.createRadialGradient( e.x, e.y, 0, e.x, e.y, glowRadius );
-	glow.addColorStop( 0, `rgba(${ rgb },${ ( e.alpha * 0.35 ).toFixed( 3 ) })` );
-	glow.addColorStop( 1, `rgba(${ rgb },0)` );
+	glow.addColorStop( 0, withAlpha( colour, e.alpha * 0.35 ) );
+	glow.addColorStop( 1, withAlpha( colour, 0 ) );
 
 	ctx.beginPath();
 	ctx.arc( e.x, e.y, glowRadius, 0, Math.PI * 2 );
@@ -177,9 +177,9 @@ function drawEmber( e ) {
 	ctx.fill();
 
 	const core = ctx.createRadialGradient( e.x, e.y, 0, e.x, e.y, e.radius );
-	core.addColorStop( 0,   `rgba(${ rgb },${ Math.min( e.alpha * 1.2, 1 ).toFixed( 3 ) })` );
-	core.addColorStop( 0.6, `rgba(${ rgb },${ e.alpha.toFixed( 3 ) })` );
-	core.addColorStop( 1,   `rgba(${ rgb },0)` );
+	core.addColorStop( 0,   withAlpha( colour, Math.min( e.alpha * 1.2, 1 ) ) );
+	core.addColorStop( 0.6, withAlpha( colour, e.alpha ) );
+	core.addColorStop( 1,   withAlpha( colour, 0 ) );
 
 	ctx.beginPath();
 	ctx.arc( e.x, e.y, e.radius, 0, Math.PI * 2 );

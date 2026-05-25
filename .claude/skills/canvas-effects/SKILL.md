@@ -128,26 +128,45 @@ export function setupCanvas(canvas, onResize = null) {
 }
 
 /**
- * Read a CSS custom property from the canvas element, strip its alpha
- * channel, and return the bare RGB components as a comma-separated string
- * for use in rgba() construction.
- *
- * Scene canvases inherit CSS custom properties from the Entry Group, so
- * reading from the canvas directly is equivalent to reading from the group.
+ * Read a CSS colour token and return `{ rgb, alpha }`. The token may be hex
+ * or rgba — alpha defaults to 1 if absent. The token's alpha is intentional
+ * (designers use it to tune how subtle a colour should be); effects must
+ * honour it by multiplying per-stop alpha against `colour.alpha`. Use
+ * `withAlpha()` to build rgba strings correctly.
  *
  * @param {HTMLCanvasElement} canvas
- * @param {string}            token     - CSS custom property name (with --)
- * @param {string}            fallback  - fallback RGB string, e.g. '90,55,12'
+ * @param {string}            token    - CSS custom property name (with --)
+ * @param {string}            fallback - 3 or 4 numbers, e.g. '185,165,85,0.14'
+ * @returns {{ rgb: string, alpha: number }}
+ */
+export function extractColour(canvas, token, fallback) {
+    const raw    = getComputedStyle(canvas).getPropertyValue(token).trim() || fallback;
+    const tokens = raw.match(/[\d.]+/g);
+
+    if (tokens && tokens.length >= 3) {
+        return {
+            rgb:   `${tokens[0]},${tokens[1]},${tokens[2]}`,
+            alpha: tokens.length >= 4 ? parseFloat(tokens[3]) : 1,
+        };
+    }
+
+    const fb = fallback.match(/[\d.]+/g) || ['0', '0', '0'];
+    return {
+        rgb:   `${fb[0]},${fb[1]},${fb[2]}`,
+        alpha: fb.length >= 4 ? parseFloat(fb[3]) : 1,
+    };
+}
+
+/**
+ * Build a CSS rgba string from an extractColour() result, multiplying the
+ * token's alpha by an optional per-stop alpha multiplier.
+ *
+ * @param {{ rgb: string, alpha: number }} colour
+ * @param {number}                         alpha  - per-stop multiplier (default 1)
  * @returns {string}
  */
-export function extractRGB(canvas, token, fallback) {
-    const raw   = getComputedStyle(canvas).getPropertyValue(token).trim()
-        || fallback;
-    const match = raw.match(/[\d.]+/g);
-
-    return (match && match.length >= 3)
-        ? `${match[0]},${match[1]},${match[2]}`
-        : fallback;
+export function withAlpha(colour, alpha = 1) {
+    return `rgba(${colour.rgb},${(colour.alpha * alpha).toFixed(4)})`;
 }
 
 /**
@@ -184,7 +203,7 @@ Every effect file follows this structure, in order:
 5. Data attribute overrides
 6. Canvas setup via `setupCanvas()`
 7. Reduced motion check
-8. Colour — read from CSS custom property via `extractRGB()`
+8. Colour — read from CSS custom property via `extractColour()`
 9. Effect-specific state (particles, field, seeds, etc.)
 10. Draw function(s)
 11. Animation loop — or static draw if reduced motion
@@ -211,7 +230,7 @@ guard is needed.
  * @file resources/js/canvas/scene/{effect}.js
  */
 
-import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
 const canvas = document.querySelector('.x3p0-canvas-scene--{effect}');
 
@@ -256,7 +275,12 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-let rgb = extractRGB(canvas, '--wp--preset--color--{token}', '{fallback-rgb}');
+let colour = extractColour(canvas, '--wp--preset--color--{token}', '{fallback-rgb-or-rgba}');
+
+// Then use withAlpha() at draw-time:
+//   ctx.fillStyle = withAlpha(colour, particle.alpha);
+//   grad.addColorStop(0, withAlpha(colour, 1));
+//   grad.addColorStop(1, withAlpha(colour, 0));
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
 
@@ -327,13 +351,20 @@ via the `map` object — never rely on implicit conversion.
 
 ## Colour
 
-- All colour comes from CSS custom properties read via `extractRGB()`.
+- All colour comes from CSS custom properties read via `extractColour()`.
   Scene canvases inherit CSS custom properties from the Entry Group, so
   reading from the canvas directly is equivalent.
-- Use each value directly as the RGB components of an `rgba()` string.
-- Control opacity per-particle or per-line via `ctx.globalAlpha` or the
-  alpha argument of `rgba()`.
-- Always provide a hardcoded fallback matching the late-summer palette.
+- Use `withAlpha(colour, alpha)` to build rgba strings — never construct
+  `rgba(${rgb}, ...)` manually. The helper multiplies the token's alpha by
+  the per-stop alpha, which is critical: tokens in this theme frequently
+  carry intentional alpha (e.g. `--rule` in mood-lost is alpha 0.14), and
+  stripping that yields effects up to 7–9× too bright.
+- The per-stop alpha is a *multiplier on top of* the token's alpha, not a
+  replacement. `withAlpha(colour, 1)` = pure token alpha; `withAlpha(colour, 0)`
+  = transparent for gradient endpoints.
+- Always provide a hardcoded fallback that matches the chapter's actual
+  token, *including alpha*. Format: `'185,165,85,0.14'` (rgb,alpha) or
+  `'74,40,8'` (rgb only when the token is hex / alpha 1).
 
 An effect may read **one or several** tokens depending on what its visual
 character needs:
@@ -344,8 +375,8 @@ character needs:
 - **A small palette of tokens** is appropriate when the effect reads as
   monotone with a single hue — clusters of distinct particles, line
   networks, anything where tonal range is part of the design. Each
-  particle picks an index into a `let rgbs = [...]` array built from
-  separate `extractRGB()` calls. Do not invent intermediate hues by
+  particle picks an index into a `let colours = [...]` array built from
+  separate `extractColour()` calls. Do not invent intermediate hues by
   shifting HSL — use what the palette gives you.
 
 The most useful anchor tokens:
@@ -429,8 +460,8 @@ To ship a new effect, the only steps are:
   tuneable value into a draw function to fix a bug.
 - If adding a new tuneable, add it to both CONFIG and the data attribute
   override map.
-- If changing colour behaviour, go through `extractRGB()` — do not
-  hardcode colours except as fallbacks.
+- If changing colour behaviour, go through `extractColour()` + `withAlpha()` —
+  do not hardcode colours except as fallbacks.
 
 ---
 
@@ -438,7 +469,7 @@ To ship a new effect, the only steps are:
 
 - Do not write an IIFE wrapper — module scope handles isolation.
 - Do not add per-effect CSS positioning rules — `.x3p0-canvas-scene` covers it.
-- Do not hardcode colours except as `extractRGB()` fallbacks.
+- Do not hardcode colours except as `extractColour()` fallbacks.
 - Do not put tuneable values anywhere except CONFIG.
 - Do not add `width` or `height` attributes to the canvas element.
 - Do not size the canvas to anything other than the viewport.

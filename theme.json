@@ -143,6 +143,16 @@
 					"slug": "sketch-ink",
 					"color": "rgba(48, 24, 4, 0.70)",
 					"name": "Sketch Ink"
+				},
+				{
+					"slug": "white",
+					"color": "#ffffff",
+					"name": "White"
+				},
+				{
+					"slug": "black",
+					"color": "#000000",
+					"name": "Black"
 				}
 			],
 			"text": false

@@ -1,345 +1,307 @@
 /**
- * Canvas effect: Moonlight — 404 Lost page.
+ * Lost moon — moonlight scene for the 404 page.
  *
- * Renders the full moonlight scene: a moon disc sitting just above the top
+ * Renders the full moonlight composition: a disc sitting just above the top
  * edge of the viewport, two static halo rings, a volumetric beam shaft
- * falling through the forest gap, and two soft ground pools of reflected
- * light. The moon bloom pulses very slowly — not flickering, just breathing,
- * the way moonlight feels when your eyes have adjusted and the forest seems
- * to shift without anything actually moving. The beam has an extremely subtle
- * cold-air shimmer. Nothing here is dramatic. It is simply the moon, and the
- * light it makes.
+ * falling through a forest gap, and three soft ground pools of reflected
+ * light. The bloom pulses very slowly — not flickering, just breathing,
+ * the way moonlight feels once your eyes have adjusted and the forest seems
+ * to shift without anything actually moving. The beam has a faint cold-air
+ * shimmer on an independent cycle so the two never sync.
  *
- * Canvas class : x3p0-canvas-scene--lost-moon
- * Position     : fixed — fills the viewport regardless of scroll
- * Reduced motion: canvas is sized, drawn once at mid-pulse, then static
+ * Two palette tokens drive the colour:
+ *   `--ink-accent` — atmospheric amber-gold, used everywhere the light hits
+ *                    air or ground (bloom, halos, beam, inner beam, pools).
+ *   `--ink`        — luminous cream-warm, used only for the moon disc. The
+ *                    moon is the source; everything else is what the source
+ *                    illuminates.
  *
- * @file resources/js/canvas/chapter-lost-moon.js
+ * Canvas class  : x3p0-canvas-scene--lost-moon
+ * Position      : fixed — fills the viewport regardless of scroll
+ * Reduced motion: drawn once at mid-pulse, then static
+ *
+ * @file resources/js/canvas/scene/lost-moon.js
  */
 
-( function () {
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
-	const canvas = document.querySelector( '.x3p0-canvas-scene--lost-moon' );
+const canvas = document.querySelector( '.x3p0-canvas-scene--lost-moon' );
 
-	if ( ! canvas ) {
-		return;
-	}
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-	const group = canvas.parentElement;
-	const ctx   = canvas.getContext( '2d' );
+const CONFIG = {
 
-	// ─── CONFIG ──────────────────────────────────────────────────────────────
+	// Moon centre, as fractions of viewport size.
+	// moonY < 0 keeps the disc partly above the top edge.
+	moonX: 0.5,
+	moonY: -0.048,
 
-	const CONFIG = {
-		// Moon centre X as a fraction of viewport width.
-		moonX: 0.5,
+	// Moon disc radius as a fraction of viewport height.
+	moonRadius: 0.098,
 
-		// Moon centre Y as a fraction of viewport height.
-		// Negative keeps it partially above the top edge.
-		moonY: -0.048,
+	// Halo ring radii and static opacities.
+	haloRadius1:  0.168,
+	haloRadius2:  0.215,
+	haloOpacity1: 0.07,
+	haloOpacity2: 0.045,
 
-		// Moon disc radius as a fraction of viewport height.
-		moonRadius: 0.098,
+	// Moon bloom — outer atmospheric glow. The pulse is barely perceptible.
+	bloomRadius:        0.62,    // fraction of viewport height
+	bloomOpacityMin:    0.055,
+	bloomOpacityMax:    0.095,
+	bloomPulseDuration: 10000,   // ms — one full cycle
 
-		// Halo ring radii as fractions of viewport height.
-		haloRadius1: 0.168,
-		haloRadius2: 0.215,
+	// Beam shaft — wide cone from moon to ground.
+	beamWidthBase:       0.28,   // fraction of viewport width at the floor
+	beamWidthTop:        0.06,   // fraction of viewport width at the top
+	beamOpacityMin:      0.038,
+	beamOpacityMax:      0.065,
+	beamShimmerDuration: 7500,   // ms — one full cycle
+	beamShimmerPhase:    1.2,    // radian phase offset from the bloom pulse
 
-		// Halo ring opacities — static, no animation.
-		haloOpacity1: 0.07,
-		haloOpacity2: 0.045,
+	// Inner beam — tighter, more luminous core. Static opacity.
+	innerBeamWidthBase: 0.14,
+	innerBeamWidthTop:  0.032,
+	innerBeamOpacity:   0.048,
+	innerBeamReach:     0.72,    // fraction of viewport height the core extends to
 
-		// Moon bloom pulse — opacity range for the outer glow.
-		// Very close values so the pulse is barely perceptible.
-		bloomOpacityMin: 0.055,
-		bloomOpacityMax: 0.095,
+	// Ground pool — directly under the beam.
+	poolCentreRadius:  0.32,     // fraction of viewport width
+	poolCentreOpacity: 0.088,
 
-		// Bloom radius as a fraction of viewport height.
-		bloomRadius: 0.62,
+	// Ground pools — left and right secondary reflections.
+	poolSideRadius:  0.22,       // fraction of viewport width
+	poolSideOpacity: 0.055,
+	poolLeftX:       0.26,       // fraction of viewport width
+	poolRightX:      0.74,
+	poolY:           0.88,       // fraction of viewport height
 
-		// Bloom pulse duration (ms) — one full cycle.
-		bloomPulseDuration: 10000,
+	// Moon disc — alpha at centre and edge of the disc gradient.
+	discAlphaCentre: 1.0,
+	discAlphaEdge:   0.30,
+	discOverallAlpha: 0.92,      // applied as globalAlpha across the disc
 
-		// Beam shaft — wide cone from moon to ground.
-		// Width at base as a fraction of viewport width.
-		beamWidthBase: 0.28,
+	// Moon disc — inner highlight offset (fraction of moon radius, upward).
+	discHighlightOffset: 0.15,
 
-		// Beam shaft — narrow top width as a fraction of viewport width.
-		beamWidthTop: 0.06,
+	// Crater texture overlay opacity.
+	craterOpacity: 0.055,
 
-		// Beam opacity range for cold-air shimmer.
-		beamOpacityMin: 0.038,
-		beamOpacityMax: 0.065,
+};
 
-		// Beam shimmer duration (ms) — one full cycle.
-		beamShimmerDuration: 7500,
+// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
 
-		// Inner beam — tighter, more luminous core.
-		innerBeamWidthBase: 0.14,
-		innerBeamWidthTop:  0.032,
-		innerBeamOpacity:   0.048,
-
-		// Ground pool — centre, directly under beam.
-		poolCentreRadius: 0.32,
-		poolCentreOpacity: 0.088,
-
-		// Ground pool — left and right secondary pools.
-		poolSideRadius:   0.22,
-		poolSideOpacity:  0.055,
-		poolLeftX:        0.26,
-		poolRightX:       0.74,
-		poolY:            0.88,
+( () => {
+	const map = {
+		moonX:               Number,
+		moonY:               Number,
+		moonRadius:          Number,
+		haloRadius1:         Number,
+		haloRadius2:         Number,
+		haloOpacity1:        Number,
+		haloOpacity2:        Number,
+		bloomRadius:         Number,
+		bloomOpacityMin:     Number,
+		bloomOpacityMax:     Number,
+		bloomPulseDuration:  Number,
+		beamWidthBase:       Number,
+		beamWidthTop:        Number,
+		beamOpacityMin:      Number,
+		beamOpacityMax:      Number,
+		beamShimmerDuration: Number,
+		beamShimmerPhase:    Number,
+		innerBeamWidthBase:  Number,
+		innerBeamWidthTop:   Number,
+		innerBeamOpacity:    Number,
+		innerBeamReach:      Number,
+		poolCentreRadius:    Number,
+		poolCentreOpacity:   Number,
+		poolSideRadius:      Number,
+		poolSideOpacity:     Number,
+		poolLeftX:           Number,
+		poolRightX:          Number,
+		poolY:               Number,
+		discAlphaCentre:     Number,
+		discAlphaEdge:       Number,
+		discOverallAlpha:    Number,
+		discHighlightOffset: Number,
+		craterOpacity:       Number,
 	};
 
-	// ─── CANVAS SETUP ────────────────────────────────────────────────────────
+	Object.keys( map ).forEach( ( key ) => {
+		if ( canvas.dataset[ key ] !== undefined ) {
+			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
+		}
+	} );
+} )();
 
-	function resize() {
-		canvas.width  = window.innerWidth;
-		canvas.height = window.innerHeight;
-	}
+// ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-	resize();
-	window.addEventListener( 'resize', resize );
+const rafRef = { current: null };
 
-	// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────
+const { ctx, resize } = setupCanvas( canvas );
 
-	( function () {
-		const map = {
-			moonX:                Number,
-			moonY:                Number,
-			moonRadius:           Number,
-			haloRadius1:          Number,
-			haloRadius2:          Number,
-			haloOpacity1:         Number,
-			haloOpacity2:         Number,
-			bloomOpacityMin:      Number,
-			bloomOpacityMax:      Number,
-			bloomRadius:          Number,
-			bloomPulseDuration:   Number,
-			beamWidthBase:        Number,
-			beamWidthTop:         Number,
-			beamOpacityMin:       Number,
-			beamOpacityMax:       Number,
-			beamShimmerDuration:  Number,
-			innerBeamWidthBase:   Number,
-			innerBeamWidthTop:    Number,
-			innerBeamOpacity:     Number,
-			poolCentreRadius:     Number,
-			poolCentreOpacity:    Number,
-			poolSideRadius:       Number,
-			poolSideOpacity:      Number,
-			poolLeftX:            Number,
-			poolRightX:           Number,
-			poolY:                Number,
-		};
+// ─── REDUCED MOTION ──────────────────────────────────────────────────────────
 
-		Object.keys( map ).forEach( ( key ) => {
-			if ( canvas.dataset[ key ] !== undefined ) {
-				CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
-			}
-		} );
-	} )();
+const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 
-	// ─── REDUCED MOTION ──────────────────────────────────────────────────────
+// ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-	const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+// Atmospheric amber — what the light *touches*. Mood-lost gives this an
+// alpha of 0.72, which is part of how subtle moon-on-air should feel.
+let glow = extractColour( canvas, '--wp--preset--color--ink-accent', '200,178,85,0.72'  );
 
-	// ─── COLOUR ──────────────────────────────────────────────────────────────
+// Luminous cream-warm — what the light *is*. Mood-lost gives this 0.90.
+let disc = extractColour( canvas, '--wp--preset--color--ink',        '215,205,158,0.90' );
 
-	// ink-accent — moonbeam amber-silver. Used for beam, pools, bloom.
-	// Fallback: late-summer ink-accent.
-	const style        = getComputedStyle( group );
-	const inkAccent    = style.getPropertyValue( '--wp--preset--color--ink-accent' ).trim()
-		|| '#4a2808';
+// ─── DRAW ────────────────────────────────────────────────────────────────────
 
-	// parchment-accent — secondary moon colour. Used for disc gradient.
-	// Fallback: late-summer parchment-accent.
-	const parchAccent  = style.getPropertyValue( '--wp--preset--color--parchment-accent' ).trim()
-		|| '#9a5818';
+function drawFrame( bloomAlpha, beamAlpha ) {
+	const W  = window.innerWidth;
+	const H  = window.innerHeight;
+	const MX = CONFIG.moonX      * W;
+	const MY = CONFIG.moonY      * H;
+	const MR = CONFIG.moonRadius * H;
 
-	// ─── DRAW ─────────────────────────────────────────────────────────────────
+	ctx.clearRect( 0, 0, W, H );
 
-	function drawFrame( bloomAlpha, beamAlpha ) {
-		const W  = canvas.width;
-		const H  = canvas.height;
-		const MX = CONFIG.moonX * W;
-		const MY = CONFIG.moonY * H;
-		const MR = CONFIG.moonRadius * H;
+	// ── Bloom — outer atmospheric glow ───────────────────────────────────────
+	const bloom = ctx.createRadialGradient( MX, MY, 0, MX, MY, CONFIG.bloomRadius * H );
+	bloom.addColorStop( 0,    withAlpha( glow, 1 ) );
+	bloom.addColorStop( 0.25, withAlpha( glow, 1 ) );
+	bloom.addColorStop( 1,    withAlpha( glow, 0 ) );
 
-		ctx.clearRect( 0, 0, W, H );
+	ctx.globalAlpha = bloomAlpha;
+	ctx.fillStyle   = bloom;
+	ctx.fillRect( 0, 0, W, H );
 
-		// ── Bloom — outer atmospheric glow, animated ──────────────────────────
-		const bloomR  = CONFIG.bloomRadius * H;
-		const bloom   = ctx.createRadialGradient( MX, MY, 0, MX, MY, bloomR );
-		bloom.addColorStop( 0,    inkAccent );
-		bloom.addColorStop( 0.25, inkAccent );
-		bloom.addColorStop( 1,    'transparent' );
+	// ── Halo rings ───────────────────────────────────────────────────────────
+	ctx.strokeStyle = withAlpha( glow, 1 );
 
-		ctx.globalAlpha = bloomAlpha;
-		ctx.fillStyle   = bloom;
-		ctx.fillRect( 0, 0, W, H );
+	ctx.globalAlpha = CONFIG.haloOpacity1;
+	ctx.lineWidth   = 1.5;
+	ctx.beginPath();
+	ctx.arc( MX, MY, CONFIG.haloRadius1 * H, 0, Math.PI * 2 );
+	ctx.stroke();
 
-		// ── Halo rings — static ───────────────────────────────────────────────
-		ctx.globalAlpha = CONFIG.haloOpacity1;
-		ctx.strokeStyle = inkAccent;
-		ctx.lineWidth   = 1.5;
-		ctx.beginPath();
-		ctx.arc( MX, MY, CONFIG.haloRadius1 * H, 0, Math.PI * 2 );
-		ctx.stroke();
+	ctx.globalAlpha = CONFIG.haloOpacity2;
+	ctx.lineWidth   = 1;
+	ctx.beginPath();
+	ctx.arc( MX, MY, CONFIG.haloRadius2 * H, 0, Math.PI * 2 );
+	ctx.stroke();
 
-		ctx.globalAlpha = CONFIG.haloOpacity2;
-		ctx.lineWidth   = 1;
-		ctx.beginPath();
-		ctx.arc( MX, MY, CONFIG.haloRadius2 * H, 0, Math.PI * 2 );
-		ctx.stroke();
+	// ── Beam shaft — wide cone, animated shimmer ─────────────────────────────
+	const beamBase = ( CONFIG.beamWidthBase / 2 ) * W;
+	const beamTop  = ( CONFIG.beamWidthTop  / 2 ) * W;
+	const beamGrad = ctx.createLinearGradient( MX, 0, MX, H );
+	beamGrad.addColorStop( 0,    withAlpha( glow, 1 ) );
+	beamGrad.addColorStop( 0.22, withAlpha( glow, 1 ) );
+	beamGrad.addColorStop( 0.62, withAlpha( glow, 1 ) );
+	beamGrad.addColorStop( 1,    withAlpha( glow, 0 ) );
 
-		// ── Beam shaft — wide cone, animated shimmer ──────────────────────────
-		const beamBase = ( CONFIG.beamWidthBase / 2 ) * W;
-		const beamTop  = ( CONFIG.beamWidthTop  / 2 ) * W;
-		const beamGrad = ctx.createLinearGradient( MX, 0, MX, H );
-		beamGrad.addColorStop( 0,    inkAccent );
-		beamGrad.addColorStop( 0.22, inkAccent );
-		beamGrad.addColorStop( 0.62, inkAccent );
-		beamGrad.addColorStop( 1,    'transparent' );
+	ctx.globalAlpha = beamAlpha;
+	ctx.fillStyle   = beamGrad;
+	ctx.beginPath();
+	ctx.moveTo( MX - beamTop,  0 );
+	ctx.lineTo( MX - beamBase, H );
+	ctx.lineTo( MX + beamBase, H );
+	ctx.lineTo( MX + beamTop,  0 );
+	ctx.closePath();
+	ctx.fill();
 
-		ctx.globalAlpha = beamAlpha;
-		ctx.fillStyle   = beamGrad;
-		ctx.beginPath();
-		ctx.moveTo( MX - beamTop,  0 );
-		ctx.lineTo( MX - beamBase, H );
-		ctx.lineTo( MX + beamBase, H );
-		ctx.lineTo( MX + beamTop,  0 );
-		ctx.closePath();
-		ctx.fill();
+	// ── Inner beam — tighter luminous core ───────────────────────────────────
+	const innerBase  = ( CONFIG.innerBeamWidthBase / 2 ) * W;
+	const innerTop   = ( CONFIG.innerBeamWidthTop  / 2 ) * W;
+	const innerReach = H * CONFIG.innerBeamReach;
+	const innerGrad  = ctx.createLinearGradient( MX, 0, MX, innerReach );
+	innerGrad.addColorStop( 0,   withAlpha( glow, 1 ) );
+	innerGrad.addColorStop( 0.5, withAlpha( glow, 1 ) );
+	innerGrad.addColorStop( 1,   withAlpha( glow, 0 ) );
 
-		// ── Inner beam — tighter luminous core, static opacity ────────────────
-		const innerBase = ( CONFIG.innerBeamWidthBase / 2 ) * W;
-		const innerTop  = ( CONFIG.innerBeamWidthTop  / 2 ) * W;
-		const innerGrad = ctx.createLinearGradient( MX, 0, MX, H * 0.72 );
-		innerGrad.addColorStop( 0,   inkAccent );
-		innerGrad.addColorStop( 0.5, inkAccent );
-		innerGrad.addColorStop( 1,   'transparent' );
+	ctx.globalAlpha = CONFIG.innerBeamOpacity;
+	ctx.fillStyle   = innerGrad;
+	ctx.beginPath();
+	ctx.moveTo( MX - innerTop,  0 );
+	ctx.lineTo( MX - innerBase, innerReach );
+	ctx.lineTo( MX + innerBase, innerReach );
+	ctx.lineTo( MX + innerTop,  0 );
+	ctx.closePath();
+	ctx.fill();
 
-		ctx.globalAlpha = CONFIG.innerBeamOpacity;
-		ctx.fillStyle   = innerGrad;
-		ctx.beginPath();
-		ctx.moveTo( MX - innerTop,  0 );
-		ctx.lineTo( MX - innerBase, H * 0.72 );
-		ctx.lineTo( MX + innerBase, H * 0.72 );
-		ctx.lineTo( MX + innerTop,  0 );
-		ctx.closePath();
-		ctx.fill();
+	// ── Ground pools — soft reflected light ──────────────────────────────────
+	drawPool( MX,                       H,                CONFIG.poolCentreRadius * W, CONFIG.poolCentreOpacity );
+	drawPool( CONFIG.poolLeftX  * W,    CONFIG.poolY * H, CONFIG.poolSideRadius   * W, CONFIG.poolSideOpacity   );
+	drawPool( CONFIG.poolRightX * W,    CONFIG.poolY * H, CONFIG.poolSideRadius   * W, CONFIG.poolSideOpacity   );
 
-		// ── Ground pools — soft reflected light ───────────────────────────────
+	// ── Moon disc — drawn last so it sits above the bloom ────────────────────
+	const moonGrad = ctx.createRadialGradient(
+		MX, MY - MR * CONFIG.discHighlightOffset, 0,
+		MX, MY, MR
+	);
+	moonGrad.addColorStop( 0,   withAlpha( disc, CONFIG.discAlphaCentre ) );
+	moonGrad.addColorStop( 0.8, withAlpha( disc, CONFIG.discAlphaCentre ) );
+	moonGrad.addColorStop( 1,   withAlpha( disc, CONFIG.discAlphaEdge ) );
 
-		// Centre pool
-		const poolCR   = CONFIG.poolCentreRadius * W;
-		const poolCGrad = ctx.createRadialGradient( MX, H, 0, MX, H, poolCR );
-		poolCGrad.addColorStop( 0,   inkAccent );
-		poolCGrad.addColorStop( 0.5, inkAccent );
-		poolCGrad.addColorStop( 1,   'transparent' );
+	ctx.globalAlpha = CONFIG.discOverallAlpha;
+	ctx.fillStyle   = moonGrad;
+	ctx.beginPath();
+	ctx.arc( MX, MY, MR, 0, Math.PI * 2 );
+	ctx.fill();
 
-		ctx.globalAlpha = CONFIG.poolCentreOpacity;
-		ctx.fillStyle   = poolCGrad;
-		ctx.fillRect( 0, 0, W, H );
+	// ── Craters — three subtle amber patches over the disc ───────────────────
+	ctx.globalAlpha = CONFIG.craterOpacity;
+	ctx.fillStyle   = withAlpha( glow, 1 );
+	ctx.beginPath();
+	ctx.arc( MX - MR * 0.27, MY - MR * 0.20, MR * 0.20, 0, Math.PI * 2 );
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc( MX + MR * 0.37, MY + MR * 0.13, MR * 0.13, 0, Math.PI * 2 );
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc( MX - MR * 0.09, MY + MR * 0.30, MR * 0.16, 0, Math.PI * 2 );
+	ctx.fill();
 
-		// Left pool
-		const poolSR    = CONFIG.poolSideRadius * W;
-		const poolLX    = CONFIG.poolLeftX  * W;
-		const poolRX    = CONFIG.poolRightX * W;
-		const poolY     = CONFIG.poolY      * H;
+	ctx.globalAlpha = 1;
+}
 
-		const poolLGrad = ctx.createRadialGradient( poolLX, poolY, 0, poolLX, poolY, poolSR );
-		poolLGrad.addColorStop( 0,   inkAccent );
-		poolLGrad.addColorStop( 0.5, inkAccent );
-		poolLGrad.addColorStop( 1,   'transparent' );
+function drawPool( x, y, r, alpha ) {
+	const grad = ctx.createRadialGradient( x, y, 0, x, y, r );
+	grad.addColorStop( 0,   withAlpha( glow, 1 ) );
+	grad.addColorStop( 0.5, withAlpha( glow, 1 ) );
+	grad.addColorStop( 1,   withAlpha( glow, 0 ) );
 
-		ctx.globalAlpha = CONFIG.poolSideOpacity;
-		ctx.fillStyle   = poolLGrad;
-		ctx.fillRect( 0, 0, W, H );
+	ctx.globalAlpha = alpha;
+	ctx.fillStyle   = grad;
+	ctx.fillRect( 0, 0, window.innerWidth, window.innerHeight );
+}
 
-		// Right pool
-		const poolRGrad = ctx.createRadialGradient( poolRX, poolY, 0, poolRX, poolY, poolSR );
-		poolRGrad.addColorStop( 0,   inkAccent );
-		poolRGrad.addColorStop( 0.5, inkAccent );
-		poolRGrad.addColorStop( 1,   'transparent' );
+// ─── REDUCED MOTION — draw once at mid-pulse, then stop ──────────────────────
 
-		ctx.globalAlpha = CONFIG.poolSideOpacity;
-		ctx.fillStyle   = poolRGrad;
-		ctx.fillRect( 0, 0, W, H );
+if ( reducedMotion ) {
+	const midBloom = ( CONFIG.bloomOpacityMin + CONFIG.bloomOpacityMax ) / 2;
+	const midBeam  = ( CONFIG.beamOpacityMin  + CONFIG.beamOpacityMax  ) / 2;
+	drawFrame( midBloom, midBeam );
+	createCleanup( canvas, rafRef, resize );
+}
 
-		// ── Moon disc — drawn last so it sits above the bloom ─────────────────
-		const moonGrad = ctx.createRadialGradient( MX, MY - MR * 0.15, 0, MX, MY, MR );
-		moonGrad.addColorStop( 0,   '#faf5e0' );
-		moonGrad.addColorStop( 0.5, '#f0e8c0' );
-		moonGrad.addColorStop( 0.8, '#e4d898' );
-		moonGrad.addColorStop( 1,   parchAccent );
+// ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
 
-		ctx.globalAlpha = 0.92;
-		ctx.fillStyle   = moonGrad;
-		ctx.beginPath();
-		ctx.arc( MX, MY, MR, 0, Math.PI * 2 );
-		ctx.fill();
-
-		// Very subtle crater texture
-		ctx.globalAlpha = 0.055;
-		ctx.fillStyle   = parchAccent;
-		ctx.beginPath();
-		ctx.arc( MX - MR * 0.27, MY - MR * 0.20, MR * 0.20, 0, Math.PI * 2 );
-		ctx.fill();
-		ctx.beginPath();
-		ctx.arc( MX + MR * 0.37, MY + MR * 0.13, MR * 0.13, 0, Math.PI * 2 );
-		ctx.fill();
-		ctx.beginPath();
-		ctx.arc( MX - MR * 0.09, MY + MR * 0.30, MR * 0.16, 0, Math.PI * 2 );
-		ctx.fill();
-
-		ctx.globalAlpha = 1;
-	}
-
-	// ─── REDUCED MOTION — draw once at mid-pulse ─────────────────────────────
-
-	if ( reducedMotion ) {
-		const midBloom = ( CONFIG.bloomOpacityMin + CONFIG.bloomOpacityMax ) / 2;
-		const midBeam  = ( CONFIG.beamOpacityMin  + CONFIG.beamOpacityMax  ) / 2;
-		drawFrame( midBloom, midBeam );
-		return;
-	}
-
-	// ─── ANIMATION LOOP ───────────────────────────────────────────────────────
-
-	let rafId = null;
-
+else {
 	function tick( timestamp ) {
-		// Bloom pulse — slow sine wave between min and max opacity.
 		const bloomPhase = ( timestamp % CONFIG.bloomPulseDuration ) / CONFIG.bloomPulseDuration;
 		const bloomAlpha = CONFIG.bloomOpacityMin
 			+ ( CONFIG.bloomOpacityMax - CONFIG.bloomOpacityMin )
 			* ( 0.5 + 0.5 * Math.sin( bloomPhase * Math.PI * 2 ) );
 
-		// Beam shimmer — independent cycle, offset phase so it doesn't
-		// sync with the bloom pulse.
-		const beamPhase  = ( timestamp % CONFIG.beamShimmerDuration ) / CONFIG.beamShimmerDuration;
-		const beamAlpha  = CONFIG.beamOpacityMin
+		const beamPhase = ( timestamp % CONFIG.beamShimmerDuration ) / CONFIG.beamShimmerDuration;
+		const beamAlpha = CONFIG.beamOpacityMin
 			+ ( CONFIG.beamOpacityMax - CONFIG.beamOpacityMin )
-			* ( 0.5 + 0.5 * Math.sin( beamPhase * Math.PI * 2 + 1.2 ) );
+			* ( 0.5 + 0.5 * Math.sin( beamPhase * Math.PI * 2 + CONFIG.beamShimmerPhase ) );
 
 		drawFrame( bloomAlpha, beamAlpha );
-		rafId = requestAnimationFrame( tick );
+		rafRef.current = requestAnimationFrame( tick );
 	}
 
-	rafId = requestAnimationFrame( tick );
-
-	// ─── CLEANUP ─────────────────────────────────────────────────────────────
-
-	const observer = new MutationObserver( () => {
-		if ( ! document.contains( group ) ) {
-			cancelAnimationFrame( rafId );
-			window.removeEventListener( 'resize', resize );
-			observer.disconnect();
-		}
-	} );
-
-	observer.observe( document.body, { childList: true, subtree: true } );
-
-} )();
+	rafRef.current = requestAnimationFrame( tick );
+	createCleanup( canvas, rafRef, resize );
+}

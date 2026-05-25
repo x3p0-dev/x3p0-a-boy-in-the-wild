@@ -1,324 +1,317 @@
 /**
  * Snow and embers — atmospheric canvas effect.
  *
- * Snow particles fall from above (cool blue-white). Embers rise from a fixed
- * origin point in the lower-right area of the canvas (warm amber). Two
- * particle pools, one canvas. Used for Chapter 5 — How to Make a Fire When
- * Everything Is Wet.
+ * Intended for Chapter 5 ("How to Make a Fire When Everything Is Wet") with
+ * the mood-campfire style variation. Snow falls from above (pure white,
+ * subtle alpha); embers rise from a fixed origin point in the lower-right
+ * area of the canvas (the chapter's warm ink-accent). Two particle pools,
+ * one canvas. Particle sizes scale with viewport area against a 1440×900
+ * reference so the effect looks proportionally consistent at any size.
+ *
+ * Colour tokens:
+ *   `--white`       — pure white for snow flakes
+ *   `--ink-accent`  — warm orange for ember glow + core (mood-campfire's
+ *                     ink-accent is `rgba(200,140,60,0.80)`, exactly the
+ *                     ember hue this effect wants)
  *
  * Canvas class  : x3p0-canvas-scene--snow-embers
  * Position      : fixed — fills the viewport regardless of scroll
- * Reduced motion: canvas is sized but never animated
+ * Reduced motion: canvas is sized but not drawn (mid-flight particles
+ *                 would read as a frozen-stamped scene, not a still moment)
  *
- * @file resources/js/canvas/snow-embers.js
+ * @file resources/js/canvas/scene/snow-embers.js
  */
 
-( function () {
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
-	const canvas = document.querySelector( '.x3p0-canvas-scene--snow-embers' );
+const canvas = document.querySelector( '.x3p0-canvas-scene--snow-embers' );
 
-	if ( ! canvas ) {
-		return;
-	}
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-	const group = canvas.parentElement;
-	const ctx   = canvas.getContext( '2d' );
+const CONFIG = {
 
-	// ─── CONFIG ──────────────────────────────────────────────────────────────
+	// ── Snow ─────────────────────────────────────────────────────────────────
 
-	const CONFIG = {
-		// Snow particle count.
-		snowCount: 60,
+	// Number of snow particles on screen at once.
+	snowCount: 60,
 
-		// Snow particle radius range (CSS px, before scale).
-		snowRadiusMin: 0.4,
-		snowRadiusMax: 1.8,
+	// Snow flake radius range (px, before viewport-area scale).
+	snowRadiusMin: 0.4,
+	snowRadiusMax: 1.8,
 
-		// Snow fall speed range (CSS px/frame).
-		snowSpeedMin: 0.15,
-		snowSpeedMax: 0.55,
+	// Snow fall speed range (px/frame).
+	snowSpeedMin: 0.15,
+	snowSpeedMax: 0.55,
 
-		// Snow horizontal drift range (CSS px/frame).
-		snowDriftRange: 0.3,
+	// Snow horizontal drift range — base linear sideways motion (px/frame).
+	snowDriftRange: 0.3,
 
-		// Snow opacity range.
-		snowOpacityMin: 0.08,
-		snowOpacityMax: 0.41,
+	// Per-flake alpha range (multiplied by the white token's alpha).
+	snowOpacityMin: 0.08,
+	snowOpacityMax: 0.41,
 
-		// Snow flicker amplitude (added/subtracted from opacity each frame).
-		snowFlickerAmp: 0.06,
+	// Snow flicker — small sinusoidal variation added/subtracted from alpha.
+	snowFlickerAmp:   0.06,
+	snowFlickerSpeed: 0.04,    // radians/frame
 
-		// Snow oscillation speed (radians/frame multiplier).
-		snowOscSpeed: 0.008,
+	// Snow lateral oscillation — independent sinusoidal x wander.
+	snowOscSpeed: 0.008,       // radians/frame
+	snowOscAmp:   0.15,        // px
 
-		// Snow oscillation amplitude (CSS px).
-		snowOscAmp: 0.15,
+	// How far past the viewport edge a flake travels before recycling.
+	snowSpawnMargin: 10,
 
-		// Snow colour (RGB components).
-		snowR: 200,
-		snowG: 210,
-		snowB: 220,
+	// ── Embers ───────────────────────────────────────────────────────────────
 
-		// Ember particle count.
-		emberCount: 18,
+	// Number of ember particles on screen at once.
+	emberCount: 18,
 
-		// Ember origin as a fraction of canvas dimensions.
-		emberOriginX: 0.84,
-		emberOriginY: 0.84,
+	// Ember origin as fractions of viewport size — lower-right by default.
+	emberOriginX: 0.84,
+	emberOriginY: 0.84,
 
-		// Ember origin scatter radius (CSS px).
-		emberScatterX: 80,
-		emberScatterY: 40,
+	// Spawn scatter around the origin (px).
+	emberScatterX: 80,
+	emberScatterY: 40,
 
-		// Ember particle radius range (CSS px, before scale).
-		emberRadiusMin: 0.6,
-		emberRadiusMax: 2.4,
+	// Ember core radius range (px, before viewport-area scale).
+	emberRadiusMin: 0.6,
+	emberRadiusMax: 2.4,
 
-		// Ember glow halo radius addition (CSS px, before scale).
-		emberGlowRadius: 1.5,
+	// Glow halo radius added on top of the core radius (px, before scale).
+	emberGlowRadius: 1.5,
 
-		// Ember rise speed range (CSS px/frame).
-		emberSpeedMin: 0.2,
-		emberSpeedMax: 0.7,
+	// Glow alpha as a fraction of the ember's current alpha.
+	emberGlowAlphaFactor: 0.5,
 
-		// Ember horizontal drift range (CSS px/frame).
-		emberDriftRange: 0.4,
+	// Ember rise speed range (px/frame).
+	emberSpeedMin: 0.2,
+	emberSpeedMax: 0.7,
 
-		// Ember opacity range.
-		emberOpacityMin: 0.15,
-		emberOpacityMax: 0.60,
+	// Ember horizontal drift range — base linear sideways motion (px/frame).
+	emberDriftRange: 0.4,
 
-		// Ember opacity fade per frame.
-		emberFade: 0.0008,
+	// Per-ember alpha range (multiplied by the ink-accent token's alpha).
+	emberOpacityMin: 0.15,
+	emberOpacityMax: 0.60,
 
-		// Ember flicker amplitude.
-		emberFlickerAmp: 0.08,
+	// Ember alpha fade per frame — embers gradually dim as they rise.
+	emberFade: 0.0008,
 
-		// Ember oscillation speed (radians/frame multiplier).
-		emberOscSpeed: 0.015,
+	// Ember flicker — sinusoidal variation added to alpha each frame.
+	emberFlickerAmp: 0.08,
 
-		// Ember oscillation amplitude (CSS px).
-		emberOscAmp: 0.3,
+	// Ember lateral oscillation — independent sinusoidal x wander.
+	emberOscSpeed: 0.015,      // radians/frame
+	emberOscAmp:   0.3,        // px
 
-		// Ember hue range — added to base orange channel values.
-		emberHueMin: 15,
-		emberHueMax: 45,
+	// How far past the top edge an ember rises before recycling.
+	emberRecycleMargin: 10,
 
-		// Scale formula — particle sizes are multiplied by this value.
-		// Derived from viewport area relative to a 1440×900 reference.
-		// Override via data-scale to set a fixed value.
-		scaleAuto: true,
+	// ── Viewport-area scaling ───────────────────────────────────────────────
 
-		// Fixed scale value used when scaleAuto is false.
-		scale: 1,
+	// Auto: particle sizes scale by √(area / refArea). Override `scale`
+	// via data attribute to lock it (auto switches off automatically).
+	scaleAuto:      true,
+	scale:          1,
+	scaleMin:       0.4,
+	scaleMax:       2.5,
+	scaleRefWidth:  1440,
+	scaleRefHeight: 900,
+
+};
+
+// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────────
+
+( () => {
+	const map = {
+		snowCount:           Number,
+		snowRadiusMin:       Number,
+		snowRadiusMax:       Number,
+		snowSpeedMin:        Number,
+		snowSpeedMax:        Number,
+		snowDriftRange:      Number,
+		snowOpacityMin:      Number,
+		snowOpacityMax:      Number,
+		snowFlickerAmp:      Number,
+		snowFlickerSpeed:    Number,
+		snowOscSpeed:        Number,
+		snowOscAmp:          Number,
+		snowSpawnMargin:     Number,
+		emberCount:          Number,
+		emberOriginX:        Number,
+		emberOriginY:        Number,
+		emberScatterX:       Number,
+		emberScatterY:       Number,
+		emberRadiusMin:      Number,
+		emberRadiusMax:      Number,
+		emberGlowRadius:     Number,
+		emberGlowAlphaFactor: Number,
+		emberSpeedMin:       Number,
+		emberSpeedMax:       Number,
+		emberDriftRange:     Number,
+		emberOpacityMin:     Number,
+		emberOpacityMax:     Number,
+		emberFade:           Number,
+		emberFlickerAmp:     Number,
+		emberOscSpeed:       Number,
+		emberOscAmp:         Number,
+		emberRecycleMargin:  Number,
+		scale:               Number,
+		scaleMin:            Number,
+		scaleMax:            Number,
+		scaleRefWidth:       Number,
+		scaleRefHeight:      Number,
 	};
 
-	// ─── CANVAS SETUP ────────────────────────────────────────────────────────
+	Object.keys( map ).forEach( ( key ) => {
+		if ( canvas.dataset[ key ] !== undefined ) {
+			CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
 
-	function resize() {
-		const dpr     = window.devicePixelRatio || 1;
-		canvas.width  = window.innerWidth  * dpr;
-		canvas.height = window.innerHeight * dpr;
-		ctx.scale( dpr, dpr );
-	}
-
-	resize();
-	window.addEventListener( 'resize', resize );
-
-	// ─── DATA ATTRIBUTE OVERRIDES ────────────────────────────────────────────
-
-	( function () {
-		const map = {
-			snowCount:      Number,
-			snowRadiusMin:  Number,
-			snowRadiusMax:  Number,
-			snowSpeedMin:   Number,
-			snowSpeedMax:   Number,
-			snowDriftRange: Number,
-			snowOpacityMin: Number,
-			snowOpacityMax: Number,
-			snowFlickerAmp: Number,
-			snowOscSpeed:   Number,
-			snowOscAmp:     Number,
-			snowR:          Number,
-			snowG:          Number,
-			snowB:          Number,
-			emberCount:     Number,
-			emberOriginX:   Number,
-			emberOriginY:   Number,
-			emberScatterX:  Number,
-			emberScatterY:  Number,
-			emberRadiusMin: Number,
-			emberRadiusMax: Number,
-			emberGlowRadius: Number,
-			emberSpeedMin:  Number,
-			emberSpeedMax:  Number,
-			emberDriftRange: Number,
-			emberOpacityMin: Number,
-			emberOpacityMax: Number,
-			emberFade:      Number,
-			emberFlickerAmp: Number,
-			emberOscSpeed:  Number,
-			emberOscAmp:    Number,
-			emberHueMin:    Number,
-			emberHueMax:    Number,
-			scale:          Number,
-		};
-
-		Object.keys( map ).forEach( ( key ) => {
-			if ( canvas.dataset[ key ] !== undefined ) {
-				CONFIG[ key ] = map[ key ]( canvas.dataset[ key ] );
-
-				// If scale is explicitly set, disable auto scaling.
-				if ( key === 'scale' ) {
-					CONFIG.scaleAuto = false;
-				}
-			}
-		} );
-	} )();
-
-	// ─── REDUCED MOTION ──────────────────────────────────────────────────────
-
-	const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
-
-	// ─── SCALE ───────────────────────────────────────────────────────────────
-
-	function getScale() {
-		if ( ! CONFIG.scaleAuto ) {
-			return CONFIG.scale;
+			// If scale is explicitly set, switch off auto.
+			if ( key === 'scale' ) CONFIG.scaleAuto = false;
 		}
+	} );
+} )();
 
-		return Math.max(
-			0.4,
-			Math.min(
-				2.5,
-				Math.sqrt( ( window.innerWidth * window.innerHeight ) / ( 1440 * 900 ) )
-			)
-		);
-	}
+// ─── CANVAS SETUP ────────────────────────────────────────────────────────────
 
-	// ─── PARTICLES ───────────────────────────────────────────────────────────
+const rafRef = { current: null };
 
-	function emberOrigin() {
-		return {
-			x: window.innerWidth  * CONFIG.emberOriginX,
-			y: window.innerHeight * CONFIG.emberOriginY,
-		};
-	}
+const { ctx, resize } = setupCanvas( canvas );
 
-	const snow = Array.from( { length: CONFIG.snowCount }, () => ( {
+// ─── REDUCED MOTION ──────────────────────────────────────────────────────────
+
+const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+// ─── COLOUR ──────────────────────────────────────────────────────────────────
+
+let snowColour  = extractColour( canvas, '--wp--preset--color--white',      '255,255,255'    );
+let emberColour = extractColour( canvas, '--wp--preset--color--ink-accent', '200,140,60,0.80' );
+
+// ─── EFFECT STATE ────────────────────────────────────────────────────────────
+
+function randomBetween( min, max ) {
+	return min + Math.random() * ( max - min );
+}
+
+function getScale() {
+	if ( ! CONFIG.scaleAuto ) return CONFIG.scale;
+
+	const ratio = Math.sqrt(
+		( window.innerWidth * window.innerHeight ) /
+		( CONFIG.scaleRefWidth * CONFIG.scaleRefHeight )
+	);
+
+	return Math.max( CONFIG.scaleMin, Math.min( CONFIG.scaleMax, ratio ) );
+}
+
+function emberOrigin() {
+	return {
+		x: window.innerWidth  * CONFIG.emberOriginX,
+		y: window.innerHeight * CONFIG.emberOriginY,
+	};
+}
+
+function spawnSnow() {
+	return {
 		x:       Math.random() * window.innerWidth,
 		y:       Math.random() * window.innerHeight,
-		r:       CONFIG.snowRadiusMin + Math.random() * ( CONFIG.snowRadiusMax - CONFIG.snowRadiusMin ),
-		speed:   CONFIG.snowSpeedMin  + Math.random() * ( CONFIG.snowSpeedMax  - CONFIG.snowSpeedMin ),
+		r:       randomBetween( CONFIG.snowRadiusMin,  CONFIG.snowRadiusMax  ),
+		speed:   randomBetween( CONFIG.snowSpeedMin,   CONFIG.snowSpeedMax   ),
 		drift:   ( Math.random() - 0.5 ) * CONFIG.snowDriftRange,
-		opacity: CONFIG.snowOpacityMin + Math.random() * ( CONFIG.snowOpacityMax - CONFIG.snowOpacityMin ),
+		opacity: randomBetween( CONFIG.snowOpacityMin, CONFIG.snowOpacityMax ),
 		phase:   Math.random() * Math.PI * 2,
-	} ) );
+	};
+}
 
-	const embers = Array.from( { length: CONFIG.emberCount }, () => {
-		const o = emberOrigin();
-		return {
-			x:       o.x + ( Math.random() - 0.5 ) * CONFIG.emberScatterX,
-			y:       o.y + Math.random() * CONFIG.emberScatterY,
-			r:       CONFIG.emberRadiusMin + Math.random() * ( CONFIG.emberRadiusMax - CONFIG.emberRadiusMin ),
-			speed:   CONFIG.emberSpeedMin  + Math.random() * ( CONFIG.emberSpeedMax  - CONFIG.emberSpeedMin ),
-			drift:   ( Math.random() - 0.5 ) * CONFIG.emberDriftRange,
-			opacity: CONFIG.emberOpacityMin + Math.random() * ( CONFIG.emberOpacityMax - CONFIG.emberOpacityMin ),
-			phase:   Math.random() * Math.PI * 2,
-			hue:     CONFIG.emberHueMin + Math.random() * ( CONFIG.emberHueMax - CONFIG.emberHueMin ),
-		};
-	} );
+function spawnEmber() {
+	const o = emberOrigin();
+	return {
+		x:       o.x + ( Math.random() - 0.5 ) * CONFIG.emberScatterX,
+		y:       o.y + Math.random() * CONFIG.emberScatterY,
+		r:       randomBetween( CONFIG.emberRadiusMin,  CONFIG.emberRadiusMax  ),
+		speed:   randomBetween( CONFIG.emberSpeedMin,   CONFIG.emberSpeedMax   ),
+		drift:   ( Math.random() - 0.5 ) * CONFIG.emberDriftRange,
+		opacity: randomBetween( CONFIG.emberOpacityMin, CONFIG.emberOpacityMax ),
+		phase:   Math.random() * Math.PI * 2,
+	};
+}
 
-	// ─── DRAW ────────────────────────────────────────────────────────────────
+const snow   = Array.from( { length: CONFIG.snowCount  }, spawnSnow  );
+const embers = Array.from( { length: CONFIG.emberCount }, spawnEmber );
 
+// ─── DRAW ────────────────────────────────────────────────────────────────────
+
+function draw( frame ) {
+	const scale = getScale();
+	const W     = window.innerWidth;
+	const H     = window.innerHeight;
+	const SM    = CONFIG.snowSpawnMargin;
+	const EM    = CONFIG.emberRecycleMargin;
+
+	ctx.clearRect( 0, 0, W, H );
+
+	// ── Snow ─────────────────────────────────────────────────────────────────
+	for ( const s of snow ) {
+		s.y += s.speed;
+		s.x += s.drift + Math.sin( frame * CONFIG.snowOscSpeed + s.phase ) * CONFIG.snowOscAmp;
+
+		if ( s.y > H + SM ) { s.y = -SM;    s.x = Math.random() * W; }
+		if ( s.x < -SM    ) { s.x = W + SM; }
+		if ( s.x > W + SM ) { s.x = -SM;    }
+
+		const flicker = Math.sin( frame * CONFIG.snowFlickerSpeed + s.phase ) * CONFIG.snowFlickerAmp;
+
+		ctx.beginPath();
+		ctx.arc( s.x, s.y, s.r * scale, 0, Math.PI * 2 );
+		ctx.fillStyle = withAlpha( snowColour, s.opacity + flicker );
+		ctx.fill();
+	}
+
+	// ── Embers ───────────────────────────────────────────────────────────────
+	for ( const e of embers ) {
+		e.y       -= e.speed;
+		e.x       += e.drift + Math.sin( frame * CONFIG.emberOscSpeed + e.phase ) * CONFIG.emberOscAmp;
+		e.opacity -= CONFIG.emberFade;
+
+		if ( e.y < -EM || e.opacity <= 0 ) {
+			Object.assign( e, spawnEmber() );
+		}
+
+		const flicker = Math.sin( frame * CONFIG.emberOscSpeed + e.phase ) * CONFIG.emberFlickerAmp;
+
+		// Glow halo — larger, softer
+		ctx.beginPath();
+		ctx.arc( e.x, e.y, ( e.r + CONFIG.emberGlowRadius ) * scale, 0, Math.PI * 2 );
+		ctx.fillStyle = withAlpha( emberColour, e.opacity * CONFIG.emberGlowAlphaFactor );
+		ctx.fill();
+
+		// Core
+		ctx.beginPath();
+		ctx.arc( e.x, e.y, e.r * scale, 0, Math.PI * 2 );
+		ctx.fillStyle = withAlpha( emberColour, e.opacity + flicker );
+		ctx.fill();
+	}
+}
+
+// ─── REDUCED MOTION — skip drawing entirely ──────────────────────────────────
+
+if ( reducedMotion ) {
+	createCleanup( canvas, rafRef, resize );
+}
+
+// ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
+
+else {
 	let frame = 0;
 
-	function draw() {
-		const scale = getScale();
-		const W     = window.innerWidth;
-		const H     = window.innerHeight;
-
-		ctx.clearRect( 0, 0, W, H );
-
-		// Snow
-		for ( const s of snow ) {
-			s.y += s.speed;
-			s.x += s.drift + Math.sin( frame * CONFIG.snowOscSpeed + s.phase ) * CONFIG.snowOscAmp;
-
-			if ( s.y > H + 10 ) { s.y = -10; s.x = Math.random() * W; }
-			if ( s.x < -10 )    { s.x = W + 10; }
-			if ( s.x > W + 10 ) { s.x = -10; }
-
-			const flicker = Math.sin( frame * 0.04 + s.phase ) * CONFIG.snowFlickerAmp;
-
-			ctx.beginPath();
-			ctx.arc( s.x, s.y, s.r * scale, 0, Math.PI * 2 );
-			ctx.fillStyle = `rgba(${ CONFIG.snowR },${ CONFIG.snowG },${ CONFIG.snowB },${ s.opacity + flicker })`;
-			ctx.fill();
-		}
-
-		// Embers
-		for ( const e of embers ) {
-			e.y       -= e.speed;
-			e.x       += e.drift + Math.sin( frame * CONFIG.emberOscSpeed + e.phase ) * CONFIG.emberOscAmp;
-			e.opacity -= CONFIG.emberFade;
-
-			if ( e.y < -10 || e.opacity <= 0 ) {
-				const o   = emberOrigin();
-				e.y       = o.y + Math.random() * CONFIG.emberScatterY;
-				e.x       = o.x + ( Math.random() - 0.5 ) * CONFIG.emberScatterX;
-				e.opacity = CONFIG.emberOpacityMin + Math.random() * ( CONFIG.emberOpacityMax - CONFIG.emberOpacityMin );
-				e.speed   = CONFIG.emberSpeedMin   + Math.random() * ( CONFIG.emberSpeedMax   - CONFIG.emberSpeedMin );
-				e.drift   = ( Math.random() - 0.5 ) * CONFIG.emberDriftRange;
-				e.hue     = CONFIG.emberHueMin + Math.random() * ( CONFIG.emberHueMax - CONFIG.emberHueMin );
-			}
-
-			const flicker = Math.sin( frame * CONFIG.emberOscSpeed + e.phase ) * CONFIG.emberFlickerAmp;
-
-			// Glow halo
-			ctx.beginPath();
-			ctx.arc( e.x, e.y, ( e.r + CONFIG.emberGlowRadius ) * scale, 0, Math.PI * 2 );
-			ctx.fillStyle = `rgba(255,${ 120 + e.hue },20,${ e.opacity * 0.5 })`;
-			ctx.fill();
-
-			// Core
-			ctx.beginPath();
-			ctx.arc( e.x, e.y, e.r * scale, 0, Math.PI * 2 );
-			ctx.fillStyle = `rgba(255,${ 180 + e.hue },80,${ e.opacity + flicker })`;
-			ctx.fill();
-		}
-
-		frame++;
-	}
-
-	// ─── REDUCED MOTION — canvas sized but never animated ────────────────────
-
-	if ( reducedMotion ) {
-		return;
-	}
-
-	// ─── ANIMATION LOOP ──────────────────────────────────────────────────────
-
-	let rafId = null;
-
 	function tick() {
-		draw();
-		rafId = requestAnimationFrame( tick );
+		draw( frame );
+		frame++;
+		rafRef.current = requestAnimationFrame( tick );
 	}
 
-	rafId = requestAnimationFrame( tick );
-
-	// ─── CLEANUP ─────────────────────────────────────────────────────────────
-
-	const observer = new MutationObserver( () => {
-		if ( ! document.contains( group ) ) {
-			cancelAnimationFrame( rafId );
-			window.removeEventListener( 'resize', resize );
-			observer.disconnect();
-		}
-	} );
-
-	observer.observe( document.body, { childList: true, subtree: true } );
-
-} )();
+	rafRef.current = requestAnimationFrame( tick );
+	createCleanup( canvas, rafRef, resize );
+}

@@ -19,7 +19,7 @@
  * @file resources/js/canvas/scene/storm.js
  */
 
-import { setupCanvas, extractRGB, createCleanup } from 'x3p0/canvas-utils';
+import { setupCanvas, extractColour, withAlpha, createCleanup } from 'x3p0/canvas-utils';
 
 const canvas = document.querySelector( '.x3p0-canvas-scene--storm' );
 
@@ -149,11 +149,13 @@ const reducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).ma
 
 // ─── COLOUR ──────────────────────────────────────────────────────────────────
 
-// Storm-mood ink-accent is a cool greenish-grey. The fallback matches.
-let rgb = extractRGB( canvas, '--wp--preset--color--ink-accent', '160,200,160' );
+// Storm-mood ink-accent is a cool greenish-grey at alpha 0.70. The token's
+// alpha is preserved through withAlpha() so the rain stays as subtle as the
+// designer intended.
+let colour = extractColour( canvas, '--wp--preset--color--ink-accent', '160,200,160,0.70' );
 
 function rainColour( alpha ) {
-	return `rgba(${ rgb },${ alpha })`;
+	return withAlpha( colour, alpha );
 }
 
 // ─── EFFECT STATE ────────────────────────────────────────────────────────────
