@@ -30,3 +30,5 @@ Read the relevant skill before starting any task that falls into its area.
 | Creating or modifying block/section style variations | `.claude/skills/block-style-variations/` |
 | Writing any text in the theme or story | `.claude/skills/story-voice/` |
 | Writing chapter prose | `.claude/skills/story-voice/` + `.claude/skills/chapter-content/` |
+| Writing sketch briefs or image prompts | `.claude/skills/sketch-briefs/` |
+| Writing sound briefs or Suno prompts | `.claude/skills/sound-briefs/` |
