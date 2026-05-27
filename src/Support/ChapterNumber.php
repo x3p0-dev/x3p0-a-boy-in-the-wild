@@ -84,9 +84,9 @@ class ChapterNumber
 	public function numeric(): string
 	{
 		return sprintf(
-			// Translators: %d is the chapter number.
-			_x('Chapter %d', 'chapter number numeric', 'x3p0-a-boy-in-the-wild'),
-			$this->number
+			// Translators: %s is the chapter number.
+			_x('Chapter %s', 'chapter number numeric', 'x3p0-a-boy-in-the-wild'),
+			number_format_i18n($this->number)
 		);
 	}
 

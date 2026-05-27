@@ -92,9 +92,9 @@ class ChapterDay
 	public function numeric(): string
 	{
 		return sprintf(
-			// Translators: %d is the chapter day number.
-			_x('Day %d', 'chapter day numeric', 'x3p0-a-boy-in-the-wild'),
-			$this->day
+			// Translators: %s is the chapter day number.
+			_x('Day %s', 'chapter day numeric', 'x3p0-a-boy-in-the-wild'),
+			number_format_i18n($this->day)
 		);
 	}
 }
