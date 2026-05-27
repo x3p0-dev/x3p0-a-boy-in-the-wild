@@ -1,14 +1,14 @@
 ---
 name: chapter-design
 description: >
-	Design principles, variation system, pattern structure, and recurring
-	elements for A Boy in the Wild chapter patterns. Use this skill before
-	designing or building any chapter pattern, writing a chapter design brief,
-	choosing a style variation, or making any decision about layout, colour,
-	movement, or sound for a chapter. Triggers on: "design chapter X", "build
-	a chapter pattern", "what variation should chapter X use", "write a design
-	brief", or any task that requires making visual or experiential decisions
-	about a chapter.
+  Design principles, variation system, pattern structure, and recurring
+  elements for A Boy in the Wild chapter patterns. Use this skill before
+  designing or building any chapter pattern, writing a chapter design brief,
+  choosing a style variation, or making any decision about layout, colour,
+  movement, or sound for a chapter. Triggers on: "design chapter X", "build
+  a chapter pattern", "what variation should chapter X use", "write a design
+  brief", or any task that requires making visual or experiential decisions
+  about a chapter.
 ---
 
 # Chapter Design
@@ -155,10 +155,24 @@ Every chapter is an entry point into a specific moment in thirty years of a
 life. The reader has stepped out of whatever they were doing and into this
 man's world. The design should honour that.
 
-Before reaching for a familiar layout, ask: what is the most interesting,
-most honest way to present this specific chapter? Not interesting as a design
-exercise — interesting as an answer to the question *what is it like to be
-here, now, in this moment?*
+**Before choosing any layout, answer this question in one sentence:**
+*What is it like to be inside this specific chapter's moment?*
+
+Not what the chapter is about. Not what happens. What it physically, sensorially
+feels like to be there. The answer to that question is the design brief. The
+layout, colour, movement, and typography all follow from it. If you cannot
+answer the question, you are not ready to design the chapter.
+
+Examples of the question answered well:
+- Ch 3 — *It is dark and wet and something large is circling outside and I
+  cannot leave.* Result: full bleed storm image, floating text, rain canvas.
+- Ch 5 — *It is 2am in deep winter and my hands have stopped working and
+  everything depends on the next attempt.* Result: attempt log, dark palette,
+  snow and embers canvas, each failure crossed out.
+
+If the answer to the question leads to a field note layout, that is the right
+answer. If it leads to something that has never been done in this story before,
+that is also the right answer. The question is the discipline, not the outcome.
 
 The layout vocabulary is a starting point. It documents what has been done.
 It does not limit what can be done. A chapter told entirely through a
@@ -327,10 +341,13 @@ Each pattern is a complete, standalone document — the full chapter experience
 from navigation in to navigation out. The pattern is built from nested layers,
 each with a canonical name:
 
-**Entry** — the outermost Group block. Full-width, constrained layout, with
-padding on all sides. Carries the variation class
-(`is-style-section-{type}-{slug}`) that controls the chapter's full colour
-world. May carry a background image. Everything else lives inside it.
+**Entry** — the outermost Group block. It is the page. Its background fills
+the full viewport width — no max-width cap, no card border, no container
+wrapper around it. The variation class (`is-style-section-{type}-{slug}`)
+applied here controls the colour world for everything inside it. When
+building or mocking up a chapter, the Entry colour fills the entire screen.
+The content column inside is constrained; the Entry itself never is. May
+carry a background image. Everything else lives inside it.
 
 **Frame** — a `<main>` Group block inside Entry. Full-width, constrained
 layout. Separates the chapter content from the Waypoint above and Story

@@ -1,13 +1,13 @@
 ---
 name: block-style-variations
 description: >
-	Creating and modifying block style variations and section styles for the
-	A Boy in the Wild theme. Use this skill before creating any new style
-	variation file, modifying an existing one, or choosing where a variation
-	file should live. Triggers on: "add a block style variation", "create a
-	section style", "add a new variation for X block", "style this block
-	differently", or any task that produces a file under styles/block/ or
-	styles/section/.
+  Creating and modifying block style variations and section styles for the
+  A Boy in the Wild theme. Use this skill before creating any new style
+  variation file, modifying an existing one, or choosing where a variation
+  file should live. Triggers on: "add a block style variation", "create a
+  section style", "add a new variation for X block", "style this block
+  differently", or any task that produces a file under styles/block/ or
+  styles/section/.
 ---
 
 # Block Style Variations
