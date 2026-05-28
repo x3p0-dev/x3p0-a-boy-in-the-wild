@@ -134,8 +134,19 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 						} -->
 						<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40)">
 
-							<!-- wp:paragraph {"className":"is-style-text-subhead" } -->
-							<p class="is-style-text-subhead">31</p>
+							<!-- wp:paragraph {
+								"metadata":{
+									"name":"<?= esc_attr__('Day (Number)', 'x3p0-a-boy-in-the-wild') ?>",
+									"bindings":{
+										"content":{
+											"source":"x3p0/chapter",
+											"args":{"field":"dayNumber"}
+										}
+									}
+								},
+								"className":"is-style-text-subhead"
+							} -->
+							<p class="is-style-text-subhead">51</p>
 							<!-- /wp:paragraph -->
 
 							<!-- wp:paragraph {"className":"is-style-text-caption"} -->
