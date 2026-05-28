@@ -53,6 +53,7 @@ final class RestRegistrar implements Bootable
 				'type'       => 'object',
 				'properties' => [
 					'day'         => ['type' => 'string'],
+					'dayNumber'   => ['type' => 'string'],
 					'year'        => ['type' => 'string'],
 					'number'      => ['type' => 'string'],
 					'numberRoman' => ['type' => 'string'],
@@ -73,6 +74,7 @@ final class RestRegistrar implements Bootable
 
 		return [
 			'day'         => ChapterDay::fromTimestamp($timestamp)->numeric(),
+			'dayNumber'   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
 			'year'        => ChapterYear::fromTimestamp($timestamp)->numeric(),
 			'number'      => ChapterNumber::fromPostId($post['id'])->numeric(),
 			'numberRoman' => ChapterNumber::fromPostId($post['id'])->roman(),

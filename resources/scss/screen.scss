@@ -32,3 +32,15 @@ s {
 		solid
 		min(0.875em, 3px);
 }
+
+///
+/// Insert styles.
+///
+/// @link https://github.com/WordPress/gutenberg/issues/64362
+///
+ins {
+	color: inherit;
+	font-family: var(--wp--preset--font-family--tertiary);
+	text-decoration: currentColor underline solid clamp(2px, 0.125em, 0.125em);
+	text-underline-offset: 4px;
+}

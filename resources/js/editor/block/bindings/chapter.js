@@ -42,6 +42,11 @@ registerBlockBindingsSource({
 				args:  {field: 'day'}
 			},
 			{
+				label: __('Day (Number Only)', 'x3p0-a-boy-in-the-wild'),
+				type:  'string',
+				args: {field: 'dayNumber'}
+			},
+			{
 				label: __('Number', 'x3p0-a-boy-in-the-wild'),
 				type:  'string',
 				args:  {field: 'number'}

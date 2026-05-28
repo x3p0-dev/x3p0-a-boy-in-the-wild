@@ -289,6 +289,29 @@
 							"fontDisplay": "swap"
 						}
 					]
+				},
+				{
+					"slug": "script",
+					"name": "The Script (Covenant)",
+					"fontFamily": "'Covenant', monospace",
+					"fontFace": [
+						{
+							"fontFamily": "Covenant",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"file:./public/fonts/covenant/covenant.woff2"
+							]
+						},
+						{
+							"fontFamily": "Covenant",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"src": [
+								"file:./public/fonts/covenant/covenant-italic.woff2"
+							]
+						}
+					]
 				}
 			],
 			"fontSizes": [
@@ -367,7 +390,7 @@
 			"textAlign": true,
 			"textColumns": false,
 			"textIndent": false,
-			"writingMode": false
+			"writingMode": true
 		},
 		"shadow": {
 			"defaultPresets": false,

@@ -5,10 +5,24 @@
 	"slug": "section-season-midwinter",
 	"blockTypes": ["core/group"],
 	"styles": {
-		"css": "--wp--preset--color--parchment: #242820;\n--wp--preset--color--parchment-raised: #2e3228;\n--wp--preset--color--parchment-surface: #1a1e18;\n--wp--preset--color--parchment-accent: rgba(170,165,145,0.42);\n--wp--preset--color--ink: rgba(188,184,165,0.80);\n--wp--preset--color--ink-subtle: rgba(170,165,145,0.55);\n--wp--preset--color--ink-muted: rgba(170,165,145,0.32);\n--wp--preset--color--ink-accent: rgba(170,165,145,0.42);\n--wp--preset--color--ink-on-accent: #242820;\n--wp--preset--color--rule: rgba(170,165,145,0.15);\n--wp--preset--color--sketch-parchment: #2e3228;\n--wp--preset--color--sketch-ink: rgba(170,165,145,0.45);\nanimation: midwinter-shimmer 14s ease-in-out infinite;",
 		"color": {
 			"background": "var(--wp--preset--color--parchment)",
 			"text": "var(--wp--preset--color--ink)"
+		},
+		"css": "--wp--preset--color--parchment: #242820; --wp--preset--color--parchment-raised: #2e3228; --wp--preset--color--parchment-surface: #1a1e18; --wp--preset--color--parchment-accent: rgba(170,165,145,0.42); --wp--preset--color--ink: rgba(188,184,165,0.80); --wp--preset--color--ink-subtle: rgba(170,165,145,0.55); --wp--preset--color--ink-muted: rgba(170,165,145,0.32); --wp--preset--color--ink-accent: rgba(170,165,145,0.42); --wp--preset--color--ink-on-accent: #242820; --wp--preset--color--handwritten: rgba(170,165,145,0.40); --wp--preset--color--rule: rgba(170,165,145,0.15); --wp--preset--color--sketch-parchment: #2e3228; --wp--preset--color--sketch-ink: rgba(170,165,145,0.45);",
+		"blocks": {
+			"core/separator": {
+				"css": "background: linear-gradient(to right, var(--wp--preset--color--rule) 0px, var(--wp--preset--color--rule) 28px, transparent 28px, transparent 36px, var(--wp--preset--color--rule) 36px, var(--wp--preset--color--rule) 58px, transparent 58px, transparent 68px, var(--wp--preset--color--rule) 68px, var(--wp--preset--color--rule) 82px, transparent 82px, transparent 92px, var(--wp--preset--color--rule) 92px, var(--wp--preset--color--rule) 120px); background-size: 120px 100%; background-repeat: repeat-x; opacity: 0.7;",
+				"border": {
+					"width": "0"
+				},
+				"color": {
+					"background": "transparent"
+				},
+				"dimensions": {
+					"height": "1.5px"
+				}
+			}
 		}
 	}
 }

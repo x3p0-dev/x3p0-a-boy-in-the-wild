@@ -56,6 +56,7 @@ final class Chapter extends BindingSource
 
 		return match ($args['field'] ?? '') {
 			'day'         => $this->renderDay($postId)?->numeric(),
+			'dayNumber'   => strval($this->renderDay($postId)?->number()),
 			'year'        => $this->renderYear($postId)?->numeric(),
 			'number'      => $this->renderNumber($postId)?->numeric(),
 			'numberRoman' => $this->renderNumber($postId)?->roman(),

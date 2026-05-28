@@ -42,6 +42,15 @@ final class CanvasScriptModuleLoader implements Bootable
 	private const FILE_PREFIX = 'public/js/canvas';
 
 	/**
+	 * Modifiers to ignore (e.g., `x3po-canvas-scene--foreground`) since
+	 * these do map to files. They're classes to style via CSS.
+	 */
+	private const IGNORE_MODIFIERS = [
+		'background',
+		'foreground'
+	];
+
+	/**
 	 * @inheritDoc
 	 */
 	public function boot(): void
@@ -118,7 +127,11 @@ final class CanvasScriptModuleLoader implements Bootable
 
 			[$namespace, $slug] = explode('--', $remainder, 2);
 
-			if ($namespace === '' || $slug === '') {
+			if (
+				$namespace === ''
+				|| $slug === ''
+				|| in_array($slug, self::IGNORE_MODIFIERS, true)
+			) {
 				continue;
 			}
 

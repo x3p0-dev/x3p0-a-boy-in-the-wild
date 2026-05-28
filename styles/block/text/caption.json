@@ -7,6 +7,8 @@
 		"core/heading",
 		"core/paragraph",
 		"core/post-author-biography",
+		"core/post-date",
+		"core/post-excerpt",
 		"core/term-description"
 	],
 	"styles": {
@@ -15,7 +17,7 @@
 		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--tertiary)",
-			"fontSize": "1.025em",
+			"fontSize": "1.125em",
 			"lineHeight": "var(--wp--custom--line-height--lg)",
 			"fontStyle": "normal"
 		}

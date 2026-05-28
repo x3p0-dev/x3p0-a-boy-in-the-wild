@@ -18,8 +18,9 @@
 			"width": "0"
 		},
 		"dimensions": {
-			"minHeight": "0"
+			"minHeight": "0",
+			"height": "auto"
 		},
-		"css": "mask: none; &::before { font-size: inherit; content: var(--wp--custom--mark--separator); display: block; background: none; mask: none; }"
+		"css": "background: none; mask: none; opacity: inherit; &::before { font-size: inherit; content: var(--wp--custom--mark--separator); display: block; background: none; mask: none; }"
 	}
 }
