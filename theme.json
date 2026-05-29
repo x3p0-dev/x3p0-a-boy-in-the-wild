@@ -14,6 +14,12 @@
 					"text": true,
 					"background": true
 				}
+			},
+			"core/post-title": {
+				"typography": {
+					"fontStyle": true,
+					"fontWeight": true
+				}
 			}
 		},
 		"border": {
