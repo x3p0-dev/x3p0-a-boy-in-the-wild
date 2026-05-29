@@ -59,7 +59,7 @@ declare(strict_types=1);
 
 					<!-- wp:post-title {
 						"level":1,
-						"metadata":{"name":"<?= esc_attr__('Chapter Title', 'x3p0-a-boy-in-the-wild') ?>"}
+						"placeholder":"<?= esc_attr__('The Same Night', 'x3p0-a-boy-in-the-wild') ?>"
 					} /-->
 
 				</header>

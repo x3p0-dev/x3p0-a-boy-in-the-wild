@@ -74,7 +74,10 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 
 					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
 
-					<!-- wp:post-title {"level":1} /-->
+					<!-- wp:post-title {
+						"level":1,
+						"placeholder":"<?= esc_attr__('The Clearing', 'x3p0-a-boy-in-the-wild') ?>"
+					} /-->
 
 				</div>
 				<!-- /wp:group -->

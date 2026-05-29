@@ -64,7 +64,11 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 
 				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
 
-				<!-- wp:post-title {"level":1,"className":"is-style-text-poster"} /-->
+				<!-- wp:post-title {
+					"level":1,
+					"placeholder":"<?= esc_attr__('The Storm', 'x3p0-a-boy-in-the-wild') ?>",
+					"className":"is-style-text-poster"
+				} /-->
 
 				<!-- wp:paragraph -->
 				<p><em>It lasted one night. In my version it lasts considerably longer.</em></p>

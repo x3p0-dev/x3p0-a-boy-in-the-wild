@@ -63,7 +63,11 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 
 				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/chapter-dateline"} /-->
 
-				<!-- wp:post-title {"level":1,"className":"is-style-text-poster"} /-->
+				<!-- wp:post-title {
+					"level":1,
+					"placeholder": "<?= esc_attr__('The Map I Drew', 'x3p0-a-boy-in-the-wild') ?>",
+					"className":"is-style-text-poster"
+				} /-->
 
 			</header>
 			<!-- /wp:group -->
