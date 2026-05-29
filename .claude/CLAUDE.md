@@ -22,8 +22,8 @@ Read the relevant skill before starting any task that falls into its area.
 
 | Task | Skill |
 |---|---|
-| Writing any JS | `.claude/skills/x3p0-js-style/` |
-| Writing any PHP | `.claude/skills/x3p0-php-style/` |
+| Writing any JS | `.claude/skills/x3p0-code-style-js/` |
+| Writing any PHP | `.claude/skills/x3p0-code-style-php/` |
 | Writing or modifying canvas effects | `.claude/skills/abitw-canvas-effects/` |
 | Designing or building a chapter pattern | `.claude/skills/abitw-chapter-design/` + `.claude/skills/abitw-patterns/` |
 | Writing any pattern file | `.claude/skills/x3p0-theme-patterns/` + `.claude/skills/abitw-patterns/` |

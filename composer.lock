@@ -932,12 +932,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/x3p0-dev/x3p0-skills.git",
-                "reference": "fee6cef100ac46bf0bd7fbe91449540d1e80c698"
+                "reference": "71efe3df7ee8de1d32f0554d3f5aa0c3c87b24c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x3p0-dev/x3p0-skills/zipball/fee6cef100ac46bf0bd7fbe91449540d1e80c698",
-                "reference": "fee6cef100ac46bf0bd7fbe91449540d1e80c698",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-skills/zipball/71efe3df7ee8de1d32f0554d3f5aa0c3c87b24c8",
+                "reference": "71efe3df7ee8de1d32f0554d3f5aa0c3c87b24c8",
                 "shasum": ""
             },
             "require": {
@@ -959,7 +959,7 @@
                 "issues": "https://github.com/x3p0-dev/x3p0-skills/issues",
                 "source": "https://github.com/x3p0-dev/x3p0-skills/tree/master"
             },
-            "time": "2026-05-29T18:38:07+00:00"
+            "time": "2026-05-29T20:04:58+00:00"
         }
     ],
     "aliases": [],
