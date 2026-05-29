@@ -27,7 +27,7 @@ Read the relevant skill before starting any task that falls into its area.
 | Writing or modifying canvas effects | `.claude/skills/canvas-effects/` |
 | Designing or building a chapter pattern | `.claude/skills/chapter-design/` + `.claude/skills/theme-patterns/` |
 | Writing any pattern file | `.claude/skills/wp-patterns/` + `.claude/skills/theme-patterns/` |
-| Creating or modifying block/section style variations | `.claude/skills/block-style-variations/` |
+| Creating or modifying block/section style variations | `.claude/skills/wp-block-style-variations/` + `.claude/skills/theme-block-style-variations/` |
 | Writing any text in the theme or story | `.claude/skills/story-voice/` |
 | Writing chapter prose | `.claude/skills/story-voice/` + `.claude/skills/chapter-content/` |
 | Writing sketch briefs or image prompts | `.claude/skills/sketch-briefs/` |
