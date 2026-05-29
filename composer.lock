@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d70c7b7a6667ccb51cd0de6362d45c17",
+    "content-hash": "866d235d6f897e22d0819352e0d5d242",
     "packages": [
         {
             "name": "x3p0-dev/x3p0-framework",
@@ -689,16 +689,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.37.0",
+            "version": "v1.38.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6a21eb99c6973357967f6ce3708cd55a6bec6315"
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6a21eb99c6973357967f6ce3708cd55a6bec6315",
-                "reference": "6a21eb99c6973357967f6ce3708cd55a6bec6315",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92",
                 "shasum": ""
             },
             "require": {
@@ -750,7 +750,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.37.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.1"
             },
             "funding": [
                 {
@@ -770,7 +770,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T17:25:58+00:00"
+            "time": "2026-05-26T12:51:13+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -925,12 +925,48 @@
                 }
             ],
             "time": "2025-11-25T12:08:04+00:00"
+        },
+        {
+            "name": "x3p0-dev/x3p0-skills",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/x3p0-dev/x3p0-skills.git",
+                "reference": "fee6cef100ac46bf0bd7fbe91449540d1e80c698"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-skills/zipball/fee6cef100ac46bf0bd7fbe91449540d1e80c698",
+                "reference": "fee6cef100ac46bf0bd7fbe91449540d1e80c698",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "default-branch": true,
+            "type": "claude-skill",
+            "autoload": {
+                "psr-4": {
+                    "X3P0\\Skills\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Shared AI skills for WordPress themes and plugins.",
+            "support": {
+                "issues": "https://github.com/x3p0-dev/x3p0-skills/issues",
+                "source": "https://github.com/x3p0-dev/x3p0-skills/tree/master"
+            },
+            "time": "2026-05-29T18:38:07+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "x3p0-dev/x3p0-framework": 20
+        "x3p0-dev/x3p0-framework": 20,
+        "x3p0-dev/x3p0-skills": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

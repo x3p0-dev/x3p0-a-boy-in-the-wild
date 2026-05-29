@@ -1,10 +1,10 @@
 ---
-name: theme-block-style-variations
+name: abitw-block-style-variations
 description: >
   Creating and modifying block style variations and section styles for the
   A Boy in the Wild theme. Use this skill before creating any new style
   variation file, modifying an existing one, or choosing where a variation
-  file should live. Read wp-block-style-variations first for WordPress
+  file should live. Read x3p0-theme-block-style-variations first for WordPress
   fundamentals. Triggers on: "add a block style variation", "add a block
   style", "create a section style", "style this block differently", or any
   task that produces a file under styles/block/ or styles/section/.
@@ -12,7 +12,7 @@ description: >
 
 # Block Style Variations — Theme Conventions
 
-Read `wp-block-style-variations` before this skill. This skill covers
+Read `x3p0-theme-block-style-variations` before this skill. This skill covers
 conventions specific to the A Boy in the Wild theme, including where this
 theme's system overrides WordPress defaults.
 

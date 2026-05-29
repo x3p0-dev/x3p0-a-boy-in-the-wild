@@ -1,5 +1,5 @@
 ---
-name: sound-briefs
+name: abitw-sound-briefs
 description: >
   Writing sound briefs for A Boy in the Wild chapters. Use this skill before
   writing any Suno prompt for ambient sound effects, ambient music, or played

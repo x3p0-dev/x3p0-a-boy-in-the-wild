@@ -1,10 +1,10 @@
 ---
-name: theme-patterns
+name: abitw-patterns
 description: >
   Building patterns for the A Boy in the Wild theme. Use this skill before
   writing or modifying any pattern file in this theme. Covers the folder
   structure, pattern types, naming conventions, categories, and how the
-  design system connects to patterns. Read wp-patterns first for WordPress
+  design system connects to patterns. Read x3p0-theme-patterns first for WordPress
   pattern fundamentals. Triggers on: "build a chapter pattern", "add a
   fragment", "create a canvas pattern", "write a query pattern", or any task
   that produces a file under patterns/ in this theme.
@@ -12,7 +12,7 @@ description: >
 
 # Theme Patterns
 
-Read wp-patterns before this skill. This skill covers conventions specific
+Read x3p0-theme-patterns before this skill. This skill covers conventions specific
 to the A Boy in the Wild theme.
 
 ---

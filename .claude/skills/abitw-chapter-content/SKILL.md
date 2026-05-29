@@ -1,5 +1,5 @@
 ---
-name: chapter-content
+name: abitw-chapter-content
 description: >
   Writing prose for A Boy in the Wild chapters. Use this skill before
   writing any chapter content — field notes, played chapters, buried

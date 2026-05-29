@@ -1,5 +1,5 @@
 ---
-name: sketch-briefs
+name: abitw-sketch-briefs
 description: >
   Writing sketch briefs for A Boy in the Wild chapter images. Use this skill
   before writing any Photoshop AI prompt, sketch caption, or sketch alt text.

@@ -22,13 +22,13 @@ Read the relevant skill before starting any task that falls into its area.
 
 | Task | Skill |
 |---|---|
-| Writing any JS | `.claude/skills/js-style/` |
-| Writing any PHP | `.claude/skills/php-style/` |
-| Writing or modifying canvas effects | `.claude/skills/canvas-effects/` |
-| Designing or building a chapter pattern | `.claude/skills/chapter-design/` + `.claude/skills/theme-patterns/` |
-| Writing any pattern file | `.claude/skills/wp-patterns/` + `.claude/skills/theme-patterns/` |
-| Creating or modifying block/section style variations | `.claude/skills/wp-block-style-variations/` + `.claude/skills/theme-block-style-variations/` |
-| Writing any text in the theme or story | `.claude/skills/story-voice/` |
-| Writing chapter prose | `.claude/skills/story-voice/` + `.claude/skills/chapter-content/` |
-| Writing sketch briefs or image prompts | `.claude/skills/sketch-briefs/` |
-| Writing sound briefs or Suno prompts | `.claude/skills/sound-briefs/` |
+| Writing any JS | `.claude/skills/x3p0-js-style/` |
+| Writing any PHP | `.claude/skills/x3p0-php-style/` |
+| Writing or modifying canvas effects | `.claude/skills/abitw-canvas-effects/` |
+| Designing or building a chapter pattern | `.claude/skills/abitw-chapter-design/` + `.claude/skills/abitw-patterns/` |
+| Writing any pattern file | `.claude/skills/x3p0-theme-patterns/` + `.claude/skills/abitw-patterns/` |
+| Creating or modifying block/section style variations | `.claude/skills/x3p0-theme-block-style-variations/` + `.claude/skills/abitw-block-style-variations/` |
+| Writing any text in the theme or story | `.claude/skills/abitw-story-voice/` |
+| Writing chapter prose | `.claude/skills/abitw-story-voice/` + `.claude/skills/abitw-chapter-content/` |
+| Writing sketch briefs or image prompts | `.claude/skills/abitw-sketch-briefs/` |
+| Writing sound briefs or Suno prompts | `.claude/skills/abitw-sound-briefs/` |

@@ -1,5 +1,5 @@
 ---
-name: chapter-design
+name: abitw-chapter-design
 description: >
   Design principles, variation system, pattern structure, and recurring
   elements for A Boy in the Wild chapter patterns. Use this skill before

@@ -1,5 +1,5 @@
 ---
-name: story-voice
+name: abitw-story-voice
 description: >
   The boy's writing voice for A Boy in the Wild. Use this skill before
   writing any prose, UI copy, datelines, error messages, navigation text,

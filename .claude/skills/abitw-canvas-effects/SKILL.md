@@ -1,5 +1,5 @@
 ---
-name: canvas-effects
+name: abitw-canvas-effects
 description: >
   Writing, modifying, and maintaining canvas-based atmospheric effects for
   the A Boy in the Wild theme. Use this skill before writing any canvas

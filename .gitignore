@@ -16,6 +16,7 @@
 *.map
 *.zip
 .DS_Store
+.claude/skills/x3p0-*
 
 /notes
 .claude/docs/private
