@@ -37,6 +37,7 @@ scripts/ export-ignore
 tests/ export-ignore
 
 # Ignore development files.
+CLAUDE.md export-ignore
 composer.json export-ignore
 composer.lock export-ignore
 jsconfig.json export-ignore
