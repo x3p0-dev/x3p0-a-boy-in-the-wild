@@ -20,7 +20,7 @@
 			"@x3p0-skills"
 		],
 		"lint:php": "./vendor/bin/phpcs -d error_reporting=E_ALL^E_DEPRECATED -s --colors .",
-		"x3p0-prelude": "X3P0\\ABoyInTheWild\\Scripts\\Prelude::compose",
+		"x3p0-prelude": "X3P0\\Prelude\\Compose::run",
 		"x3p0-skills": "X3P0\\Skills\\Installer::install",
 		"zip": "composer archive --file=x3p0-a-boy-in-the-wild"
 	},
@@ -43,8 +43,7 @@
 	"autoload": {
 		"psr-4": {
 			"X3P0\\ABoyInTheWild\\": "src/",
-			"X3P0\\ABoyInTheWild\\Framework\\": "packages/x3p0-dev/x3p0-framework/src/",
-			"X3P0\\ABoyInTheWild\\Scripts\\": "scripts/"
+			"X3P0\\ABoyInTheWild\\Framework\\": "packages/x3p0-dev/x3p0-framework/src/"
 		},
 		"files": [
 			"src/functions-helpers.php"
@@ -53,7 +52,6 @@
 			"packages/"
 		],
 		"exclude-from-classmap": [
-			"scripts/",
 			"vendor/"
 		]
 	},
@@ -66,6 +64,7 @@
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"symfony/var-dumper": "^6.4",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"x3p0-dev/x3p0-prelude": "dev-master",
 		"x3p0-dev/x3p0-skills": "dev-master"
 	},
 	"minimum-stability": "stable",
