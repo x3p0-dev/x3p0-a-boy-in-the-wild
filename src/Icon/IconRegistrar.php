@@ -29,6 +29,11 @@ final class IconRegistrar implements Bootable
 	private const NAMESPACE = 'x3p0';
 
 	/**
+	 * Path to the icons folder relative to the theme root.
+	 */
+	private const ICONS_PATH = 'public/media/svg';
+
+	/**
 	 * @inheritDoc
 	 */
 	public function boot(): void
@@ -64,7 +69,7 @@ final class IconRegistrar implements Bootable
 		$registry = WP_Icons_Registry::get_instance();
 
 		try {
-			$method = new ReflectionMethod(WP_Icons_Registry::class, 'register');
+			$method = new ReflectionMethod($registry, 'register');
 		} catch (ReflectionException) {
 			return;
 		}
@@ -72,7 +77,7 @@ final class IconRegistrar implements Bootable
 		foreach ($this->icons() as $name => $label) {
 			$method->invoke($registry, self::NAMESPACE . "/{$name}", [
 				'label'    => $label,
-				'filePath' => get_parent_theme_file_path("public/media/svg/{$name}.svg")
+				'filePath' => get_parent_theme_file_path(self::ICONS_PATH . "/{$name}.svg")
 			]);
 		}
 	}
