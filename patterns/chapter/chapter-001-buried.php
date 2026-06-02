@@ -3,7 +3,7 @@
 /**
  * Title: Chapter 1 (Buried) — The Same Night
  * Slug: x3p0-a-boy-in-the-wild/chapter-001-buried
- * Description: Private thoughts after Chapter 1.
+ * Description: Starter pattern for Chapter 1 (Buried)
  * Categories: x3p0-chapters-buried
  * Inserter: true
  */

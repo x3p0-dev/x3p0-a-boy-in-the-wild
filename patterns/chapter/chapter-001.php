@@ -3,7 +3,7 @@
 /**
  * Title: Chapter 1 — The Clearing
  * Slug: x3p0-a-boy-in-the-wild/chapter-001
- * Description: Starter pattern for Chapter 1. Late summer. Day 1. Age 12.
+ * Description: Starter pattern for Chapter 1.
  * Categories: x3p0-chapters
  * Inserter: true
  */

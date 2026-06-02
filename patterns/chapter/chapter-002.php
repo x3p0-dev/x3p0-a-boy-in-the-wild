@@ -3,7 +3,7 @@
 /**
  * Title: Chapter 2 — The Map I Drew
  * Slug: x3p0-a-boy-in-the-wild/chapter-002
- * Description: Starter pattern for Chapter 2. Early autumn. Day 52. Age 12.
+ * Description: Starter pattern for Chapter 2..
  * Categories: x3p0-chapters
  * Inserter: true
  */
