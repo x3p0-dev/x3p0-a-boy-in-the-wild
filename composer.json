@@ -12,16 +12,13 @@
 			"composer dump-autoload"
 		],
 		"post-install-cmd": [
-			"@x3p0-prelude",
-			"@x3p0-skills"
+			"@x3p0-dev-scripts"
 		],
 		"post-update-cmd": [
-			"@x3p0-prelude",
-			"@x3p0-skills"
+			"@x3p0-dev-scripts"
 		],
 		"lint:php": "./vendor/bin/phpcs -d error_reporting=E_ALL^E_DEPRECATED -s --colors .",
-		"x3p0-prelude": "X3P0\\Prelude\\Compose::run",
-		"x3p0-skills": "X3P0\\Skills\\Installer::install",
+		"x3p0-dev-scripts": "X3P0\\ABoyInTheWild\\Scripts\\ComposerScripts::devScripts",
 		"zip": "composer archive --file=x3p0-a-boy-in-the-wild"
 	},
 	"extra": {
@@ -54,6 +51,11 @@
 		"exclude-from-classmap": [
 			"vendor/"
 		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"X3P0\\ABoyInTheWild\\Scripts\\": "scripts/"
+		}
 	},
 	"require": {
 		"php": ">=8.1",
