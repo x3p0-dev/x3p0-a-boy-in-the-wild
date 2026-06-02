@@ -28,46 +28,26 @@ final class AudioInteractivity
 	public const STORE = 'x3p0-a-boy-in-the-wild/audio';
 
 	/**
-	 * Toggle action for the interactive script module.
+	 * Directive attributes to add to the HTML.
 	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
-	public const ACTION_TOGGLE = 'actions.toggle';
+	private const DIRECTIVES = [
+		'data-wp-interactive'       => self::STORE,
+		'data-wp-init'              => 'callbacks.init',
+		'data-wp-on--click'         => 'actions.toggle',
+		'data-wp-class--is-playing' => 'state.playing',
+		'data-wp-class--is-muted'   => 'state.muted',
+		'data-wp-bind--aria-label'  => 'state.ariaLabel',
+		'data-wp-text'              => 'state.label'
+	];
 
 	/**
-	 * Init callback for the interactive script module.
+	 * Default audio volume.
 	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
-	public const CALLBACK_INIT = 'callbacks.init';
-
-	/**
-	 * Interactive state path tracking whether audio is currently playing.
-	 *
-	 * @todo Type hint with PHP 8.3+ requirement.
-	 */
-	public const STATE_IS_PLAYING = 'state.playing';
-
-	/**
-	 * Interactive state path tracking whether audio is currently muted.
-	 *
-	 * @todo Type hint with PHP 8.3+ requirement.
-	 */
-	public const STATE_IS_MUTED = 'state.muted';
-
-	/**
-	 * Interactive state path for the audio control's `aria-label`.
-	 *
-	 * @todo Type hint with PHP 8.3+ requirement.
-	 */
-	public const STATE_ARIA_LABEL = 'state.ariaLabel';
-
-	/**
-	 * Interactive state path for the audio control's visible label.
-	 *
-	 * @todo Type hint with PHP 8.3+ requirement.
-	 */
-	public const STATE_LABEL = 'state.label';
+	private const DEFAULT_VOLUME = 0.1;
 
 	/**
 	 * Sets up the initial object state.
@@ -92,17 +72,7 @@ final class AudioInteractivity
 	 */
 	public function addDirectives(WP_HTML_Tag_Processor $processor): WP_HTML_Tag_Processor
 	{
-		$attr = [
-			'data-wp-interactive'       => self::STORE,
-			'data-wp-init'              => self::CALLBACK_INIT,
-			'data-wp-on--click'         => self::ACTION_TOGGLE,
-			'data-wp-class--is-playing' => self::STATE_IS_PLAYING,
-			'data-wp-class--is-muted'   => self::STATE_IS_MUTED,
-			'data-wp-bind--aria-label'  => self::STATE_ARIA_LABEL,
-			'data-wp-text'              => self::STATE_LABEL
-		];
-
-		foreach ($attr as $name => $value) {
+		foreach (self::DIRECTIVES as $name => $value) {
 			$processor->set_attribute($name, $value);
 		}
 
@@ -116,7 +86,7 @@ final class AudioInteractivity
 	{
 		wp_interactivity_state(self::STORE, [
 			'url'    => $this->resolver->getCurrentAudioFile(),
-			'volume' => 0.1,
+			'volume' => self::DEFAULT_VOLUME,
 			'text'   => [
 				'listen'      => __('Listen', 'x3p0-a-boy-in-the-wild'),
 				'stop'        => __('Stop', 'x3p0-a-boy-in-the-wild'),

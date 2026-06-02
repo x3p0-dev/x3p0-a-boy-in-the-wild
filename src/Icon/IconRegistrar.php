@@ -19,20 +19,10 @@ use WP_Icons_Registry;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
- * Handles registering icons.
+ * Handles registering icons with WordPress.
  */
 final class IconRegistrar implements Bootable
 {
-	/**
-	 * Namespace prefix applied to every registered icon name.
-	 */
-	private const NAMESPACE = 'x3p0';
-
-	/**
-	 * Path to the icons folder relative to the theme root.
-	 */
-	private const ICONS_PATH = 'public/media/svg';
-
 	/**
 	 * @inheritDoc
 	 */
@@ -42,25 +32,7 @@ final class IconRegistrar implements Bootable
 	}
 
 	/**
-	 * Returns an array of icons.
-	 */
-	private function icons(): array
-	{
-		return [
-			'bird-horizon' => __('Bird Horizon', 'x3p0-a-boy-in-the-wild'),
-			'compass'      => __('Compass',      'x3p0-a-boy-in-the-wild'),
-			'crosshair'    => __('Crosshair',    'x3p0-a-boy-in-the-wild'),
-			'draw'         => __('Draw',         'x3p0-a-boy-in-the-wild'),
-			'forest'       => __('Forest',       'x3p0-a-boy-in-the-wild'),
-			'route'        => __('Route',        'x3p0-a-boy-in-the-wild'),
-			'sealed-key'   => __('Sealed Key',   'x3p0-a-boy-in-the-wild'),
-			'sundial'      => __('Sundial',      'x3p0-a-boy-in-the-wild'),
-			'sun-path'     => __('Sun Path',     'x3p0-a-boy-in-the-wild')
-		];
-	}
-
-	/**
-	 * Registers custom icons.
+	 * Registers custom icons with the WordPress icon registry.
 	 *
 	 * @throws ReflectionException
 	 */
@@ -74,10 +46,10 @@ final class IconRegistrar implements Bootable
 			return;
 		}
 
-		foreach ($this->icons() as $name => $label) {
-			$method->invoke($registry, self::NAMESPACE . "/{$name}", [
-				'label'    => $label,
-				'filePath' => get_parent_theme_file_path(self::ICONS_PATH . "/{$name}.svg")
+		foreach (Icon::cases() as $icon) {
+			$method->invoke($registry, $icon->value, [
+				'label'    => $icon->label(),
+				'filePath' => $icon->filePath()
 			]);
 		}
 	}

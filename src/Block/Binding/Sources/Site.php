@@ -22,7 +22,7 @@ use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
  */
 final class Site extends BindingSource
 {
-	protected const NAME = 'x3p0/site';
+	public const NAME = 'x3p0/site';
 
 	/**
 	 * @inheritDoc

@@ -17,6 +17,7 @@ use WP_Block;
 use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
 use X3P0\ABoyInTheWild\Support\{
 	ChapterDay,
+	ChapterFields,
 	ChapterNumber,
 	ChapterSeason,
 	ChapterTime,
@@ -29,7 +30,7 @@ use X3P0\ABoyInTheWild\Support\{
  */
 final class Chapter extends BindingSource
 {
-	protected const NAME = 'x3p0/chapter';
+	public const NAME = 'x3p0/chapter';
 
 	/**
 	 * @inheritDoc
@@ -52,57 +53,18 @@ final class Chapter extends BindingSource
 	 */
 	public function callback(array $args, WP_Block $block, string $name): ?string
 	{
-		$postId = absint($block->context['postId'] ?? get_the_ID());
+		$postId    = absint($block->context['postId'] ?? get_the_ID());
+		$timestamp = strtotime(get_post($postId)->post_date);
 
 		return match ($args['field'] ?? '') {
-			'day'         => $this->renderDay($postId)?->numeric(),
-			'dayNumber'   => strval($this->renderDay($postId)?->number()),
-			'year'        => $this->renderYear($postId)?->numeric(),
-			'number'      => $this->renderNumber($postId)?->numeric(),
-			'numberRoman' => $this->renderNumber($postId)?->roman(),
-			'season'      => $this->renderSeason($postId),
-			'time'        => $this->renderTime($postId),
-			default       => null
+			ChapterFields::DAY          => ChapterDay::fromTimestamp($timestamp)->numeric(),
+			ChapterFields::DAY_NUMBER   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
+			ChapterFields::YEAR         => ChapterYear::fromTimestamp($timestamp)->numeric(),
+			ChapterFields::NUMBER       => ChapterNumber::fromPostId($postId)->numeric(),
+			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($postId)->roman(),
+			ChapterFields::SEASON       => ChapterSeason::fromTimestamp($timestamp),
+			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp),
+			default                     => null
 		};
-	}
-
-	/**
-	 * Returns the story season based on the timestamp.
-	 */
-	private function renderSeason(int $postId): string
-	{
-		return ChapterSeason::fromTimestamp(strtotime(get_post($postId)->post_date));
-	}
-
-	/**
-	 * Returns the story year based on the timestamp.
-	 */
-	private function renderYear(int $postId): ?ChapterYear
-	{
-		return ChapterYear::fromTimestamp(strtotime(get_post($postId)->post_date));
-	}
-
-	/**
-	 * Returns the story day based on the timestamp.
-	 */
-	private function renderDay(int $postId): ?ChapterDay
-	{
-		return ChapterDay::fromTimestamp(strtotime(get_post($postId)->post_date));
-	}
-
-	/**
-	 * Returns the story day based on the timestamp.
-	 */
-	private function renderNumber(int $postId): ?ChapterNumber
-	{
-		return ChapterNumber::fromPostId($postId);
-	}
-
-	/**
-	 * Returns the story time based on the timestamp.
-	 */
-	private function renderTime(int $postId): string
-	{
-		return ChapterTime::fromTimestamp(strtotime(get_post($postId)->post_date));
 	}
 }

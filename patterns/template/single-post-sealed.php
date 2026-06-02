@@ -8,6 +8,8 @@
 
 declare(strict_types=1);
 
+use X3P0\ABoyInTheWild\Icon\Icon;
+
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
@@ -39,7 +41,16 @@ defined('ABSPATH') || exit;
 		} -->
 		<article class="wp-block-group alignfull">
 
-			<!-- wp:icon {"icon":"x3p0/sealed-key","align":"center","className":"is-style-icon-pulse-fade","style":{"dimensions":{"width":"64px"},"elements":{"link":{"color":{"text":"var:preset|color|ink-muted"}}}},"textColor":"ink-muted"} /-->
+			<!-- wp:icon {
+				"icon":"<?= esc_attr(Icon::SEALED_KEY->value) ?>",
+				"align":"center",
+				"className":"is-style-icon-pulse-fade",
+				"style":{
+					"dimensions":{"width":"64px"},
+					"elements":{"link":{"color":{"text":"var:preset|color|ink-muted"}}}
+				},
+				"textColor":"ink-muted"
+			} /-->
 
 			<!-- wp:group {
 				"tagName":"header",

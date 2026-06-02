@@ -179,7 +179,7 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 				<!-- /wp:separator -->
 
 				<!-- wp:paragraph -->
-				<p>I tried to sleep. <span class="redacted">I thought about my family for the first time since the first night. I am not going to write about that.</span></p>
+				<p>I tried to sleep. <s>I thought about my family for the first time since the first night. I am not going to write about that.</s></p>
 				<!-- /wp:paragraph -->
 
 				<!-- wp:spacer {"height":"var:preset|spacing|110"} -->

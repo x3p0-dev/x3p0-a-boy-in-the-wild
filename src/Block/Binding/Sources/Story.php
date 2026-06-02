@@ -23,7 +23,7 @@ use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
  */
 final class Story extends BindingSource
 {
-	protected const NAME = 'x3p0/story';
+	public const NAME = 'x3p0/story';
 
 	/**
 	 * Stores the first chapter.
@@ -41,18 +41,8 @@ final class Story extends BindingSource
 	/**
 	 * @inheritDoc
 	 */
-	public function usesContext(): array
-	{
-		return ['postId'];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function callback(array $args, WP_Block $block, string $name): ?string
 	{
-		$postId = absint($block->context['postId'] ?? get_the_ID());
-
 		return match ($args['field'] ?? '') {
 			'firstChapterUrl'   => $this->renderFirstChapterUrl(),
 			'firstChapterLabel' => $this->renderFirstChapterLabel(),

@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use X3P0\ABoyInTheWild\Icon\Icon;
+
 $background = get_theme_file_uri('public/media/images/system/season-late-summer.webp');
 $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp');
 ?>
@@ -137,7 +139,13 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 			} -->
 			<footer class="wp-block-group is-style-container-meta">
 
-				<!-- wp:icon {"icon":"x3p0/bird-horizon","style":{"layout":{"selfStretch":"fit","flexSize":null},"dimensions":{"width":"40px"}}} /-->
+				<!-- wp:icon {
+					"icon":"<?= esc_attr(Icon::BIRD_HORIZON->value) ?>",
+					"style":{
+						"layout":{"selfStretch":"fit","flexSize":null},
+						"dimensions":{"width":"40px"}
+					}
+				} /-->
 
 				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"}} -->
 				<div class="wp-block-group">

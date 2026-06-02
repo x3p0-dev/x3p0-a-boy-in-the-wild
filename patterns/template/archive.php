@@ -8,6 +8,8 @@
 
 declare(strict_types=1);
 
+use X3P0\ABoyInTheWild\Icon\Icon;
+
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
@@ -133,7 +135,10 @@ $sketch     = get_theme_file_uri('public/media/images/template/archive-sketch.we
 						<p class="is-style-text-kicker"><?= esc_html__('0 Chapters', 'x3p0-a-boy-in-the-wild') ?></p>
 						<!-- /wp:paragraph -->
 
-						<!-- wp:icon {"icon":"x3p0/sundial","style":{"dimensions":{"width":"40px"}}} /-->
+						<!-- wp:icon {
+							"icon":"<?= esc_attr(Icon::SUNDIAL->value) ?>",
+							"style":{"dimensions":{"width":"40px"}}
+						} /-->
 
 					</div>
 					<!-- /wp:group -->

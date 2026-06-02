@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Title: Chapter Year
  * Slug: x3p0-a-boy-in-the-wild/fragment-chapter-year
@@ -6,16 +7,19 @@
  * Categories: x3p0-fragments
  * Inserter: yes
  */
-?>
 
+use X3P0\ABoyInTheWild\Block\Binding\Sources\Chapter;
+use X3P0\ABoyInTheWild\Support\ChapterFields;
+
+?>
 
 <!-- wp:paragraph {
 	"metadata":{
 		"name":"<?= esc_attr__('Year', 'x3p0-a-boy-in-the-wild') ?>",
 		"bindings":{
 			"content":{
-				"source":"x3p0/chapter",
-				"args":{"field":"year"}
+				"source":"<?= esc_attr(Chapter::NAME) ?>",
+				"args":{"field":"<?= esc_attr(ChapterFields::YEAR) ?>"}
 			}
 		}
 	}

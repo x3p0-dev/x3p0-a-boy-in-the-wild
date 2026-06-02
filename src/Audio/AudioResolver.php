@@ -42,7 +42,7 @@ final class AudioResolver
 	 */
 	private function getPostAudioUrl(int $postId): string
 	{
-		$audioId = get_post_meta($postId, AudioMeta::META_KEY, true);
+		$audioId = get_post_meta($postId, AudioMeta::AUDIO_KEY, true);
 
 		return $audioId
 			? (string) wp_get_attachment_url(absint($audioId))

@@ -13,14 +13,11 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Audio;
 
-use WP_HTML_Tag_Processor;
-
 /**
  * Primary entry point for audio functionality.
  *
- * Provides access to audio resolution and interactivity features.
- * Use this service to check the current audio, determine if switching
- * is available, and enable interactive audio switching.
+ * Provides access to audio resolution and interactivity features. Use this
+ * service to check the current audio and enable interactive audio playing.
  */
 final class AudioService
 {

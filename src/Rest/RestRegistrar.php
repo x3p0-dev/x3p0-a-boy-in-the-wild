@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Rest;
 
-use WP_Post;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\ChapterDay;
-use X3P0\ABoyInTheWild\Support\ChapterNumber;
-use X3P0\ABoyInTheWild\Support\ChapterSeason;
-use X3P0\ABoyInTheWild\Support\ChapterTime;
-use X3P0\ABoyInTheWild\Support\ChapterYear;
+use X3P0\ABoyInTheWild\Support\{
+	ChapterDay,
+	ChapterFields,
+	ChapterNumber,
+	ChapterSeason,
+	ChapterTime,
+	ChapterYear
+};
 
 /**
  * Registers fields with the REST API needed in the editor.
@@ -52,13 +54,13 @@ final class RestRegistrar implements Bootable
 			'schema' => [
 				'type'       => 'object',
 				'properties' => [
-					'day'         => ['type' => 'string'],
-					'dayNumber'   => ['type' => 'string'],
-					'year'        => ['type' => 'string'],
-					'number'      => ['type' => 'string'],
-					'numberRoman' => ['type' => 'string'],
-					'season'      => ['type' => 'string'],
-					'time'        => ['type' => 'string']
+					ChapterFields::DAY          => ['type' => 'string'],
+					ChapterFields::DAY_NUMBER   => ['type' => 'string'],
+					ChapterFields::YEAR         => ['type' => 'string'],
+					ChapterFields::NUMBER       => ['type' => 'string'],
+					ChapterFields::NUMBER_ROMAN => ['type' => 'string'],
+					ChapterFields::SEASON       => ['type' => 'string'],
+					ChapterFields::TIME         => ['type' => 'string']
 				]
 			]
 		]);
@@ -73,13 +75,13 @@ final class RestRegistrar implements Bootable
 		$timestamp = strtotime($post['date']);
 
 		return [
-			'day'         => ChapterDay::fromTimestamp($timestamp)->numeric(),
-			'dayNumber'   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
-			'year'        => ChapterYear::fromTimestamp($timestamp)->numeric(),
-			'number'      => ChapterNumber::fromPostId($post['id'])->numeric(),
-			'numberRoman' => ChapterNumber::fromPostId($post['id'])->roman(),
-			'season'      => ChapterSeason::fromTimestamp($timestamp),
-			'time'        => ChapterTime::fromTimestamp($timestamp)
+			ChapterFields::DAY          => ChapterDay::fromTimestamp($timestamp)->numeric(),
+			ChapterFields::DAY_NUMBER   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
+			ChapterFields::YEAR         => ChapterYear::fromTimestamp($timestamp)->numeric(),
+			ChapterFields::NUMBER       => ChapterNumber::fromPostId($post['id'])->numeric(),
+			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($post['id'])->roman(),
+			ChapterFields::SEASON       => ChapterSeason::fromTimestamp($timestamp),
+			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp),
 		];
 	}
 }

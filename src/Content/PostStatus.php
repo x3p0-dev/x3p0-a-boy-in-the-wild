@@ -21,6 +21,16 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
  */
 final class PostStatus implements Bootable
 {
+
+	private const DRAFT = 'draft';
+	private const PUBLISH = 'publish';
+	private const PRIVATE = 'private';
+	private const TRASH = 'trash';
+	private const FUTURE = 'future';
+	private const PENDING = 'pending';
+	private const AUTO_DRAFT = 'auto-draft';
+	private const PROTECTED = 'protected';
+
 	/**
 	 * @inheritDoc
 	 */
@@ -38,31 +48,31 @@ final class PostStatus implements Bootable
 		global $wp_post_statuses;
 
 		$statuses = [
-			'draft'       => [
+			self::DRAFT       => [
 				'label' => __('Unwritten', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('Unwritten <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			],
-			'publish'     => [
+			self::PUBLISH     => [
 				'label' => __('In the Field', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('In the Field <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			],
-			'private'     => [
+			self::PRIVATE     => [
 				'label' => __('Buried', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('Buried <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			],
-			'trash'       => [
+			self::TRASH       => [
 				'label' => __('Lost', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('Lost <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			],
-			'future'      => [
+			self::FUTURE      => [
 				'label' => __('Forthcoming', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('Forthcoming <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			],
-			'pending'     => [
+			self::PENDING     => [
 				'label' => __('Nearly There', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('Nearly There <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			],
-			'auto-draft'  => [
+			self::AUTO_DRAFT  => [
 				'label' => __('Unstarted', 'x3p0-a-boy-in-the-wild'),
 				'count' => __('Unstarted <span class="count">(%s)</span>', 'x3p0-a-boy-in-the-wild'),
 			]
@@ -89,12 +99,12 @@ final class PostStatus implements Bootable
 		}
 
 		$map = [
-			'draft'      => __('Unwritten',    'x3p0-a-boy-in-the-wild'),
-			'pending'    => __('Nearly There', 'x3p0-a-boy-in-the-wild'),
-			'future'     => __('Forthcoming',  'x3p0-a-boy-in-the-wild'),
-			'private'    => __('Buried',       'x3p0-a-boy-in-the-wild'),
-			'auto-draft' => __('Unstarted',    'x3p0-a-boy-in-the-wild'),
-			'protected'  => __('Sealed',       'x3p0-a-boy-in-the-wild')
+			self::DRAFT      => __('Unwritten',    'x3p0-a-boy-in-the-wild'),
+			self::PENDING    => __('Nearly There', 'x3p0-a-boy-in-the-wild'),
+			self::FUTURE     => __('Forthcoming',  'x3p0-a-boy-in-the-wild'),
+			self::PRIVATE    => __('Buried',       'x3p0-a-boy-in-the-wild'),
+			self::AUTO_DRAFT => __('Unstarted',    'x3p0-a-boy-in-the-wild'),
+			self::PROTECTED  => __('Sealed',       'x3p0-a-boy-in-the-wild')
 		];
 
 		foreach ($states as $status => $label) {

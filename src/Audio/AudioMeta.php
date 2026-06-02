@@ -25,7 +25,7 @@ final class AudioMeta implements Bootable
 	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
-	public const META_KEY = 'x3p0_audio';
+	public const AUDIO_KEY = 'x3p0_audio';
 
 	/**
 	 * @inheritDoc
@@ -40,7 +40,7 @@ final class AudioMeta implements Bootable
 	 */
 	private function register(): void
 	{
-		register_post_meta('post', self::META_KEY, [
+		register_post_meta('post', self::AUDIO_KEY, [
 			'label'             => __('Chapter Audio', 'x3p0-a-boy-in-the-wild'),
 			'description'       => __('The associated chapter audio attachment ID.', 'x3p0-a-boy-in-the-wild'),
 			'auth_callback'     => fn() => current_user_can('edit_posts'),

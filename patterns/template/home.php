@@ -8,6 +8,8 @@
 
 declare(strict_types=1);
 
+use X3P0\ABoyInTheWild\Icon\Icon;
+
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
@@ -129,7 +131,11 @@ $sketch     = get_theme_file_uri('public/media/images/template/home-sketch.webp'
 						<h2 class="wp-block-heading is-style-text-kicker"><?= esc_html__('The Trail So Far', 'x3p0-a-boy-in-the-wild') ?></h2>
 						<!-- /wp:heading -->
 
-						<!-- wp:icon {"icon":"x3p0/compass","metadata":{"name":"<?= esc_attr__('Compass', 'x3p0-a-boy-in-the-wild') ?>"},"style":{"dimensions":{"width":"40px"}}} /-->
+						<!-- wp:icon {
+							"icon":"<?= esc_attr(Icon::COMPASS->value) ?>",
+							"metadata":{"name":"<?= esc_attr__('Compass', 'x3p0-a-boy-in-the-wild') ?>"},
+							"style":{"dimensions":{"width":"40px"}}
+						} /-->
 
 					</div>
 					<!-- /wp:group -->
@@ -150,9 +156,7 @@ $sketch     = get_theme_file_uri('public/media/images/template/home-sketch.webp'
 				<!-- wp:buttons {"metadata":{"name":"<?= esc_attr__('The Beginning', 'x3p0-a-boy-in-the-wild') ?>"}} -->
 				<div class="wp-block-buttons">
 
-					<!-- wp:button {"metadata":{"bindings":{"url":{"source":"x3p0/story","args":{"field":"firstChapterUrl"}},"text":{"source":"x3p0/story","args":{"field":"firstChapterLabel"}}}},"className":"is-style-button-link"} -->
-					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/"><?= esc_html__('Begin at the beginning →', 'x3p0-a-boy-in-the-wild') ?></a></div>
-					<!-- /wp:button -->
+					<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-story-first-chapter-button"} /-->
 
 				</div>
 				<!-- /wp:buttons -->
