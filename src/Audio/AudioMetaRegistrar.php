@@ -18,7 +18,7 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 /**
  * Registers user meta for storing audio preferences.
  */
-final class AudioMeta implements Bootable
+final class AudioMetaRegistrar implements Bootable
 {
 	/**
 	 * Audio ID meta key.

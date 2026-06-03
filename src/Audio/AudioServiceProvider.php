@@ -28,6 +28,6 @@ final class AudioServiceProvider extends ServiceProvider
 
 	protected const BOOTABLE = [
 		AudioAssets::class,
-		AudioMeta::class
+		AudioMetaRegistrar::class
 	];
 }
