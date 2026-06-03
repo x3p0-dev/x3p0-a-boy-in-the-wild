@@ -13,16 +13,11 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Category;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
-final class BlockCategoryServiceProvider extends ServiceProvider implements Bootable
+final class BlockCategoryServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(BlockCategoryRegistrar::class)->boot();
-	}
+	protected const BOOTABLE = [
+		BlockCategoryRegistrar::class
+	];
 }

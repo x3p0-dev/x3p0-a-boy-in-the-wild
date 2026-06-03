@@ -13,26 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Render;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
-final class RenderServiceProvider extends ServiceProvider implements Bootable
+final class RenderServiceProvider extends ServiceProvider
 {
-	/**
-	 * Classes that hook into specific block's rendering process.
-	 */
-	private const RENDERERS = [
+	protected const BOOTABLE = [
 		Filters\Button::class,
 		Filters\PostExcerpt::class
 	];
-
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		foreach (self::RENDERERS as $renderer) {
-			$this->container->get($renderer)->boot();
-		}
-	}
 }

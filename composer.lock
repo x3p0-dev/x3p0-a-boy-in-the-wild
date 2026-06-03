@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/x3p0-dev/x3p0-framework.git",
-                "reference": "f691e8704a4cd98d81440bf31ee3c495b30eefbe"
+                "reference": "7b64a5dbe743885d182e654c0bb2771ad992235d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x3p0-dev/x3p0-framework/zipball/f691e8704a4cd98d81440bf31ee3c495b30eefbe",
-                "reference": "f691e8704a4cd98d81440bf31ee3c495b30eefbe",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-framework/zipball/7b64a5dbe743885d182e654c0bb2771ad992235d",
+                "reference": "7b64a5dbe743885d182e654c0bb2771ad992235d",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "issues": "https://github.com/x3p0-dev/x3p0-framework/issues",
                 "source": "https://github.com/x3p0-dev/x3p0-framework/tree/master"
             },
-            "time": "2025-11-23T06:40:34+00:00"
+            "time": "2026-06-03T03:27:04+00:00"
         }
     ],
     "packages-dev": [
@@ -932,12 +932,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/x3p0-dev/x3p0-prelude.git",
-                "reference": "6843cc35ef592922af5e652ae8280cba3f4986c7"
+                "reference": "7df1920f0495dbccefd98d84f4901ce4568e153c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x3p0-dev/x3p0-prelude/zipball/6843cc35ef592922af5e652ae8280cba3f4986c7",
-                "reference": "6843cc35ef592922af5e652ae8280cba3f4986c7",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-prelude/zipball/7df1920f0495dbccefd98d84f4901ce4568e153c",
+                "reference": "7df1920f0495dbccefd98d84f4901ce4568e153c",
                 "shasum": ""
             },
             "require": {
@@ -968,7 +968,7 @@
                 "issues": "https://github.com/x3p0-dev/x3p0-prelude/issues",
                 "source": "https://github.com/x3p0-dev/x3p0-prelude/tree/master"
             },
-            "time": "2026-06-01T14:11:15+00:00"
+            "time": "2026-06-02T21:01:49+00:00"
         },
         {
             "name": "x3p0-dev/x3p0-skills",

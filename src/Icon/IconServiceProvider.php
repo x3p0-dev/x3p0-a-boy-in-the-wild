@@ -13,19 +13,14 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Icon;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Icon domain.
  */
-final class IconServiceProvider extends ServiceProvider implements Bootable
+final class IconServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(IconRegistrar::class)->boot();
-	}
+	protected const BOOTABLE = [
+		IconRegistrar::class
+	];
 }

@@ -13,19 +13,14 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Admin;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Admin domain.
  */
-final class AdminServiceProvider extends ServiceProvider implements Bootable
+final class AdminServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(AdminColorRegistrar::class)->boot();
-	}
+	protected const BOOTABLE = [
+		AdminColorRegistrar::class
+	];
 }

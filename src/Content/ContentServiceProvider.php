@@ -13,23 +13,18 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Content;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Content domain.
  */
-final class ContentServiceProvider extends ServiceProvider implements Bootable
+final class ContentServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(Category::class)->boot();
-		$this->container->get(Post::class)->boot();
-		$this->container->get(PostStatus::class)->boot();
-		$this->container->get(PostTag::class)->boot();
-		$this->container->get(PostTitleFormat::class)->boot();
-	}
+	protected const BOOTABLE = [
+		Category::class,
+		Post::class,
+		PostStatus::class,
+		PostTag::class,
+		PostTitleFormat::class
+	];
 }

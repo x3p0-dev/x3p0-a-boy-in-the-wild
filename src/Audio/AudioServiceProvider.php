@@ -13,30 +13,21 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Audio;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Audio domain.
  */
-final class AudioServiceProvider extends ServiceProvider implements Bootable
+final class AudioServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function register(): void
-	{
-		$this->container->singleton(AudioInteractivity::class);
-		$this->container->singleton(AudioService::class);
-		$this->container->singleton(AudioResolver::class);
-	}
+	protected const SINGLETONS = [
+		AudioInteractivity::class,
+		AudioService::class,
+		AudioResolver::class
+	];
 
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(AudioAssets::class)->boot();
-		$this->container->get(AudioMeta::class)->boot();
-	}
+	protected const BOOTABLE = [
+		AudioAssets::class,
+		AudioMeta::class
+	];
 }

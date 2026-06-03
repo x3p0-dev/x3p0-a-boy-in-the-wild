@@ -13,20 +13,15 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Template;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Template domain.
  */
-final class TemplateServiceProvider extends ServiceProvider implements Bootable
+final class TemplateServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(TemplateHierarchy::class)->boot();
-		$this->container->get(TemplateRegistrar::class)->boot();
-	}
+	protected const BOOTABLE = [
+		TemplateHierarchy::class,
+		TemplateRegistrar::class
+	];
 }

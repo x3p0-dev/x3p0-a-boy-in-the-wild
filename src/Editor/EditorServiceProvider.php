@@ -13,20 +13,15 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Editor;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Editor domain.
  */
-final class EditorServiceProvider extends ServiceProvider implements Bootable
+final class EditorServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(EditorAssets::class)->boot();
-		$this->container->get(EditorSettings::class)->boot();
-	}
+	protected const BOOTABLE = [
+		EditorAssets::class,
+		EditorSettings::class
+	];
 }

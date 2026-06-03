@@ -13,26 +13,25 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Settings;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
-final class SettingsServiceProvider extends ServiceProvider implements Bootable
+final class SettingsServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function register(): void
-	{
-		$this->container->singleton(SettingsModifierFactory::class);
-		$this->container->singleton(SettingsModifierRegistry::class);
-	}
+	protected const SINGLETONS = [
+		SettingsModifierFactory::class,
+		SettingsModifierRegistry::class
+	];
+
+	protected const BOOTABLE = [
+		SettingsModifierManager::class
+	];
 
 	/**
 	 * @inheritDoc
 	 */
 	public function boot(): void
 	{
-		$this->container->get(SettingsModifierManager::class)->boot();
+		parent::boot();
 
 		SettingsModifierRegistrar::register(
 			$this->container->get(SettingsModifierRegistry::class)

@@ -13,12 +13,18 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Stylesheet;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
-class StylesheetServiceProvider extends ServiceProvider implements Bootable
+final class StylesheetServiceProvider extends ServiceProvider
 {
 	private const STYLESHEETS_PATH = 'public/css/blocks';
+
+	/**
+	 * @inheritDoc
+	 */
+	protected const BOOTABLE = [
+		StylesheetLoader::class
+	];
 
 	/**
 	 * @inheritDoc
@@ -29,13 +35,5 @@ class StylesheetServiceProvider extends ServiceProvider implements Bootable
 			StylesheetIterator::class,
 			fn() => new StylesheetIterator(self::STYLESHEETS_PATH)
 		);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(StylesheetLoader::class)->boot();
 	}
 }

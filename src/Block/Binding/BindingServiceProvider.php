@@ -13,20 +13,14 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
-use WP_Block_Bindings_Registry;
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Block Binding domain.
  */
-final class BindingServiceProvider extends ServiceProvider implements Bootable
+final class BindingServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(BindingSourceRegistrar::class)->boot();
-	}
+	protected const BOOTABLE = [
+		BindingSourceRegistrar::class
+	];
 }

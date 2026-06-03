@@ -81,7 +81,7 @@ final class RestRegistrar implements Bootable
 			ChapterFields::NUMBER       => ChapterNumber::fromPostId($post['id'])->numeric(),
 			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($post['id'])->roman(),
 			ChapterFields::SEASON       => ChapterSeason::fromTimestamp($timestamp),
-			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp),
+			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp)
 		];
 	}
 }

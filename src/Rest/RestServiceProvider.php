@@ -13,19 +13,14 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Rest;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Rest domain.
  */
-class RestServiceProvider extends ServiceProvider implements Bootable
+final class RestServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(RestRegistrar::class)->boot();
-	}
+	protected const BOOTABLE = [
+		RestRegistrar::class
+	];
 }

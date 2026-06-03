@@ -13,22 +13,11 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Canvas;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
-final class CanvasServiceProvider extends ServiceProvider implements Bootable
+final class CanvasServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function register(): void
-	{}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(CanvasScriptModuleLoader::class)->boot();
-	}
+	protected const BOOTABLE = [
+		CanvasScriptModuleLoader::class
+	];
 }

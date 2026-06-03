@@ -13,22 +13,17 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Frontend;
 
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
  * Boots the bindings registered under the Frontend domain.
  */
-final class FrontendServiceProvider extends ServiceProvider implements Bootable
+final class FrontendServiceProvider extends ServiceProvider
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		$this->container->get(FrontendAssets::class)->boot();
-		$this->container->get(Query::class)->boot();
-		$this->container->get(PostPasswordForm::class)->boot();
-		$this->container->get(PostNavigation::class)->boot();
-	}
+	protected const BOOTABLE = [
+		FrontendAssets::class,
+		PostNavigation::class,
+		PostPasswordForm::class,
+		Query::class
+	];
 }
