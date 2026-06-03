@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Audio service.
+ * Audio facade.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -19,7 +19,7 @@ namespace X3P0\ABoyInTheWild\Audio;
  * Provides access to audio resolution and interactivity features. Use this
  * service to check the current audio and enable interactive audio playing.
  */
-final class AudioService
+final class AudioFacade
 {
 	/**
 	 * Sets up the initial object state.

@@ -21,8 +21,8 @@ use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 final class AudioServiceProvider extends ServiceProvider
 {
 	protected const SINGLETONS = [
+		AudioFacade::class,
 		AudioInteractivity::class,
-		AudioService::class,
 		AudioResolver::class
 	];
 

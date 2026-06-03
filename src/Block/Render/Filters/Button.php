@@ -16,7 +16,7 @@ namespace X3P0\ABoyInTheWild\Block\Render\Filters;
 use WP_Block;
 use WP_HTML_Tag_Processor;
 use X3P0\ABoyInTheWild\Audio\AudioInteractivity;
-use X3P0\ABoyInTheWild\Audio\AudioService;
+use X3P0\ABoyInTheWild\Audio\AudioFacade;
 use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
 
 /**
@@ -33,7 +33,7 @@ final class Button extends RenderFilter
 	/**
 	 * Sets up the object state.
 	 */
-	public function __construct(private readonly AudioService $audio)
+	public function __construct(private readonly AudioFacade $audio)
 	{}
 
 	/**
