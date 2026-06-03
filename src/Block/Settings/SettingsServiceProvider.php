@@ -23,18 +23,7 @@ final class SettingsServiceProvider extends ServiceProvider
 	];
 
 	protected const BOOTABLE = [
-		SettingsModifierManager::class
+		SettingsModifierManager::class,
+		SettingsModifierRegistrar::class
 	];
-
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		parent::boot();
-
-		SettingsModifierRegistrar::register(
-			$this->container->get(SettingsModifierRegistry::class)
-		);
-	}
 }
