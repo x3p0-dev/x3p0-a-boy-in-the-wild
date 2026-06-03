@@ -72,14 +72,15 @@ final class RestRegistrar implements Bootable
 	 */
 	private function getChapterData(array $post): array
 	{
-		$timestamp = strtotime($post['date']);
+		$postId    = $post['id'];
+		$timestamp = get_post_timestamp($postId);
 
 		return [
 			ChapterFields::DAY          => ChapterDay::fromTimestamp($timestamp)->numeric(),
 			ChapterFields::DAY_NUMBER   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
 			ChapterFields::YEAR         => ChapterYear::fromTimestamp($timestamp)->numeric(),
-			ChapterFields::NUMBER       => ChapterNumber::fromPostId($post['id'])->numeric(),
-			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($post['id'])->roman(),
+			ChapterFields::NUMBER       => ChapterNumber::fromPostId($postId)->numeric(),
+			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($postId)->roman(),
 			ChapterFields::SEASON       => ChapterSeason::fromTimestamp($timestamp),
 			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp)
 		];

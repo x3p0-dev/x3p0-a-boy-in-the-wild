@@ -54,7 +54,7 @@ final class Chapter extends BindingSource
 	public function callback(array $args, WP_Block $block, string $name): ?string
 	{
 		$postId    = absint($block->context['postId'] ?? get_the_ID());
-		$timestamp = strtotime(get_post($postId)->post_date);
+		$timestamp = get_post_timestamp($postId);
 
 		return match ($args['field'] ?? '') {
 			ChapterFields::DAY          => ChapterDay::fromTimestamp($timestamp)->numeric(),
