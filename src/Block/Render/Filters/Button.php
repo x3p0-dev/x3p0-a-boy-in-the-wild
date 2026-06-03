@@ -34,7 +34,8 @@ final class Button extends RenderFilter
 	 * Sets up the object state.
 	 */
 	public function __construct(private readonly AudioFacade $audio)
-	{}
+	{
+	}
 
 	/**
 	 * Filters the Button block on render and runs any class methods based
@@ -42,22 +43,14 @@ final class Button extends RenderFilter
 	 */
 	protected function render(string $content, array $block, WP_Block $instance): string
 	{
-		if (
-			isset($block['attrs']['className'])
-			&& str_contains($block['attrs']['className'], self::AUDIO_CLASS)
-		) {
-			return $this->renderAudioToggle($content);
-		}
+		$className = $block['attrs']['className'] ?? '';
+		$contains = fn($subClass) => str_contains($className, $subClass);
 
-		// @todo - The color scheme is not active in the theme yet.
-		if (
-			isset($block['attrs']['className'])
-			&& str_contains($block['attrs']['className'], self::COLOR_SCHEME_CLASS)
-		) {
-			return '';
-		}
-
-		return $content;
+		return match (true) {
+			$contains(self::AUDIO_CLASS)        => $this->renderAudioToggle($content),
+			$contains(self::COLOR_SCHEME_CLASS) => $this->renderColorSchemeToggle($content),
+			default                             => $content
+		};
 	}
 
 	/**
@@ -67,10 +60,7 @@ final class Button extends RenderFilter
 	{
 		$processor = new WP_HTML_Tag_Processor($content);
 
-		if (
-			! $processor->next_tag(['class_name' => self::AUDIO_CLASS])
-			|| ! $processor->next_tag('button')
-		) {
+		if (! $this->nextButton($processor, self::AUDIO_CLASS)) {
 			return $processor->get_updated_html();
 		}
 
@@ -84,5 +74,31 @@ final class Button extends RenderFilter
 		$this->audio->interactivity()->enable();
 
 		return $processor->get_updated_html();
+	}
+
+	/**
+	 * Enables the color scheme interactivity if this is a scheme toggle button.
+	 *
+	 * @todo Build out the color scheme system.
+	 */
+	private function renderColorSchemeToggle(string $content): string
+	{
+		$processor = new WP_HTML_Tag_Processor($content);
+
+		if ($this->nextButton($processor, self::COLOR_SCHEME_CLASS)) {
+			return '';
+		}
+
+		return $processor->get_updated_html();
+	}
+
+	/**
+	 * Finds the next matching button block by class name and the next
+	 * `<button>` element contained within.
+	 */
+	private function nextButton(WP_HTML_Tag_Processor $processor, string $className): bool
+	{
+		return $processor->next_tag(['class_name' => $className])
+			&& $processor->next_tag('button');
 	}
 }
