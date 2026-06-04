@@ -42,9 +42,9 @@ registerBlockBindingsSource({
 				args:  {field: 'day'}
 			},
 			{
-				label: __('Day (Number Only)', 'x3p0-a-boy-in-the-wild'),
+				label: __('Day (Labeled)', 'x3p0-a-boy-in-the-wild'),
 				type:  'string',
-				args: {field: 'dayNumber'}
+				args: {field: 'dayLabel'}
 			},
 			{
 				label: __('Number', 'x3p0-a-boy-in-the-wild'),
@@ -52,9 +52,19 @@ registerBlockBindingsSource({
 				args:  {field: 'number'}
 			},
 			{
+				label: __('Number (Labeled)', 'x3p0-a-boy-in-the-wild'),
+				type:  'string',
+				args:  {field: 'numberLabel'}
+			},
+			{
 				label: __('Number (Roman)', 'x3p0-a-boy-in-the-wild'),
 				type:  'string',
 				args:  {field: 'numberRoman'}
+			},
+			{
+				label: __('Number (Roman, Labeled)', 'x3p0-a-boy-in-the-wild'),
+				type:  'string',
+				args:  {field: 'numberRomanLabel'}
 			},
 			{
 				label: __('Season', 'x3p0-a-boy-in-the-wild'),
@@ -64,12 +74,17 @@ registerBlockBindingsSource({
 			{
 				label: __('Time of Day', 'x3p0-a-boy-in-the-wild'),
 				type:  'string',
-				args:  {field: 'time'}
+				args:  {field: 'timeOfDay'}
 			},
 			{
 				label: __('Year', 'x3p0-a-boy-in-the-wild'),
 				type:  'string',
 				args:  {field: 'year'}
+			},
+			{
+				label: __('Year (Labeled)', 'x3p0-a-boy-in-the-wild'),
+				type:  'string',
+				args:  {field: 'yearLabel'}
 			}
 		];
 	},

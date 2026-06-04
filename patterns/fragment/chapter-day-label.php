@@ -2,8 +2,8 @@
 
 /**
  * Title: Chapter Day
- * Slug: x3p0-a-boy-in-the-wild/fragment-chapter-day
- * Description: Displays a chapter's day number.
+ * Slug: x3p0-a-boy-in-the-wild/fragment-chapter-day-label
+ * Description: Displays a chapter's day with a label.
  * Categories: x3p0-fragments
  * Inserter: yes
  */
@@ -15,14 +15,14 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 <!-- wp:paragraph {
 	"metadata":{
-		"name":"<?= esc_attr__('Day (Number)', 'x3p0-a-boy-in-the-wild') ?>",
+		"name":"<?= esc_attr__('Day', 'x3p0-a-boy-in-the-wild') ?>",
 		"bindings":{
 			"content":{
 				"source":"<?= esc_attr(Chapter::NAME) ?>",
-				"args":{"field":"<?= esc_attr(ChapterField::Day->value) ?>"}
+				"args":{"field":"<?= esc_attr(ChapterField::DayLabel->value) ?>"}
 			}
 		}
 	}
 } -->
-<p>0</p>
+<p><?= esc_html__('Day', 'x3p0-a-boy-in-the-wild') ?></p>
 <!-- /wp:paragraph -->

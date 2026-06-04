@@ -9,7 +9,7 @@
  */
 
 use X3P0\ABoyInTheWild\Block\Binding\Sources\Chapter;
-use X3P0\ABoyInTheWild\Support\ChapterFields;
+use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 ?>
 
@@ -19,7 +19,7 @@ use X3P0\ABoyInTheWild\Support\ChapterFields;
 		"bindings":{
 			"content":{
 				"source":"<?= esc_attr(Chapter::NAME) ?>",
-				"args":{"field":"<?= esc_attr(ChapterFields::SEASON) ?>"}
+				"args":{"field":"<?= esc_attr(ChapterField::Season->value) ?>"}
 			}
 		}
 	}

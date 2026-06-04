@@ -281,7 +281,7 @@ $background = get_theme_file_uri('public/media/images/chapter/005-campfire.webp'
 			} -->
 			<footer class="wp-block-group is-style-container-meta">
 
-				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-year"} /-->
+				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-year-label"} /-->
 
 				<!-- wp:separator {"className":"is-style-separator-inline"} -->
 				<hr class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"/>

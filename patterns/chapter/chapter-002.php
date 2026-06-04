@@ -11,7 +11,7 @@
 declare(strict_types=1);
 
 use X3P0\ABoyInTheWild\Block\Binding\Sources\Chapter;
-use X3P0\ABoyInTheWild\Support\ChapterFields;
+use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 ?>
@@ -147,7 +147,7 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 									"bindings":{
 										"content":{
 											"source":"<?= esc_attr(Chapter::NAME) ?>",
-											"args":{"field":"<?= esc_attr(ChapterFields::DAY_NUMBER) ?>"}
+											"args":{"field":"<?= esc_attr(ChapterField::Day->value) ?>"}
 										}
 									}
 								},

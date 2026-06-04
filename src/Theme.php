@@ -49,6 +49,7 @@ final class Theme extends Application
 		Icon\IconServiceProvider::class,
 		Pattern\PatternServiceProvider::class,
 		Rest\RestServiceProvider::class,
+		Story\StoryServiceProvider::class,
 		Template\TemplateServiceProvider::class
 	];
 }

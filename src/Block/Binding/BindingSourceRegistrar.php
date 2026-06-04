@@ -13,30 +13,25 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
-use TypeError;
-use WP_Block_Bindings_Registry;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
- * Registers custom binding sources via the WordPress Block Bindings API.
+ * Registers custom binding sources via the WordPress Block Bindings API. The
+ * sources are composed and handed in by the service provider, so this class
+ * stays free of the container.
  */
 final class BindingSourceRegistrar implements Bootable
 {
 	/**
-	 * Array of block binding source classnames.
+	 * @param array<int, BindingSource> $sources The binding sources to register.
 	 */
-	private const SOURCES = [
-		Sources\Chapter::class,
-		Sources\Query::class,
-		Sources\Site::class,
-		Sources\Story::class,
-		Sources\Term::class
-	];
+	public function __construct(private readonly array $sources) {}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function boot(): void {
+	public function boot(): void
+	{
 		add_action('init', $this->register(...));
 	}
 
@@ -45,9 +40,7 @@ final class BindingSourceRegistrar implements Bootable
 	 */
 	public function register(): void
 	{
-		foreach (self::SOURCES as $name) {
-			$source = new $name;
-
+		foreach ($this->sources as $source) {
 			register_block_bindings_source($source->getName(), [
 				'label'              => $source->getLabel(),
 				'get_value_callback' => $source->callback(...),

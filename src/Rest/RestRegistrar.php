@@ -14,14 +14,8 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Rest;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\{
-	ChapterDay,
-	ChapterFields,
-	ChapterNumber,
-	ChapterSeason,
-	ChapterTime,
-	ChapterYear
-};
+use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
+use X3P0\ABoyInTheWild\Story\Chapter\ChapterRepository;
 
 /**
  * Registers fields with the REST API needed in the editor.
@@ -35,6 +29,8 @@ final class RestRegistrar implements Bootable
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	private const CHAPTER_FIELD = 'x3p0-a-boy-in-the-wild/chapter';
+
+	public function __construct(private readonly ChapterRepository $chapters) {}
 
 	/**
 	 * @inheritDoc
@@ -53,15 +49,10 @@ final class RestRegistrar implements Bootable
 			'get_callback' => $this->getChapterData(...),
 			'schema' => [
 				'type'       => 'object',
-				'properties' => [
-					ChapterFields::DAY          => ['type' => 'string'],
-					ChapterFields::DAY_NUMBER   => ['type' => 'string'],
-					ChapterFields::YEAR         => ['type' => 'string'],
-					ChapterFields::NUMBER       => ['type' => 'string'],
-					ChapterFields::NUMBER_ROMAN => ['type' => 'string'],
-					ChapterFields::SEASON       => ['type' => 'string'],
-					ChapterFields::TIME         => ['type' => 'string']
-				]
+				'properties' => array_fill_keys(
+					ChapterField::names(),
+					['type' => 'string']
+				)
 			]
 		]);
 	}
@@ -72,17 +63,8 @@ final class RestRegistrar implements Bootable
 	 */
 	private function getChapterData(array $post): array
 	{
-		$postId    = $post['id'];
-		$timestamp = get_post_timestamp($postId);
+		$chapter = $this->chapters->find($post['id']);
 
-		return [
-			ChapterFields::DAY          => ChapterDay::fromTimestamp($timestamp)->numeric(),
-			ChapterFields::DAY_NUMBER   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
-			ChapterFields::YEAR         => ChapterYear::fromTimestamp($timestamp)->numeric(),
-			ChapterFields::NUMBER       => ChapterNumber::fromPostId($postId)->numeric(),
-			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($postId)->roman(),
-			ChapterFields::SEASON       => ChapterSeason::fromTimestamp($timestamp),
-			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp)
-		];
+		return $chapter ? $chapter->fields() : [];
 	}
 }

@@ -15,14 +15,7 @@ namespace X3P0\ABoyInTheWild\Block\Binding\Sources;
 
 use WP_Block;
 use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
-use X3P0\ABoyInTheWild\Support\{
-	ChapterDay,
-	ChapterFields,
-	ChapterNumber,
-	ChapterSeason,
-	ChapterTime,
-	ChapterYear
-};
+use X3P0\ABoyInTheWild\Story\Chapter\ChapterRepository;
 
 /**
  * Handles registering the `x3p0/chapter` block bindings source and rendering its
@@ -31,6 +24,8 @@ use X3P0\ABoyInTheWild\Support\{
 final class Chapter extends BindingSource
 {
 	public const NAME = 'x3p0/chapter';
+
+	public function __construct(private readonly ChapterRepository $chapters) {}
 
 	/**
 	 * @inheritDoc
@@ -53,18 +48,8 @@ final class Chapter extends BindingSource
 	 */
 	public function callback(array $args, WP_Block $block, string $name): ?string
 	{
-		$postId    = absint($block->context['postId'] ?? get_the_ID());
-		$timestamp = get_post_timestamp($postId);
+		$postId = absint($block->context['postId'] ?? get_the_ID());
 
-		return match ($args['field'] ?? '') {
-			ChapterFields::DAY          => ChapterDay::fromTimestamp($timestamp)->numeric(),
-			ChapterFields::DAY_NUMBER   => strval(ChapterDay::fromTimestamp($timestamp)->number()),
-			ChapterFields::YEAR         => ChapterYear::fromTimestamp($timestamp)->numeric(),
-			ChapterFields::NUMBER       => ChapterNumber::fromPostId($postId)->numeric(),
-			ChapterFields::NUMBER_ROMAN => ChapterNumber::fromPostId($postId)->roman(),
-			ChapterFields::SEASON       => ChapterSeason::fromTimestamp($timestamp),
-			ChapterFields::TIME         => ChapterTime::fromTimestamp($timestamp),
-			default                     => null
-		};
+		return $this->chapters->find($postId)?->field($args['field'] ?? '');
 	}
 }

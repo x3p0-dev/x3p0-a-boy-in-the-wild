@@ -223,7 +223,7 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 				<div class="wp-block-separator has-alpha-channel-opacity is-style-separator-inline"></div>
 				<!-- /wp:separator -->
 
-				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-year"} /-->
+				<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-year-label"} /-->
 
 			</footer>
 			<!-- /wp:group -->

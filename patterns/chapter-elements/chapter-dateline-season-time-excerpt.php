@@ -37,7 +37,7 @@
 	} -->
 	<div class="wp-block-group">
 
-		<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-time"} /-->
+		<!-- wp:pattern {"slug":"x3p0-a-boy-in-the-wild/fragment-chapter-time-of-day"} /-->
 
 		<!-- wp:paragraph -->
 		<p>.</p>
