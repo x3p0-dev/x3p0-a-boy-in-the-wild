@@ -92,6 +92,11 @@ final class CanvasScriptModuleLoader implements Bootable
 	 */
 	private function render(string $content): string
 	{
+		// Bail early if in the admin, which can trigger this hook.
+		if (is_admin()) {
+			return $content;
+		}
+
 		$processor = new WP_HTML_Tag_Processor($content);
 
 		while ($processor->next_tag('canvas')) {
