@@ -14,14 +14,13 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Story\Chapter;
 
 use WP_Post;
-use X3P0\ABoyInTheWild\Story\Moment\MomentFactory;
 use X3P0\ABoyInTheWild\Story\StoryEpoch;
 
 /**
  * Retrieves Chapter aggregates, hiding the WordPress persistence behind the
- * domain type. Read-only: it loads a chapter by ID — or reconstitutes one from
- * a post already in hand — reading the authored designation (section type and
- * number) from post meta. Moment construction is delegated to the MomentFactory.
+ * domain type. Read-only: it loads a chapter by ID, or reconstitutes one from a
+ * post already in hand. It knows how to find and identify chapters, not what
+ * they are composed of — assembly is delegated to the ChapterFactory.
  *
  * Registered as a singleton, and chapters are kept in an identity map, so each
  * post yields a single Chapter instance per request.
@@ -36,8 +35,8 @@ final class ChapterRepository
 	private array $chapters = [];
 
 	public function __construct(
-		private readonly MomentFactory $moments,
-		private readonly StoryEpoch $epoch
+		private readonly ChapterFactory $chapterFactory,
+		private readonly StoryEpoch     $epoch
 	) {}
 
 	/**
@@ -66,26 +65,6 @@ final class ChapterRepository
 	 */
 	public function forPost(WP_Post $post): Chapter
 	{
-		return $this->chapters[$post->ID] ??= new Chapter(
-			post:        $post,
-			moment:      $this->moments->forPost($post),
-			designation: $this->designationOf($post)
-		);
-	}
-
-	/**
-	 * Reads the post's authored designation — section type and optional
-	 * number — defaulting to a chapter and treating a non-positive number as
-	 * unnumbered.
-	 */
-	private function designationOf(WP_Post $post): ChapterDesignation
-	{
-		$type   = (string) get_post_meta($post->ID, ChapterMetaRegistrar::TYPE, true);
-		$number = (int) get_post_meta($post->ID, ChapterMetaRegistrar::NUMBER, true);
-
-		return new ChapterDesignation(
-			type:   ChapterType::tryFrom($type) ?? ChapterType::Chapter,
-			number: $number > 0 ? $number : null
-		);
+		return $this->chapters[$post->ID] ??= $this->chapterFactory->make($post);
 	}
 }
