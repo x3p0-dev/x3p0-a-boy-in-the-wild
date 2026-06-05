@@ -1,4 +1,3 @@
-import {registerPlugin} from '@wordpress/plugins';
 import {PluginDocumentSettingPanel} from '@wordpress/editor';
 import {MediaUpload, MediaUploadCheck} from '@wordpress/block-editor';
 import {
@@ -18,17 +17,17 @@ const NUMBER_KEY = 'x3p0_chapter_number';
 const AUDIO_KEY  = 'x3p0_audio';
 
 const SECTION_TYPES = [
-	{label: __('Prologue', 'x3p0-a-boy-in-the-wild'), value: 'prologue'},
-	{label: __('Chapter', 'x3p0-a-boy-in-the-wild'), value: 'chapter'},
+	{label: __('Prologue',  'x3p0-a-boy-in-the-wild'), value: 'prologue'},
+	{label: __('Chapter',   'x3p0-a-boy-in-the-wild'), value: 'chapter'},
 	{label: __('Interlude', 'x3p0-a-boy-in-the-wild'), value: 'interlude'},
-	{label: __('Epilogue', 'x3p0-a-boy-in-the-wild'), value: 'epilogue'},
+	{label: __('Epilogue',  'x3p0-a-boy-in-the-wild'), value: 'epilogue'},
 	{label: __('Afterword', 'x3p0-a-boy-in-the-wild'), value: 'afterword'}
 ];
 
-function ChapterPanel() {
-	const {meta, audioMedia, postId} = useSelect((select) => {
-		const postId  = select('core/editor').getCurrentPostId();
-		const meta    = select('core/editor').getEditedPostAttribute('meta') || {};
+const ChapterPanel = () => {
+	const {meta, audioMedia, postId, postType} = useSelect((select) => {
+		const editor  = select('core/editor');
+		const meta    = editor.getEditedPostAttribute('meta') || {};
 		const audioId = meta[AUDIO_KEY] || 0;
 
 		return {
@@ -36,11 +35,18 @@ function ChapterPanel() {
 			audioMedia: audioId
 				? select('core').getEntityRecord('postType', 'attachment', audioId)
 				: null,
-			postId
+			postId:   editor.getCurrentPostId(),
+			postType: editor.getCurrentPostType()
 		};
 	});
 
 	const {editEntityRecord} = useDispatch('core');
+
+	// Chapter data lives only on posts — never pages, templates, or anywhere
+	// else the editor renders document panels.
+	if (postType !== 'post') {
+		return null;
+	}
 
 	function setMeta(values) {
 		editEntityRecord('postType', 'post', postId, {meta: values});
@@ -133,8 +139,6 @@ function ChapterPanel() {
 			</VStack>
 		</PluginDocumentSettingPanel>
 	);
-}
+};
 
-registerPlugin('x3p0-chapter', {
-	render: ChapterPanel
-});
+export default ChapterPanel;

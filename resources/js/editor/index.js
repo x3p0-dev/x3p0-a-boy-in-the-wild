@@ -1,5 +1,5 @@
 import './block/bindings';
 import './format-library';
-import './plugins/ChapterPanel';
+import './plugins';
 import './variations/html';
 import './variations/image';
