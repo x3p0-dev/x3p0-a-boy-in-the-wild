@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Story\Chapter;
 
+use Exception;
 use WP_Post;
 use X3P0\ABoyInTheWild\Story\Moment\MomentFactory;
 
@@ -34,6 +35,8 @@ final class ChapterFactory
 
 	/**
 	 * Builds a chapter from a post.
+	 *
+	 * @throws Exception
 	 */
 	public function make(WP_Post $post): Chapter
 	{

@@ -15,6 +15,7 @@ namespace X3P0\ABoyInTheWild\Story\Moment;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Exception;
 use WP_Post;
 use X3P0\ABoyInTheWild\Story\StoryAlmanac;
 use X3P0\ABoyInTheWild\Story\StoryEpoch;
@@ -35,27 +36,31 @@ final class MomentFactory
 	/**
 	 * A moment at the given date.
 	 */
-	public function forDate(DateTimeImmutable $date): Moment
+	public function make(DateTimeImmutable $date): Moment
 	{
 		return new Moment($date, $this->epoch, $this->almanac);
 	}
 
 	/**
 	 * A moment at a post's publication date.
+	 *
+	 * @throws Exception
 	 */
 	public function forPost(WP_Post $post): Moment
 	{
 		$zone = new DateTimeZone(wp_timezone_string());
 		$date = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $post->post_date, $zone);
 
-		return $this->forDate($date ?: new DateTimeImmutable('now', $zone));
+		return $this->make($date ?: new DateTimeImmutable('now', $zone));
 	}
 
 	/**
 	 * A moment at the current instant.
+	 *
+	 * @throws Exception
 	 */
 	public function now(): Moment
 	{
-		return $this->forDate(new DateTimeImmutable('now', new DateTimeZone(wp_timezone_string())));
+		return $this->make(new DateTimeImmutable('now', new DateTimeZone(wp_timezone_string())));
 	}
 }

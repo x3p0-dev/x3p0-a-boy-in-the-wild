@@ -35,8 +35,8 @@ final class Moment
 {
 	public function __construct(
 		private readonly DateTimeImmutable $date,
-		private readonly StoryEpoch $epoch,
-		private readonly StoryAlmanac $almanac
+		private readonly StoryEpoch        $epoch,
+		private readonly StoryAlmanac      $almanac
 	) {}
 
 	/**
