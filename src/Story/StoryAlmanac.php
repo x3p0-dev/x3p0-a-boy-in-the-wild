@@ -15,11 +15,7 @@ namespace X3P0\ABoyInTheWild\Story;
 
 /**
  * The story's almanac: the source of its calendars. It defines the bands for
- * each calendar, builds them into resolvers, and is the single place a filter
- * hook will expose those bands to other developers.
- *
- * Registered as a singleton, so each calendar is built once per request and
- * held on the instance.
+ * each calendar, builds them into resolvers.
  *
  * Seasons reduce a (month, day) pair to `month * 100 + day` — a value that
  * sorts and compares exactly like a clock hour — so a season band is resolved

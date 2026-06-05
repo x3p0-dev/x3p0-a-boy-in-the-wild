@@ -19,8 +19,8 @@ use Stringable;
  * A chapter year (Year 1 onward) and the ways it can be presented. Additional
  * presentations (e.g. an ordinal "1st Year") are added here as new methods.
  *
- * A year is a number: cast to a string it is the year number. Years stay small
- * enough that they need no thousands grouping, so the raw value is used.
+ *  A year is a number: cast to a string it is the localized year number; the
+ *  named presentations (label, …) are explicit methods.
  */
 final class StoryYear implements Stringable
 {
@@ -39,7 +39,7 @@ final class StoryYear implements Stringable
 	 */
 	public function __toString(): string
 	{
-		return (string) $this->number;
+		return number_format_i18n($this->number);
 	}
 
 	/**
@@ -50,7 +50,7 @@ final class StoryYear implements Stringable
 		return sprintf(
 			// Translators: %d is the chapter year number.
 			_x('Year %d', 'chapter year numeric', 'x3p0-a-boy-in-the-wild'),
-			$this->number
+			number_format_i18n($this->number)
 		);
 	}
 }

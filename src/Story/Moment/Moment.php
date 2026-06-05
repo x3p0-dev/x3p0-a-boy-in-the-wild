@@ -63,9 +63,8 @@ final class Moment
 	public function season(): StorySeason
 	{
 		$monthDay = (int) $this->date->format('n') * 100 + (int) $this->date->format('j');
-		$band     = $this->almanac->seasons()->bandAt($monthDay);
 
-		return new StorySeason($band['key'], $band['label']);
+		return new StorySeason(...$this->almanac->seasons()->bandAt($monthDay));
 	}
 
 	/**
@@ -73,9 +72,9 @@ final class Moment
 	 */
 	public function timeOfDay(): StoryTimeOfDay
 	{
-		$band = $this->almanac->timesOfDay()->bandAt((int) $this->date->format('G'));
+		$hour = (int) $this->date->format('G');
 
-		return new StoryTimeOfDay($band['key'], $band['label']);
+		return new StoryTimeOfDay(...$this->almanac->timesOfDay()->bandAt($hour));
 	}
 
 	/**
