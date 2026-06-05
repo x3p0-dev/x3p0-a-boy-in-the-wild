@@ -20,12 +20,11 @@ use X3P0\ABoyInTheWild\Story\StoryEpoch;
 /**
  * Retrieves Chapter aggregates, hiding the WordPress persistence behind the
  * domain type. Read-only: it loads a chapter by ID — or reconstitutes one from
- * a post already in hand — and owns the sequence-position count. Moment
- * construction is delegated to the MomentFactory.
+ * a post already in hand — reading the authored designation (section type and
+ * number) from post meta. Moment construction is delegated to the MomentFactory.
  *
  * Registered as a singleton, and chapters are kept in an identity map, so each
- * post yields a single Chapter instance per request (and so at most one
- * position count, which that chapter caches).
+ * post yields a single Chapter instance per request.
  */
 final class ChapterRepository
 {
@@ -70,28 +69,23 @@ final class ChapterRepository
 		return $this->chapters[$post->ID] ??= new Chapter(
 			$post,
 			$this->moments->forPost($post),
-			fn (): int => $this->countPosition($post)
+			$this->designationOf($post)
 		);
 	}
 
 	/**
-	 * Counts the post's position in its own status sequence: 1, 2, 3 …
-	 *
-	 * Each post status keeps a separate sequence — published chapters are
-	 * numbered among published chapters, private among private — so the count
-	 * is of same-status posts dated on or before this one. Caching is left to
-	 * the chapter, which calls this at most once.
+	 * Reads the post's authored designation — section type and optional
+	 * number — defaulting to a chapter and treating a non-positive number as
+	 * unnumbered.
 	 */
-	private function countPosition(WP_Post $post): int
+	private function designationOf(WP_Post $post): ChapterDesignation
 	{
-		global $wpdb;
+		$type   = (string) get_post_meta($post->ID, ChapterMetaRegistrar::TYPE, true);
+		$number = (int) get_post_meta($post->ID, ChapterMetaRegistrar::NUMBER, true);
 
-		$count = (int) $wpdb->get_var($wpdb->prepare(
-			"SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = %s AND post_date <= %s",
-			$post->post_status,
-			$post->post_date
-		));
-
-		return max(1, $count);
+		return new ChapterDesignation(
+			ChapterType::tryFrom($type) ?? ChapterType::Chapter,
+			$number > 0 ? $number : null
+		);
 	}
 }

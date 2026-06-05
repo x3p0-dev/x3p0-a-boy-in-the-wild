@@ -13,38 +13,26 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Story\Chapter;
 
-use Closure;
 use WP_Post;
 use X3P0\ABoyInTheWild\Story\Moment\Moment;
 
 /**
- * A published post located on the story's timeline. It sits on two independent
- * axes: its position in the published sequence (the number), and its moment on
- * the story calendar (day, year, season, time).
+ * A published post located on the story's timeline. Its designation (section
+ * type + optional number) is authored — read from post meta — while its moment
+ * on the story calendar (day, year, season, time of day) is derived from the
+ * publication date.
  *
- * Alongside the rich accessors (number(), moment()), it renders its fields as
- * the named strings the REST schema and `x3p0/chapter` block binding expose.
+ * Alongside the rich accessors (designation(), moment()), it renders its fields
+ * as the named strings the REST schema and `x3p0/chapter` block binding expose.
  * The render() match is exhaustive over ChapterField, so a new field cannot be
  * added without a corresponding presentation.
- *
- * The position is a database count, so it is supplied as a deferred callback:
- * the query runs only the first time the number is asked for, and the result
- * is cached here for the life of the chapter.
  */
 final class Chapter
 {
-	/**
-	 * Cached chapter number, resolved on first access.
-	 */
-	private ?ChapterNumber $number = null;
-
-	/**
-	 * @param Closure(): int $position Defers the sequence-position count.
-	 */
 	public function __construct(
 		private readonly WP_Post $post,
 		private readonly Moment $moment,
-		private readonly Closure $position
+		private readonly ChapterDesignation $designation
 	) {}
 
 	/**
@@ -64,12 +52,11 @@ final class Chapter
 	}
 
 	/**
-	 * The chapter's position in the published sequence. The count runs once,
-	 * on first access.
+	 * The chapter's designation: section type plus optional number.
 	 */
-	public function number(): ChapterNumber
+	public function designation(): ChapterDesignation
 	{
-		return $this->number ??= new ChapterNumber(($this->position)());
+		return $this->designation;
 	}
 
 	/**
@@ -106,14 +93,15 @@ final class Chapter
 		return match ($field) {
 			ChapterField::Day              => (string) $this->moment->day(),
 			ChapterField::DayLabel         => $this->moment->day()->label(),
-			ChapterField::Year             => (string) $this->moment->year(),
-			ChapterField::YearLabel        => $this->moment->year()->label(),
-			ChapterField::Number           => (string) $this->number(),
-			ChapterField::NumberLabel      => $this->number()->label(),
-			ChapterField::NumberRoman      => $this->number()->roman(),
-			ChapterField::NumberRomanLabel => $this->number()->romanLabel(),
+			ChapterField::Designation      => $this->designation->label(),
+			ChapterField::DesignationRoman => $this->designation->romanLabel(),
+			ChapterField::Number           => $this->designation->number(),
+			ChapterField::NumberRoman      => $this->designation->numberRoman(),
 			ChapterField::Season           => $this->moment->season()->label(),
-			ChapterField::TimeOfDay        => $this->moment->timeOfDay()->label()
+			ChapterField::TimeOfDay        => $this->moment->timeOfDay()->label(),
+			ChapterField::Type             => $this->designation->type()->label(),
+			ChapterField::Year             => (string) $this->moment->year(),
+			ChapterField::YearLabel        => $this->moment->year()->label()
 		};
 	}
 }

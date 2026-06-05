@@ -10,7 +10,21 @@ import {registerBlockBindingsSource} from '@wordpress/blocks';
 import {__} from '@wordpress/i18n';
 import {select} from '@wordpress/data';
 
-const FIELD = 'x3p0-a-boy-in-the-wild/chapter';
+const REST_FIELD = 'x3p0-a-boy-in-the-wild/chapter';
+
+const FIELDS = {
+	day:              __('Day',                 'x3p0-a-boy-in-the-wild'),
+	dayLabel:         __('Day (Labeled)',       'x3p0-a-boy-in-the-wild'),
+	designation:      __('Designation',         'x3p0-a-boy-in-the-wild'),
+	designationRoman: __('Designation (Roman)', 'x3p0-a-boy-in-the-wild'),
+	number:           __('Number',              'x3p0-a-boy-in-the-wild'),
+	numberRoman:      __('Number (Roman)',      'x3p0-a-boy-in-the-wild'),
+	season:           __('Season',              'x3p0-a-boy-in-the-wild'),
+	timeOfDay:        __('Time of Day',         'x3p0-a-boy-in-the-wild'),
+	type:             __('Type',                'x3p0-a-boy-in-the-wild'),
+	year:             __('Year',                'x3p0-a-boy-in-the-wild'),
+	yearLabel:        __('Year (Labeled)',      'x3p0-a-boy-in-the-wild')
+};
 
 registerBlockBindingsSource({
 	name: 'x3p0/chapter',
@@ -22,7 +36,7 @@ registerBlockBindingsSource({
 			context?.postId
 		);
 
-		const chapterData = record?.[FIELD] ?? {};
+		const chapterData = record?.[REST_FIELD] ?? {};
 		const values = {};
 
 		for (const [attributeName, source] of Object.entries(bindings)) {
@@ -35,58 +49,11 @@ registerBlockBindingsSource({
 		return values;
 	},
 	getFieldsList() {
-		return [
-			{
-				label: __('Day', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'day'}
-			},
-			{
-				label: __('Day (Labeled)', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args: {field: 'dayLabel'}
-			},
-			{
-				label: __('Number', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'number'}
-			},
-			{
-				label: __('Number (Labeled)', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'numberLabel'}
-			},
-			{
-				label: __('Number (Roman)', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'numberRoman'}
-			},
-			{
-				label: __('Number (Roman, Labeled)', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'numberRomanLabel'}
-			},
-			{
-				label: __('Season', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'season'}
-			},
-			{
-				label: __('Time of Day', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'timeOfDay'}
-			},
-			{
-				label: __('Year', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'year'}
-			},
-			{
-				label: __('Year (Labeled)', 'x3p0-a-boy-in-the-wild'),
-				type:  'string',
-				args:  {field: 'yearLabel'}
-			}
-		];
+		return Object.entries(FIELDS).map(([field, label]) => ({
+			label,
+			type: 'string',
+			args: {field}
+		}));
 	},
 	canUserEditValue: () => false
 });

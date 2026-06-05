@@ -24,12 +24,13 @@ enum ChapterField: string
 {
 	case Day              = 'day';
 	case DayLabel         = 'dayLabel';
+	case Designation      = 'designation';
+	case DesignationRoman = 'designationRoman';
 	case Number           = 'number';
-	case NumberLabel      = 'numberLabel';
 	case NumberRoman      = 'numberRoman';
-	case NumberRomanLabel = 'numberRomanLabel';
 	case Season           = 'season';
 	case TimeOfDay        = 'timeOfDay';
+	case Type             = 'type';
 	case Year             = 'year';
 	case YearLabel        = 'yearLabel';
 

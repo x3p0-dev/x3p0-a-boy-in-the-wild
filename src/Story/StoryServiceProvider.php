@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Story;
 
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
+use X3P0\ABoyInTheWild\Story\Chapter\ChapterMetaRegistrar;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterRepository;
 use X3P0\ABoyInTheWild\Story\Moment\MomentFactory;
 
@@ -28,5 +29,9 @@ final class StoryServiceProvider extends ServiceProvider
 		MomentFactory::class,
 		StoryAlmanac::class,
 		StoryEpoch::class
+	];
+
+	protected const BOOTABLE = [
+		ChapterMetaRegistrar::class
 	];
 }
