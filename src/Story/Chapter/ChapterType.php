@@ -32,10 +32,10 @@ enum ChapterType: string
 	public function label(): string
 	{
 		return match ($this) {
-			self::Prologue  => __('Prologue', 'x3p0-a-boy-in-the-wild'),
-			self::Chapter   => __('Chapter', 'x3p0-a-boy-in-the-wild'),
+			self::Prologue  => __('Prologue',  'x3p0-a-boy-in-the-wild'),
+			self::Chapter   => __('Chapter',   'x3p0-a-boy-in-the-wild'),
 			self::Interlude => __('Interlude', 'x3p0-a-boy-in-the-wild'),
-			self::Epilogue  => __('Epilogue', 'x3p0-a-boy-in-the-wild'),
+			self::Epilogue  => __('Epilogue',  'x3p0-a-boy-in-the-wild'),
 			self::Afterword => __('Afterword', 'x3p0-a-boy-in-the-wild')
 		};
 	}

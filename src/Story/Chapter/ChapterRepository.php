@@ -67,9 +67,9 @@ final class ChapterRepository
 	public function forPost(WP_Post $post): Chapter
 	{
 		return $this->chapters[$post->ID] ??= new Chapter(
-			$post,
-			$this->moments->forPost($post),
-			$this->designationOf($post)
+			post:        $post,
+			moment:      $this->moments->forPost($post),
+			designation: $this->designationOf($post)
 		);
 	}
 
@@ -84,8 +84,8 @@ final class ChapterRepository
 		$number = (int) get_post_meta($post->ID, ChapterMetaRegistrar::NUMBER, true);
 
 		return new ChapterDesignation(
-			ChapterType::tryFrom($type) ?? ChapterType::Chapter,
-			$number > 0 ? $number : null
+			type:   ChapterType::tryFrom($type) ?? ChapterType::Chapter,
+			number: $number > 0 ? $number : null
 		);
 	}
 }
