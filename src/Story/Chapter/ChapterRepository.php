@@ -60,17 +60,20 @@ final class ChapterRepository
 	}
 
 	/**
-	 * Counts the post's position in the published sequence: 1, 2, 3 …
+	 * Counts the post's position in its own status sequence: 1, 2, 3 …
 	 *
-	 * The number of published posts dated on or before this one. Caching is
-	 * left to the chapter, which calls this at most once.
+	 * Each post status keeps a separate sequence — published chapters are
+	 * numbered among published chapters, private among private — so the count
+	 * is of same-status posts dated on or before this one. Caching is left to
+	 * the chapter, which calls this at most once.
 	 */
 	private function countPosition(WP_Post $post): int
 	{
 		global $wpdb;
 
 		$count = (int) $wpdb->get_var($wpdb->prepare(
-			"SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' AND post_date <= %s",
+			"SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = %s AND post_date <= %s",
+			$post->post_status,
 			$post->post_date
 		));
 
