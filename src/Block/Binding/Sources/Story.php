@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Block\Binding\Sources;
 
 use WP_Block;
-use WP_Post;
 use X3P0\ABoyInTheWild\Block\Binding\BindingSource;
+use X3P0\ABoyInTheWild\Story\Chapter\{Chapter, ChapterRepository};
 
 /**
  * Handles registering the `x3p0/story` block bindings source and rendering its
@@ -26,9 +26,11 @@ final class Story extends BindingSource
 	public const NAME = 'x3p0/story';
 
 	/**
-	 * Stores the first chapter.
+	 * Caches the first chapter for the request.
 	 */
-	private ?WP_Post $firstChapter = null;
+	private ?Chapter $firstChapter = null;
+
+	public function __construct(private readonly ChapterRepository $chapters) {}
 
 	/**
 	 * @inheritDoc
@@ -51,26 +53,11 @@ final class Story extends BindingSource
 	}
 
 	/**
-	 * Returns the first published chapter/post.
+	 * Returns the story's first chapter, resolved from the Chapter repository.
 	 */
-	private function getFirstChapter(): ?WP_Post
+	private function getFirstChapter(): ?Chapter
 	{
-		if (! is_null($this->firstChapter)) {
-			return $this->firstChapter;
-		}
-
-		$posts = get_posts([
-			'numberposts' => 1,
-			'order'       => 'ASC',
-			'orderby'     => 'date',
-			'post_status' => 'publish',
-		]);
-
-		if (! empty($posts) && isset($posts[0])) {
-			$this->firstChapter = $posts[0];
-		}
-
-		return $this->firstChapter;
+		return $this->firstChapter ??= $this->chapters->first();
 	}
 
 	/**
@@ -78,11 +65,11 @@ final class Story extends BindingSource
 	 */
 	private function renderFirstChapterUrl(): ?string
 	{
-		if (! $post = $this->getFirstChapter()) {
+		if (! $chapter = $this->getFirstChapter()) {
 			return null;
 		}
 
-		return esc_url(get_permalink($post->ID));
+		return esc_url(get_permalink($chapter->post()->ID));
 	}
 
 	/**
@@ -90,13 +77,13 @@ final class Story extends BindingSource
 	 */
 	private function renderFirstChapterLabel(): ?string
 	{
-		if (! $post = $this->getFirstChapter()) {
+		if (! $chapter = $this->getFirstChapter()) {
 			return null;
 		}
 
 		return sprintf(
 			__('Begin at %s &rarr;', 'x3p0-a-boy-in-the-wild'),
-			esc_html(get_the_title($post->ID))
+			esc_html(get_the_title($chapter->post()->ID))
 		);
 	}
 }

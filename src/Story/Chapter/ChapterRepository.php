@@ -15,6 +15,7 @@ namespace X3P0\ABoyInTheWild\Story\Chapter;
 
 use WP_Post;
 use X3P0\ABoyInTheWild\Story\Moment\MomentFactory;
+use X3P0\ABoyInTheWild\Story\StoryEpoch;
 
 /**
  * Retrieves Chapter aggregates, hiding the WordPress persistence behind the
@@ -35,7 +36,10 @@ final class ChapterRepository
 	 */
 	private array $chapters = [];
 
-	public function __construct(private readonly MomentFactory $moments) {}
+	public function __construct(
+		private readonly MomentFactory $moments,
+		private readonly StoryEpoch $epoch
+	) {}
 
 	/**
 	 * Loads a chapter by post ID, or null when no such post exists.
@@ -43,6 +47,17 @@ final class ChapterRepository
 	public function find(int $postId): ?Chapter
 	{
 		$post = get_post($postId);
+		return $post instanceof WP_Post ? $this->forPost($post) : null;
+	}
+
+	/**
+	 * Loads the first chapter — the story's origin post — or null when none
+	 * exists. Shares the StoryEpoch lookup rather than querying again.
+	 */
+	public function first(): ?Chapter
+	{
+		$post = $this->epoch->post();
+
 		return $post instanceof WP_Post ? $this->forPost($post) : null;
 	}
 

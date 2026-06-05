@@ -15,50 +15,65 @@ namespace X3P0\ABoyInTheWild\Story;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use WP_Post;
 
 /**
- * The story's day-zero: the publication date of the earliest published
- * chapter. Every elapsed measurement (day, year) is taken from here.
+ * The story's origin: the earliest published post. Its publication date is the
+ * day-zero from which every elapsed measurement (day, year) is taken, and the
+ * post itself is the story's first chapter.
  *
- * Registered as a singleton, so the database lookup runs once per request and
- * the resolved value is held on the instance — no static state.
+ * Registered as a singleton, so the lookup runs once per request and the post
+ * is held on the instance — both the epoch date and the first chapter derive
+ * from this single query.
  */
 final class StoryEpoch
 {
 	/**
-	 * Whether the epoch has been resolved this request.
+	 * Whether the origin post has been looked up this request.
 	 */
 	private bool $resolved = false;
 
 	/**
-	 * The resolved epoch, or null when no chapters have been published.
+	 * The earliest published post, or null when none exists.
 	 */
-	private ?DateTimeImmutable $epoch = null;
+	private ?WP_Post $post = null;
 
 	/**
-	 * Returns the epoch, or null when no published chapters exist.
+	 * Returns the earliest published post — the story's first chapter — or
+	 * null when no published posts exist.
+	 */
+	public function post(): ?WP_Post
+	{
+		if (! $this->resolved) {
+			$this->post = get_posts([
+				'numberposts' => 1,
+				'orderby'     => 'date',
+				'order'       => 'ASC',
+				'post_status' => 'publish'
+			])[0] ?? null;
+
+			$this->resolved = true;
+		}
+
+		return $this->post;
+	}
+
+	/**
+	 * Returns the epoch — the origin post's publication date — or null when no
+	 * published posts exist.
 	 */
 	public function resolve(): ?DateTimeImmutable
 	{
-		if ($this->resolved) {
-			return $this->epoch;
+		if (! $post = $this->post()) {
+			return null;
 		}
 
-		global $wpdb;
-
-		$date = $wpdb->get_var(
-			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date ASC LIMIT 1"
+		$date = DateTimeImmutable::createFromFormat(
+			'Y-m-d H:i:s',
+			$post->post_date,
+			new DateTimeZone(wp_timezone_string())
 		);
 
-		$parsed = $date ? DateTimeImmutable::createFromFormat(
-			'Y-m-d H:i:s',
-			$date,
-			new DateTimeZone(wp_timezone_string())
-		) : false;
-
-		$this->epoch    = $parsed ?: null;
-		$this->resolved = true;
-
-		return $this->epoch;
+		return $date ?: null;
 	}
 }
