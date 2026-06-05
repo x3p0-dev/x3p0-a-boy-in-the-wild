@@ -22,9 +22,12 @@ final class ContentServiceProvider extends ServiceProvider
 {
 	protected const BOOTABLE = [
 		Category::class,
-		Post::class,
+		ManagePostColumns::class,
+		PostDateColumn::class,
+		PostRowActions::class,
 		PostStatus::class,
 		PostTag::class,
-		PostTitleFormat::class
+		PostTitleFormat::class,
+		PostType\Post::class
 	];
 }
