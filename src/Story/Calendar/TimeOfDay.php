@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Story season value object.
+ * Story time-of-day value object.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Calendar;
 
 /**
- * A named season on the story's seasonal calendar. The key is the stable
- * machine identifier (e.g. "deep-winter"); the label is the translated,
- * human-readable name (e.g. "Deep Winter").
+ * A named period of the day on the story's time-of-day calendar. The key is
+ * the stable machine identifier (e.g. "before-dawn"); the label is the
+ * translated, human-readable name (e.g. "Before Dawn").
  */
-final class StorySeason
+final class TimeOfDay
 {
 	public function __construct(
 		private readonly string $key,
@@ -26,7 +26,7 @@ final class StorySeason
 	) {}
 
 	/**
-	 * The stable machine identifier: "deep-winter", "midwinter" …
+	 * The stable machine identifier: "before-dawn", "night" …
 	 */
 	public function key(): string
 	{
@@ -34,7 +34,7 @@ final class StorySeason
 	}
 
 	/**
-	 * The translated, human-readable name: "Deep Winter", "Midwinter" …
+	 * The translated, human-readable name: "Before Dawn", "Night" …
 	 */
 	public function label(): string
 	{

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Sky;
 
 use DateTimeImmutable;
 use DateTimeZone;
@@ -27,7 +27,7 @@ use DateTimeZone;
  * arithmetic here is involved enough, and carries enough astronomical
  * constants, to live on its own.
  */
-final class StoryLunarCycle
+final class LunarCycle
 {
 	/**
 	 * The mean length of one synodic month, in days.

@@ -17,12 +17,10 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Exception;
 use WP_Post;
-use X3P0\ABoyInTheWild\Story\{
-	StoryAlmanac,
-	StoryEpoch,
-	StoryLunarCycle,
-	StorySolarCycle
-};
+use X3P0\ABoyInTheWild\Story\Calendar\Almanac;
+use X3P0\ABoyInTheWild\Story\Sky\LunarCycle;
+use X3P0\ABoyInTheWild\Story\Sky\SolarCycle;
+use X3P0\ABoyInTheWild\Story\Timeline\Epoch;
 
 /**
  * Builds moments on the story's calendar. Callers describe the point they want
@@ -33,10 +31,10 @@ use X3P0\ABoyInTheWild\Story\{
 final class MomentFactory
 {
 	public function __construct(
-		private readonly StoryEpoch $epoch,
-		private readonly StoryAlmanac $almanac,
-		private readonly StoryLunarCycle $lunar,
-		private readonly StorySolarCycle $solar
+		private readonly Epoch $epoch,
+		private readonly Almanac $almanac,
+		private readonly LunarCycle $lunar,
+		private readonly SolarCycle $solar
 	) {}
 
 	/**

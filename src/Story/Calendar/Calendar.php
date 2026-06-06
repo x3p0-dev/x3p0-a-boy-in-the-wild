@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Calendar;
 
 /**
  * A cyclical calendar: an ordered set of named bands over a single comparable
@@ -22,7 +22,7 @@ namespace X3P0\ABoyInTheWild\Story;
  * the story keeps or where their bands come from. The Almanac defines those
  * and hands a ready-built calendar here to resolve against.
  */
-final class StoryCalendar
+final class Calendar
 {
 	/**
 	 * @param array<string, array{start: int, end: int, label: string}> $bands

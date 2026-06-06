@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Sky;
 
 use DateTimeImmutable;
 
@@ -29,7 +29,7 @@ use DateTimeImmutable;
  * the hour angle is always defined; the cosine is clamped regardless to keep the
  * result finite.
  */
-final class StorySolarCycle
+final class SolarCycle
 {
 	/**
 	 * The story's latitude, in degrees north. Northern Minnesota; the precise
@@ -60,7 +60,7 @@ final class StorySolarCycle
 	 * The state of natural light at the moment: daylight between sunrise and
 	 * sunset, twilight within the twilight span of either, and dark beyond.
 	 */
-	public function lightAt(DateTimeImmutable $moment): StoryLightState
+	public function lightAt(DateTimeImmutable $moment): LightState
 	{
 		$hour    = (int) $moment->format('G') + (int) $moment->format('i') / 60;
 		$halfDay = 12.0 * $this->hourAngleAt($moment) / M_PI;
@@ -72,9 +72,9 @@ final class StorySolarCycle
 			&& $hour <= $sunset + self::TWILIGHT_HOURS;
 
 		return match (true) {
-			$isDaylight => StoryLightState::Daylight,
-			$isTwilight => StoryLightState::Twilight,
-			default     => StoryLightState::Dark
+			$isDaylight => LightState::Daylight,
+			$isTwilight => LightState::Twilight,
+			default     => LightState::Dark
 		};
 	}
 

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Timeline;
 
 use DateTimeImmutable;
 use DateTimeZone;
@@ -26,7 +26,7 @@ use WP_Post;
  * is held on the instance — both the epoch date and the first chapter derive
  * from this single query.
  */
-final class StoryEpoch
+final class Epoch
 {
 	/**
 	 * Whether the origin post has been looked up this request.

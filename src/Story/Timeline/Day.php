@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Timeline;
 
 use Stringable;
 
@@ -22,7 +22,7 @@ use Stringable;
  * A day is a number: cast to a string it is the localized day number; the
  * named presentations (label, …) are explicit methods.
  */
-final class StoryDay implements Stringable
+final class Day implements Stringable
 {
 	public function __construct(private readonly int $number) {}
 

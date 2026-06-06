@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Sky;
 
 /**
  * The state of natural light at a moment — whether the sun is up, near the
  * horizon, or down. Where the time of day reads the clock, the light state
  * reads the sun, so the same hour is daylight in summer and dark in winter.
- * The StorySolarCycle decides which state a moment falls in; each case carries
+ * The SolarCycle decides which state a moment falls in; each case carries
  * its localized name.
  */
-enum StoryLightState: string
+enum LightState: string
 {
 	case Daylight = 'daylight';
 	case Twilight = 'twilight';

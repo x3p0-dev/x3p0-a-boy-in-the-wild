@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Timeline;
 
 use Stringable;
 
@@ -22,7 +22,7 @@ use Stringable;
  *  A year is a number: cast to a string it is the localized year number; the
  *  named presentations (label, …) are explicit methods.
  */
-final class StoryYear implements Stringable
+final class Year implements Stringable
 {
 	public function __construct(private readonly int $number) {}
 

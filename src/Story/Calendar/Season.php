@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Story moon phase value object.
+ * Story season value object.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Calendar;
 
 /**
- * A named phase on the story's lunar cycle. The key is the stable machine
- * identifier (e.g. "waxing-crescent"); the label is the translated,
- * human-readable name (e.g. "Waxing Crescent").
+ * A named season on the story's seasonal calendar. The key is the stable
+ * machine identifier (e.g. "deep-winter"); the label is the translated,
+ * human-readable name (e.g. "Deep Winter").
  */
-final class StoryMoonPhase
+final class Season
 {
 	public function __construct(
 		private readonly string $key,
@@ -26,7 +26,7 @@ final class StoryMoonPhase
 	) {}
 
 	/**
-	 * The stable machine identifier: "new", "waxing-crescent", "full" …
+	 * The stable machine identifier: "deep-winter", "midwinter" …
 	 */
 	public function key(): string
 	{
@@ -34,7 +34,7 @@ final class StoryMoonPhase
 	}
 
 	/**
-	 * The translated, human-readable name: "New Moon", "Full Moon" …
+	 * The translated, human-readable name: "Deep Winter", "Midwinter" …
 	 */
 	public function label(): string
 	{

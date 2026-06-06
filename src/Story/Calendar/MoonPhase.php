@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Story time-of-day value object.
+ * Story moon phase value object.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Calendar;
 
 /**
- * A named period of the day on the story's time-of-day calendar. The key is
- * the stable machine identifier (e.g. "before-dawn"); the label is the
- * translated, human-readable name (e.g. "Before Dawn").
+ * A named phase on the story's lunar cycle. The key is the stable machine
+ * identifier (e.g. "waxing-crescent"); the label is the translated,
+ * human-readable name (e.g. "Waxing Crescent").
  */
-final class StoryTimeOfDay
+final class MoonPhase
 {
 	public function __construct(
 		private readonly string $key,
@@ -26,7 +26,7 @@ final class StoryTimeOfDay
 	) {}
 
 	/**
-	 * The stable machine identifier: "before-dawn", "night" …
+	 * The stable machine identifier: "new", "waxing-crescent", "full" …
 	 */
 	public function key(): string
 	{
@@ -34,7 +34,7 @@ final class StoryTimeOfDay
 	}
 
 	/**
-	 * The translated, human-readable name: "Before Dawn", "Night" …
+	 * The translated, human-readable name: "New Moon", "Full Moon" …
 	 */
 	public function label(): string
 	{

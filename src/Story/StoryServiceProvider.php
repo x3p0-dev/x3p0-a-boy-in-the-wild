@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Story;
 
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
-use X3P0\ABoyInTheWild\Story\Chapter\ChapterDesignationFactory;
+use X3P0\ABoyInTheWild\Story\Calendar\Almanac;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterFactory;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterMetaRegistrar;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterRepository;
 use X3P0\ABoyInTheWild\Story\Moment\MomentFactory;
+use X3P0\ABoyInTheWild\Story\Sky\LunarCycle;
+use X3P0\ABoyInTheWild\Story\Sky\SolarCycle;
+use X3P0\ABoyInTheWild\Story\Timeline\Epoch;
 
 /**
  * Registers the Story domain services. The value objects (chapters, moments,
@@ -30,10 +33,10 @@ final class StoryServiceProvider extends ServiceProvider
 		ChapterFactory::class,
 		ChapterRepository::class,
 		MomentFactory::class,
-		StoryAlmanac::class,
-		StoryEpoch::class,
-		StoryLunarCycle::class,
-		StorySolarCycle::class
+		Almanac::class,
+		Epoch::class,
+		LunarCycle::class,
+		SolarCycle::class
 	];
 
 	protected const BOOTABLE = [

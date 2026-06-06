@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Sky;
 
 use Stringable;
 
@@ -22,7 +22,7 @@ use Stringable;
  * A daylight span is a number: cast to a string it is the localized hour count;
  * the named presentations (label, …) are explicit methods.
  */
-final class StoryDaylight implements Stringable
+final class Daylight implements Stringable
 {
 	public function __construct(private readonly int $hours) {}
 

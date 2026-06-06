@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Story\Chapter;
 
 use WP_Post;
-use X3P0\ABoyInTheWild\Story\StoryEpoch;
+use X3P0\ABoyInTheWild\Story\Timeline\Epoch;
 
 /**
  * Retrieves Chapter aggregates, hiding the WordPress persistence behind the
@@ -36,7 +36,7 @@ final class ChapterRepository
 
 	public function __construct(
 		private readonly ChapterFactory $chapterFactory,
-		private readonly StoryEpoch     $epoch
+		private readonly Epoch          $epoch
 	) {}
 
 	/**
@@ -50,7 +50,7 @@ final class ChapterRepository
 
 	/**
 	 * Loads the first chapter — the story's origin post — or null when none
-	 * exists. Shares the StoryEpoch lookup rather than querying again.
+	 * exists. Shares the Epoch lookup rather than querying again.
 	 */
 	public function first(): ?Chapter
 	{

@@ -15,19 +15,17 @@ namespace X3P0\ABoyInTheWild\Story\Moment;
 
 use DateInterval;
 use DateTimeImmutable;
-use X3P0\ABoyInTheWild\Story\{
-	StoryAlmanac,
-	StoryDay,
-	StoryDaylight,
-	StoryEpoch,
-	StoryLightState,
-	StoryLunarCycle,
-	StoryMoonPhase,
-	StorySeason,
-	StorySolarCycle,
-	StoryTimeOfDay,
-	StoryYear
-};
+use X3P0\ABoyInTheWild\Story\Calendar\Almanac;
+use X3P0\ABoyInTheWild\Story\Calendar\MoonPhase;
+use X3P0\ABoyInTheWild\Story\Calendar\Season;
+use X3P0\ABoyInTheWild\Story\Calendar\TimeOfDay;
+use X3P0\ABoyInTheWild\Story\Sky\Daylight;
+use X3P0\ABoyInTheWild\Story\Sky\LightState;
+use X3P0\ABoyInTheWild\Story\Sky\LunarCycle;
+use X3P0\ABoyInTheWild\Story\Sky\SolarCycle;
+use X3P0\ABoyInTheWild\Story\Timeline\Day;
+use X3P0\ABoyInTheWild\Story\Timeline\Epoch;
+use X3P0\ABoyInTheWild\Story\Timeline\Year;
 
 /**
  * A point in time read on the story's calendar. The day and year are elapsed
@@ -43,72 +41,72 @@ final class Moment
 {
 	public function __construct(
 		private readonly DateTimeImmutable $date,
-		private readonly StoryEpoch        $epoch,
-		private readonly StoryAlmanac      $almanac,
-		private readonly StoryLunarCycle   $lunar,
-		private readonly StorySolarCycle   $solar
+		private readonly Epoch        $epoch,
+		private readonly Almanac      $almanac,
+		private readonly LunarCycle   $lunar,
+		private readonly SolarCycle   $solar
 	) {}
 
 	/**
 	 * The story day this moment falls on.
 	 */
-	public function day(): StoryDay
+	public function day(): Day
 	{
 		$elapsed = $this->elapsed();
-		return new StoryDay($elapsed ? max(1, $elapsed->days + 1) : 1);
+		return new Day($elapsed ? max(1, $elapsed->days + 1) : 1);
 	}
 
 	/**
 	 * The story year this moment falls in.
 	 */
-	public function year(): StoryYear
+	public function year(): Year
 	{
 		$elapsed = $this->elapsed();
-		return new StoryYear($elapsed ? max(1, $elapsed->y + 1) : 1);
+		return new Year($elapsed ? max(1, $elapsed->y + 1) : 1);
 	}
 
 	/**
 	 * The season this moment falls in.
 	 */
-	public function season(): StorySeason
+	public function season(): Season
 	{
 		$monthDay = (int) $this->date->format('n') * 100 + (int) $this->date->format('j');
 
-		return new StorySeason(...$this->almanac->seasons()->bandAt($monthDay));
+		return new Season(...$this->almanac->seasons()->bandAt($monthDay));
 	}
 
 	/**
 	 * The time of day this moment falls in.
 	 */
-	public function timeOfDay(): StoryTimeOfDay
+	public function timeOfDay(): TimeOfDay
 	{
 		$hour = (int) $this->date->format('G');
 
-		return new StoryTimeOfDay(...$this->almanac->timesOfDay()->bandAt($hour));
+		return new TimeOfDay(...$this->almanac->timesOfDay()->bandAt($hour));
 	}
 
 	/**
 	 * The moon phase this moment falls in.
 	 */
-	public function moonPhase(): StoryMoonPhase
+	public function moonPhase(): MoonPhase
 	{
 		$permille = $this->lunar->permilleAt($this->date);
 
-		return new StoryMoonPhase(...$this->almanac->moonPhases()->bandAt($permille));
+		return new MoonPhase(...$this->almanac->moonPhases()->bandAt($permille));
 	}
 
 	/**
 	 * The daylight on the day this moment falls on.
 	 */
-	public function daylight(): StoryDaylight
+	public function daylight(): Daylight
 	{
-		return new StoryDaylight((int) round($this->solar->daylightHoursAt($this->date)));
+		return new Daylight((int) round($this->solar->daylightHoursAt($this->date)));
 	}
 
 	/**
 	 * The state of natural light at this moment.
 	 */
-	public function light(): StoryLightState
+	public function light(): LightState
 	{
 		return $this->solar->lightAt($this->date);
 	}

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Story;
+namespace X3P0\ABoyInTheWild\Story\Calendar;
 
 /**
  * The story's almanac: the source of its calendars. It defines the bands for
@@ -21,21 +21,21 @@ namespace X3P0\ABoyInTheWild\Story;
  * sorts and compares exactly like a clock hour — so a season band is resolved
  * by the identical wrap-aware match as a time-of-day band.
  */
-final class StoryAlmanac
+final class Almanac
 {
 	/**
 	 * Calendars built on first request.
 	 */
-	private ?StoryCalendar $seasons    = null;
-	private ?StoryCalendar $timesOfDay = null;
-	private ?StoryCalendar $moonPhases = null;
+	private ?Calendar $seasons    = null;
+	private ?Calendar $timesOfDay = null;
+	private ?Calendar $moonPhases = null;
 
 	/**
 	 * The story's seasonal calendar (Minnesota seasons).
 	 */
-	public function seasons(): StoryCalendar
+	public function seasons(): Calendar
 	{
-		return $this->seasons ??= new StoryCalendar([
+		return $this->seasons ??= new Calendar([
 			'early-spring' => self::season(
 				label:      __('Early Spring', 'x3p0-a-boy-in-the-wild'),
 				startMonth: 3,
@@ -126,9 +126,9 @@ final class StoryAlmanac
 	/**
 	 * The story's time-of-day calendar.
 	 */
-	public function timesOfDay(): StoryCalendar
+	public function timesOfDay(): Calendar
 	{
-		return $this->timesOfDay ??= new StoryCalendar([
+		return $this->timesOfDay ??= new Calendar([
 			'before-dawn' => [
 				'start' => 4,
 				'end'   => 5,
@@ -184,13 +184,13 @@ final class StoryAlmanac
 
 	/**
 	 * The story's lunar calendar. Its bands are laid over the position in the
-	 * synodic cycle as permille (0–999) — the value StoryLunarCycle reduces a
+	 * synodic cycle as permille (0–999) — the value LunarCycle reduces a
 	 * date to — so the new moon's band straddles the 0/999 boundary and is
 	 * resolved by the same wrap-aware match the other calendars use.
 	 */
-	public function moonPhases(): StoryCalendar
+	public function moonPhases(): Calendar
 	{
-		return $this->moonPhases ??= new StoryCalendar([
+		return $this->moonPhases ??= new Calendar([
 			'new' => [
 				'start' => 938,
 				'end'   => 62,
