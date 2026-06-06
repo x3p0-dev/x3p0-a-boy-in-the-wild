@@ -32,7 +32,8 @@ final class StoryServiceProvider extends ServiceProvider
 		MomentFactory::class,
 		StoryAlmanac::class,
 		StoryEpoch::class,
-		StoryLunarCycle::class
+		StoryLunarCycle::class,
+		StorySolarCycle::class
 	];
 
 	protected const BOOTABLE = [

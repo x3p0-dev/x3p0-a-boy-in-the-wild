@@ -91,18 +91,19 @@ final class Chapter
 	private function render(ChapterField $field): string
 	{
 		return match ($field) {
-			ChapterField::Day              => (string) $this->moment->day(),
-			ChapterField::DayLabel         => $this->moment->day()->label(),
-			ChapterField::Designation      => $this->designation->label(),
-			ChapterField::DesignationRoman => $this->designation->romanLabel(),
-			ChapterField::MoonPhase        => $this->moment->moonPhase()->label(),
-			ChapterField::Number           => $this->designation->number(),
-			ChapterField::NumberRoman      => $this->designation->numberRoman(),
-			ChapterField::Season           => $this->moment->season()->label(),
-			ChapterField::TimeOfDay        => $this->moment->timeOfDay()->label(),
-			ChapterField::Type             => $this->designation->type()->label(),
-			ChapterField::Year             => (string) $this->moment->year(),
-			ChapterField::YearLabel        => $this->moment->year()->label()
+			ChapterField::Day           => (string) $this->moment->day(),
+			ChapterField::DayLabel      => $this->moment->day()->label(),
+			ChapterField::Daylight      => (string) $this->moment->daylight(),
+			ChapterField::DaylightLabel => $this->moment->daylight()->label(),
+			ChapterField::Designation   => $this->designation->label(),
+			ChapterField::Light         => $this->moment->light()->label(),
+			ChapterField::MoonPhase     => $this->moment->moonPhase()->label(),
+			ChapterField::Number        => $this->designation->number(),
+			ChapterField::Season        => $this->moment->season()->label(),
+			ChapterField::TimeOfDay     => $this->moment->timeOfDay()->label(),
+			ChapterField::Type          => $this->designation->type()->label(),
+			ChapterField::Year          => (string) $this->moment->year(),
+			ChapterField::YearLabel     => $this->moment->year()->label()
 		};
 	}
 }

@@ -15,24 +15,29 @@ namespace X3P0\ABoyInTheWild\Story\Moment;
 
 use DateInterval;
 use DateTimeImmutable;
-use X3P0\ABoyInTheWild\Story\StoryAlmanac;
-use X3P0\ABoyInTheWild\Story\StoryDay;
-use X3P0\ABoyInTheWild\Story\StoryEpoch;
-use X3P0\ABoyInTheWild\Story\StoryLunarCycle;
-use X3P0\ABoyInTheWild\Story\StoryMoonPhase;
-use X3P0\ABoyInTheWild\Story\StorySeason;
-use X3P0\ABoyInTheWild\Story\StoryTimeOfDay;
-use X3P0\ABoyInTheWild\Story\StoryYear;
+use X3P0\ABoyInTheWild\Story\{
+	StoryAlmanac,
+	StoryDay,
+	StoryDaylight,
+	StoryEpoch,
+	StoryLightState,
+	StoryLunarCycle,
+	StoryMoonPhase,
+	StorySeason,
+	StorySolarCycle,
+	StoryTimeOfDay,
+	StoryYear
+};
 
 /**
  * A point in time read on the story's calendar. The day and year are elapsed
  * measurements from the Epoch; the season and time of day are bands on the
  * Almanac's calendars.
  *
- * All five are functions of the one instant, so the moment resolves each on
+ * All seven are functions of the one instant, so the moment resolves each on
  * demand — the day and year both read the single epoch-to-date interval. The
- * Epoch, Almanac, and Lunar Cycle are injected by the MomentFactory that builds
- * it.
+ * Epoch, Almanac, Lunar Cycle, and Solar Cycle are injected by the MomentFactory
+ * that builds it.
  */
 final class Moment
 {
@@ -40,7 +45,8 @@ final class Moment
 		private readonly DateTimeImmutable $date,
 		private readonly StoryEpoch        $epoch,
 		private readonly StoryAlmanac      $almanac,
-		private readonly StoryLunarCycle   $lunar
+		private readonly StoryLunarCycle   $lunar,
+		private readonly StorySolarCycle   $solar
 	) {}
 
 	/**
@@ -89,6 +95,22 @@ final class Moment
 		$permille = $this->lunar->permilleAt($this->date);
 
 		return new StoryMoonPhase(...$this->almanac->moonPhases()->bandAt($permille));
+	}
+
+	/**
+	 * The daylight on the day this moment falls on.
+	 */
+	public function daylight(): StoryDaylight
+	{
+		return new StoryDaylight((int) round($this->solar->daylightHoursAt($this->date)));
+	}
+
+	/**
+	 * The state of natural light at this moment.
+	 */
+	public function light(): StoryLightState
+	{
+		return $this->solar->lightAt($this->date);
 	}
 
 	/**

@@ -12,20 +12,12 @@ import {select} from '@wordpress/data';
 
 const REST_FIELD = 'x3p0-a-boy-in-the-wild/chapter';
 
-const FIELDS = {
-	day:              __('Day',                 'x3p0-a-boy-in-the-wild'),
-	dayLabel:         __('Day (Labeled)',       'x3p0-a-boy-in-the-wild'),
-	designation:      __('Designation',         'x3p0-a-boy-in-the-wild'),
-	designationRoman: __('Designation (Roman)', 'x3p0-a-boy-in-the-wild'),
-	moonPhase:        __('Moon Phase',          'x3p0-a-boy-in-the-wild'),
-	number:           __('Number',              'x3p0-a-boy-in-the-wild'),
-	numberRoman:      __('Number (Roman)',      'x3p0-a-boy-in-the-wild'),
-	season:           __('Season',              'x3p0-a-boy-in-the-wild'),
-	timeOfDay:        __('Time of Day',         'x3p0-a-boy-in-the-wild'),
-	type:             __('Type',                'x3p0-a-boy-in-the-wild'),
-	year:             __('Year',                'x3p0-a-boy-in-the-wild'),
-	yearLabel:        __('Year (Labeled)',      'x3p0-a-boy-in-the-wild')
-};
+// The field list is generated from the PHP ChapterField enum and handed over by
+// EditorAssets, so it cannot drift from the schema or the renderer. See
+// ChapterField::options().
+
+// noinspection JSUnresolvedVariable
+const FIELDS = window.x3p0ABoyInTheWild?.chapterFields ?? {};
 
 registerBlockBindingsSource({
 	name: 'x3p0/chapter',
