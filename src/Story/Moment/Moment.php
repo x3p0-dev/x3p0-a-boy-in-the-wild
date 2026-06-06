@@ -18,6 +18,8 @@ use DateTimeImmutable;
 use X3P0\ABoyInTheWild\Story\StoryAlmanac;
 use X3P0\ABoyInTheWild\Story\StoryDay;
 use X3P0\ABoyInTheWild\Story\StoryEpoch;
+use X3P0\ABoyInTheWild\Story\StoryLunarCycle;
+use X3P0\ABoyInTheWild\Story\StoryMoonPhase;
 use X3P0\ABoyInTheWild\Story\StorySeason;
 use X3P0\ABoyInTheWild\Story\StoryTimeOfDay;
 use X3P0\ABoyInTheWild\Story\StoryYear;
@@ -27,16 +29,18 @@ use X3P0\ABoyInTheWild\Story\StoryYear;
  * measurements from the Epoch; the season and time of day are bands on the
  * Almanac's calendars.
  *
- * All four are functions of the one instant, so the moment resolves each on
+ * All five are functions of the one instant, so the moment resolves each on
  * demand — the day and year both read the single epoch-to-date interval. The
- * Epoch and Almanac are injected by the MomentFactory that builds it.
+ * Epoch, Almanac, and Lunar Cycle are injected by the MomentFactory that builds
+ * it.
  */
 final class Moment
 {
 	public function __construct(
 		private readonly DateTimeImmutable $date,
 		private readonly StoryEpoch        $epoch,
-		private readonly StoryAlmanac      $almanac
+		private readonly StoryAlmanac      $almanac,
+		private readonly StoryLunarCycle   $lunar
 	) {}
 
 	/**
@@ -75,6 +79,16 @@ final class Moment
 		$hour = (int) $this->date->format('G');
 
 		return new StoryTimeOfDay(...$this->almanac->timesOfDay()->bandAt($hour));
+	}
+
+	/**
+	 * The moon phase this moment falls in.
+	 */
+	public function moonPhase(): StoryMoonPhase
+	{
+		$permille = $this->lunar->permilleAt($this->date);
+
+		return new StoryMoonPhase(...$this->almanac->moonPhases()->bandAt($permille));
 	}
 
 	/**

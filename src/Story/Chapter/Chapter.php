@@ -95,6 +95,7 @@ final class Chapter
 			ChapterField::DayLabel         => $this->moment->day()->label(),
 			ChapterField::Designation      => $this->designation->label(),
 			ChapterField::DesignationRoman => $this->designation->romanLabel(),
+			ChapterField::MoonPhase        => $this->moment->moonPhase()->label(),
 			ChapterField::Number           => $this->designation->number(),
 			ChapterField::NumberRoman      => $this->designation->numberRoman(),
 			ChapterField::Season           => $this->moment->season()->label(),

@@ -19,6 +19,7 @@ use Exception;
 use WP_Post;
 use X3P0\ABoyInTheWild\Story\StoryAlmanac;
 use X3P0\ABoyInTheWild\Story\StoryEpoch;
+use X3P0\ABoyInTheWild\Story\StoryLunarCycle;
 
 /**
  * Builds moments on the story's calendar. Callers describe the point they want
@@ -30,7 +31,8 @@ final class MomentFactory
 {
 	public function __construct(
 		private readonly StoryEpoch $epoch,
-		private readonly StoryAlmanac $almanac
+		private readonly StoryAlmanac $almanac,
+		private readonly StoryLunarCycle $lunar
 	) {}
 
 	/**
@@ -38,7 +40,7 @@ final class MomentFactory
 	 */
 	public function make(DateTimeImmutable $date): Moment
 	{
-		return new Moment($date, $this->epoch, $this->almanac);
+		return new Moment($date, $this->epoch, $this->almanac, $this->lunar);
 	}
 
 	/**

@@ -26,6 +26,7 @@ enum ChapterField: string
 	case DayLabel         = 'dayLabel';
 	case Designation      = 'designation';
 	case DesignationRoman = 'designationRoman';
+	case MoonPhase        = 'moonPhase';
 	case Number           = 'number';
 	case NumberRoman      = 'numberRoman';
 	case Season           = 'season';

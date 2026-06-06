@@ -17,6 +17,7 @@ const FIELDS = {
 	dayLabel:         __('Day (Labeled)',       'x3p0-a-boy-in-the-wild'),
 	designation:      __('Designation',         'x3p0-a-boy-in-the-wild'),
 	designationRoman: __('Designation (Roman)', 'x3p0-a-boy-in-the-wild'),
+	moonPhase:        __('Moon Phase',          'x3p0-a-boy-in-the-wild'),
 	number:           __('Number',              'x3p0-a-boy-in-the-wild'),
 	numberRoman:      __('Number (Roman)',      'x3p0-a-boy-in-the-wild'),
 	season:           __('Season',              'x3p0-a-boy-in-the-wild'),

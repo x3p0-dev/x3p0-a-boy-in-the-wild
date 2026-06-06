@@ -28,6 +28,7 @@ final class StoryAlmanac
 	 */
 	private ?StoryCalendar $seasons    = null;
 	private ?StoryCalendar $timesOfDay = null;
+	private ?StoryCalendar $moonPhases = null;
 
 	/**
 	 * The story's seasonal calendar (Minnesota seasons).
@@ -177,6 +178,58 @@ final class StoryAlmanac
 				'start' => 22,
 				'end'   => 4,
 				'label' => __('Night', 'x3p0-a-boy-in-the-wild')
+			]
+		]);
+	}
+
+	/**
+	 * The story's lunar calendar. Its bands are laid over the position in the
+	 * synodic cycle as permille (0–999) — the value StoryLunarCycle reduces a
+	 * date to — so the new moon's band straddles the 0/999 boundary and is
+	 * resolved by the same wrap-aware match the other calendars use.
+	 */
+	public function moonPhases(): StoryCalendar
+	{
+		return $this->moonPhases ??= new StoryCalendar([
+			'new' => [
+				'start' => 938,
+				'end'   => 62,
+				'label' => __('New Moon', 'x3p0-a-boy-in-the-wild')
+			],
+			'waxing-crescent' => [
+				'start' => 63,
+				'end'   => 187,
+				'label' => __('Waxing Crescent', 'x3p0-a-boy-in-the-wild')
+			],
+			'first-quarter' => [
+				'start' => 188,
+				'end'   => 312,
+				'label' => __('First Quarter', 'x3p0-a-boy-in-the-wild')
+			],
+			'waxing-gibbous' => [
+				'start' => 313,
+				'end'   => 437,
+				'label' => __('Waxing Gibbous', 'x3p0-a-boy-in-the-wild')
+			],
+			'full' => [
+				'start' => 438,
+				'end'   => 562,
+				'label' => __('Full Moon', 'x3p0-a-boy-in-the-wild')
+			],
+			'waning-gibbous' => [
+				'start' => 563,
+				'end'   => 687,
+				'label' => __('Waning Gibbous', 'x3p0-a-boy-in-the-wild')
+			],
+			'last-quarter' => [
+				'start' => 688,
+				'end'   => 812,
+				'label' => __('Last Quarter', 'x3p0-a-boy-in-the-wild')
+			],
+			'waning-crescent' => [
+				'start' => 813,
+				'end'   => 937,
+				'label' => __('Waning Crescent', 'x3p0-a-boy-in-the-wild')
 			]
 		]);
 	}
