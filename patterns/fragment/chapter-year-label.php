@@ -8,6 +8,11 @@
  * Inserter: yes
  */
 
+declare(strict_types=1);
+
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
 use X3P0\ABoyInTheWild\Block\Binding\Sources\Chapter;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 

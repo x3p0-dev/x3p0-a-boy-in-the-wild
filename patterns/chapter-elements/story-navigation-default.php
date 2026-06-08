@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Title: Story Navigation (Default)
  * Slug: x3p0-a-boy-in-the-wild/story-navigation-default
@@ -6,6 +7,12 @@
  * Categories: x3p0-chapter-elements
  * Inserter: yes
  */
+
+declare(strict_types=1);
+
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
 ?>
 
 <!-- wp:group {

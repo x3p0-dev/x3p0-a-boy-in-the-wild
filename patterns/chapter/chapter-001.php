@@ -10,6 +10,9 @@
 
 declare(strict_types=1);
 
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
 use X3P0\ABoyInTheWild\Icon\Icon;
 
 $background = get_theme_file_uri('public/media/images/system/season-late-summer.webp');

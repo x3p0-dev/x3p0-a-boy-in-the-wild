@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Title: Animation: Adrift
  * Slug: x3p0-a-boy-in-the-wild/canvas-scene-adrift
@@ -6,6 +7,12 @@
  * Categories: x3p0-canvas-scenes
  * Inserter: yes
  */
+
+declare(strict_types=1);
+
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
 ?>
 
 <!-- wp:html -->

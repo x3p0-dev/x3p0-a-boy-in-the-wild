@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Title: The Chapters
  * Slug: x3p0-a-boy-in-the-wild/query-trail
@@ -7,6 +8,12 @@
  * Block Types: core/query
  * Inserter: yes
  */
+
+declare(strict_types=1);
+
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
 ?>
 
 <!-- wp:query {
