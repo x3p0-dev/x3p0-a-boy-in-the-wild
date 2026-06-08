@@ -22,6 +22,10 @@ final class EditorSettings implements Bootable
 {
 	/**
 	 * Custom block editor settings to merge into the defaults.
+	 *
+	 * The `fontLibraryEnabled` flag hides the Font Library within the
+	 * editor UI only. The admin-side menu link and page are disabled
+	 * separately in {@see \X3P0\ABoyInTheWild\Admin\FontLibraryDisabler}.
 	 */
 	private const SETTINGS = [
 		'disableContentOnlyForUnsyncedPatterns' => true,
