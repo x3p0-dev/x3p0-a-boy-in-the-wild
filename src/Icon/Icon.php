@@ -36,7 +36,7 @@ enum Icon: string
 	/**
 	 * Path to the icons folder relative to the theme root.
 	 */
-	private const ICONS_PATH = 'public/media/svg';
+	private const ICONS_PATH = 'public/media/svg/icon';
 
 	/**
 	 * Returns the icon's translated label.
