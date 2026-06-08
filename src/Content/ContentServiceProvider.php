@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Content;
 
+use X3P0\ABoyInTheWild\Content\Taxonomy\Category;
+use X3P0\ABoyInTheWild\Content\Taxonomy\PostTag;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**
@@ -21,13 +23,13 @@ use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 final class ContentServiceProvider extends ServiceProvider
 {
 	protected const BOOTABLE = [
-		Category::class,
 		ManagePostColumns::class,
 		PostDateColumn::class,
 		PostRowActions::class,
 		PostStatus::class,
-		PostTag::class,
 		PostTitleFormat::class,
-		PostType\Post::class
+		PostType\Post::class,
+		Taxonomy\Category::class,
+		Taxonomy\PostTag::class
 	];
 }

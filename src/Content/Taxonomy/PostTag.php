@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\ABoyInTheWild\Content;
+namespace X3P0\ABoyInTheWild\Content\Taxonomy;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
@@ -26,7 +26,7 @@ final class PostTag implements Bootable
 	 */
 	public function boot(): void
 	{
-		add_filter('register_taxonomy_args', $this->taxonomyArgs(...), 999999, 2);
+		add_filter('register_post_tag_taxonomy_args', $this->taxonomyArgs(...), 999999, 2);
 	}
 
 	/**
@@ -34,10 +34,6 @@ final class PostTag implements Bootable
 	 */
 	public function taxonomyArgs(array $args, string $taxonomy): array
 	{
-		if ('post_tag' !== $taxonomy) {
-			return $args;
-		}
-
 		$args['labels'] = array_merge($args['labels'] ?? [], [
 			'name'          => __('Arcs', 'x3p0-a-boy-in-the-wild'),
 			'singular_name' => __('Arc', 'x3p0-a-boy-in-the-wild'),
