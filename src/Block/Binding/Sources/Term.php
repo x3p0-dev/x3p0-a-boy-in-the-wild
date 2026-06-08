@@ -23,7 +23,7 @@ use WP_Term;
  */
 final class Term extends BindingSource
 {
-	protected const NAME = 'x3p0/term';
+	public const NAME = 'x3p0/term';
 
 	/**
 	 * @inheritDoc

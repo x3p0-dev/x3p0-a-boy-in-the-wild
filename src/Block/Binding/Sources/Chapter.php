@@ -25,6 +25,8 @@ final class Chapter extends BindingSource
 {
 	public const NAME = 'x3p0/chapter';
 
+	protected const USES_CONTEXT = ['postId'];
+
 	public function __construct(private readonly ChapterRepository $chapters) {}
 
 	/**
@@ -33,14 +35,6 @@ final class Chapter extends BindingSource
 	public function getLabel(): string
 	{
 		return __('Chapter Data', 'x3p0-a-boy-in-the-wild');
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function usesContext(): array
-	{
-		return ['postId'];
 	}
 
 	/**

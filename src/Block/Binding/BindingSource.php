@@ -25,8 +25,18 @@ abstract class BindingSource
 	/**
 	 * The binding source identifier (e.g., 'x3p0/chapter'). Subclasses
 	 * must override this constant.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 * @todo Make abstract with PHP 8.4+ requirement.
 	 */
-	protected const NAME = '';
+	public const NAME = '';
+
+	/**
+	 * What contexts (if any) the binding source uses. Optional.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	protected const USES_CONTEXT = [];
 
 	/**
 	 * Returns the binding source name (e.g., 'x3p0/chapter').
@@ -54,7 +64,7 @@ abstract class BindingSource
 	 */
 	public function usesContext(): array
 	{
-		return [];
+		return static::USES_CONTEXT;
 	}
 
 	/**
