@@ -21,6 +21,7 @@ use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 final class AdminServiceProvider extends ServiceProvider
 {
 	protected const BOOTABLE = [
-		AdminColorRegistrar::class
+		AdminColorRegistrar::class,
+		FontLibraryDisabler::class
 	];
 }
