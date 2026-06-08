@@ -12,6 +12,7 @@
 /.ideas
 /node_modules
 /packages
+/public
 /vendor
 *.map
 *.zip
