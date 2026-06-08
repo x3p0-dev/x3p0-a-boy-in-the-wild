@@ -42,7 +42,7 @@ const CONFIG = {
 	speedReference: 15,
 
 	// Overall canvas opacity (0–1) — applied as ctx.globalAlpha for the frame.
-	opacity: 0.65,
+	opacity: 0.85,
 
 	// Drop length range (px). Scaled per drop by its depth factor.
 	dropLenMin: 8,
@@ -52,13 +52,16 @@ const CONFIG = {
 	dropSpeedMin: 6,
 	dropSpeedMax: 10,
 
-	// Drop alpha range. Scaled per drop by depth.
-	dropAlphaMin: 0.18,
-	dropAlphaMax: 0.52,
+	// Drop alpha range. Scaled per drop by depth. Kept high because the storm
+	// background is near-black — these multiply against the token's own alpha
+	// and the frame opacity, so anything lower reads as invisible.
+	dropAlphaMin: 0.32,
+	dropAlphaMax: 0.68,
 
-	// Drop stroke width range (px). Scaled per drop by depth.
-	dropWidthMin: 0.7,
-	dropWidthMax: 1.3,
+	// Drop stroke width range (px). Scaled per drop by depth. The minimum is
+	// held above ~0.8 so the thinnest far drops do not antialias away on HiDPI.
+	dropWidthMin: 0.9,
+	dropWidthMax: 1.5,
 
 	// Splash ring alpha range. Scaled per drop by depth.
 	splashAlphaMin: 0.28,
