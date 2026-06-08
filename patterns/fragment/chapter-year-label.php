@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Title: Chapter Year
+ * Title: Chapter Year (Labeled)
  * Slug: x3p0-a-boy-in-the-wild/fragment-chapter-year-label
  * Description: Displays a chapter's year within the story with a label.
  * Categories: x3p0-fragments
@@ -15,7 +15,7 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 <!-- wp:paragraph {
 	"metadata":{
-		"name":"<?= esc_attr__('Year', 'x3p0-a-boy-in-the-wild') ?>",
+		"name":"<?= esc_attr(ChapterField::YearLabel->label()) ?>",
 		"bindings":{
 			"content":{
 				"source":"<?= esc_attr(Chapter::NAME) ?>",
@@ -24,5 +24,5 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 		}
 	}
 } -->
-<p><?= esc_html__('Year', 'x3p0-a-boy-in-the-wild') ?></p>
+<p><?= esc_html(ChapterField::YearLabel->label()) ?></p>
 <!-- /wp:paragraph -->

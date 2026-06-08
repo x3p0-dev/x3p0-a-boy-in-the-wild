@@ -15,7 +15,7 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 <!-- wp:paragraph {
 	"metadata":{
-		"name":"<?= esc_attr__('Time of Day', 'x3p0-a-boy-in-the-wild') ?>",
+		"name":"<?= esc_attr(ChapterField::TimeOfDay->label()) ?>",
 		"bindings":{
 			"content":{
 				"source":"<?= esc_attr(Chapter::NAME) ?>",
@@ -24,5 +24,5 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 		}
 	}
 } -->
-<p><?= esc_html__('Time', 'x3p0-a-boy-in-the-wild') ?></p>
+<p><?= esc_html(ChapterField::TimeOfDay->label()) ?></p>
 <!-- /wp:paragraph -->

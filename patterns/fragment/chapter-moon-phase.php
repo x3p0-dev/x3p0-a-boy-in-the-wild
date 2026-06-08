@@ -14,7 +14,7 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 <!-- wp:paragraph {
 	"metadata":{
-		"name":"<?= esc_attr__('Moon Phase', 'x3p0-a-boy-in-the-wild') ?>",
+		"name":"<?= esc_attr(ChapterField::MoonPhase->label()) ?>",
 		"bindings":{
 			"content":{
 				"source":"<?= esc_attr(Chapter::NAME) ?>",
@@ -23,5 +23,5 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 		}
 	}
 } -->
-<p><?= esc_html__('Moon', 'x3p0-a-boy-in-the-wild') ?></p>
+<p><?= esc_html(ChapterField::MoonPhase->label()) ?></p>
 <!-- /wp:paragraph -->

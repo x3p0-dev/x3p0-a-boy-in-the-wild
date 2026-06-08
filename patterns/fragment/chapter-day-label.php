@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Title: Chapter Day
+ * Title: Chapter Day (Labeled)
  * Slug: x3p0-a-boy-in-the-wild/fragment-chapter-day-label
  * Description: Displays a chapter's day with a label.
  * Categories: x3p0-fragments
@@ -15,7 +15,7 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 
 <!-- wp:paragraph {
 	"metadata":{
-		"name":"<?= esc_attr__('Day', 'x3p0-a-boy-in-the-wild') ?>",
+		"name":"<?= esc_attr(ChapterField::DayLabel->label()) ?>",
 		"bindings":{
 			"content":{
 				"source":"<?= esc_attr(Chapter::NAME) ?>",
@@ -24,5 +24,5 @@ use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
 		}
 	}
 } -->
-<p><?= esc_html__('Day', 'x3p0-a-boy-in-the-wild') ?></p>
+<p><?= esc_html(ChapterField::DayLabel->label()) ?></p>
 <!-- /wp:paragraph -->
