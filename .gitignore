@@ -11,7 +11,8 @@
 /.idea
 /.ideas
 /node_modules
-/packages
+/packages/*
+!/packages/README.md
 /public
 /vendor
 *.map
