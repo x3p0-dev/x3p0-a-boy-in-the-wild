@@ -26,7 +26,7 @@ final class ManagePostColumns implements Bootable
 	 */
 	public function boot(): void
 	{
-		add_filter('manage_post_columns', $this->filter(...));
+		add_filter('manage_post_posts_columns', $this->filter(...));
 	}
 
 	/**
