@@ -144,7 +144,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 						<!-- /wp:paragraph -->
 
 						<!-- wp:icon {
-							"icon":"<?= esc_attr(Icon::SUNDIAL->value) ?>",
+							"icon":"<?= esc_attr(Icon::Sundial->value) ?>",
 							"style":{"dimensions":{"width":"40px"}}
 						} /-->
 

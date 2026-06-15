@@ -18,15 +18,15 @@ namespace X3P0\ABoyInTheWild\Icon;
  */
 enum Icon: string
 {
-	case BIRD_HORIZON = 'x3p0/bird-horizon';
-	case COMPASS      = 'x3p0/compass';
-	case CROSSHAIR    = 'x3p0/crosshair';
-	case DRAW         = 'x3p0/draw';
-	case FOREST       = 'x3p0/forest';
-	case ROUTE        = 'x3p0/route';
-	case SEALED_KEY   = 'x3p0/sealed-key';
-	case SUNDIAL      = 'x3p0/sundial';
-	case SUN_PATH     = 'x3p0/sun-path';
+	case BirdHorizon = 'x3p0/bird-horizon';
+	case Compass     = 'x3p0/compass';
+	case Crosshair   = 'x3p0/crosshair';
+	case Draw        = 'x3p0/draw';
+	case Forest      = 'x3p0/forest';
+	case Route       = 'x3p0/route';
+	case SealedKey   = 'x3p0/sealed-key';
+	case Sundial     = 'x3p0/sundial';
+	case SunPath     = 'x3p0/sun-path';
 
 	/**
 	 * Namespace prefix for all registered icon names.
@@ -44,15 +44,15 @@ enum Icon: string
 	public function label(): string
 	{
 		return match ($this) {
-			self::BIRD_HORIZON => __('Bird Horizon', 'x3p0-a-boy-in-the-wild'),
-			self::COMPASS      => __('Compass',      'x3p0-a-boy-in-the-wild'),
-			self::CROSSHAIR    => __('Crosshair',    'x3p0-a-boy-in-the-wild'),
-			self::DRAW         => __('Draw',         'x3p0-a-boy-in-the-wild'),
-			self::FOREST       => __('Forest',       'x3p0-a-boy-in-the-wild'),
-			self::ROUTE        => __('Route',        'x3p0-a-boy-in-the-wild'),
-			self::SEALED_KEY   => __('Sealed Key',   'x3p0-a-boy-in-the-wild'),
-			self::SUNDIAL      => __('Sundial',      'x3p0-a-boy-in-the-wild'),
-			self::SUN_PATH     => __('Sun Path',     'x3p0-a-boy-in-the-wild')
+			self::BirdHorizon => __('Bird Horizon', 'x3p0-a-boy-in-the-wild'),
+			self::Compass      => __('Compass',      'x3p0-a-boy-in-the-wild'),
+			self::Crosshair    => __('Crosshair',    'x3p0-a-boy-in-the-wild'),
+			self::Draw         => __('Draw',         'x3p0-a-boy-in-the-wild'),
+			self::Forest       => __('Forest',       'x3p0-a-boy-in-the-wild'),
+			self::Route        => __('Route',        'x3p0-a-boy-in-the-wild'),
+			self::SealedKey   => __('Sealed Key',   'x3p0-a-boy-in-the-wild'),
+			self::Sundial      => __('Sundial',      'x3p0-a-boy-in-the-wild'),
+			self::SunPath     => __('Sun Path',     'x3p0-a-boy-in-the-wild')
 		};
 	}
 

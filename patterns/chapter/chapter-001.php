@@ -141,7 +141,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 			<footer class="wp-block-group is-style-container-meta">
 
 				<!-- wp:icon {
-					"icon":"<?= esc_attr(Icon::BIRD_HORIZON->value) ?>",
+					"icon":"<?= esc_attr(Icon::BirdHorizon->value) ?>",
 					"style":{
 						"layout":{"selfStretch":"fit","flexSize":null},
 						"dimensions":{"width":"40px"}

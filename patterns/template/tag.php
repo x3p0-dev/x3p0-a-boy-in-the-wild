@@ -142,7 +142,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 						<!-- /wp:paragraph -->
 
 						<!-- wp:icon {
-							"icon":"<?= esc_attr(Icon::ROUTE->value) ?>",
+							"icon":"<?= esc_attr(Icon::Route->value) ?>",
 							"style":{"dimensions":{"width":"40px"}}
 						} /-->
 

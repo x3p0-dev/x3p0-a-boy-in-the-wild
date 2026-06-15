@@ -142,7 +142,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 						<!-- /wp:paragraph -->
 
 						<!-- wp:icon {
-							"icon":"<?= esc_attr(Icon::DRAW->value) ?>",
+							"icon":"<?= esc_attr(Icon::Draw->value) ?>",
 							"style":{"dimensions":{"width":"40px"}}
 						} /-->
 

@@ -42,7 +42,7 @@ defined('ABSPATH') || exit;
 		<article class="wp-block-group alignfull">
 
 			<!-- wp:icon {
-				"icon":"<?= esc_attr(Icon::SEALED_KEY->value) ?>",
+				"icon":"<?= esc_attr(Icon::SealedKey->value) ?>",
 				"align":"center",
 				"className":"is-style-icon-pulse-fade",
 				"style":{

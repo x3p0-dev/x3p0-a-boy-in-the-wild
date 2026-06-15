@@ -139,7 +139,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 						<!-- /wp:heading -->
 
 						<!-- wp:icon {
-							"icon":"<?= esc_attr(Icon::COMPASS->value) ?>",
+							"icon":"<?= esc_attr(Icon::Compass->value) ?>",
 							"metadata":{"name":"<?= esc_attr__('Compass', 'x3p0-a-boy-in-the-wild') ?>"},
 							"style":{"dimensions":{"width":"40px"}}
 						} /-->
