@@ -42,8 +42,6 @@ final class FontLibraryDisabler implements Bootable
 		add_action('admin_menu', $this->removeMenuPages(...), 999999);
 
 		foreach (self::MENU_SLUGS as $slug) {
-			// Mirrors core's `get_plugin_page_hookname()`, which
-			// strips the `.php` suffix when building the page hook.
 			$hook = str_replace('.php', '', $slug);
 			add_action("load-appearance_page_{$hook}", $this->blockPage(...));
 		}
