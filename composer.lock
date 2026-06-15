@@ -689,16 +689,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.38.1",
+            "version": "v1.38.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92"
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/14c5439eec4ccff081ac14eca2dc57feb2a66d92",
-                "reference": "14c5439eec4ccff081ac14eca2dc57feb2a66d92",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
                 "shasum": ""
             },
             "require": {
@@ -750,7 +750,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.1"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
             },
             "funding": [
                 {
@@ -770,7 +770,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-26T12:51:13+00:00"
+            "time": "2026-05-27T06:59:30+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -932,12 +932,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/x3p0-dev/x3p0-prelude.git",
-                "reference": "7df1920f0495dbccefd98d84f4901ce4568e153c"
+                "reference": "1464d0f1f034459531735fe97841c9d9967511f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x3p0-dev/x3p0-prelude/zipball/7df1920f0495dbccefd98d84f4901ce4568e153c",
-                "reference": "7df1920f0495dbccefd98d84f4901ce4568e153c",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-prelude/zipball/1464d0f1f034459531735fe97841c9d9967511f4",
+                "reference": "1464d0f1f034459531735fe97841c9d9967511f4",
                 "shasum": ""
             },
             "require": {
@@ -968,7 +968,7 @@
                 "issues": "https://github.com/x3p0-dev/x3p0-prelude/issues",
                 "source": "https://github.com/x3p0-dev/x3p0-prelude/tree/master"
             },
-            "time": "2026-06-02T21:01:49+00:00"
+            "time": "2026-06-15T15:36:17+00:00"
         },
         {
             "name": "x3p0-dev/x3p0-skills",
@@ -976,12 +976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/x3p0-dev/x3p0-skills.git",
-                "reference": "71efe3df7ee8de1d32f0554d3f5aa0c3c87b24c8"
+                "reference": "ea99d0e9e76ac9abaf6b19009ae229f78b38dbf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x3p0-dev/x3p0-skills/zipball/71efe3df7ee8de1d32f0554d3f5aa0c3c87b24c8",
-                "reference": "71efe3df7ee8de1d32f0554d3f5aa0c3c87b24c8",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-skills/zipball/ea99d0e9e76ac9abaf6b19009ae229f78b38dbf6",
+                "reference": "ea99d0e9e76ac9abaf6b19009ae229f78b38dbf6",
                 "shasum": ""
             },
             "require": {
@@ -1003,7 +1003,7 @@
                 "issues": "https://github.com/x3p0-dev/x3p0-skills/issues",
                 "source": "https://github.com/x3p0-dev/x3p0-skills/tree/master"
             },
-            "time": "2026-05-29T20:04:58+00:00"
+            "time": "2026-06-11T16:08:55+00:00"
         }
     ],
     "aliases": [],
