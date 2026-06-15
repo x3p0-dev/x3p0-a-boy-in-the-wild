@@ -11,7 +11,7 @@ declare(strict_types=1);
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-$sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
+use X3P0\ABoyInTheWild\Media\Image;
 ?>
 
 <!-- wp:group {
@@ -145,7 +145,7 @@ $sketch = get_theme_file_uri('public/media/images/template/404-sketch.webp');
 			<!-- /wp:paragraph -->
 
 			<!-- wp:image {"id":484,"sizeSlug":"full","linkDestination":"none","align":"wide","className":"is-style-image-sketch"} -->
-			<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt="" class="wp-image-484"/><figcaption class="wp-element-caption"><?= esc_html__('Not to scale · Not surveyed · Made in poor light', 'x3p0-a-boy-in-the-wild') ?></figcaption></figure>
+			<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url(Image::Template404Sketch->url()) ?>" alt="" class="wp-image-484"/><figcaption class="wp-element-caption"><?= esc_html__('Not to scale · Not surveyed · Made in poor light', 'x3p0-a-boy-in-the-wild') ?></figcaption></figure>
 			<!-- /wp:image -->
 
 			<!-- wp:paragraph {"className":"is-style-text-caption"} -->

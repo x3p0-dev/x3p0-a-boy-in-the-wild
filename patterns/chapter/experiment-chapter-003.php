@@ -13,7 +13,7 @@ declare(strict_types=1);
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-$background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
+use X3P0\ABoyInTheWild\Media\Image;
 ?>
 
 <!-- wp:group {
@@ -22,7 +22,7 @@ $background = get_theme_file_uri('public/media/images/chapter/003-storm.webp');
 	"style":{
 		"background":{
 			"backgroundImage":{
-				"url":"<?= esc_url($background) ?>",
+				"url":"<?= esc_url(Image::Chapter003Storm->url()) ?>",
 				"id":69,
 				"source":"file",
 				"title":"boy-in-the-wold-storm"

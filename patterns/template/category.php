@@ -8,13 +8,11 @@
 
 declare(strict_types=1);
 
-use X3P0\ABoyInTheWild\Icon\Icon;
-
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-$background = get_theme_file_uri('public/media/images/system/season-late-summer.webp');
-$sketch     = get_theme_file_uri('public/media/images/template/era-sketch.webp');
+use X3P0\ABoyInTheWild\Icon\Icon;
+use X3P0\ABoyInTheWild\Media\Image;
 ?>
 
 <!-- wp:group {
@@ -23,7 +21,17 @@ $sketch     = get_theme_file_uri('public/media/images/template/era-sketch.webp')
 	"align":"full",
 	"style":{
 		"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70","left":"var:preset|spacing|70","right":"var:preset|spacing|70"},"margin":{"top":"0"}},
-		"background":{"backgroundImage":{"url":"<?= esc_url($background) ?>","id":419,"source":"file","title":"late-summer-background"},"backgroundSize":"cover","backgroundPosition":"50% 0%","backgroundAttachment":"fixed"}
+		"background":{
+			"backgroundImage":{
+				"url":"<?= esc_url(Image::SystemSeasonLateSummer->url()) ?>",
+				"id":419,
+				"source":"file",
+				"title":"late-summer-background"
+			},
+			"backgroundSize":"cover",
+			"backgroundPosition":"50% 0%",
+			"backgroundAttachment":"fixed"
+		}
 	},
 	"layout":{"type":"default"}
 } -->
@@ -93,7 +101,7 @@ $sketch     = get_theme_file_uri('public/media/images/template/era-sketch.webp')
 					"sizeSlug":"large",
 					"className":"is-style-image-sketch"
 				} -->
-				<figure class="wp-block-image size-large is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt=""/><figcaption class="wp-element-caption"><?= esc_html__('The territory as I know it. Corrections pending.', 'x3p0-a-boy-in-the-wild') ?></figcaption></figure>
+				<figure class="wp-block-image size-large is-style-image-sketch"><img src="<?= esc_url(Image::TemplateEraSketch->url()) ?>" alt=""/><figcaption class="wp-element-caption"><?= esc_html__('The territory as I know it. Corrections pending.', 'x3p0-a-boy-in-the-wild') ?></figcaption></figure>
 				<!-- /wp:image -->
 
 			</header>

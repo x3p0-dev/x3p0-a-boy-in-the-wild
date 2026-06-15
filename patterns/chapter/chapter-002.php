@@ -14,9 +14,8 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 use X3P0\ABoyInTheWild\Block\Binding\Sources\Chapter;
+use X3P0\ABoyInTheWild\Media\Image;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
-
-$map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 ?>
 
 <!-- wp:group {
@@ -41,7 +40,7 @@ $map =  get_theme_file_uri('public/media/images/chapter/002-map.webp');
 		"align":"full",
 		"className":"is-style-image-sketch"
 	} -->
-	<figure class="wp-block-image alignfull size-full is-style-image-sketch"><img src="<?= esc_url($map) ?>" alt="A hand-drawn territory map on parchment, showing contour lines, two ridges, and four named locations marked with pins. One location — The Place Where I Buried Something — is marked with an X in the far corner." class="wp-image-516"/><figcaption class="wp-element-caption">Scale: about a day's walk. Maybe two.</figcaption></figure>
+	<figure class="wp-block-image alignfull size-full is-style-image-sketch"><img src="<?= esc_url(Image::Chapter002Map->url()) ?>" alt="A hand-drawn territory map on parchment, showing contour lines, two ridges, and four named locations marked with pins. One location — The Place Where I Buried Something — is marked with an X in the far corner." class="wp-image-516"/><figcaption class="wp-element-caption">Scale: about a day's walk. Maybe two.</figcaption></figure>
 	<!-- /wp:image -->
 
 	<!-- wp:group {

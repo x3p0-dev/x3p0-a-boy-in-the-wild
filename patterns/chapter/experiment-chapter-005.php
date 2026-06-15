@@ -13,7 +13,7 @@ declare(strict_types=1);
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-$background = get_theme_file_uri('public/media/images/chapter/005-campfire.webp');
+use X3P0\ABoyInTheWild\Media\Image;
 ?>
 
 <!-- wp:group {
@@ -24,7 +24,7 @@ $background = get_theme_file_uri('public/media/images/chapter/005-campfire.webp'
 		"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}},
 		"background":{
 			"backgroundImage":{
-				"url":"<?= esc_url($background) ?>",
+				"url":"<?= esc_url(Image::Chapter005Campfire->url()) ?>",
 				"id":173,
 				"source":"file",
 				"title":"boy-in-the-wild-dark-fire"

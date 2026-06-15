@@ -14,9 +14,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 use X3P0\ABoyInTheWild\Icon\Icon;
-
-$background = get_theme_file_uri('public/media/images/system/season-late-summer.webp');
-$sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp');
+use X3P0\ABoyInTheWild\Media\Image;
 ?>
 
 <!-- wp:group {
@@ -29,7 +27,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 		},
 		"background":{
 			"backgroundImage":{
-				"url":"<?= esc_url($background) ?>",
+				"url":"<?= esc_url(Image::SystemSeasonLateSummer->url()) ?>",
 				"id":419,
 				"source":"file",
 				"title":"late-summer-background"
@@ -111,7 +109,7 @@ $sketch     =  get_theme_file_uri('public/media/images/chapter/001-clearing.webp
 				<!-- /wp:paragraph -->
 
 				<!-- wp:image {"id":243,"sizeSlug":"full","linkDestination":"none","align":"wide","className":"is-style-image-sketch"} -->
-				<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url($sketch) ?>" alt="A charcoal drawing of a small fire burning in a forest clearing at night. Tall pines press close on either side, their shadows stretching across the ground. The fire is the only light." class="wp-image-243"/><figcaption class="wp-element-caption">The Clearing. First Night.</figcaption></figure>
+				<figure class="wp-block-image alignwide size-full is-style-image-sketch"><img src="<?= esc_url(Image::Chapter001Clearing->url()) ?>" alt="A charcoal drawing of a small fire burning in a forest clearing at night. Tall pines press close on either side, their shadows stretching across the ground. The fire is the only light." class="wp-image-243"/><figcaption class="wp-element-caption">The Clearing. First Night.</figcaption></figure>
 				<!-- /wp:image -->
 
 				<!-- wp:paragraph -->

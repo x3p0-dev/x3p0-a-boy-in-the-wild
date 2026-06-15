@@ -13,18 +13,13 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Audio;
 
+use X3P0\ABoyInTheWild\Media\Audio;
+
 /**
  * Resolves the current audio from multiple sources.
  */
 final class AudioResolver
 {
-	/**
-	 * Default audio files for specific contexts where no post meta is set.
-	 */
-	private const DEFAULTS = [
-		'404' => 'public/media/audio/music/moonless-pine-drift.mp3',
-	];
-
 	/**
 	 * Gets the current audio.
 	 */
@@ -32,7 +27,7 @@ final class AudioResolver
 	{
 		return match (true) {
 			is_singular('post') => $this->getPostAudioUrl(get_queried_object_id()),
-			is_404()            => get_theme_file_uri(self::DEFAULTS['404']),
+			is_404()            => Audio::MoonlessPineDrift->url(),
 			default             => '',
 		};
 	}
