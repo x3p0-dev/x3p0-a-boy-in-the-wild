@@ -20,10 +20,6 @@ namespace X3P0\ABoyInTheWild\Media;
 enum Audio: string
 {
 	case MoonlessPineDrift = 'music/moonless-pine-drift.mp3';
-	case HalfFinishedChord = 'uploads/music/half-finished-chord.mp3';
-	case DeepHush          = 'uploads/sounds/deep-hush.mp3';
-	case RainInTheHollow   = 'uploads/sounds/rain-in-the-hollow.mp3';
-	case TheSepiaAfternoon = 'uploads/sounds/the-sepia-afternoon.mp3';
 
 	/**
 	 * Path to the audio folder relative to the theme root.
