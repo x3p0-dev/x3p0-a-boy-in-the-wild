@@ -53,9 +53,9 @@ final class StylesheetLoader implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		foreach ($this->discovery as $asset) {
-			if ($asset->hasAssetFile()) {
-				$this->enqueueStylesheet($asset);
+		foreach ($this->discovery as $stylesheet) {
+			if ($stylesheet->hasAssetFile()) {
+				$this->enqueueStylesheet($stylesheet);
 			}
 		}
 	}
@@ -68,17 +68,17 @@ final class StylesheetLoader implements Bootable
 	 * derived from the file's parent directory (namespace) and filename
 	 * (slug); dependencies and version come from its asset file.
 	 */
-	private function enqueueStylesheet(CompiledAsset $asset): void
+	private function enqueueStylesheet(CompiledAsset $stylesheet): void
 	{
-		$namespace = $asset->getPathInfo()->getBasename();
-		$slug      = $asset->getBasename('.css');
+		$namespace = $stylesheet->getPathInfo()->getBasename();
+		$slug      = $stylesheet->getBasename('.css');
 
 		wp_enqueue_block_style("{$namespace}/{$slug}", [
 			'handle' => self::HANDLE_PREFIX . "-{$namespace}-{$slug}",
-			'src'    => $asset->fileUrl(),
-			'path'   => $asset->filePath(),
-			'deps'   => $asset->dependencies(),
-			'ver'    => $asset->version()
+			'src'    => $stylesheet->fileUrl(),
+			'path'   => $stylesheet->filePath(),
+			'deps'   => $stylesheet->dependencies(),
+			'ver'    => $stylesheet->version()
 		]);
 	}
 }

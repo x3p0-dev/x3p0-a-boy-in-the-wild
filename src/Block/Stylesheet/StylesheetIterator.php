@@ -28,9 +28,8 @@ use X3P0\ABoyInTheWild\Support\CompiledAsset;
  *
  * This class provides an iterator implementation that recursively searches a
  * specified directory path for CSS files and wraps them in CompiledAsset
- * objects.
- * It implements the Iterator interface, allowing it to be used in foreach loops
- * and other iteration contexts.
+ * objects. It implements the Iterator interface, allowing it to be used in
+ * foreach loops and other iteration contexts.
  *
  * The discovery process filters for valid CSS files only and automatically
  * resolves the path relative to the parent theme directory. If the specified
