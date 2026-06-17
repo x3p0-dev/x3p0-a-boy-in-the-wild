@@ -21,34 +21,17 @@ use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
  */
 final class BindingServiceProvider extends ServiceProvider
 {
-	/**
-	 * Block binding source classnames. Resolved from the container so each
-	 * source receives its own dependencies via constructor injection.
-	 */
-	private const SOURCES = [
-		Sources\Chapter::class,
-		Sources\Query::class,
-		Sources\Site::class,
-		Sources\Story::class,
-		Sources\Term::class
-	];
-
 	protected const BOOTABLE = [
 		BindingSourceRegistrar::class
 	];
 
-	/**
-	 * @inheritDoc
-	 */
-	public function register(): void
-	{
-		parent::register();
-
-		$this->container->singleton(
-			BindingSourceRegistrar::class,
-			fn (Container $container) => new BindingSourceRegistrar(
-				array_map($container->get(...), self::SOURCES)
-			)
-		);
-	}
+	protected const TAGS = [
+		'block.binding.sources' => [
+			Sources\Chapter::class,
+			Sources\Query::class,
+			Sources\Site::class,
+			Sources\Story::class,
+			Sources\Term::class
+		]
+	];
 }

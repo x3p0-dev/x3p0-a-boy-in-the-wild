@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
+use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tag;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
@@ -25,7 +26,10 @@ final class BindingSourceRegistrar implements Bootable
 	/**
 	 * @param array<int, BindingSource> $sources The binding sources to register.
 	 */
-	public function __construct(private readonly array $sources) {}
+	public function __construct(
+		#[Tag('block.binding.sources')]
+		private readonly array $sources
+	) {}
 
 	/**
 	 * @inheritDoc
