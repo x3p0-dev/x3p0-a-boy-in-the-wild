@@ -15,6 +15,7 @@ namespace X3P0\ABoyInTheWild\Editor;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
+use X3P0\ABoyInTheWild\Support\CompiledAsset;
 
 /**
  * Loads editor assets.
@@ -45,14 +46,14 @@ final class EditorAssets implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		$script_asset = include get_parent_theme_file_path('public/js/editor.asset.php');
-		$style_asset  = include get_parent_theme_file_path('public/css/editor.asset.php');
+		$script = new CompiledAsset('public/js/editor.js');
+		$style  = new CompiledAsset('public/css/editor.css');
 
 		wp_enqueue_script(
 			'x3p0-a-boy-in-the-wild-editor',
-			get_parent_theme_file_uri('public/js/editor.js'),
-			$script_asset['dependencies'],
-			$script_asset['version'],
+			$script->fileUrl(),
+			$script->dependencies(),
+			$script->version(),
 			true
 		);
 
@@ -74,9 +75,9 @@ final class EditorAssets implements Bootable
 
 		wp_enqueue_style(
 			'x3p0-a-boy-in-the-wild-editor',
-			get_parent_theme_file_uri('public/css/editor.css'),
-			$style_asset['dependencies'],
-			$style_asset['version']
+			$style->fileUrl(),
+			$style->dependencies(),
+			$style->version()
 		);
 	}
 }

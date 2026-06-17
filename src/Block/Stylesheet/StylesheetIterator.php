@@ -21,11 +21,14 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 
+use X3P0\ABoyInTheWild\Support\CompiledAsset;
+
 /**
  * Discovers and iterates through block stylesheet files.
  *
  * This class provides an iterator implementation that recursively searches a
- * specified directory path for CSS files and wraps them in Stylesheet objects.
+ * specified directory path for CSS files and wraps them in CompiledAsset
+ * objects.
  * It implements the Iterator interface, allowing it to be used in foreach loops
  * and other iteration contexts.
  *
@@ -41,9 +44,9 @@ final class StylesheetIterator implements Iterator
 	private readonly Iterator $iterator;
 
 	/**
-	 * The current Stylesheet object in the iteration.
+	 * The current compiled asset in the iteration.
 	 */
-	private ?Stylesheet $current = null;
+	private ?CompiledAsset $current = null;
 
 	/**
 	 * Sets up the stylesheet discovery iterator. Initializes the discovery
@@ -56,9 +59,9 @@ final class StylesheetIterator implements Iterator
 	}
 
 	/**
-	 * Returns the current Stylesheet object.
+	 * Returns the current compiled asset.
 	 */
-	public function current(): ?Stylesheet
+	public function current(): ?CompiledAsset
 	{
 		return $this->current;
 	}
@@ -130,14 +133,13 @@ final class StylesheetIterator implements Iterator
 	}
 
 	/**
-	 * If the iterator is at a valid position, creates a new Stylesheet
-	 * object from the current file. Otherwise, sets current to null.
+	 * If the iterator is at a valid position, wraps the current file in a
+	 * CompiledAsset. Otherwise, sets current to null.
 	 */
 	private function updateCurrent(): void
 	{
 		if ($this->iterator->valid()) {
-			$file = $this->iterator->current();
-			$this->current = new Stylesheet($file, $this->path);
+			$this->current = CompiledAsset::fromFile($this->iterator->current());
 			return;
 		}
 

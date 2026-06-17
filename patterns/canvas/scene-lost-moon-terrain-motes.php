@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use X3P0\ABoyInTheWild\Block\Canvas\Canvas;
+
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
@@ -17,7 +19,7 @@ defined('ABSPATH') || exit;
 
 <!-- wp:html -->
 <!-- Animation canvas. Do not alter unless you know what you're doing! -->
-<canvas class="x3p0-canvas-scene x3p0-canvas-scene--lost-moon" data-moon-x="0.4"></canvas>
-<canvas class="x3p0-canvas-scene x3p0-canvas-scene--lost-terrain"></canvas>
-<canvas class="x3p0-canvas-scene x3p0-canvas-scene--lost-motes" data-origin-x-min="0.24" data-origin-x-max="0.56"></canvas>
+<canvas class="<?= esc_attr(Canvas::SceneLostMoon->classes()) ?>" data-moon-x="0.4"></canvas>
+<canvas class="<?= esc_attr(Canvas::SceneLostTerrain->classes()) ?>"></canvas>
+<canvas class="<?= esc_attr(Canvas::SceneLostMotes->classes()) ?>" data-origin-x-min="0.24" data-origin-x-max="0.56"></canvas>
 <!-- /wp:html -->

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Audio;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
+use X3P0\ABoyInTheWild\Support\CompiledAsset;
 
 /**
  * Manages audio script and style assets.
@@ -48,13 +49,13 @@ final class AudioAssets implements Bootable
 	 */
 	private function register(): void
 	{
-		$script = include get_parent_theme_file_path('public/js/interactive/audio.asset.php');
+		$script = new CompiledAsset('public/js/interactive/audio.js');
 
 		wp_register_script_module(
 			self::AUDIO_MODULE_ID,
-			get_parent_theme_file_uri('public/js/interactive/audio.js'),
-			$script['dependencies'],
-			$script['version']
+			$script->fileUrl(),
+			$script->dependencies(),
+			$script->version()
 		);
 	}
 }

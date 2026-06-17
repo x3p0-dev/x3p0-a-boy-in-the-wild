@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Block\Stylesheet;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
+use X3P0\ABoyInTheWild\Support\CompiledAsset;
 
 /**
  * Handles registering and enqueueing block stylesheets.
@@ -52,9 +53,9 @@ final class StylesheetLoader implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		foreach ($this->discovery as $stylesheet) {
-			if ($stylesheet->hasAssetFile()) {
-				$this->enqueueStylesheet($stylesheet);
+		foreach ($this->discovery as $asset) {
+			if ($asset->hasAssetFile()) {
+				$this->enqueueStylesheet($asset);
 			}
 		}
 	}
@@ -63,22 +64,21 @@ final class StylesheetLoader implements Bootable
 	 * Enqueues an individual block stylesheet with WordPress.
 	 *
 	 * Registers the stylesheet using WordPress's block style API, which
-	 * handles conditional loading. The style handle is generated from the
-	 * block's namespace and slug, and dependencies/version are read from
-	 * the stylesheet's asset file.
+	 * handles conditional loading. The block name and style handle are
+	 * derived from the file's parent directory (namespace) and filename
+	 * (slug); dependencies and version come from its asset file.
 	 */
-	private function enqueueStylesheet(Stylesheet $stylesheet): void
+	private function enqueueStylesheet(CompiledAsset $asset): void
 	{
-		$namespace = $stylesheet->getNamespace();
-		$slug      = $stylesheet->getSlug();
-		$asset     = $stylesheet->getAssetData();
+		$namespace = $asset->getPathInfo()->getBasename();
+		$slug      = $asset->getBasename('.css');
 
-		wp_enqueue_block_style($stylesheet->getBlockName(), [
+		wp_enqueue_block_style("{$namespace}/{$slug}", [
 			'handle' => self::HANDLE_PREFIX . "-{$namespace}-{$slug}",
-			'src'    => $stylesheet->getFileUrl(),
-			'path'   => $stylesheet->getFilePath(),
-			'deps'   => $asset['dependencies'],
-			'ver'    => $asset['version']
+			'src'    => $asset->fileUrl(),
+			'path'   => $asset->filePath(),
+			'deps'   => $asset->dependencies(),
+			'ver'    => $asset->version()
 		]);
 	}
 }

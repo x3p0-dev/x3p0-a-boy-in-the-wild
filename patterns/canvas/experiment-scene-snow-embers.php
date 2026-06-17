@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use X3P0\ABoyInTheWild\Block\Canvas\Canvas;
+
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
@@ -17,5 +19,5 @@ defined('ABSPATH') || exit;
 
 <!-- wp:html -->
 <!-- Animation canvas. Do not alter unless you know what you're doing! -->
-<canvas class="x3p0-canvas-scene x3p0-canvas-scene--snow-embers"></canvas>
+<canvas class="<?= esc_attr(Canvas::SceneSnowEmbers->classes()) ?>"></canvas>
 <!-- /wp:html -->

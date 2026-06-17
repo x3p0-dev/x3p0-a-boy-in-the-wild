@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Frontend;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
+use X3P0\ABoyInTheWild\Support\CompiledAsset;
 
 /**
  * Handles frontend asset loading and configuration.
@@ -44,21 +45,21 @@ final class FrontendAssets implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		$style = include get_parent_theme_file_path('public/css/screen.asset.php');
+		$style = new CompiledAsset('public/css/screen.css');
 
 		// Loads the primary stylesheet.
 		wp_enqueue_style(
 			'x3p0-a-boy-in-the-wild-style',
-			get_parent_theme_file_uri('public/css/screen.css'),
-			$style['dependencies'],
-			$style['version']
+			$style->fileUrl(),
+			$style->dependencies(),
+			$style->version()
 		);
 
 		// Add path data so the stylesheet can potentially be inlined.
 		wp_style_add_data(
 			'x3p0-a-boy-in-the-wild-style',
 			'path',
-			get_parent_theme_file_path('public/css/screen.css')
+			$style->filePath()
 		);
 	}
 
