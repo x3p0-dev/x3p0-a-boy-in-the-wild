@@ -83,8 +83,8 @@ final class CanvasScriptModuleLoader implements Bootable
 		$processor = new WP_HTML_Tag_Processor($content);
 
 		while ($processor->next_tag('canvas')) {
-			foreach ($this->matchedModules($processor) as $module) {
-				$this->enqueueModule($module);
+			foreach ($this->matchedModules($processor) as $canvas) {
+				$this->enqueueModule($canvas);
 			}
 		}
 
