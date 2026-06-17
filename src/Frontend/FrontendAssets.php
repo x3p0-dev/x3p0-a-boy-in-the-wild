@@ -29,11 +29,26 @@ final class FrontendAssets implements Bootable
 	protected const INLINE_CSS_LIMIT = 50000;
 
 	/**
+	 * Screen style handle.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const SCREEN_HANDLE = 'x3p0-a-boy-in-the-wild-screen';
+
+	/**
+	 * Screen style path.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const SCREEN_PATH = 'public/css/screen.css';
+
+	/**
 	 * @inheritDoc
 	 */
 	public function boot(): void
 	{
 		add_action('wp_enqueue_scripts', $this->enqueue(...));
+		add_action('after_setup_theme', $this->addEditorStyles(...));
 		add_filter('styles_inline_size_limit', $this->inlineStylesLimit(...));
 
 		// Disable the emoji script.
@@ -45,22 +60,29 @@ final class FrontendAssets implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		$style = new CompiledAsset('public/css/screen.css');
+		$style = new CompiledAsset(self::SCREEN_PATH);
 
 		// Loads the primary stylesheet.
 		wp_enqueue_style(
-			'x3p0-a-boy-in-the-wild-style',
+			self::SCREEN_HANDLE,
 			$style->fileUrl(),
 			$style->dependencies(),
 			$style->version()
 		);
 
 		// Add path data so the stylesheet can potentially be inlined.
-		wp_style_add_data(
-			'x3p0-a-boy-in-the-wild-style',
-			'path',
-			$style->filePath()
-		);
+		wp_style_add_data(self::SCREEN_HANDLE, 'path', $style->filePath());
+	}
+
+	/**
+	 * Adds the front-end stylesheet to the editor canvas so blocks render
+	 * with the same styles (WYSIWYG) while editing.
+	 */
+	private function addEditorStyles(): void
+	{
+		$style = new CompiledAsset(self::SCREEN_PATH);
+
+		add_editor_style([$style->fileUrl()]);
 	}
 
 	/**

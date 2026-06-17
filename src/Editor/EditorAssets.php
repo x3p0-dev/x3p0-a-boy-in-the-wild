@@ -23,22 +23,47 @@ use X3P0\ABoyInTheWild\Support\CompiledAsset;
 final class EditorAssets implements Bootable
 {
 	/**
+	 * Editor script handle.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const SCRIPT_HANDLE = 'x3p0-a-boy-in-the-wild-editor';
+
+	/**
+	 * Editor script path.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const SCRIPT_PATH = 'public/js/editor.js';
+
+	/**
+	 * Global JS object that server-side data is assigned to for editor
+	 * scripts to read.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const SCRIPT_GLOBAL = 'x3p0ABoyInTheWild';
+
+	/**
+	 * Editor style handle.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const STYLE_HANDLE = 'x3p0-a-boy-in-the-wild-editor';
+
+	/**
+	 * Editor style path.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const STYLE_PATH = 'public/css/editor.css';
+
+	/**
 	 * @inheritDoc
 	 */
 	public function boot(): void
 	{
-		add_action('after_setup_theme', $this->addEditorStyles(...));
 		add_action('enqueue_block_editor_assets', $this->enqueue(...));
-	}
-
-	/**
-	 * Add editor stylesheets.
-	 */
-	private function addEditorStyles(): void
-	{
-		add_editor_style([
-			get_parent_theme_file_uri('public/css/screen.css')
-		]);
 	}
 
 	/**
@@ -46,11 +71,11 @@ final class EditorAssets implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		$script = new CompiledAsset('public/js/editor.js');
-		$style  = new CompiledAsset('public/css/editor.css');
+		$script = new CompiledAsset(self::SCRIPT_PATH);
+		$style  = new CompiledAsset(self::STYLE_PATH);
 
 		wp_enqueue_script(
-			'x3p0-a-boy-in-the-wild-editor',
+			self::SCRIPT_HANDLE,
 			$script->fileUrl(),
 			$script->dependencies(),
 			$script->version(),
@@ -59,22 +84,23 @@ final class EditorAssets implements Bootable
 
 		// Set translations for editor scripts.
 		// @link https://developer.wordpress.org/reference/functions/wp_set_script_translations/
-		wp_set_script_translations('x3p0-a-boy-in-the-wild-editor', 'x3p0-a-boy-in-the-wild');
+		wp_set_script_translations(self::SCRIPT_HANDLE, 'x3p0-a-boy-in-the-wild');
 
 		// Hand the chapter field list to the `x3p0/chapter` binding
 		// source so its editor field picker is generated from the
 		// ChapterField enum.
 		wp_add_inline_script(
-			'x3p0-a-boy-in-the-wild-editor',
+			self::SCRIPT_HANDLE,
 			sprintf(
-				'window.x3p0ABoyInTheWild = Object.assign(window.x3p0aBoyInTheWild || {}, %s);',
+				'window.%1$s = Object.assign(window.%1$s || {}, %2$s);',
+				self::SCRIPT_GLOBAL,
 				wp_json_encode(['chapterFields' => ChapterField::options()])
 			),
 			'before'
 		);
 
 		wp_enqueue_style(
-			'x3p0-a-boy-in-the-wild-editor',
+			self::STYLE_HANDLE,
 			$style->fileUrl(),
 			$style->dependencies(),
 			$style->version()
