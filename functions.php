@@ -22,5 +22,8 @@ if (! class_exists(Theme::class) && is_file(__DIR__ . '/vendor/autoload.php')) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
-# Initialize the theme5 and boot registered services.
-add_action('after_setup_theme', fn() => theme()->boot(), -999);
+# Initialize the theme and boot registered services.
+add_action('after_setup_theme', function (): void {
+	do_action('x3p0/a-boy-in-the-wild/register', theme());
+	theme()->boot();
+}, -999);
