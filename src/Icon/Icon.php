@@ -45,13 +45,13 @@ enum Icon: string
 	{
 		return match ($this) {
 			self::BirdHorizon => __('Bird Horizon', 'x3p0-a-boy-in-the-wild'),
-			self::Compass      => __('Compass',      'x3p0-a-boy-in-the-wild'),
-			self::Crosshair    => __('Crosshair',    'x3p0-a-boy-in-the-wild'),
-			self::Draw         => __('Draw',         'x3p0-a-boy-in-the-wild'),
-			self::Forest       => __('Forest',       'x3p0-a-boy-in-the-wild'),
-			self::Route        => __('Route',        'x3p0-a-boy-in-the-wild'),
+			self::Compass     => __('Compass',      'x3p0-a-boy-in-the-wild'),
+			self::Crosshair   => __('Crosshair',    'x3p0-a-boy-in-the-wild'),
+			self::Draw        => __('Draw',         'x3p0-a-boy-in-the-wild'),
+			self::Forest      => __('Forest',       'x3p0-a-boy-in-the-wild'),
+			self::Route       => __('Route',        'x3p0-a-boy-in-the-wild'),
 			self::SealedKey   => __('Sealed Key',   'x3p0-a-boy-in-the-wild'),
-			self::Sundial      => __('Sundial',      'x3p0-a-boy-in-the-wild'),
+			self::Sundial     => __('Sundial',      'x3p0-a-boy-in-the-wild'),
 			self::SunPath     => __('Sun Path',     'x3p0-a-boy-in-the-wild')
 		};
 	}
