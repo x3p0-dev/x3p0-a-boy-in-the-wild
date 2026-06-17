@@ -119,6 +119,7 @@ final class CanvasScriptModuleLoader implements Bootable
 	{
 		$prefix = self::CSS_PREFIX . '-';
 
+		/* @var string $class */
 		foreach ($processor->class_list() as $class) {
 			if (! str_starts_with($class, $prefix)) {
 				continue;

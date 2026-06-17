@@ -22,13 +22,6 @@ use X3P0\ABoyInTheWild\Framework\Core\Application;
 final class Theme extends Application
 {
 	/**
-	 * Defines the theme's namespace, which is used as a hook prefix.
-	 *
-	 * @todo Type hint with PHP 8.3+ requirement.
-	 */
-	protected const NAMESPACE = 'x3p0/a-boy-in-the-wild';
-
-	/**
 	 * Defines the theme's default service providers.
 	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
