@@ -15,10 +15,19 @@ namespace X3P0\ABoyInTheWild\Block\Render;
 
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
+/**
+ * Boots the render filters that hook the per-block `render_block_{type}` filter.
+ */
 final class RenderServiceProvider extends ServiceProvider
 {
 	protected const BOOTABLE = [
-		Filters\Button::class,
-		Filters\PostExcerpt::class
+		RenderFilterSubscriber::class
+	];
+
+	protected const TAGS = [
+		'block.render.filters' => [
+			Filters\Button::class,
+			Filters\PostExcerpt::class
+		]
 	];
 }

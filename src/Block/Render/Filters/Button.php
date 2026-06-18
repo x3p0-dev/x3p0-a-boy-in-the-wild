@@ -17,15 +17,15 @@ use WP_Block;
 use WP_HTML_Tag_Processor;
 use X3P0\ABoyInTheWild\Audio\AudioInteractivity;
 use X3P0\ABoyInTheWild\Audio\AudioFacade;
+use X3P0\ABoyInTheWild\Block\ForBlock;
 use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
 
 /**
  * Filters rendered output for the `core/button` block.
  */
+#[ForBlock('core/button')]
 final class Button extends RenderFilter
 {
-	protected const BLOCK_TYPE = 'core/button';
-
 	private const AUDIO_CLASS = 'toggle-audio';
 
 	private const COLOR_SCHEME_CLASS = 'toggle-color-scheme';
@@ -41,7 +41,7 @@ final class Button extends RenderFilter
 	 * Filters the Button block on render and runs any class methods based
 	 * on various attributes that may be set.
 	 */
-	protected function render(string $content, array $block, WP_Block $instance): string
+	public function render(string $content, array $block, WP_Block $instance): string
 	{
 		$className = $block['attrs']['className'] ?? '';
 		$contains = fn($subClass) => str_contains($className, $subClass);

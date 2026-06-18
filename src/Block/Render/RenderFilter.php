@@ -13,39 +13,18 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Render;
 
-use LogicException;
 use WP_Block;
-use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
- * Abstract base class for block integrations that render blocks.
+ * The render filter contract defines how block render filters are implemented
+ * within the theme. Each filter declares the block it targets via the
+ * `#[ForBlock]` attribute; the subscriber reads that attribute and hooks the
+ * `render()` method onto the `render_block_{type}` filter.
  */
-abstract class RenderFilter implements Bootable
+abstract class RenderFilter
 {
-	/**
-	 * The type of block being filtered. This is used to register the filter
-	 * on the `render_block_{BLOCK_TYPE}` hook.
-	 */
-	protected const BLOCK_TYPE = '';
-
-	/**
-	 * @inheritDoc
-	 */
-	public function boot(): void
-	{
-		if (static::BLOCK_TYPE === '') {
-			throw new LogicException(sprintf(
-				// Translators: %s is a PHP classname.
-				__('%s must define the BLOCK_TYPE constant', 'x3p0-a-boy-in-the-wild'),
-				static::class
-			));
-		}
-
-		add_filter('render_block_' . static::BLOCK_TYPE, $this->render(...), 999999, 3);
-	}
-
 	/**
 	 * Filter on the block's rendering process.
 	 */
-	abstract protected function render(string $content, array $block, WP_Block $instance): string;
+	abstract public function render(string $content, array $block, WP_Block $instance): string;
 }

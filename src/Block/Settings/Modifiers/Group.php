@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Settings\Modifiers;
 
+use X3P0\ABoyInTheWild\Block\ForBlock;
 use X3P0\ABoyInTheWild\Block\Settings\SettingsModifier;
 
+#[ForBlock('core/group')]
 final class Group extends SettingsModifier
 {
-	/**
-	 * The block type this modifier targets.
-	 */
-	protected const BLOCK_TYPE = 'core/group';
-
 	/**
 	 * {@inheritDoc}
 	 *

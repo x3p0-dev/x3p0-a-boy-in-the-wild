@@ -15,6 +15,7 @@ namespace X3P0\ABoyInTheWild\Block\Render\Filters;
 
 use WP_Block;
 use WP_HTML_Tag_Processor;
+use X3P0\ABoyInTheWild\Block\ForBlock;
 use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
 
 /**
@@ -23,14 +24,13 @@ use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
  * When a post is password-protected, WordPress omits the excerpt from the
  * rendered block. This restores it when a manual excerpt has been set.
  */
+#[ForBlock('core/post-excerpt')]
 final class PostExcerpt extends RenderFilter
 {
-	protected const BLOCK_TYPE = 'core/post-excerpt';
-
 	/**
 	 * @inheritDoc
 	 */
-	protected function render(string $content, array $block, WP_Block $instance): string
+	public function render(string $content, array $block, WP_Block $instance): string
 	{
 		$post_id = $instance->context['postId'] ?? null;
 
