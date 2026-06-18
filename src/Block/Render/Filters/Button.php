@@ -15,7 +15,6 @@ namespace X3P0\ABoyInTheWild\Block\Render\Filters;
 
 use WP_Block;
 use WP_HTML_Tag_Processor;
-use X3P0\ABoyInTheWild\Audio\AudioInteractivity;
 use X3P0\ABoyInTheWild\Audio\AudioFacade;
 use X3P0\ABoyInTheWild\Block\ForBlock;
 use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
