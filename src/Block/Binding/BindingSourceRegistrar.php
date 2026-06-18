@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
+use LogicException;
 use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tag;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
@@ -45,7 +46,15 @@ final class BindingSourceRegistrar implements Bootable
 	public function register(): void
 	{
 		foreach ($this->sources as $source) {
-			register_block_bindings_source($source->getName(), [
+			if ($source::NAME === '') {
+				throw new LogicException(sprintf(
+					// Translators: %s is a PHP classname.
+					__('%s must define the NAME constant', 'x3p0-a-boy-in-the-wild'),
+					$source::class
+				));
+			}
+
+			register_block_bindings_source($source::NAME, [
 				'label'              => $source->getLabel(),
 				'get_value_callback' => $source->callback(...),
 				'uses_context'       => $source->usesContext()

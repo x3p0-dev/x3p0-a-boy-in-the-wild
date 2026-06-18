@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
-use LogicException;
 use WP_Block;
 
 /**
@@ -37,22 +36,6 @@ abstract class BindingSource
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	protected const USES_CONTEXT = [];
-
-	/**
-	 * Returns the binding source name (e.g., 'x3p0/chapter').
-	 */
-	public function getName(): string
-	{
-		if (static::NAME === '') {
-			throw new LogicException(sprintf(
-				// Translators: %s is a PHP classname.
-				__('%s must define the NAME constant', 'x3p0-a-boy-in-the-wild'),
-				static::class
-			));
-		}
-
-		return static::NAME;
-	}
 
 	/**
 	 * Returns the human-readable label for the binding source.
