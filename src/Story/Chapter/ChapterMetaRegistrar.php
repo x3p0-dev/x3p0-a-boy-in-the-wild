@@ -38,6 +38,8 @@ final class ChapterMetaRegistrar implements Bootable
 	public function register(): void
 	{
 		register_post_meta('post', self::TYPE, [
+			'label'             => __('Chapter Type', 'x3p0-a-boy-in-the-wild'),
+			'description'       => __('The type of chapter being written.', 'x3p0-a-boy-in-the-wild'),
 			'type'              => 'string',
 			'single'            => true,
 			'default'           => ChapterType::Chapter->value,
@@ -47,6 +49,8 @@ final class ChapterMetaRegistrar implements Bootable
 		]);
 
 		register_post_meta('post', self::NUMBER, [
+			'label'             => __('Chapter Number', 'x3p0-a-boy-in-the-wild'),
+			'description'       => __('The sequential chapter number.', 'x3p0-a-boy-in-the-wild'),
 			'type'              => 'integer',
 			'single'            => true,
 			'show_in_rest'      => true,
