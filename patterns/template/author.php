@@ -11,6 +11,8 @@ declare(strict_types=1);
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
+use X3P0\ABoyInTheWild\Block\Binding\Sources\Query;
+use X3P0\ABoyInTheWild\Block\Binding\Sources\Story;
 use X3P0\ABoyInTheWild\Icon\Icon;
 use X3P0\ABoyInTheWild\Media\Image;
 ?>
@@ -137,7 +139,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 					} -->
 					<div class="wp-block-group is-style-container-meta">
 
-						<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"x3p0/query","args":{"field":"count"}}}},"className":"is-style-text-kicker"} -->
+						<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"<?= esc_attr(Query::NAME) ?>","args":{"field":"count"}}}},"className":"is-style-text-kicker"} -->
 						<p class="is-style-text-kicker"><?= esc_html__('0 Chapters', 'x3p0-a-boy-in-the-wild') ?></p>
 						<!-- /wp:paragraph -->
 
@@ -165,7 +167,7 @@ use X3P0\ABoyInTheWild\Media\Image;
 				<!-- wp:buttons {"metadata":{"name":"<?= esc_attr__('The Beginning', 'x3p0-a-boy-in-the-wild') ?>"}} -->
 				<div class="wp-block-buttons">
 
-					<!-- wp:button {"metadata":{"bindings":{"url":{"source":"x3p0/story","args":{"field":"firstChapterUrl"}},"text":{"source":"x3p0/story","args":{"field":"firstChapterLabel"}}}},"className":"is-style-button-link"} -->
+					<!-- wp:button {"metadata":{"bindings":{"url":{"source":"<?= esc_attr(Story::NAME) ?>","args":{"field":"firstChapterUrl"}},"text":{"source":"<?= esc_attr(Story::NAME) ?>","args":{"field":"firstChapterLabel"}}}},"className":"is-style-button-link"} -->
 					<div class="wp-block-button is-style-button-link"><a class="wp-block-button__link wp-element-button" href="/"><?= esc_html__('Begin at the beginning →', 'x3p0-a-boy-in-the-wild') ?></a></div>
 					<!-- /wp:button -->
 
