@@ -24,7 +24,7 @@ use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
  * Filters rendered output for the `core/button` block.
  */
 #[ForBlock('core/button')]
-final class Button extends RenderFilter
+final class Button implements RenderFilter
 {
 	private const AUDIO_CLASS = 'toggle-audio';
 

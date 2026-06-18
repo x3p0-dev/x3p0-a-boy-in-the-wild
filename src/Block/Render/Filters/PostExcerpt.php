@@ -25,7 +25,7 @@ use X3P0\ABoyInTheWild\Block\Render\RenderFilter;
  * rendered block. This restores it when a manual excerpt has been set.
  */
 #[ForBlock('core/post-excerpt')]
-final class PostExcerpt extends RenderFilter
+final class PostExcerpt implements RenderFilter
 {
 	/**
 	 * @inheritDoc

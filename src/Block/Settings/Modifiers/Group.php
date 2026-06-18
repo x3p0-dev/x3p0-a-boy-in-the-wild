@@ -17,7 +17,7 @@ use X3P0\ABoyInTheWild\Block\ForBlock;
 use X3P0\ABoyInTheWild\Block\Settings\SettingsModifier;
 
 #[ForBlock('core/group')]
-final class Group extends SettingsModifier
+final class Group implements SettingsModifier
 {
 	/**
 	 * {@inheritDoc}

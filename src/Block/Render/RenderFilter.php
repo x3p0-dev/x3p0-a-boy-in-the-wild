@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Abstract render filter.
+ * Render filter interface.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -21,10 +21,10 @@ use WP_Block;
  * `#[ForBlock]` attribute; the subscriber reads that attribute and hooks the
  * `render()` method onto the `render_block_{type}` filter.
  */
-abstract class RenderFilter
+interface RenderFilter
 {
 	/**
 	 * Filter on the block's rendering process.
 	 */
-	abstract public function render(string $content, array $block, WP_Block $instance): string;
+	public function render(string $content, array $block, WP_Block $instance): string;
 }

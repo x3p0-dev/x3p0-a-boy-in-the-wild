@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Settings modifier base class.
+ * Settings modifier interface.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2026, Justin Tadlock
@@ -19,10 +19,10 @@ namespace X3P0\ABoyInTheWild\Block\Settings;
  * the `#[ForBlock]` attribute; the dispatcher reads that attribute and routes
  * the `block_type_metadata_settings` filter to the right modifier.
  */
-abstract class SettingsModifier
+interface SettingsModifier
 {
 	/**
 	 * Modifies the block settings.
 	 */
-	abstract public function modify(array $settings): array;
+	public function modify(array $settings): array;
 }
