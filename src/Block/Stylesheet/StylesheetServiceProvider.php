@@ -35,5 +35,7 @@ final class StylesheetServiceProvider extends ServiceProvider
 			StylesheetIterator::class,
 			fn() => new StylesheetIterator(self::STYLESHEETS_PATH)
 		);
+
+		parent::register();
 	}
 }

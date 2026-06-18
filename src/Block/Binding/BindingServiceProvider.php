@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
-use X3P0\ABoyInTheWild\Framework\Container\Container;
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
 
 /**

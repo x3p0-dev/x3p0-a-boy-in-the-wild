@@ -35,16 +35,16 @@ final class Category implements Bootable
 	public function taxonomyArgs(array $args, string $taxonomy): array
 	{
 		$args['labels'] = array_merge($args['labels'] ?? [], [
-			'name'          => __('Eras', 'x3p0-a-boy-in-the-wild'),
-			'singular_name' => __('Era', 'x3p0-a-boy-in-the-wild'),
-			'menu_name'     => __('Eras', 'x3p0-a-boy-in-the-wild'),
-			'add_new_item'  => __('Add New Era', 'x3p0-a-boy-in-the-wild'),
-			'edit_item'     => __('Edit Era', 'x3p0-a-boy-in-the-wild'),
-			'update_item'   => __('Update Era', 'x3p0-a-boy-in-the-wild'),
-			'search_items'  => __('Search Eras', 'x3p0-a-boy-in-the-wild'),
-			'all_items'     => __('All Eras', 'x3p0-a-boy-in-the-wild'),
+			'name'          => __('Eras',           'x3p0-a-boy-in-the-wild'),
+			'singular_name' => __('Era',            'x3p0-a-boy-in-the-wild'),
+			'menu_name'     => __('Eras',           'x3p0-a-boy-in-the-wild'),
+			'add_new_item'  => __('Add New Era',    'x3p0-a-boy-in-the-wild'),
+			'edit_item'     => __('Edit Era',       'x3p0-a-boy-in-the-wild'),
+			'update_item'   => __('Update Era',     'x3p0-a-boy-in-the-wild'),
+			'search_items'  => __('Search Eras',    'x3p0-a-boy-in-the-wild'),
+			'all_items'     => __('All Eras',       'x3p0-a-boy-in-the-wild'),
 			'not_found'     => __('No eras found.', 'x3p0-a-boy-in-the-wild'),
-			'no_terms'      => __('No eras', 'x3p0-a-boy-in-the-wild'),
+			'no_terms'      => __('No eras',        'x3p0-a-boy-in-the-wild')
 		]);
 
 		return $args;

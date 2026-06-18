@@ -29,6 +29,13 @@ final class AudioAssets implements Bootable
 	public const AUDIO_MODULE_ID = 'x3p0-a-boy-in-the-wild/audio';
 
 	/**
+	 * Audio script module path.
+	 *
+	 * @todo Type hint with PHP 8.3+ requirement.
+	 */
+	private const AUDIO_MODULE_PATH = 'public/js/interactive/audio.js';
+
+	/**
 	 * @inheritDoc
 	 */
 	public function boot(): void
@@ -49,13 +56,13 @@ final class AudioAssets implements Bootable
 	 */
 	private function register(): void
 	{
-		$script = new CompiledAsset('public/js/interactive/audio.js');
+		$module = new CompiledAsset(self::AUDIO_MODULE_PATH);
 
 		wp_register_script_module(
 			self::AUDIO_MODULE_ID,
-			$script->fileUrl(),
-			$script->dependencies(),
-			$script->version()
+			$module->fileUrl(),
+			$module->dependencies(),
+			$module->version()
 		);
 	}
 }

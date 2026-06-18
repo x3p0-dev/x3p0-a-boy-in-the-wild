@@ -33,7 +33,7 @@ final class StylesheetLoader implements Bootable
 	/**
 	 * Sets up the stylesheet loader.
 	 */
-	public function __construct(private readonly StylesheetIterator $discovery)
+	public function __construct(private readonly StylesheetIterator $stylesheets)
 	{}
 
 	/**
@@ -53,7 +53,7 @@ final class StylesheetLoader implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		foreach ($this->discovery as $stylesheet) {
+		foreach ($this->stylesheets as $stylesheet) {
 			if ($stylesheet->hasAssetFile()) {
 				$this->enqueueStylesheet($stylesheet);
 			}

@@ -35,16 +35,16 @@ final class PostTag implements Bootable
 	public function taxonomyArgs(array $args, string $taxonomy): array
 	{
 		$args['labels'] = array_merge($args['labels'] ?? [], [
-			'name'          => __('Arcs', 'x3p0-a-boy-in-the-wild'),
-			'singular_name' => __('Arc', 'x3p0-a-boy-in-the-wild'),
-			'menu_name'     => __('Arcs', 'x3p0-a-boy-in-the-wild'),
-			'add_new_item'  => __('Add New Arc', 'x3p0-a-boy-in-the-wild'),
-			'edit_item'     => __('Edit Arc', 'x3p0-a-boy-in-the-wild'),
-			'update_item'   => __('Update Arc', 'x3p0-a-boy-in-the-wild'),
-			'search_items'  => __('Search Arcs', 'x3p0-a-boy-in-the-wild'),
-			'all_items'     => __('All Arcs', 'x3p0-a-boy-in-the-wild'),
+			'name'          => __('Arcs',           'x3p0-a-boy-in-the-wild'),
+			'singular_name' => __('Arc',            'x3p0-a-boy-in-the-wild'),
+			'menu_name'     => __('Arcs',           'x3p0-a-boy-in-the-wild'),
+			'add_new_item'  => __('Add New Arc',    'x3p0-a-boy-in-the-wild'),
+			'edit_item'     => __('Edit Arc',       'x3p0-a-boy-in-the-wild'),
+			'update_item'   => __('Update Arc',     'x3p0-a-boy-in-the-wild'),
+			'search_items'  => __('Search Arcs',    'x3p0-a-boy-in-the-wild'),
+			'all_items'     => __('All Arcs',       'x3p0-a-boy-in-the-wild'),
 			'not_found'     => __('No arcs found.', 'x3p0-a-boy-in-the-wild'),
-			'no_terms'      => __('No arcs', 'x3p0-a-boy-in-the-wild'),
+			'no_terms'      => __('No arcs',        'x3p0-a-boy-in-the-wild')
 		]);
 
 		return $args;

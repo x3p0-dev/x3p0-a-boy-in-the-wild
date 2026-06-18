@@ -21,7 +21,6 @@ use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
  */
 final class PostStatus implements Bootable
 {
-
 	private const DRAFT = 'draft';
 	private const PUBLISH = 'publish';
 	private const PRIVATE = 'private';
