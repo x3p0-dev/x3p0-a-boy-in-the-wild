@@ -15,7 +15,7 @@ namespace X3P0\ABoyInTheWild\Block\Render;
 
 use ReflectionException;
 use X3P0\ABoyInTheWild\Block\ForBlock;
-use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tag;
+use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tagged;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
@@ -29,7 +29,7 @@ final class RenderFilterSubscriber implements Bootable
 	 * @param array<int, RenderFilter> $filters The render filters to subscribe.
 	 */
 	public function __construct(
-		#[Tag('block.render.filters')]
+		#[Tagged('block.render.filters')]
 		private readonly array $filters
 	) {}
 

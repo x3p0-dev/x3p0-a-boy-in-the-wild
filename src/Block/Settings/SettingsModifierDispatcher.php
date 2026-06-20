@@ -15,7 +15,7 @@ namespace X3P0\ABoyInTheWild\Block\Settings;
 
 use ReflectionException;
 use X3P0\ABoyInTheWild\Block\ForBlock;
-use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tag;
+use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tagged;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
 /**
@@ -37,7 +37,7 @@ final class SettingsModifierDispatcher implements Bootable
 	 * @param array<int, SettingsModifier> $modifiers The settings modifiers.
 	 */
 	public function __construct(
-		#[Tag('block.settings.modifiers')]
+		#[Tagged('block.settings.modifiers')]
 		private readonly array $modifiers
 	) {}
 
