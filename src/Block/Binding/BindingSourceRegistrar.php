@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Binding;
 
-use LogicException;
 use X3P0\ABoyInTheWild\Framework\Container\Attributes\Tagged;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 
@@ -47,7 +46,7 @@ final class BindingSourceRegistrar implements Bootable
 	{
 		foreach ($this->sources as $source) {
 			if ($source::NAME === '') {
-				throw new LogicException(sprintf(
+				throw new UndefinedBindingNameException(sprintf(
 					// Translators: %s is a PHP classname.
 					__('%s must define the NAME constant', 'x3p0-a-boy-in-the-wild'),
 					$source::class

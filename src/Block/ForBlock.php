@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Block;
 
 use Attribute;
-use LogicException;
 use ReflectionClass;
 use ReflectionException;
 
@@ -48,7 +47,7 @@ final class ForBlock
 		$attributes = (new ReflectionClass($handler))->getAttributes(self::class);
 
 		if (! $attributes) {
-			throw new LogicException(sprintf(
+			throw new UndefinedBlockTargetException(sprintf(
 				// Translators: 1: PHP classname, 2: PHP attribute name.
 				__('%1$s must declare the %2$s attribute', 'x3p0-a-boy-in-the-wild'),
 				is_object($handler) ? $handler::class : $handler,
