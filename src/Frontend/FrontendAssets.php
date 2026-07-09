@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Frontend;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
+use X3P0\ABoyInTheWild\Asset\AssetResolver;
 
 /**
  * Handles frontend asset loading and configuration.
@@ -42,6 +42,9 @@ final class FrontendAssets implements Bootable
 	 */
 	private const SCREEN_PATH = 'public/css/screen.css';
 
+	public function __construct(private readonly AssetResolver $assetResolver)
+	{}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -60,7 +63,7 @@ final class FrontendAssets implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		$style = new CompiledAsset(self::SCREEN_PATH);
+		$style = $this->assetResolver->asset(self::SCREEN_PATH);
 
 		// Loads the primary stylesheet.
 		wp_enqueue_style(
@@ -80,7 +83,7 @@ final class FrontendAssets implements Bootable
 	 */
 	private function addEditorStyles(): void
 	{
-		$style = new CompiledAsset(self::SCREEN_PATH);
+		$style = $this->assetResolver->asset(self::SCREEN_PATH);
 
 		add_editor_style([$style->fileUrl()]);
 	}

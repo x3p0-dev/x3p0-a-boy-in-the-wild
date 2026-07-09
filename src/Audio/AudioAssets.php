@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Audio;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
+use X3P0\ABoyInTheWild\Asset\AssetResolver;
 
 /**
  * Manages audio script and style assets.
@@ -34,6 +34,9 @@ final class AudioAssets implements Bootable
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	private const AUDIO_MODULE_PATH = 'public/js/interactive/audio.js';
+
+	public function __construct(private readonly AssetResolver $assetResolver)
+	{}
 
 	/**
 	 * @inheritDoc
@@ -56,7 +59,7 @@ final class AudioAssets implements Bootable
 	 */
 	private function register(): void
 	{
-		$module = new CompiledAsset(self::AUDIO_MODULE_PATH);
+		$module = $this->assetResolver->asset(self::AUDIO_MODULE_PATH);
 
 		wp_register_script_module(
 			self::AUDIO_MODULE_ID,

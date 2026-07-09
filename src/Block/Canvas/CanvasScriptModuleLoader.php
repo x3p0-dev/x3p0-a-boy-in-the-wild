@@ -15,7 +15,7 @@ namespace X3P0\ABoyInTheWild\Block\Canvas;
 
 use WP_HTML_Tag_Processor;
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
+use X3P0\ABoyInTheWild\Asset\AssetResolver;
 
 /**
  * Enqueues canvas script modules when a matching trigger class is found on a
@@ -33,6 +33,9 @@ final class CanvasScriptModuleLoader implements Bootable
 	private const SHARED_MODULES = [
 		'x3p0/canvas-utils' => 'public/js/canvas/utils.js'
 	];
+
+	public function __construct(private readonly AssetResolver $assetResolver)
+	{}
 
 	/**
 	 * @inheritDoc
@@ -53,9 +56,9 @@ final class CanvasScriptModuleLoader implements Bootable
 	private function registerSharedModules(): void
 	{
 		foreach (self::SHARED_MODULES as $handle => $path) {
-			$module = new CompiledAsset($path);
+			$module = $this->assetResolver->asset($path);
 
-			if (! $module->hasAssetFile()) {
+			if (! $module->hasDataFile()) {
 				return;
 			}
 
@@ -110,13 +113,13 @@ final class CanvasScriptModuleLoader implements Bootable
 	}
 
 	/**
-	 * Enqueues a script module if its compiled asset file exists.
+	 * Enqueues a script module if its built asset file exists.
 	 */
 	private function enqueueModule(Canvas $canvas): void
 	{
-		$module = $canvas->module();
+		$module = $this->assetResolver->asset($canvas->modulePath());
 
-		if (! $module->hasAssetFile()) {
+		if (! $module->hasDataFile()) {
 			return;
 		}
 

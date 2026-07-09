@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Block\Stylesheet;
 
 use X3P0\ABoyInTheWild\Framework\Core\ServiceProvider;
+use X3P0\ABoyInTheWild\Asset\AssetResolver;
 
 final class StylesheetServiceProvider extends ServiceProvider
 {
@@ -33,7 +34,10 @@ final class StylesheetServiceProvider extends ServiceProvider
 	{
 		$this->container->singleton(
 			StylesheetIterator::class,
-			fn() => new StylesheetIterator(self::STYLESHEETS_PATH)
+			fn($container) => new StylesheetIterator(
+				$container->get(AssetResolver::class),
+				self::STYLESHEETS_PATH
+			)
 		);
 
 		parent::register();

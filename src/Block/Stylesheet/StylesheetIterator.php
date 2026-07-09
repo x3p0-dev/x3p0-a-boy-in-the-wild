@@ -21,19 +21,20 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
+use X3P0\ABoyInTheWild\Asset\Asset;
+use X3P0\ABoyInTheWild\Asset\AssetResolver;
 
 /**
  * Discovers and iterates through block stylesheet files.
  *
  * This class provides an iterator implementation that recursively searches a
- * specified directory path for CSS files and wraps them in CompiledAsset
- * objects. It implements the Iterator interface, allowing it to be used in
- * foreach loops and other iteration contexts.
+ * specified directory path for CSS files and wraps them in Asset objects. It
+ * implements the Iterator interface, allowing it to be used in foreach loops
+ * and other iteration contexts.
  *
- * The discovery process filters for valid CSS files only and automatically
- * resolves the path relative to the parent theme directory. If the specified
- * path doesn't exist, an empty iterator is returned.
+ * The discovery process filters for valid CSS files only and resolves the path
+ * against the theme through the injected resolver. If the specified path
+ * doesn't exist, an empty iterator is returned.
  */
 final class StylesheetIterator implements Iterator
 {
@@ -43,24 +44,26 @@ final class StylesheetIterator implements Iterator
 	private readonly Iterator $iterator;
 
 	/**
-	 * The current compiled asset in the iteration.
+	 * The current asset in the iteration.
 	 */
-	private ?CompiledAsset $current = null;
+	private ?Asset $current = null;
 
 	/**
 	 * Sets up the stylesheet discovery iterator. Initializes the discovery
 	 * process for the given path by creating a recursive file iterator that
 	 * will search for CSS files.
 	 */
-	public function __construct(protected readonly string $path)
-	{
+	public function __construct(
+		private readonly AssetResolver $assetResolver,
+		protected readonly string      $path
+	) {
 		$this->iterator = $this->createIterator();
 	}
 
 	/**
-	 * Returns the current compiled asset.
+	 * Returns the current asset.
 	 */
-	public function current(): ?CompiledAsset
+	public function current(): ?Asset
 	{
 		return $this->current;
 	}
@@ -132,13 +135,13 @@ final class StylesheetIterator implements Iterator
 	}
 
 	/**
-	 * If the iterator is at a valid position, wraps the current file in a
-	 * CompiledAsset. Otherwise, sets current to null.
+	 * If the iterator is at a valid position, wraps the current file in an
+	 * Asset. Otherwise, sets current to null.
 	 */
 	private function updateCurrent(): void
 	{
 		if ($this->iterator->valid()) {
-			$this->current = CompiledAsset::fromFile($this->iterator->current());
+			$this->current = $this->assetResolver->fromFile($this->iterator->current());
 			return;
 		}
 

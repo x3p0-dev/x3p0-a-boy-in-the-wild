@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\ABoyInTheWild\Block\Stylesheet;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
+use X3P0\ABoyInTheWild\Asset\Asset;
 
 /**
  * Handles registering and enqueueing block stylesheets.
@@ -54,7 +54,7 @@ final class StylesheetLoader implements Bootable
 	private function enqueue(): void
 	{
 		foreach ($this->stylesheets as $stylesheet) {
-			if ($stylesheet->hasAssetFile()) {
+			if ($stylesheet->hasDataFile()) {
 				$this->enqueueStylesheet($stylesheet);
 			}
 		}
@@ -68,7 +68,7 @@ final class StylesheetLoader implements Bootable
 	 * derived from the file's parent directory (namespace) and filename
 	 * (slug); dependencies and version come from its asset file.
 	 */
-	private function enqueueStylesheet(CompiledAsset $stylesheet): void
+	private function enqueueStylesheet(Asset $stylesheet): void
 	{
 		$namespace = $stylesheet->getPathInfo()->getBasename();
 		$slug      = $stylesheet->getBasename('.css');

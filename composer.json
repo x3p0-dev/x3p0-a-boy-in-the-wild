@@ -27,6 +27,9 @@
 				"prefix": "X3P0\\ABoyInTheWild",
 				"output-path": "packages",
 				"packages": {
+					"x3p0-dev/x3p0-asset": {
+						"replace": "X3P0\\"
+					},
 					"x3p0-dev/x3p0-framework": {
 						"replace": "X3P0\\"
 					}
@@ -40,6 +43,7 @@
 	"autoload": {
 		"psr-4": {
 			"X3P0\\ABoyInTheWild\\": "src/",
+			"X3P0\\ABoyInTheWild\\Asset\\": "packages/x3p0-dev/x3p0-asset/src/",
 			"X3P0\\ABoyInTheWild\\Framework\\": "packages/x3p0-dev/x3p0-framework/src/"
 		},
 		"files": [
@@ -59,6 +63,7 @@
 	},
 	"require": {
 		"php": ">=8.1",
+		"x3p0-dev/x3p0-asset": "dev-master",
 		"x3p0-dev/x3p0-framework": "dev-master"
 	},
 	"require-dev": {

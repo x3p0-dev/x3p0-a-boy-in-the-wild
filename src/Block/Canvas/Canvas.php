@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\ABoyInTheWild\Block\Canvas;
 
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
-
 /**
  * Enum of canvas script modules bundled with the theme. Each case value is the
  * `{namespace}/{slug}` path fragment shared by the module's built files and its
@@ -107,11 +105,11 @@ enum Canvas: string
 	}
 
 	/**
-	 * Returns the compiled asset (built `.js` file and its `.asset.php`
-	 * sidecar) for this module.
+	 * Returns the theme-relative path to this module's built `.js` file, e.g.
+	 * `public/js/canvas/scene/motes.js`.
 	 */
-	public function module(): CompiledAsset
+	public function modulePath(): string
 	{
-		return new CompiledAsset(self::PATH . "/{$this->value}.js");
+		return self::PATH . "/{$this->value}.js";
 	}
 }

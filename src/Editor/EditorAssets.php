@@ -15,7 +15,7 @@ namespace X3P0\ABoyInTheWild\Editor;
 
 use X3P0\ABoyInTheWild\Framework\Contracts\Bootable;
 use X3P0\ABoyInTheWild\Story\Chapter\ChapterField;
-use X3P0\ABoyInTheWild\Support\CompiledAsset;
+use X3P0\ABoyInTheWild\Asset\AssetResolver;
 
 /**
  * Loads editor assets.
@@ -58,6 +58,9 @@ final class EditorAssets implements Bootable
 	 */
 	private const STYLE_PATH = 'public/css/editor.css';
 
+	public function __construct(private readonly AssetResolver $assetResolver)
+	{}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -71,8 +74,8 @@ final class EditorAssets implements Bootable
 	 */
 	private function enqueue(): void
 	{
-		$script = new CompiledAsset(self::SCRIPT_PATH);
-		$style  = new CompiledAsset(self::STYLE_PATH);
+		$script = $this->assetResolver->asset(self::SCRIPT_PATH);
+		$style  = $this->assetResolver->asset(self::STYLE_PATH);
 
 		wp_enqueue_script(
 			self::SCRIPT_HANDLE,

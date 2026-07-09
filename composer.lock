@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a26aa14d24f480936fa0b3634c4c565",
+    "content-hash": "68c9db8092d3feda04972b65defbc7c3",
     "packages": [
         {
-            "name": "x3p0-dev/x3p0-framework",
+            "name": "x3p0-dev/x3p0-asset",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/x3p0-dev/x3p0-framework.git",
-                "reference": "cc933d3832b98fee6d402d6f9e7b68e83644c6d9"
+                "url": "https://github.com/x3p0-dev/x3p0-asset.git",
+                "reference": "618150e7f22ce07b40c903680927cc62b2a2d6e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x3p0-dev/x3p0-framework/zipball/cc933d3832b98fee6d402d6f9e7b68e83644c6d9",
-                "reference": "cc933d3832b98fee6d402d6f9e7b68e83644c6d9",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-asset/zipball/618150e7f22ce07b40c903680927cc62b2a2d6e9",
+                "reference": "618150e7f22ce07b40c903680927cc62b2a2d6e9",
                 "shasum": ""
             },
             "require": {
@@ -26,6 +26,61 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
                 "phpcompatibility/phpcompatibility-wp": "*",
+                "wp-coding-standards/wpcs": "^3.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "X3P0\\Asset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Tadlock",
+                    "email": "justintadlock@gmail.com",
+                    "homepage": "https://github.com/justintadlock"
+                }
+            ],
+            "description": "A small, modern asset-resolution library for WordPress plugins and themes.",
+            "keywords": [
+                "assets",
+                "enqueue",
+                "plugin",
+                "theme",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/x3p0-dev/x3p0-asset/issues",
+                "source": "https://github.com/x3p0-dev/x3p0-asset"
+            },
+            "time": "2026-07-09T18:22:31+00:00"
+        },
+        {
+            "name": "x3p0-dev/x3p0-framework",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/x3p0-dev/x3p0-framework.git",
+                "reference": "6e494b467e509e429bd73f836f23b536f76e4f7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/x3p0-dev/x3p0-framework/zipball/6e494b467e509e429bd73f836f23b536f76e4f7a",
+                "reference": "6e494b467e509e429bd73f836f23b536f76e4f7a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/phpcompatibility-wp": "*",
+                "phpunit/phpunit": "^10.5",
                 "wp-coding-standards/wpcs": "^3.0"
             },
             "default-branch": true,
@@ -45,11 +100,22 @@
                     "email": "justintadlock@gmail.com"
                 }
             ],
+            "description": "A lightweight, modern dependency injection framework for WordPress plugins and themes.",
+            "homepage": "https://github.com/x3p0-dev/x3p0-framework",
+            "keywords": [
+                "Autowiring",
+                "container",
+                "dependency-injection",
+                "di",
+                "framework",
+                "service-provider",
+                "wordpress"
+            ],
             "support": {
                 "issues": "https://github.com/x3p0-dev/x3p0-framework/issues",
-                "source": "https://github.com/x3p0-dev/x3p0-framework/tree/master"
+                "source": "https://github.com/x3p0-dev/x3p0-framework"
             },
-            "time": "2026-06-20T22:25:20+00:00"
+            "time": "2026-07-08T19:47:29+00:00"
         }
     ],
     "packages-dev": [
@@ -618,16 +684,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.7.0",
+            "version": "v3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "50f59d1f3ca46d41ac911f97a78626b6756af35b"
+                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/50f59d1f3ca46d41ac911f97a78626b6756af35b",
-                "reference": "50f59d1f3ca46d41ac911f97a78626b6756af35b",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/f3202fa1b5097b0af062dc978b32ecf63404e31d",
+                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d",
                 "shasum": ""
             },
             "require": {
@@ -665,7 +731,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.7.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.7.1"
             },
             "funding": [
                 {
@@ -685,7 +751,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-13T15:52:40+00:00"
+            "time": "2026-06-05T06:23:12+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -774,16 +840,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v6.4.36",
+            "version": "v6.4.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "7c8ad9ce4faf6c8a99948e70ce02b601a0439782"
+                "reference": "29adc5e34255f42ca9b8ae61c22b4d9e3f611317"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/7c8ad9ce4faf6c8a99948e70ce02b601a0439782",
-                "reference": "7c8ad9ce4faf6c8a99948e70ce02b601a0439782",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/29adc5e34255f42ca9b8ae61c22b4d9e3f611317",
+                "reference": "29adc5e34255f42ca9b8ae61c22b4d9e3f611317",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +904,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v6.4.36"
+                "source": "https://github.com/symfony/var-dumper/tree/v6.4.42"
             },
             "funding": [
                 {
@@ -858,7 +924,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-30T15:36:00+00:00"
+            "time": "2026-06-08T07:06:12+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -1009,6 +1075,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "x3p0-dev/x3p0-asset": 20,
         "x3p0-dev/x3p0-framework": 20,
         "x3p0-dev/x3p0-prelude": 20,
         "x3p0-dev/x3p0-skills": 20
